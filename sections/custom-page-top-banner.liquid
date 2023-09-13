@@ -1,0 +1,52 @@
+
+<div class="custom_page_top_banner">
+<div class="row">
+  <div class="relative">
+  	<img src="{{ section.settings.img | img_url: 'master' }}" alt="image">
+  <div class="absolute text_right">
+  <div class="container_left">
+  	 <div class="sml_tag">{{ section.settings.text}}</div>
+     <div class="cm_title">{{ section.settings.heading}}</div>
+     <div class="cm_p">{{ section.settings.para}}</div>
+  </div>  
+  </div>
+  </div> 	
+  
+</div>
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Page Top Banner",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "img",
+            "label": "image"
+        },
+  		{
+            "type": "text",
+            "id": "text",
+            "label": "heading"
+        },
+		{
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+        },
+        {
+            "type": "text",
+            "id": "para",
+            "label": "para",
+            "default": "enter text"
+        }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

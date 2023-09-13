@@ -1,0 +1,210 @@
+<style>
+  .product_link {
+    display: flex;
+    align-items: center;
+  }
+  .product_link .product-image,
+  .product_link .content {
+    width: 50%;
+  }
+  .product_link .content {
+    padding-left: 0.8rem;
+    padding-bottom: 1rem;
+  }
+  .product_sub_title {
+    font-size: 9px;
+    text-transform: capitalize;
+    text-align: left;
+    padding-top: 0;
+  }
+  .product_link .content h2 {
+    font-family: "Corbenr";
+    font-size: 15px;
+    margin: 0.5rem 0;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-align: left;
+    color: #f37168;
+    text-transform: lowercase;
+  }
+  .product_link .content p {
+    font-size: 16px;
+    font-family: "Corbenr";
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    letter-spacing: 0;
+    color: #000000;
+    margin: 0.5rem 0;
+  }
+  .product_link .content p span {
+    color: #bababa;
+    font-size: 14px;
+    text-decoration: line-through;
+    padding-left: 0.5rem;
+  }
+  .product_link .content button {
+    border-radius: 18px;
+    background: #f37168;
+    border: none;
+    color: white;
+    padding: 5px 2rem;
+    font-size: 12px;
+    width: 100%;
+    font-family: 'manropes';
+    max-width: 230px;
+    min-height: 35px;
+  }
+  .product-image img {
+    height: 100%;
+    width: 100%;
+    border-radius: 22px;
+  }
+  .collection_flx {
+    padding: 1rem;
+    padding-left: 2rem;
+  }
+  .collection_flx li {
+    margin-bottom: 2rem;
+  }
+  .wc_product_review_badge .wc_review_badge_inner {
+    display: flex;
+  }
+  .wc_review_badge_wrap .wc_icon_color svg, #wc_review_section .wc_review_badge_wrap .wc_icon_color svg {
+    width: 70px !important;
+  }
+  .wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+    font-size: 10px;
+    line-height: unset;
+  }
+
+  @media (min-width: 768px) {
+    li.grid__item.center {
+      width: 50%;
+    }
+    .wc_review_badge_wrap .wc_icon_color svg, #wc_review_section .wc_review_badge_wrap .wc_icon_color svg {
+      width: 100px !important;
+    }
+    .wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+      font-size: 16px;
+    }
+    .product_link .content h2 {
+      font-size: 28px;
+    }
+    .product_sub_title {
+      font-size: 18px;
+    }
+    .product_link .content p {
+      font-size: 22px;
+    }
+    .product_link .content p span {
+      font-size: 20px;
+    }
+    .product_link .product-image {
+      width: 40%;
+    }
+    .product_link {
+      justify-content: space-around;
+    }
+    .product_link .content {
+      text-align: left;
+    }
+    .product_link .content button {
+      margin-top: 1rem;
+      padding: 0.6rem 2rem;
+      width: 90%;
+      font-size: 20px;
+      margin-left: unset !impoetant;
+    }
+    .add_to_cart_custom {
+      margin-top: 1rem;
+    }
+  }
+</style>
+<div class="collection_flx">
+  {% for block in section.blocks %}
+    <li class="grid__item center">
+      <a class="product_link" href="{{ block.settings.product.url }}">
+        <div class="product-image">
+          <img src="{{ block.settings.product_image | img_url: '' }}" />
+        </div>
+        <div class="content">
+          <div class="reviews">
+            <div class="wc_product_review_badge" data-handle="{{ block.settings.product.handle }}" data-product_id="{{ block.settings.product.id }}"></div>
+          </div>
+          <h2>{{ block.settings.product.title }}</h2>
+          {% if block.settings.product.metafields.my_fields.product_subtitle != blank %}
+            <div class="product_sub_title">{{ block.settings.product.metafields.my_fields.product_subtitle }}</div>
+          {% endif %}
+          <p class="product-price"> 
+            {{ block.settings.product.price | money_without_trailing_zeros }} 
+            {% if block.settings.product.compare_at_price > block.settings.product.price %}
+              <span>{{ block.settings.product.compare_at_price | money_without_trailing_zeros }}</span> 
+            {% endif %}
+          </p>
+          <div class="add_to_cart_custom" variant-id="{{ block.settings.product.variants.first.id }}" variant-name="{{ block.settings.product.variants.first.title }}" price="{{ block.settings.product.price }}" product-name="{{ block.settings.product.title }}" product-id="{{ block.settings.product.id }}">
+            <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ block.settings.product.variants.first.id }}" />
+                <input min="1" type="number" id="quantity" name="quantity" value="1"/>
+                <button type="submit" name="add" variant-id="{{ block.settings.product.variants.first.id }}" variant-name="{{ block.settings.product.variants.first.title }}" price="{{ block.settings.product.price }}" product-name="{{ block.settings.product.title }}" product-id="{{ block.settings.product.id }}"
+                  {% unless block.settings.product.available %} aria-disabled="true"{% endunless %}
+                  aria-label="{% unless block.settings.product.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                  class="btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"
+                  aria-haspopup="dialog"
+                  data-add-to-cart>
+                  <span data-add-to-cart-text>
+                    {% unless block.settings.product.available %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% else %}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {% endunless %}
+                  </span>
+                  <span class="hide" data-loader>
+                    {% include 'icon-spinner' %}
+                  </span>
+                </button>
+              </form> 
+            </div>
+        </div>
+      </a>
+    </li>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "All Products",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Product",
+        "type": "product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Assign Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Assign Product Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "All Products"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

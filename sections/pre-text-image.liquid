@@ -1,0 +1,69 @@
+<div class="pre_txt_image" id="pre_txt_image">
+  <div class="page_width">
+    <div class="ptmg_flx">
+      <div class="ptmg_txt">
+        {% if section.settings.description != blank %}
+        <div class="ptmg_description"> 
+          {{ section.settings.description }}
+        </div>
+        {% endif %}
+      </div>
+      <div class="ptmg_img">
+        <div class="per_flx">
+          {% if section.settings.percentage != blank %}
+          <div class="per_value">
+            {{ section.settings.percentage }}
+          </div>
+          {% endif %}
+          {% if section.settings.title != blank %}
+          <div class="per_txt">
+            {{ section.settings.title }}
+          </div>
+          {% endif %}
+        </div>
+        {% if section.settings.image != blank %}
+        <div class="man_img">
+          <img class="lazyload" data-src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}"/>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Nutrient deficient",
+    "settings": [
+	  {
+	    "type": "text",
+	    "id": "title",
+	    "label": "Title",
+		"default": "urban indian women are nutrient deficient"
+	  },
+	  {
+	    "type": "text",
+	    "id": "percentage",
+	    "label": "Percentage",
+		"default": "70%"
+	  },
+	  {
+	    "type": "image_picker",
+	    "id": "image",
+	    "label": "Image"
+	  },
+	  {
+	    "type": "richtext",
+	    "id": "description",
+	    "label": "Description",
+	    "default": "<p>A woman’s biological buildup is unique, and so are her nutritional needs. She plays a reproductive role, and also multitasks at every stage of life. In all of this, good health takes a backseat. Regular signs of deficiency, like acne, hair fall, tiredness, or food cravings, are rarely treated at the root. We found our answer in creating daily nutrition that works alongside women, meeting their dietary and lifestyle needs.</p>"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,289 @@
+<style>
+  html {
+    padding-bottom: 0 !important;
+  }
+  #shopify-section-header, #shopify-section-footer-custom {
+    display: none;
+  }
+  section.consultDoctor {
+    background: #FFF4EF;
+    height: 100%;
+  }
+  .close-popup {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 80%;
+    width: 100%;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+  }
+  .popup {
+    text-align: center;
+    border-color: #707070;
+    border-width: 0.25px;
+    border-style: solid;
+    border-radius: 50px;
+    filter: drop-shadow(0px 0px 1px rgba(172,172,172,0.16 ));
+    background: #ffffff;
+    height: max-content;
+    width: 50%;
+    padding: 3rem;
+  }
+  .close-popup .popup h2 {
+    font-family: "manrope";
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+  }
+  .close-popup .popup p {
+    font-family: "manrope";
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+  }
+  .close-popup .popup button {
+    border-radius: 13px;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.16 ));
+    background: white;
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    margin: 0.5rem;
+    color: black;
+    font-family: "manrope";
+    font-size: 20px;
+  }
+  .close-popup .popup button.resume {
+    background: #ff6662;
+    color: white;
+    font-weight: bold;
+  }
+  .expert-consult {
+    background: #FFF4EF;
+    background-size: contain;
+    height: 100vh;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    overflow: scroll;
+    padding-bottom: 1rem;
+  }
+  .expert-close {
+    display: none;
+    padding: 0 5rem;
+    margin: 0;
+    cursor: pointer;
+    text-align: right;
+    font-size: 1.5rem;
+    font-family: 'manropeb';
+    font-weight: 900;
+  }
+  .expert-banner img {
+    height: 28rem;
+    width: 100%;
+  }
+  .mob-img {
+    display: none;
+  }
+  .get-started {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto;
+    align-items: center;
+    background: white;
+    border-radius: 22px;
+    width: 50%;
+    filter: drop-shadow(0px 1px 2.5px rgba(172,172,172,0.16 ));
+  }
+  .get-started .content {
+    width: 100%;
+/*     text-align: right; */
+    padding: 2rem;
+  }
+  .get-started .content .one,
+  .get-started .content .two {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+  }
+  .get-started .content h2 {
+    font-family: 'manropeb';
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom:20px;
+     text-transform: none;
+  }
+  .get-started .content .one h2 {
+    letter-spacing:normal;
+    font-family:"Manrope";
+  }
+  .get-started .content .two h2 {
+    letter-spacing:normal;
+    font-family: "Manrope";
+  }
+  .get-started .content p {
+    font-family: "manrope";
+    font-size: 22px;
+    border-radius: 50%;
+    font-weight: 500;
+    background: #F37168;
+    height: 45px;
+    width: 50px;
+    color: white;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 2rem;
+  }
+  .get-started .content p span {
+    font-family: 'manropeb';
+    font-weight: 800;
+  }
+  .get-started .content button {
+    color: white;
+    border-radius: 15px;
+    filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.16 ));
+    background: #ff6662;
+    font-size: 18px;
+    border: none;
+    padding: 0.5rem 1.5rem;;
+  }
+  .hulk-form {
+    display: none;
+    width: 45%;
+    border-radius: 20px;
+/*     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    margin: 0 auto;
+    background: transparent;
+/*     height: 90%; */
+/*     padding: 3vw 0; */
+  }
+  .expert-consult .start-quiz {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .expert-consult .start-quiz button {
+    width: 100%;
+    border-radius: 10px;
+    background: #f37168;
+    padding: 10px 1rem;
+    text-align: center;
+    font-family: "manropeb";
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+    border: none;
+  }
+
+/*   Mobile view changes */
+  @media(max-width:640px) {
+    .get-started .content {
+    width: 100%;
+/*     text-align: right; */
+    padding: 1rem !important;
+  }
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-24c0af1e-8de9-40c4-a403-798e4faa87f8 {
+      padding: 1rem;
+    }
+    .get-started {
+      width: 90%;
+    }
+    .expert-consult .start-quiz {
+      width: 90%;
+    }
+    .mob-img {
+      display: block;
+    }
+    .desktop-img {
+      display: none;
+    }
+    .expert-close {
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    .get-started {
+      width: 95%;
+      height: auto;
+      margin: 1rem auto;
+    }
+    .get-started .content {
+      width: 100%;
+/*       text-align: right; */
+      padding-right: 16px;
+    }
+    .doctor-img {
+      width: 50%;
+    }
+    .get-started .content h2, .get-started .content p {
+      font-size: 12px;
+    }
+    .get-started .content button {
+      font-size: 12px;
+      border: none;
+      padding: 5px 1.5rem;
+    }
+    .hulk-form {
+      width: 95%;
+      height: 95%;
+    }
+    .get-started .content p {
+      font-weight: 600;
+      width: 50px;
+    }
+
+   .close-popup {
+     height: 100%;
+   }
+    .popup {
+      border-radius: 30px;
+      width: 95%;
+      padding: 2rem 1.5rem;
+    }
+    .close-popup .popup h2, 
+    .close-popup .popup p {
+      font-size: 14px;
+    }
+    .close-popup .popup button {
+      font-size: 15px;
+    }
+  }
+  @media (max-width: 460px) {
+    .hulk-form {
+      padding: 6% 0;
+    }
+  }
+</style>
+<section class="consultDoctor">
+  <div class="expert-consult">
+    <p class="expert-close">X</p>
+    <div class="expert-banner">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/LP-banner--desktop.jpg?v=1680697951" class="desktop-img" />
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/LP-banner---01-mobile.jpg?v=1680697951" class="mob-img" />
+    </div>
+    <div class="get-started">
+      <div class="content">
+        <div class="one">
+          <p>1</p>
+          <h2>Answer some basic health related questions</h2>
+        </div>
+        <div class="two">
+          <p>2</p>
+          <h2>Get a free personalised plan based on your report</h2>
+        </div>
+      </div>
+    </div>
+    <div class="start-quiz">
+      <a href="/pages/quiz-and-questionnaire"><button>Let's Begin</button></a>
+    </div>
+  </div>
+</section>

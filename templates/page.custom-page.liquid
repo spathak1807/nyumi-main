@@ -1,0 +1,103 @@
+<style>
+  .product_breadcrumbs {
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+  @media (max-width: 768px) {
+    .product_breadcrumbs {
+      text-align: center;
+    }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<h1 style="display: none;">Kriti Sanon Favourite Nyumi Vitamin Gummies Products</h1>
+
+  {% section 'custom-page-top-banner' %}
+
+  <div class="product_breadcrumbs">
+    <a href="https://{{ request.host }}">
+      Home 
+    </a>/ Kriti-Sanon-Faviourite
+  </div>
+  
+  {% section 'custom-page-rich-text' %}
+
+  {% section 'custom-page-product1' %}
+
+  {% section 'custom-page-product2' %}
+
+  {% section 'custom-page-product3' %}
+  {% comment %}
+  {% section 'custom-page-products' %}
+  {% endcomment %}
+
+  {% section 'custom-page-video-banner' %}
+  
+  {% section 'custom-page-logo-list' %}
+  {% section 'custom-page-image-text-video' %}
+  
+  {% section 'custom-page-product4' %}
+
+{% comment %} 
+  {% section 'custom-page-testimonial' %}
+  {% endcomment %}
+
+<script>
+  <!-- Snapchat CAPI - AddToCart -->
+    $('.single_product_addtocart').click(function(event){
+      $.get('http://jsonip.com', function (res) {
+        console.log(event)
+        console.log(event.currentTarget.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.parentElement.previousElementSibling.innerText)
+        console.log(event.currentTarget.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].children[0].children[1].children[1].innerText.split(' ')[1])
+        var ip_address;
+        var product_name = event.currentTarget.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.parentElement.previousElementSibling.innerText;
+        var product_price = event.currentTarget.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].children[0].children[1].children[1].innerText.split(' ')[1]
+        console.log('IP Address is: ' + res.ip);
+        ip_address = res.ip
+        console.log("ip_address",String(ip_address))
+        var hashed_ip =  sha256(String(ip_address))
+        console.log("hashed_ip",String(hashed_ip))
+        var addToCart_event = {
+          "url": "https://tr.snapchat.com/v2/conversion",
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNjY5NjI0MzM1LCJzdWIiOiJjZTliNWE5MC1hYmY5LTRhMmYtOTVhMC05ZjFmMWVhMjIxNzd-UFJPRFVDVElPTn5jYTlkYjQ1Ni0zZTNlLTQ0ZDctODYyNi1jNTRjZjlkMTliY2MifQ.IR3xglvOb1eTyCGRycXU9U5f9x4X_mKRW8oWrx303HE",
+            "Content-Type": "application/json"
+          },
+          "data": JSON.stringify({
+            "pixel_id": "365b768d-8a9e-40d9-86fc-fdeb94acba98",
+            "timestamp": String($.now()),
+            "event_type": "ADD_CART",
+            "event_conversion_type": "WEB",
+            "event_tag": "add_cart",
+            "description": product_name,
+            "price": product_price,
+            "currency":"INR",
+            "page_url": String(window.location.href),
+            "user_agent": String(navigator.userAgent),
+            "hashed_ip_address": String(hashed_ip)
+          }),
+        };
+  
+        $.ajax(addToCart_event).done(function (response) {
+          console.log('CAPI Add To Cart',response);
+        });
+      });
+    })
+  <!-- Snapchat CAPI - AddToCart -->
+</script>
+<script>
+  $(document).ready(function() {
+    $('body').on('click', '.single_product_addtocart', function() {
+    // event.preventDefault();
+    var vallll = $('[data-cart-count]').text();
+    vallll = Number(vallll) + 1;
+      $('[data-cart-count]').text(vallll);
+      $("#CartCount").removeClass("hide");
+  });  
+  });
+</script>

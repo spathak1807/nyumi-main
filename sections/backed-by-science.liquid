@@ -1,0 +1,121 @@
+<div class="ingredient" id="ingredient">
+  <div class="strikewords">
+    {% if section.settings.title != blank %}
+    <div class="faq_title center">      
+      {{ section.settings.title }}
+    </div>
+    {% endif %}
+    {% if section.settings.description != blank %}
+    <div class="faq_decription_txt center">
+      {{ section.settings.description }}
+    </div>
+    {% endif %}
+    <ul class="strikeout">
+      {% for block in section.blocks %}
+      {% if block.settings.flavour != blank %}
+      <li>
+        <span class="inner">
+          {{block.settings.flavour}}
+        </span>
+      </li>
+      {% endif %}
+      {% endfor %}      
+    </ul>
+  </div>
+  <div class="flx indgpg_box_txt_img" id="indgpg_box_txt_img">
+    {% if section.settings.image != blank %}
+    <div class="half indgpg center">
+      <img class="lazyload" data-src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}"/>
+    </div>
+    {% else %}
+    <div class="half indgpg center">
+      <img class="lazyload" data-src="//images.ctfassets.net/537ig19c198x/4P7jzttthqBbhFNhyRd6pE/83f38c7be8b8523d0cc70994a85ad026/Ingredient-backed_by_science_beaker_460x460.png" alt="#">
+    </div>
+    {% endif %}
+    <div class="half vertical_center">
+      {% if section.settings.sub_title != blank %}
+      <h3 class="cm_title">
+        {{ section.settings.sub_title }}
+      </h3>
+      {% endif %}
+      {% if section.settings.sub_description != blank %}
+      <div class="ltx_detion">
+        {{ section.settings.sub_description }}
+      </div>
+      {% endif %}
+      {% if section.settings.btn_txt != blank %}
+      <div class="cm_but">
+        <a id="Purpose-button" class="button" href="{{ section.settings.btn_url }}">{{ section.settings.btn_txt }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Backed By Science",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "kept out for good"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Whitening agents with side-effects, high-sugar flavour / colour enhancers, bulking agents containing trans-fat - these ingredients do not belong in your food. certainly not in your daily vitamin. We devised our formulation to consciously avoid them, and worked with safer alternatives. </p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Sub Title",
+          "default": "backed by science"
+        },
+        {
+          "type": "richtext",
+          "id": "sub_description",
+          "label": "Sub Description",
+          "default": "<p>Every ingredient here has a backstory that speaks of clinical studies, thoughtful sourcing, unique formulation and stability tests. If you’re as nerdy as we are, do check out the science behind bringing these ingredients together. </p>"
+        },
+        {
+          "type": "text",
+          "id": "btn_txt",
+          "label": "Button Text",
+          "default": "our science"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button URL"
+        }
+	],
+    "blocks":[
+           {
+            "type":"flavour",
+            "name":"Flavour",
+            "settings":[
+                {
+                  "type":"text",
+                  "id":"flavour",
+                  "label":"Flavour title",
+                  "default":"gelatin"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

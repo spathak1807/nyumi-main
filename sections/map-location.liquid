@@ -1,0 +1,30 @@
+{% if section.settings.show_map_section %}
+{% if section.settings.map_iframe != blank %}
+<div class="contact_map">
+  {{ section.settings.map_iframe }}  
+</div>
+{% endif %}
+{% endif %}
+{% schema %}
+  {
+    "name": "Contact Map",
+    "settings": [
+		{
+		  "type": "checkbox",
+		  "label": "Show map section",
+		  "id": "show_map_section"
+		},
+        {
+          "type": "html",
+          "id": "map_iframe",
+          "label": "Map Iframe code"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

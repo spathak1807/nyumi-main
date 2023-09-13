@@ -1,0 +1,52 @@
+<div class="product-sitemap sitemap">
+  <h3>{{ section.settings.heading }}</h3>
+  <ul class="all-links">
+    {% for block in section.blocks %}
+      <li>
+        <a href="{{ block.settings.link }}">{{ block.settings.label }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+  {
+    "name": "Product Sitemap",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "link",
+        "name": "Link",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Sitemap"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

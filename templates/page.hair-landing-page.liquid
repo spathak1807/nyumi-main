@@ -1,0 +1,90 @@
+<style>
+  .banner-text {
+    text-align: center
+  }
+  .clinic-heading h3 {
+    font-size: 20px;
+  }
+.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    background: #f37068 !important;
+}
+  .banner-text p {
+    font-family: "Manrope";
+font-size: 11px;
+font-weight: 500;
+line-height: 21px;
+font-style: normal;
+text-align: center;
+    padding: 10px;
+  }
+
+  .banner-text h3 {
+    font-family: "Corbenr";
+font-size: 18px;
+font-weight: normal;
+line-height: 20px;
+font-style: normal;
+text-align: center;
+    color: #f37168;
+    margin: 1rem;
+  }
+
+  .brand-bg {
+    background-color: #FFF4EF;
+    padding: 1rem 0;
+  }
+
+  @media(min-width:768px) {
+   .banner-text {
+    width: 65%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+    .banner-text h3 {
+    font-family: "Corbenr";
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+    text-align: center;
+    color: #f37168;
+}
+    .banner-text p {
+    font-family: "Manrope";
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 29px;
+    font-style: normal;
+    text-align: center;
+    padding: 10px;
+}
+    
+  }
+</style>
+
+<div class="main-banner">
+   <a href="#add_to_cart">
+     <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/LP-hair-banners-01.jpg?v=1683982517" alt="">
+   </a>
+</div>
+<div class="banner-text">
+  <h3>why nyumi ?</h3>
+  <p>We choose the tougher way, only because it’s more rewarding for you. Our multi-nutrient gummies are created with a precise balance of vitamins, minerals, and botanicals that work well in their respective dosage. So they can cater to your overall nutritional needs, instead of delivering just one nutrient.</p>
+</div>
+<div class="brand-bg">
+{% section 'brand-testimonial' %}
+<div id="#add_to_cart">
+{% section 'product-slider-landing' %}
+</div>
+{% section 'benefits-carousel' %}
+{% section 'clinically-proven' %}
+</div>
+{% section 'customer-opinion' %}
+{% section 'science-behind' %}
+
+<div class="product-reviews-section" style="display: block; padding-top: 1rem;">
+  <img src="{{ "red-heart.png" | asset_url }}" alt="heart" class="section-icon">
+  <h2 class="section_heading">we heart reviews</h2>
+  <p class="section_subheading">It tells us how you’re doing and that’s always good to hear.</p>
+</div>
+<div id="wc_review_section" class="wc_review_main_content" data-url="{{ shop.url }}" data-handle="happy-hair-nails-gummies" data-product_id="6092022481063" data-limit="0"></div>

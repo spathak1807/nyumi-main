@@ -1,0 +1,75 @@
+<div class="ingredient_section" style="display: block;">
+  <div class="ingredient-wrapper" id="ingredients">
+    <h2 class="section_heading">meet our ingredients</h2>
+    <p class="section_subheading">A perfect balance of Western and Indian nutrients</p>
+    <div class="ingredient_combo_menu">
+      <ul>
+        {% assign lop_val = 0 %}
+        {% for prd_handle in product.metafields.ingredient_product.ingredient_product %}
+        {% assign prod_handle = prd_handle | split: '|' %}
+        {% for ingredient_prd in prod_handle %}
+        {% assign lop_val = lop_val | plus: 1 %}
+        {% assign ingredient_prod = all_products[ingredient_prd]%}
+        {% unless product.title == ingredient_prod.title %}
+        <li {% if lop_val == 1 %}class="active"{% endif %}>{{ ingredient_prod.title | remove: 'gummies' }}</li>
+        {% endunless %}
+        {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% assign index_looping = 0 %}
+    {% for prd_handle in product.metafields.ingredient_product.ingredient_product %}
+    {% assign prod_handle = prd_handle | split: '|' %}
+    {% for ingredient_prd in prod_handle %}
+    {% assign ingredient_prod = all_products[ingredient_prd]%}
+    {% assign index_looping = index_looping | plus: 1 %}
+    {% if index_looping == 1 %}
+    {% assign style = 'style="display: flex;"' %}
+    {% else %}
+    {% assign style = 'style="display: none;"' %}
+    {% endif %}
+    <div class="content_wrapper" data-id="{{ index_looping }}" {{ style }}>
+      <ul class="vertical-scroller">
+        {% for ingradient in ingredient_prod.metafields.ingredient_title.ingredient_title %}
+        <li {% if forloop.index == 1 %}class="active"{% endif %}>
+          <img src="{{ ingredient_prod.metafields.ingredient_image.ingredient_image[forloop.index0] }}" alt="{{ingredient_prod.metafields.ingredient_image.ingredient_image[forloop.index0].alt}}">
+          <span>{{ ingradient }}  
+            <img src="{{ 'arrow-right.png'|asset_url }}" alt="#">
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="fade-wrapper">
+        <ul class="fade-slider" id="fade-sliders">
+          {% for ingradient in ingredient_prod.metafields.ingredient_title.ingredient_title %}
+          <li {% if forloop.index == 1 %}class="active"{% endif %}>
+            <img src="{{ ingredient_prod.metafields.ingredient_image.ingredient_image[forloop.index0] }}" class="ing-image" alt="{{ product.metafields.ingredient_image.ingredient_image[forloop.index0].alt }}">
+            <h4>{{ ingradient }}</h4>
+            {{ingredient_prod.metafields.ingredient_des.ingredient_des[forloop.index0]}}
+          </li>
+          {% endfor %}
+          </ul>
+        <div class="mobile center">
+          <button onclick="myFunction()" class="button show_all_list">show more +</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product ingredients",
+    "settings": [
+
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

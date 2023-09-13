@@ -1,0 +1,500 @@
+{% if section.blocks.size > 0 %}
+<div class="nyumi-slideshow-wrapper">
+  {% for block in section.blocks %}
+  <div class="nyumi-slide nyumi-slide--{{ forloop.index }}" {{ block.shopify_attributes }}>
+    <picture>
+      <source srcset="{{ block.settings.mobile_image | img_url: 'master' }} {{ block.settings.mobile_image.width }}w" media="(max-width: 749px)" />
+      <source srcset="{{ block.settings.desktop_image | img_url: 'master' }} {{ block.settings.desktop_image.width }}w" />
+      <img src="{{ block.settings.desktop_image | img_url: 'master' }}" loading="lazy" alt="{{ block.settings.title }}" />
+    </picture>
+    {% if block.settings.button_link != blank %}
+    <a class="abs-button" href="{{ block.settings.button_link }}"></a>
+    {% endif %}  
+    <style type="text/css">
+      #shopify-section-{{ section.id }} .nyumi-slide--{{ forloop.index }} .nyumi-content {
+        padding: {{ block.settings.content_padding_mobile }}px;
+        --position-ver: {{ block.settings.vertical_position_mobile }}%;
+        {% if block.settings.text_align_mobile != "default" %}
+            text-align: {{ block.settings.text_align_mobile }};
+        {% endif %}
+      }
+      @media only screen and (min-width: 750px) {
+        #shopify-section-{{ section.id }} .nyumi-slide--{{ forloop.index }} .nyumi-content {
+          padding: {{ block.settings.content_padding }}px;
+          --position-hor: {{ block.settings.horizontal_position }}%;
+          --position-ver: {{ block.settings.vertical_position }}%;
+          {% if block.settings.text_align != "default" %}
+            text-align: {{ block.settings.text_align }};
+          {% endif %}
+        }
+      }
+    </style>
+    <div class="nyumi-content desktop_{{ block.settings.content_alignment }} mobile_{{ block.settings.content_alignment_mobile }}">
+      <div class="nyumi-content-inner">
+        <h3 class="cm_title nyumi-slide__title" style="color: {{ block.settings.title_color }}">{{ block.settings.title }}</h3>
+        <p class="cm_p nyumi-slide__description" style="color: {{ block.settings.subtitle_color }}">{{ block.settings.description }}</p>
+        {% if block.settings.button_label != blank %}
+        <a class="button nyumi-slide__button" href="{{ block.settings.button_link }}" style="background-color: {{ block.settings.button_background_color }};color: {{ block.settings.button_text_color }}!important">{{ block.settings.button_label }}</a>
+        {% endif %}  
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% if request.design_mode %}
+  <script type="text/javascript">
+    document.addEventListener('shopify:section:load', function(event) {
+      if($('.nyumi-slideshow-wrapper.slick-initialized').length) {
+        $('.nyumi-slideshow-wrapper').unslick();
+      }
+      $('.nyumi-slideshow-wrapper').slick({
+        dots: true,
+        arrows: true,
+        infinite: true
+      });
+    });
+  </script>
+{% endif %}  
+
+{% endif %}
+{% schema %}
+  {
+  "name": "Nyumi Collection PP",
+  "class": "index-section",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#231f20"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Description Color",
+          "default": "#231f20"
+        },
+        {
+          "type": "color",
+          "id": "button_background_color",
+          "label": "Button Background Color",
+          "default": "#f47169"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#FFF"
+        },
+        {
+          "type": "header",
+          "content": "Desktop Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content Position",
+          "options": [
+            {
+              "value": "top_left",
+              "label": "Top Left"
+            },
+            {
+              "value": "top_center",
+              "label": "Top Center"
+            },
+            {
+              "value": "top_right",
+              "label": "Top Right"
+            },
+            {
+              "value": "middle_left",
+              "label": "Middle Left"
+            },
+            {
+              "value": "middle_center",
+              "label": "Middle Center"
+            },
+            {
+              "value": "middle_right",
+              "label": "Middle Right"
+            },
+            {
+              "value": "bottom_left",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "bottom_center",
+              "label": "Bottom Center"
+            },
+            {
+              "value": "bottom_right",
+              "label": "Bottom Right"
+            }
+          ],
+          "default": "middle_right"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text Align",
+          "options": [
+            {
+              "value": "left",
+              "label": "left"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "center",
+              "label": "center"
+            },
+            {
+              "value": "default",
+              "label": "default"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "number",
+          "id": "content_padding",
+          "label": "Content Padding",
+          "default": 20,
+          "info": "Padding in pixels"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "label": "Horizontal Position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "label": "Vertical Position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 8
+        },
+        {
+          "type": "header",
+          "content": "Mobile Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "content_alignment_mobile",
+          "label": "Content Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "range",
+          "id": "vertical_position_mobile",
+          "label": "Vertical Position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "text_align_mobile",
+          "label": "Text Align",
+          "options": [
+            {
+              "value": "left",
+              "label": "left"
+            },
+            {
+              "value": "right",
+              "label": "right"
+            },
+            {
+              "value": "center",
+              "label": "center"
+            },
+            {
+              "value": "default",
+              "label": "default"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "number",
+          "id": "content_padding_mobile",
+          "label": "Content Padding",
+          "default": 20,
+          "info": "Padding in pixels"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nyumi Collection PP "
+    }
+  ]
+}  
+{% endschema %}
+
+{% stylesheet %}
+.nyumi-slide {
+  position: relative;
+}
+.nyumi-slide .cm_title {
+  margin-bottom: 0;
+}
+.nyumi-slide .cm_p {
+  margin: 0.5em 0;
+}
+.nyumi-slide img {
+  display: block;
+}
+.nyumi-content {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  --position-hor: 0;
+  --position-ver: 0;
+}
+.nyumi-slideshow-wrapper .slick-dots li {
+  background: gray;
+}
+.nyumi-slideshow-wrapper .slick-dots li.slick-active {
+  background: #f47e75;
+}
+.nyumi-slideshow-wrapper .slick-dots li.slick-active button:before {
+  color: transparent;
+}
+.nyumi-slideshow-wrapper .slick-dots li,
+.nyumi-slideshow-wrapper .slick-dots li button,
+.nyumi-slideshow-wrapper .slick-dots li button:before {
+  width: 1em;
+  height: 1em;
+}
+
+.nyumi-slideshow-wrapper .slick-dots {
+  margin-top: 0;
+}
+.mobile_top {
+  width: 100%;
+  top: var(--position-ver);
+  left: 0;
+  justify-content: center;
+  text-align: center;
+}
+.mobile_bottom {
+  width: 100%;
+  bottom: var(--position-ver);
+  left: 0;
+  justify-content: center;
+  text-align: center;
+}
+.mobile_center {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  top: 0;
+  left: 0;
+}
+
+.nyumi-slideshow-wrapper .slick-prev::before {
+  content: '<';
+  font-family: 'manroper';
+  font-size: 2.5rem;  
+}
+
+.nyumi-slideshow-wrapper .slick-next::before {
+  content: '>';  
+  font-family: 'manroper';  
+  font-size: 2.5rem;    
+}
+
+@media only screen and (max-width: 749px) {
+  .nyumi-slideshow-wrapper .slick-prev {
+    left: 8px;
+    z-index: 2;
+  }
+  .nyumi-slideshow-wrapper .slick-next {
+    right: 8px;
+    z-index: 2;
+  }
+  .nyumi-slideshow-wrapper .slick-dots {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .nyumi-slideshow-wrapper .slick-dots {
+    margin-top: -3.5em;
+  }
+  .nyumi-slideshow-wrapper .slick-dots li {
+    background: #FFF;
+  }
+  .nyumi-content {
+    font-size: 1.1625vw;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    --position-hor: 8%;
+    --position-ver: 8%;
+  }
+  .nyumi-slide .cm_title {
+    font-size: 3.25em;
+  }
+  .nyumi-slide .cm_p {
+    font-size: 2em;
+    font-weight: 600;
+  }
+  .nyumi-slide .button {
+    font-size: 1.5em;
+    line-height: 1.35;
+    padding: 0.35em 1.75em;
+    border-radius: 100px;
+  }
+  .nyumi-content.desktop_top_left {
+    left: var(--position-hor);
+    top: var(--position-ver);
+    text-align: left;
+  }
+  .nyumi-content.desktop_top_center {
+    top: var(--position-ver);
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .nyumi-content.desktop_top_right {
+    right: var(--position-hor);
+    top: var(--position-ver);
+    text-align: right;
+  }
+  .nyumi-content.desktop_bottom_left {
+    left: var(--position-hor);
+    bottom: var(--position-ver);
+    text-align: left;
+  }
+  .nyumi-content.desktop_bottom_right {
+    right: var(--position-hor);
+    bottom: var(--position-ver);
+    text-align: right;
+  }
+  .nyumi-content.desktop_bottom_center {
+    bottom: var(--position-ver);
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .nyumi-content.desktop_middle_left {
+    top: 0;
+    left: var(--position-hor);
+    height: 100%;
+    align-items: center;
+    text-align: left;
+  }
+  .nyumi-content.desktop_middle_center {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+  }
+  .nyumi-content.desktop_middle_right {
+    top: 0;
+    right: var(--position-hor);
+    height: 100%;
+    align-items: center;
+    text-align: right;
+  }
+}
+.abs-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}  
+{% endstylesheet %}
+
+{% javascript %}
+$(function(){
+  $('.nyumi-slideshow-wrapper').slick({
+    dots: true,
+    arrows: true,
+    infinite: true
+  });
+});
+{% endjavascript %}

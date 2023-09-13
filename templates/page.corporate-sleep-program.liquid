@@ -1,0 +1,855 @@
+
+<style>
+  #shopify-section-header-new,
+  #shopify-section-footer-custom {
+    display: none;
+  }
+  .hulk-form-background {
+    margin: 0 auto;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    background: #DAD5FF;
+  }
+  .hero-section {
+    height: 62rem;
+    background-size: cover;
+    text-align: center;
+    position: relative;
+    background: #222221;
+}
+  .hero-text {
+    font-family: "Manrope";
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 5%;
+    padding: 1rem 2rem
+  }
+  .hero-section .logo {
+    height: 109px;
+    width: 109px;
+    position: absolute;
+    left: 35%;
+    top: -15px;
+  }
+  .problem-description {
+    margin: 10px 0px;
+    font-family: "Manrope";
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+  }
+  .problem-description p {
+    margin: 0;
+    color: black;
+  }
+  .img-right-side, .img-left-side {
+    width: 85%;
+    padding-top: 1rem;
+  }
+  .left.text-box, .right.text-box {
+    width: 100%;
+  }
+  .problem-right {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: left;
+    padding: 1rem;
+}
+  .problem-left {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: right;
+    padding: 1rem;
+    flex-direction: row-reverse;
+  }
+  .problem-description p:nth-child(1) {
+    padding-bottom: 5px;
+  }
+  .left.text-box .problem-title h3,
+  .left.text-box .problem-title p,
+  .left.text-box .problem-description,
+  .right.text-box .problem-title h3,
+  .right.text-box .problem-title p,
+  .right.text-box .problem-description {
+    text-align: justify;
+    padding: 0 6px;
+  }
+  .left.text-box .problem-description br,
+  .left.text-box .problem-title br,
+  .right.text-box .problem-description br,
+  .right.text-box .problem-title br{
+    display: none;
+  }
+  .problem-title h3 {
+    margin-bottom: 0px;
+    font-family: "Manrope";
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    text-align: left;
+    color: #040060;
+}
+  .problem-title p {
+    font-family: "Manrope";
+    font-size: 12px;
+    font-weight: 600;
+    font-style: normal;
+    text-align: left;
+    color: #040060;
+}
+  .hero-text-strip {
+    background: #222221;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    padding: 1rem 5px;
+  }
+  .map-section {
+    text-align: center;
+    padding: 1rem 0.5rem;
+  }
+  .map-section h2 {
+    width: 100%;
+    font-family: "Manrope";
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .map-section-text {
+    padding: 1rem 0;
+    font-size: 14px;
+  }
+  .sleep-affect-section {
+    text-align: center;
+  }
+  .sleep-affect-title {
+    text-transform: unset;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0;
+  }
+  .issue-section {
+    display: flex;
+    justify-content: space-around;
+  }
+  .issue-section div.mobile {
+    width: 40%;
+    position: relative
+  }
+  .issue-section div.mobile p {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: initial;
+    font-weight: 800;
+    padding: 0;
+  }
+  .issue-section img {
+    width: 100%;
+  }
+  .issue-section div {
+    width: 50%;
+    position: relative;
+  }
+  .issue-section div p {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .issue-section p {
+    font-family: "Manrope";
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    padding: 1rem 5px;
+  }
+  .trust-stripe {
+    background: #dad5ff;
+    padding: 0.5rem;
+  }
+  .trust-stripe span {
+    margin: 0;
+    color: #040060;
+    font-family: "Manrope";
+    font-size: 20px;
+    font-weight: 900;
+    font-style: normal;
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .trust-stripe p {
+    color: black;
+    font-family: "Manrope";
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    text-align: center;
+  }
+  .feature-section {
+    padding: 2rem 0;
+  }
+  .feature-section h3 {
+    font-family: "Manrope";
+    font-size: 22px;
+    letter-spacing: 0;
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+    text-transform: unset;
+  }
+  .feature-section p {
+    font-family: "Manrope";
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .feature-card {
+/*     border: solid 1px black; */
+    width: 33.3%;
+    /* padding: 8px; */
+    display: flex;
+    flex-direction: column;
+  }
+  .feature-section .feature-row {
+    flex-direction: row;
+    padding: 0 5px;
+    flex-wrap: wrap;
+    align-items: unset;
+  }
+/*   .feature-section .feature-row .feature-card {
+    width: 33.3%;
+  } */
+  .feature-section .feature-row .feature-card img.mobile {
+    width: 50px;
+    height: 120px;
+    object-fit: contain;
+    padding: 15px;
+    /* min-width: min-content; */
+    margin: 0 auto;
+  }
+  .feature-card em {
+    margin: 0;
+    padding-bottom: 0.5rem;
+    font-family: "Manrope";
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 25px;
+    font-style: normal;
+    color: #040060;
+  }
+  .feature-section .feature-row .feature-card .feature-description {
+    font-family: "Manrope";
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 11px;
+    font-style: normal;
+    text-align: center;
+    padding: 0 5px;
+    color: #000000;
+  }
+  .feature-section .feature-caption {
+    font-family: "Manrope";
+    font-size: 9px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+    padding: 1rem 0;
+  }
+  .program-section{
+    padding-bottom: 2rem;
+  }
+  .program-card {
+    position: relative;
+  }
+  .program-section .program-card .text-area {
+    position: absolute;
+    top: 8%;
+    z-index: 9;
+    left: 7%;
+  }
+  .program-section .program-card .img-box {
+    padding: 1rem;
+  }
+  .program-section .program-card .img-box img {
+    border-radius: 22px;
+    filter: drop-shadow(0px 3px 1.5px rgba(0,0,0,0.16 ));
+    background: #dad5ff;
+  }
+  .program-section .program-card .text-area h3 {
+    font-family: "Corbenr";
+    font-size: 19px;
+    font-weight: normal;
+    line-height: 23px;
+    font-style: normal;
+    text-align: left;
+    color: #03005a;
+    margin: 0;
+    padding: 0.5rem;
+  }
+  .program-section .program-card .text-area .description-points p {
+    padding: 0 1.5rem;
+    padding-left: 0;
+    font-family: "Manrope";
+    font-size: 12px;
+    font-weight: 300;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    margin: 0;
+  }
+  li {
+    list-style: disc;
+    padding: 5px 0;
+    font-size: 14px;
+  }
+  .program-section .program-card .text-area .description-points {
+    padding-top: 0.5rem;
+    padding-left: 1.6rem;
+  }
+  body {
+    font-size: 8px;
+  }
+  .program-section h1 {
+    font-family: "Manrope";
+    font-size: 22px;
+    letter-spacing: 0;
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+    text-transform: unset;
+  }
+  .cta-section p {
+    font-family: "Manrope";
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .cta-section button {
+    font-family: "Manrope";
+    border-radius: 14px;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.16 ); /* Warning: CSS does not support Inner Shadow.*/
+    background: #040060;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 8px 2rem;
+  }
+  .corporate-contact-form {
+    display: none;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    z-index: 99999;
+  }
+  .corporate-contact-form .close-form {
+    position: absolute;
+    font-size: 1.2rem;
+    right: 5%;
+  }
+  .image-with-percent {
+    position: relative;
+  }
+  .map-section span {
+    position: absolute;
+  }
+  .map-section span.top {
+    top: 38%;
+    right: 45%;
+    font-family: "Manrope";
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    font-weight: bolder;
+  }
+  .map-section span.bottom {
+    top: 57%;
+    right: 60%;
+    font-family: "Manrope";
+    font-size: 14px;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    font-weight: bolder;
+  }
+  @media (max-width: 768px) {
+    .hero-section {
+      height: auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .issue-section div p {
+      top: 10%;
+      right: 5%;
+      font-size: 30px;
+    }
+    .hero-section {
+      height: auto;
+    }
+    .corporate-contact-form .close-form {
+      position: absolute;
+      font-size: 2.5rem;
+      right: 5%;
+      top: 2%;
+      color: white;
+    }
+    .corporate-contact-form {
+      padding-top: 5rem;
+      background: rgba(0,0,0,0.8);
+    }
+   .cta-section button {
+     padding: 10px 2rem;
+      border-radius: 30px;
+      font-size: 24px;
+      font-family: "Manrope";
+   }
+   .cta-section p {
+     font-size: 35px;
+     margin-top: 2rem;
+   }
+    .img-box img {
+      width:50%;
+    }
+    .program-section .program-card .text-area .description-points p {
+    padding: 0 0.5rem;
+    font-family: "Manrope";
+    font-size: 18px;
+    font-weight: 300;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    margin: 0;
+}
+    .program-section .program-card .text-area {
+    position: absolute;
+    top: 15%;
+    z-index: 9;
+    left: 7%;
+}
+    .program-section .program-card .text-area h3 {
+      font-size: 26px;
+    }
+    .program-section h1 {
+      font-size: 40px;
+    }
+    .map-section h2 {
+      font-size: 44px;
+    }
+
+    .feature-caption {
+      margin-top: 20px;
+    }
+
+    .feature-row {
+      justify-content: center;
+    }
+    .feature-section h2 {
+      font-size:40px;
+      margin-bottom: 1.5rem;
+    }
+    .trust-stripe p {
+      font-size: 30px;
+    }
+    .trust-stripe span {
+      font-size:45px;
+    }
+    .trust-stripe{
+      padding: 1.5rem;
+    }
+    .img-bg {
+          width: 100%;
+    margin: 0 auto;
+    }
+    .feature-section {
+      padding: 4rem;
+    }
+    .img-right-side, .img-left-side {
+    width: 35%;
+    padding-top: 1rem;
+}
+    .feature-section p {
+      font-size: 26px;
+    }
+    .problem-description 
+      {
+    width: 100%;
+    margin: 0 auto;
+}
+    .problem-title {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: baseline;
+    }
+/*     .sleep-affect-section {
+      padding: 4rem;
+      width: 80%;
+      margin: 0 auto;
+    } */
+    .sleep-affect-title {
+      text-transform: unset;
+      font-size: 44px;
+      margin-bottom: 0;
+      margin-top: 3rem;
+    }
+    .sleep-affect-title br {
+      display: none;
+    }
+    .map-section-text {
+    padding: 1rem 0;
+    font-size: 26px;
+}
+    .map-section {
+      justify-content: space-evenly;
+    }
+    .map {
+      width:50%;
+    }
+    .hero-text-strip {
+      background: #222221;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+    .map-section-text {
+      width: 80%;
+    }
+    p.map-section-text br {
+      display: none;
+    }
+    .issue-section img {
+    width: 100%;
+}
+    .issue-section p {
+      font-size: 30px;
+    }
+    .problem-description p {
+       font-size: 20px;
+        padding-top: 1rem;
+      text-align: justify;
+}
+    .problem-description p br {
+      display: none;
+    }
+    .feature-row {
+    justify-content: space-evenly;
+      padding: 1rem 0;
+}
+    .feature-section .feature-row .feature-card .feature-description {
+      font-size: 22px;
+      line-height: 30px;
+    }
+    .feature-section .feature-caption {
+      font-size: 16px;
+    }
+
+    .feature-caption {
+        font-size: 15px;
+    }
+.feature-size {
+      font-size: 18px;
+}
+    .problem-right,
+    .problem-left{
+      padding: 4rem;
+      width: 80%;
+      margin: 0 auto;
+    }
+    .problem-title h3 {
+       font-size: 26px;
+      text-align: center !important;
+    }
+    .problem-title p {
+          font-size: 26px;
+      text-align: right !important;
+    }
+    .left.text-box, .right.text-box {
+      width: 50%;
+    }
+    .issue-section {
+          justify-content: space-evenly;
+    align-items: center;
+      padding: 4rem;
+      width: 80%;
+      margin: 0 auto;
+    }
+    .program-section {
+      width: 80%;
+      margin: 0 auto;
+    }
+    .card-section {
+      display: flex;
+    }
+    .program-section .program-card .img-box img {
+      border-radius: 30px;
+      width: 100%;
+    }
+    .hero-section .logo {
+      height: auto;
+      width: 15%;
+      position: absolute;
+      left: 5%;
+      top: -10%;
+    }
+    .hero-text {
+      font-size: 32px;
+      width: 100%;
+      top: 35%;
+      bottom: auto;
+      padding: 1rem 0;
+    }
+    .feature-card img.desktop {
+      width: 50%;
+      margin: 0 auto;
+    }
+    .map-section span.top {
+      top: 39%;
+      right: 47.5%;
+      font-size: 26px;
+    }
+    .map-section span.bottom {
+      top: 58%;
+      right: 55%;
+      font-size: 26px;
+    }
+  }
+
+</style>
+<div class="sleep-program-page">
+    <div class="hero-section">
+       <img class="banner desktop" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/ezgif.com-webp-to-png.png?v=1683635707" />
+       <img class="banner mobile" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/stressed-office-work_1.png?v=1683319306" />
+        <a href="/"><img class="logo" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/logo-test-01_1.png?v=1683319386" alt=""></a>
+        <div class="hero-text">
+            Increase Employee Wellbeing & Productivity Through Better Sleep 
+        </div>
+    </div>
+    <div class="hero-text-strip">
+        If your employees work long hours, they may be sleep deprived, exhausted and irritable. We can help.
+    </div>
+    <div class="map-section">
+        <h2 class="map-section-title">
+            According to Philips Healthcare Survey
+        </h2>
+        <div class="image-with-percent">
+<!--           <img class="map desktop" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer.png?v=1683302495" alt=""> -->
+          <img class="map" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_14.png?v=1683470494" alt="Philips Healthcare Survey Percentage">
+          <span class="top">93%</span>
+          <span class="bottom">80%</span>
+        </div>
+        <p class="map-section-text">
+            Sleep is a core pillar of wellness, along with nutrition and <br>exercise. Proper sleep improves productivity, increases <br>morale, and reduces healthcare costs for employees.
+        </p>
+    </div>
+    <div class="sleep-affect-section">
+        <h2 class="sleep-affect-title">
+            How Sleep Affects <br>the Workplace
+        </h2>
+        <div class="issue-section">
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_22_1.png?v=1683605249" alt="Corporate Sleep Program" />
+            <p>58%*</p>
+          </div>
+<!--           <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_3.png?v=1683303157" /> -->
+          <p>Indians believe their performance<br>suffers due to inadequate sleep.</p>
+        </div>
+        <div class="problem-right">
+            <div class="left text-box">
+                <div class="problem-title">
+                    <h3 class="mobile">
+                        Ocassional
+                    <p class="mobile">
+                        lack of sleep is not harmful
+                    </p>
+                    </h3>
+                  <p class="desktop">Ocassional lack of sleep is not harmful</p>
+                </div>
+                <div class="problem-description">
+                    <p>
+                        However, repeated prolonged <br>sleep issues can hinder <br>employee’s work performance.
+                    </p><br>
+                    <p>
+                        Studies have shown that <br>employees’ sleep disturbances <br>have a wide range of negative <br>outcomes including absenteeism, <br>decreased productivity, injuries <br>and increased healthcare costs.
+                    </p>
+                </div>
+            </div>
+            <div class="img-right-side">
+                <div class="img-bg">
+                    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_4.png?v=1683303808" alt="Ocassional lack of sleep">
+                </div>
+            </div>
+        </div>
+        <div class="problem-left">
+            <div class="right text-box">
+                <div class="problem-title">
+                    <h3 class="mobile">
+                        Chronic sleep
+                    <p class="mobile">
+                        deprivation can have even <br>more drastic consequences
+                    </p>
+                    </h3>
+                  <p class="desktop">Chronic sleep deprivation can have even <br>more drastic consequences</p>
+                </div>
+                <div class="problem-description">
+                    <p>
+                        such as increased risk of <br>obesity, heart disease, cognitive <br>decline and immuno deficiency, <br>according to the Sleep <br>Foundation.
+                    </p><br>
+                    <p>
+                        It can also contribute to mental <br>health conditions such as <br>anxiety and depression.
+                    </p>
+                </div>
+            </div>
+            <div class="img-left-side">
+                <div class="img-bg">
+                    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_5.png?v=1683303837" alt="Chronic sleep deprivation">
+                </div>
+            </div>
+        </div>
+        <div class="trust-stripe">
+            <span>
+                Trust us.
+            </span>
+            <p>
+                Your employees want a sleep program.
+            </p>
+        </div>
+        <div class="feature-section">
+            <h3>
+                Real science, Real results
+            </h3>
+            <p>
+                At Nyumi, we have developed programs and solutions to aid<br>employees to sleep better every night.
+            </p>
+            <div class="feature-row">
+                <div class="feature-card">
+                  <img class="desktop" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_6_7caa302d-29d6-4e98-9aba-40d86a826087.png?v=1683304106" alt="">
+                  <div class="mobile">
+                    <img class="mobile" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_15.png?v=1683470494" alt="">
+                    <em class="mobile">100%</em>
+                  </div>
+                  <p class="feature-description">
+                      participants had an increase<br>in nightly sleep duration
+                  </p>
+                </div>
+                <div class="feature-card">
+                  <img class="desktop" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_7.png?v=1683304105" alt="">
+                  <div class="mobile">
+                    <img class="mobile" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_16.png?v=1683470494" alt="">
+                    <em class="mobile">94%</em>
+                  </div>
+                  <p class="feature-description">
+                      participants did not wake up<br>during the night
+                  </p>
+                </div>
+                <div class="feature-card">
+                  <img class="desktop" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_8_6210d2e3-5eb1-4507-925d-6c0a5cde3ccd.png?v=1683304106" alt="">
+                  <div class="mobile">
+                    <img class="mobile" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_17_2474405e-0f6b-4e85-9a90-5db1f33cf2b3.png?v=1683470494" alt="">
+                    <em class="mobile">100%</em>
+                  </div>
+                  <p class="feature-description">
+                      users experienced improved<br>mood, concentration, memory<br>and ability to function at work
+                  </p>
+                </div>
+            </div>
+            <p class="feature-caption">
+                Fig: Use of Nyumi Beauty Sleep Gummies for 25 days improved sleep quality
+            </p>
+        </div>
+        <div class="program-section">
+            <h1>
+                Corporate Employee sleep programs
+            </h1>
+            <div class="card-section">
+              <div class="program-card">
+                  <div class="text-area">
+                      <h3>Sleep Well, Keep Well Kit.</h3>
+                      <div class="description-points">
+                        <ul>
+                          <li><p>Guide to build better sleeping<br>habits.</p></li>
+                          <li><p>Calm cards to destress mind.</p></li>
+                          <li><p>Beauty Sleep Gummies, for<br>restful and deep sleep.</p></li>
+                        </ul>
+                      </div>
+                  </div>
+                  <div class="img-box">
+                      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_24_1.png?v=1684173309" alt="">
+                  </div>
+  
+              </div>
+              <div class="program-card">
+                  <div class="text-area">
+                      <h3>Rest Reboot Program</h3>
+                      <div class="description-points">
+                        <ul>
+                          <li><p>Three Sleep Workshops by<br>trained experts on holistic <br>wellness to sleep better. Focus<br>will be on nutrition, mindfulness,<br>exercise, de-stress and other tips.</p></li>
+                          <li><p>Sleep Sound Kit</p></li>
+                        </ul>
+                      </div>
+                  </div>
+                  <div class="img-box">
+                      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/CompositeLayer_11.jpg?v=1683304813" alt="">
+                  </div>
+  
+              </div>
+            </div>
+            <div class="cta-section">
+              <p>Interested for your team?</p>
+              <button class="contact-cta">Contact us today</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="corporate-contact-form">
+  <p class="close-form">X</p>
+  <div style="margin:0 auto;" class="pxFormGenerator" id="vhLAUv2B-KTcoIwVDLBMuA"></div>
+</div>
+
+<script>
+  $('.contact-cta').click(function(){
+    $('.corporate-contact-form').show()
+    // $('body').css('overflow','hidden')
+    $('.sleep-program-page').hide()
+    $('.pxFormGenerator')[0].classList.add('hulk-form-background')
+  })
+  $('.corporate-contact-form .close-form').click(function(){
+    $('.sleep-program-page').show()
+    // $('body').css('overflow-y','scroll')
+    $('.corporate-contact-form').hide()
+    $('.pxFormGenerator')[0].classList.remove('hulk-form-background')
+  })
+</script>

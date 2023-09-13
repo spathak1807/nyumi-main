@@ -1,0 +1,2543 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+{% assign some_handle = 'beauty-sleep-gummies' %}
+{% assign beauty = all_products[some_handle] %}
+
+{% assign some_handle = 'radiant-skin-gummies' %}
+{% assign radiant = all_products[some_handle] %}
+
+{% assign some_handle = 'happy-hair-nails-gummies' %}
+{% assign happy = all_products[some_handle] %}
+
+{% assign some_handle = 'iron-gummies-for-women' %}
+{% assign iron = all_products[some_handle] %}
+
+<style>
+  /* starts my css for you may also like section */
+  input.keep-hide{
+    display:none;
+  }
+  .may-also-like {
+    /* position: relative;
+    z-index: -9; */
+}
+  .also-like {
+    color: #4d4d4d;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: left!important;
+    margin-left: 25px;
+    font-family: 'Manrope';
+}
+     .also-like-image {
+    width: 60px;
+    height: 60px;
+    margin: 10px auto;
+    max-width: 80px;
+    max-height: 80px;
+}
+  p.also-like-title{
+    font-size: 10px!important;
+    display: flex;
+    justify-content: center;
+    font-family: 'corbenr';
+    color: #000000;
+  }
+     p.also-like-price {
+    font-family: 'corbenr';
+    font-size: 13px;
+    color: #000000;
+    text-align: center;
+    margin-top: 2px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.also-like-btn-container {
+   background-color: #F37168;
+    width: 117px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0px 0px 18px 18px;
+    height: 23px;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ));
+}
+  button.also-like-btn {
+    background-color: transparent !important;
+   border: none;
+    outline: none;
+    background: none;
+    font-family: 'Manrope';
+    font-size: 10px!important;
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    text-transform: lowercase;
+    padding: 0;
+    min-height:0px!important;
+}
+  .may-also-like .swiper10{
+    z-index:0;
+    padding-bottom:10px;
+  }
+  .may-also-like .swiper-slide{
+    width:117px!important;
+    border-radius: 18px;
+    margin-right: 18px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 6px;
+    gap:0;
+    padding:0;
+  }
+  .may-also-like .swiper-wrapper{
+    padding-left:12px;
+  }
+  .also-like-btn:hover{
+    background-color:transparent !important;
+  }
+  /* end my css  */
+  
+  .hide_summary{
+    display:block;
+  }
+  #price_summary_toggle_parent{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #cacaca;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #price_summary_toggle_parent button{
+    display:none;
+    border:none;
+    background-color:#fff;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0;
+    transform: rotate(90deg);
+  }
+
+  .coupon_error_message {
+    color: red;
+    font-size: 14px;
+    margin: 0 1rem;
+    display: none;
+  }
+  .minct_close i {
+    font-size: 20px !important;
+  }
+  .cart_upper {
+    padding: 10px 15px;
+  }
+  .cart_upper p {
+    font-weight: 500;
+  }
+  .coupon_section .cart_upper {
+    background: #f47169;
+    padding: 10px 15px;
+    text-align: center;
+    position: absolute;
+    top: 6.6%;
+    width: 100%;
+  }
+  .empty-cart {
+    font-size: 30px;
+    font-weight: 800;
+    color: #f47169;
+    font-family: corbenr;
+    text-align: center;
+  }
+  .variant-popup {
+    z-index: 9;
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.7)
+  }
+  .top_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .top_head p {
+    color: white;
+    font-size: 18px;
+  }
+  .top_head img {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+/*     background: white; */
+/*     border-radius: 60px; */
+/*     border: solid 1px #e8656a; */
+  }
+  .buttons {
+    padding: 1rem;
+    display: flex;
+  }
+  .buttons button {
+    width: 50%;
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 20px;
+    border: none;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  button.cancel {
+    background: #fff4ef;
+    color: #f47169;
+  }
+  .select_input_error {
+    color: red;
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  button.save {
+    background: #f47169;
+    color: white;
+  }
+  button[disabled] {
+    background: grey;
+    pointer-events: none;
+  }
+  .upsell_variant {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .inside_popup {
+    height: 60%;
+    width: 50%;
+  }
+  .item_details {
+    padding-top: 1rem;
+    /* padding-bottom: 2rem; */
+  }
+  .new_upsell {
+    background: #fff4ee;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: none;
+  }
+  .new_upsell[variant_title="Pack of 2"] {
+    display: none !important;
+  }
+  .new_upsell .msg-details {
+    display: flex;
+    background: #fff4ee;
+    border-radius: 15px 15px 10px 10px;
+    padding: 5px 8px 12px 8px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .upsell_variant input[type=radio] {
+    display: block !important;
+    cursor: pointer;
+  }
+  .upsell_variant .upsell, .select_input {
+    display: flex;
+    align-items: baseline;
+  }
+  .upsell_variant .upsell {
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .upsell_variant .upsell .select_input label span {
+    font-size: 16px;
+    color: #f37168;
+    font-family: 'corbenr';
+    font-weight: 900;
+  }
+  .upsell h2 {
+    margin: 0;
+    font-size: 30px;
+    font-family: 'manroper';
+    font-weight: 900;
+    text-transform:none;
+  }
+  .select_input input[type=radio]:checked + label {
+    background: white;
+    cursor: pointer;
+  }
+  .upsell p {
+    font-family: 'manroper';
+    text-transform: capitalize;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .select_input p {
+    font-family: 'corbenr';
+    text-transform: lowercase;
+  }
+  .upsell input {
+    height: 20px;
+    width: 20px;
+  }
+  .msg-details input {
+    display: block;
+    margin-top:6px;
+  }
+  .upsell label {
+    background: white;
+    cursor: pointer;
+    padding: 0 10px;
+  }
+  .choose_variant i {
+    font-size: 14px;
+    padding: 10px;
+    color: #f47169;
+  }
+  .choose_variant p {
+    font-size: 16px;
+    font-weight: 500; 
+    color: black;
+  }
+  .choose_variant p span {
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    background: #f37168;
+    border-radius: 5px;
+  }
+  .pricing p{
+    margin: 0 !important;
+    font-size: 30px;
+    font-weight: 900;
+    font-family: 'manroper';
+  }
+/*   .pricing_discount {
+    display: flex;
+  } */
+  .pricing_discount p {
+    text-decoration: line-through;
+    font-size: 18px;
+    padding: 5px;
+    color: gray;
+  }
+  .pricing_discount span {
+    padding: 5px 15px;
+    background: #f37168;
+    color: white;
+    border-radius: 30px;
+  }
+  .edit-icon {
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #f37168;
+  }
+  .edit-icon i {
+    font-size: 16px;
+    color: white;
+  }
+  .new_upsell .msg-details .choose_variant {
+    display: flex;
+    align-items: flex-start;
+  }
+  .new_upsell .fact-msg {
+    padding: 9px;
+    font-size: 12px;
+    margin: 0;
+    color: black;
+    font-weight:bold;
+    font-family:'Manrope';
+  }
+  .new_upsell .fact-msg i {
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+  }
+  .min_cart .minct_item {
+    border-bottom: none;
+  }
+  button[disabled], html input[disabled] {
+    background: white;
+  }
+  .apply_coupon_initial .initial_apply_btn {
+    color: #f37168;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+  .error_message {
+    color: red;
+    font-size: 14px;
+    margin: 0 1rem;
+    display: none;
+  }
+  .success_message {
+    color: green;
+    font-size: 14px;
+    margin: 0 1rem;
+    display: none;
+  }
+  .apply_coupon_initial input {
+    outline: transparent 0px;
+    border: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .apply_coupon_initial {
+    background: white;
+    display: none !important;
+    justify-content: space-between;
+    padding: 10px 1rem !important;
+    margin: 1rem;
+    margin-bottom: 0;
+    border: solid 1px #cacaca;
+    border-radius: 5px;
+  }
+  .saving_message {
+    background: white;
+/*     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px; */
+    padding: 1rem 0;
+/*     margin: 1rem; */
+    text-align: center;
+    color: #f37168;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+  .pricing_details {
+    padding: 10px 1rem;
+  }
+  .pricing_details strong {
+    font-size: 18px;
+    text-transform: capitalize;
+    margin: 0;
+  }
+  .grand-total {
+    border-top: 1px solid #cacaca;
+    border-bottom: 1px solid #cacaca;
+  }
+  .order-total, .discount, .sub-total, .items-discount, .shipping, .grand-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 5px;
+    padding-left: 0;
+  }
+  .order-total p, .discount p, .sub-total p, .items-discount p, .shipping p, .grand-total p {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    color: gray;
+  }
+  .order-total p.value, .discount p.value, .sub-total p.value, .shipping p.value, .grand-total p.value {
+    color: black;
+  }
+  .items-discount p {
+    color: #f37168;
+  }
+  .spinner {
+    position: fixed;
+    display: none;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 27.5%;
+    right: 0;
+    color: #f37168;
+    font-size: 50px;
+    background: rgba(0,0,0,0.3);
+  }
+  .all_coupons {
+    padding: 10px 15px;
+    font-family: corbenr;
+  }
+  .all_coupons strong {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: 'manropeb';
+  }
+  .coupon-card {
+    border-radius: 10px;
+    background: #fff4ee;
+    padding: 15px;
+    font-family: corbenr;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .coupon-card p {
+    margin: 0;
+    font-family: corbenr;
+  }
+  .coupon-card .coupon-title {
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'manropeb';
+    margin-top: 1rem;
+  }
+  .coupon-card .coupon-description {
+    font-size: 16px;
+    font-family: 'manroper';
+    margin: 0.5rem 0;
+  }
+  .coupon-card .logo {
+    width: 25%;
+    margin-bottom: 1rem;
+  }
+  .apply_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'manroper';
+    font-weight: 900;
+    color: #f37168;
+    margin-top: 1rem;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+  }
+  .coupon-code {
+/*     border: dashed 2px #f37168; */
+/*     padding: 5px 10px; */
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .coupon-code span {
+    width: 100%;
+    border-radius: 10px;
+    background: #f37168;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'manroper';
+  }
+  .empty-stripe {
+    width: 20%;
+    height: 50px;
+    background: #f47169;
+  }
+  .apply_section .apply-btn {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .form_elements .input-apply {
+    padding: 10px 15px;
+    background: #f37168;
+    color: white;
+    font-weight: 600;
+    width: 25%;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .form_elements {
+    font-family: corbenr;
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px gray;
+    border-radius: 10px;
+  }
+  input:focus, textarea:focus, select:focus, .disclosure__toggle:focus {
+    border: none;
+  }
+  .apply_coupon_input {
+    outline: transparent 0px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    padding: 10px 15px;
+    border-right: 0;
+  }
+  .apply_coupon_form {
+    padding: 1rem;
+    padding-top: 110px;
+  }
+  .apply_coupon_form {
+    background: none;
+    border: none;
+  }
+  .coupon_section {
+    display: none;
+    background: white;
+  }
+  .min_cart .coupon_header .minct_close i {
+    display: block;
+    font-size: 26px;
+    cursor: pointer;
+  }
+  .minct_close {
+    display: flex;
+    justify-content: center;
+  }
+  .min_cart .coupon_header .coupon_heading {
+    line-height: 40px;
+    font-weight: 500;
+    font-size: 24px;
+    color: #231f20;
+    font-family: corbenr;
+    outline: none;
+  }
+  .min_cart .minct_header {
+    background: #fff4ee;
+    box-shadow: rgb(0 0 0 / 12%) 0px 3px 6px;
+  }
+  .min_cart .coupon_header{
+    background: #fff4ee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 400px;
+    height: 60px;
+    z-index: 1;
+    box-shadow: rgb(0 0 0 / 12%) 0px 3px 6px;
+  }
+  .min_cart .coupon_header i{
+    text-align: left;
+    padding-left: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .coupon_heading {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .min_cart .coupon_header span{
+    text-align: center;
+    text-transform: lowercase;
+  }
+  .docapp-coupon-widget-variables .docapp-coupon-popup__close {
+    color: black !important;
+  }
+  .docapp-coupon-widget-variables .docapp-coupon-popup__header__title {
+    background-color: white !important;
+    color: black !important;
+  }
+  .docapp-coupon-widget-variables .docapp-coupon-popup__header__body {
+    background-color: #f37168 !important;
+  }
+  .docapp-coupon-widget-variables .docapp-coupon-popup {
+    background: #fff4ef !important;
+  }
+  .available_coupons {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    /* background: #FFEAEA; */
+    /* box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px; */
+    padding: 10px 0;
+    margin: 1rem;
+    margin-top: 0;
+/*     padding-top: 0; */
+    font-size: 16px;
+    border-radius: 5px;
+    color: #f37168;
+    font-weight: 600;
+  }
+/*   .available_coupons img {
+    width: 2rem;
+  } */
+  .available_coupons p {
+    padding: 6px 0px;
+    font-size: 16px;
+    margin-left: 0.5rem;
+    color: #f37168;
+    font-weight: 900;
+  }
+  .minct_checkout_btn {
+    display: flow-root;
+    color: #fff;
+    font-family: manropes;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px;
+    width: 50%;
+    margin-bottom: 18px;
+    background: #f47169;
+    border-radius: 10px;
+    letter-spacing: .5px;
+    text-align: center;
+    margin: 0!important;
+    text-transform: uppercase;
+  }
+  .checkout_btn span {
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+  }
+  .checkout_btn {
+    width: 400px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #FFEAEA;
+    padding: 0.5rem 0;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  }
+  .product-details__item--variant-option{
+  display: block;
+    width: 100%;
+  }
+  .compare_at_price {
+    text-decoration: line-through;
+    color: gray;
+    padding: 0 5px;
+  }
+  .minct_footer {
+    width: -webkit-fill-available;
+    bottom: 0%;
+    background: white;
+/*     padding: 10px; */
+    padding-bottom: 3.5rem;
+    margin: 0;
+/*     position: absolute; */
+/*     box-shadow: inset 0px 7px 3px -3px rgb(50 50 50 / 10%); */
+  }
+  .minct_footer_wrap {
+    padding: 10px;
+  }
+  .docapp-cart-with-coupon-summary {
+    padding: 10px !important;
+  }
+  .min_cart .min_cart_inner {
+    position: relative;
+    z-index: 9999;
+    background-color: white;
+    padding-bottom: 0;
+/*     min-height: auto; */
+/*     height: 85vh;
+    overflow-y: scroll; */
+  }
+  .cart_inner_footer {
+    background: white;
+  }
+  @media (max-width: 767px) {
+    .minct_footer {
+      padding-bottom: 7.5rem !important;
+    }
+    .min_cart .coupon_header {
+      width: 100%;
+      padding: 1rem;
+    }
+/*     .coupon-code{
+      align-items: inherit;
+    } */
+    .empty-stripe {
+      width: 25%;
+      height: 40px;
+      background: #f47169;
+    }
+    .coupon-code span {
+      width: 100%;
+      padding: 7px 0;
+      font-size: 18px;
+      font-family: 'manropeb';
+    }
+    .coupon-card .coupon-title {
+      font-size: 16px;
+    }
+    .coupon-card .coupon-description {
+      font-size: 14px;
+    }
+    .coupon_heading {
+      width: 66%;
+    }
+    .min_cart .coupon_header .coupon_heading {
+      font-size: 20px;
+    }
+    .apply_section .apply-btn {
+      font-size: 14px;
+    }
+    .all_coupons strong {
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .available_coupons {
+      font-size: 14px;
+    }
+    .pricing_details strong {
+      font-size: 16px;
+    }
+    .order-total p, .items-discount p, .shipping p, .grand-total p {
+      font-size: 14px;
+    }
+    .saving_message {
+      font-size: 1rem;
+    }
+    .spinner {
+      width: 100%;
+    }
+  }
+</style>
+
+
+<style>
+  @media screen and (max-width: 992px) {
+  .inside_popup{
+    width:90%;
+    height:auto;
+  }
+  }
+@media screen and (max-width: 552px) {
+  .checkout_btn {
+    right: 0;
+    display: none;
+  }
+  .upsell_variant {
+    padding-top: 0.5rem;
+  }
+    .msg-details input {
+    margin-top:4.5px;
+  }
+  .order-total p, .discount p, .sub-total p, .items-discount p, .shipping p, .grand-total p {
+    font-size: 14px;
+  }
+  .pricing {
+    display: flex;
+    align-items: flex-start;
+  }
+  .top_head{
+    background:white;
+    padding: 1.5rem;
+    margin-bottom:-1px;
+     border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+  }
+  .new_upsell {
+    width: 100%;
+  }
+  .top_head p{
+    color:black;
+    margin-left: 10px;
+    margin-bottom: -1px;
+    font-size:18px;
+    font-weight:800;
+    padding-top:10px;
+  }
+  .top_head img{
+   top: -20%;
+    left: 45%;
+    /* margin-right: 10px; */
+    margin-bottom: 0;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+  }
+  .upsell_variant{
+    border-radius:0;
+   
+  }
+  .inside_popup{
+    width:100%;
+    height:auto;
+    position:relative;
+  }
+  .variant-popup{
+    align-items:flex-end;
+  }
+  .upsell p{
+    font-size:14px;
+  }
+  .upsell h2{
+    font-size:16px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    line-height: 1.5;
+  } 
+  .pricing_discount p{
+    margin-right:12px !important;
+  }
+  .pricing p{
+    font-size:14px;
+    padding:0;
+    line-height: 2.5;
+}
+  .upsell_variant .upsell{
+    margin-bottom:1rem;
+    align-items: baseline;
+  }
+  .upsell_variant .upsell .select_input label span{
+    font-size:12px;
+    font-family:Manrope;
+  }
+/*   .select_input{
+    align-items:flex-start;
+  } */
+  .new_upsell .fact-msg{
+    font-size:15px;
+  }
+  .new_upsell .fact-msg i{
+    font-size:16px !important;
+  }
+  .new_upsell .msg-details{
+    padding:10px 5px;
+    padding-top:10px;
+    
+  }
+  .min_cart .minct_detail {
+    margin: 20px 10px;
+    margin-top:0;
+  }
+  .new_upsell .msg-details .choose_variant{
+    padding-left:5px;
+  }
+  .choose_variant p{
+    font-size :14px;
+  }
+  .choose_variant p span{
+    font-size:10px;
+  }
+  .choose_variant i{
+    padding:8px;
+    font-size:12px;
+  }
+  .edit-icon{
+    padding: 2px 8px;
+  }
+  .upsell input{
+    width:10px;
+    height:10px;
+/*     margin-top:-4px; */
+  }
+  .pricing_discount span{
+    
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px;
+    position: absolute;
+/*     margin-top: 12px; */
+    line-height: 14px;
+    border-radius: 14px;
+    margin-left: 2px;
+    width: 20%;
+    right: 5%;
+    text-align: center;
+    
+}
+  }
+  .buttons{
+    padding:0;
+  }
+  .buttons button{
+    font-size:14px;
+    padding:0.6rem;
+  }
+
+}
+</style>
+
+
+<div class="min_cart">
+  <div class="min_cart_outer"></div>
+  <div class="spinner">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+ <div class="cart_inner_footer"> 
+ <div class="min_cart_inner">
+    <div class="minct_header">
+      <div class="minct_heading">your cart</div>
+      <div class="minct_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    </div>
+    <div class="cart_bdy_wrp">
+      <div class="cart_drawer_loder hide">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/t/58/assets/200w.gif">
+      </div>
+      {% if settings.upsell_message != blank %}
+      <div class="cart_upper">
+        <p>{{ settings.upsell_message }}</p>
+      </div>
+      {% endif %}
+      <div class="minct_detail aaa">
+        <p class="empty-cart" style="display:none;">Your cart is empty.</p>
+        {% for item in cart.items %}
+          <div class="item_details">
+            <div class="minct_item" data-line="{{ item.index }}" data-id="{{ item.id}}" data-price="{{ item.price}}">
+              <div class="minct_item_img">
+                {% if item.image != null %} 
+                <img src="{{ item | img_url: 'x120' }}"  alt="{{ item.image.alt | escape }}"/>
+                {% endif %}
+              </div> 
+    
+              <div class="minct_item_title">  
+                <a href="{{ item.url }}" class="minct_title">{{ item.product.title }}</a>
+              
+                {%- assign variant_options = 'template ' | split: ' ' -%}
+                {%- if item.product.has_only_default_variant != true -%}
+                {%- assign variant_options = item.options_with_values -%}
+                {%- endif -%}
+                {%- assign property_size = item.properties | size -%}
+                {%- for option in variant_options -%}
+                <p class="product-details__item product-details__item--variant-option{% if item.product.has_only_default_variant %} hide{% endif %}" data-cart-item-option>{{ option.value }}</p>
+                {%- endfor -%}
+              
+                <div class="minct_item_price" price="{{ item.price }}" compare_at_price="{{ item.variant.compare_at_price }}"> 
+                  {{ item.price | money }}
+                  <span class="compare_at_price">
+                    {% if item.variant.compare_at_price > item.price %}
+                      {{ item.variant.compare_at_price | money }} 
+                    {% endif %}
+                  </span>
+                </div>
+    
+                <div class="remove_and_qty">
+                  <div class="minct_item_qty">
+                    <div class="minct_qty_sign minius_sighn yash" onclick="update_cart_price()"></div>
+                    <div class="minct_qty">{{ item.quantity }}</div>
+                    <i class="qty_loader fa fa-circle-o-notch fa-spin hide" style="font-size:20px"></i>
+                    <div class="minct_qty_sign plus_sign yash" onclick="update_cart_price()"></div>
+                  </div>
+    
+                  <div class="minct_item_remove hide">remove </div>
+                </div>
+              </div>
+            </div>
+            <div class="new_upsell" variant_title="{{ item.variant.title }}">
+            <p class="fact-msg">Fact: Use consistently for 3 months see best results!</p>
+              <div class="msg-details" product-id="{{ item.product.id }}" variant-id="{{ item.id }}" variant-price="{{ item.price }}">
+                <div class="choose_variant">
+                  <input type="radio" style="margin-right: 10px;" />
+                  <p>Switch to pack of 3 <span>Save upto 15%</span></p>
+                </div>
+                <div class="edit-icon" product-id="{{ item.product.id }}" variant-id="{{ item.id }}" variant-price="{{ item.price }}"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-popup" product-id="{{ item.product.id }}" product-price="{{ item.price }}" variant-id="{{ item.id }}">
+            <div class="inside_popup">
+              <div class="top_head">
+                <p>Purchase Options</p>
+                <img product-id="{{ item.product.id }}" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/button-ui_1.png?v=1675079012" />
+              </div>
+              <div class="upsell_variant upsell_variant-{{ item.product.id }}" variant-price={{ item.price }}>
+                <p class="select_input_error">Select any upsell variant</p>
+                <div class="buttons">
+                  <button class="cancel" product-id="{{ item.product.id }}">Cancel</button>
+                  <button class="save" product-id="{{ item.product.id }}" old-id='{{ item.id }}'>Save</button>
+                </div>
+                {% comment %}
+                {% for variant in product.variants %}
+                  <div class="upsell upsell{{ forloop.index }}" variant-price='{{ variant.price }}' variant-id='{{ variant.id }}' target-id='{{ item.id }}'>
+                    <div class="select_input">
+                      <input type="radio" id="option{{ forloop.index }}" />
+                      <label id="option{{ forloop.index }}">
+                        <h2>{{ variant.title }}</h2>
+                        <p>{{ item.product.title }}</p>
+                        <span>Save Rs {{ variant.compare_at_price | minus: variant.price | money_without_currency }}</span>
+                      </label>
+                    </div>
+                    <div class="pricing">
+                      <p>{{ variant.price | money_with_currency }}</p>
+                      <div class="pricing_discount">
+                        <p>{{ variant.compare_at_price | money_without_currency }}</p>
+                        <span>{{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round | at_least: percentage }}% OFF</span>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                {% endcomment %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <!-- you may also like section starts here  -->
+     
+      <div class="may-also-like">
+          <div class="also-like">
+             You may also like:
+          </div>
+         <div class="swiper10">
+            <div class="swiper-wrapper">
+            {% for product in collections.upsell-cart.products %}
+            {% assign recommendations_product='' %}
+            {% for tag in product.tags %}
+              {% if tag contains 'recommended_' %}
+              {% assign recommendations_tag= tag %}
+              {% endif %}
+              {% endfor %}
+            {% if recommendations_tag == product.metafields.custom.you_may_also_like %} 
+              <div class="swiper-slide">
+                {% if product.featured_image != blank %}
+                <div class="also-like-image">
+                  <img src="{{ product.featured_image | img_url:'300x300' }}">
+                </div>
+                {% endif %}
+              {% if product.title != blank %}
+                <div class="product-title-like">
+                   <p class="also-like-title">{{ product.title }}</p>
+                </div>
+                {% endif %}
+              {% if product.price != blank %}
+                <p class="also-like-price">{{ product.price | money}}</p>
+                {% endif %}
+                {% comment %} <div class="also-like-btn-container">
+                    <button class="also-like-btn"> add to cart</button>
+                </div> 
+               {% endcomment %} 
+              <div id="image-also-like-2" class="also-like-btn-container" variant-id="{{ product.variants.first.id }}" variant-name="{{ product.variants.first.title }}" price="{{ product.price }}" product-name="{{ product.title }}" product-id="{{ product.id }}">
+                  <form method="post" action="/cart/add">
+                  <input class="keep-hide" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <input class="keep-hide" min="1" type="number" id="quantity" name="quantity" value="1"/>
+                 <button type="submit" name="add" variant-id="{{ product.variants.first.id }}" variant-name="{{ product.variants.first.title }}" price="{{ product.price }}" product-name="{{ product.title }}" product-id="{{ product.id }}"
+                  {% unless product.available %} aria-disabled="true"{% endunless %}
+                  aria-label="{% unless product.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                  class="also-like-btn btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %} may-also-like"
+                  aria-haspopup="dialog"
+                  data-add-to-cart-text>
+                  <span id="atc-text" class="atc-btn" data-add-to-cart-text>
+                    {% unless product.available %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% else %}
+                      {{ 'products.product.add_to_cart'| t }}
+                    {% endunless %}
+                  </span>
+                  <span class="hide" data-loader>
+                    {% include 'icon-spinner' %}
+                  </span> 
+                  
+                </button>
+                 </form> </div>
+              </div>
+                
+                 {% endif %}
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+       
+      
+
+
+    {% for variant in beauty.variants %}
+      {% assign saving1 = variant.compare_at_price | minus: variant.price %}
+      {% assign save1 = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round %}
+      {% assign percentage1 = save1 | at_least: percentage %}
+      
+      {% assign beauty_price1 = variant[0].price %}
+      {% assign beauty_price2 = variant[1].price %}
+      {% assign beauty_price3 = variant[2].price %}
+      <div class="beauty" style="display: none;">
+        <p class="price{{ forloop.index }}">{{ variant.price | money_without_trailing_zeros }}</p>
+        <p class="compare_price{{ forloop.index }}">{{ variant.compare_at_price | money_without_trailing_zeros }}</p>
+        <p class="saveRS{{ forloop.index }}">Save {{ saving1 | money_without_trailing_zeros }}</p>
+        <p class="percentage{{ forloop.index }}">{{ percentage1 }}% OFF</p>
+      </div>
+    {% endfor %}
+    
+    {% for variant in radiant.variants %}
+      {% assign saving2 = variant.compare_at_price | minus: variant.price %}
+      {% assign save2 = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round %}
+      {% assign percentage2 = save2 | at_least: percentage %}
+      <div class="radiant" style="display: none;">
+        <p class="price{{ forloop.index }}">{{ variant.price | money_without_trailing_zeros }}</p>
+        <p class="compare_price{{ forloop.index }}">{{ variant.compare_at_price | money_without_trailing_zeros }}</p>
+        <p class="saveRS{{ forloop.index }}">Save {{ saving2 | money_without_trailing_zeros }}</p>
+        <p class="percentage{{ forloop.index }}">{{ percentage2 }}% OFF</p>
+      </div>
+    {% endfor %}
+    
+    {% for variant in happy.variants %}
+      {% assign saving3 = variant.compare_at_price | minus: variant.price %}
+      {% assign save3 = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round %}
+      {% assign percentage3 = save3 | at_least: percentage %}
+      <div class="happy" style="display: none;">
+        <p class="price{{ forloop.index }}">{{ variant.price | money_without_trailing_zeros }}</p>
+        <p class="compare_price{{ forloop.index }}">{{ variant.compare_at_price | money_without_trailing_zeros }}</p>
+        <p class="saveRS{{ forloop.index }}">Save {{ saving3 | money_without_trailing_zeros }}</p>
+        <p class="percentage{{ forloop.index }}">{{ percentage3 }}% OFF</p>
+      </div>
+    {% endfor %}
+
+    {% for variant in iron.variants %}
+      {% assign saving3 = variant.compare_at_price | minus: variant.price %}
+      {% assign save3 = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round %}
+      {% assign percentage3 = save3 | at_least: percentage %}
+      <div class="iron" style="display: none;">
+        <p class="price{{ forloop.index }}">{{ variant.price | money_without_trailing_zeros }}</p>
+        <p class="compare_price{{ forloop.index }}">{{ variant.compare_at_price | money_without_trailing_zeros }}</p>
+        <p class="saveRS{{ forloop.index }}">Save {{ saving3 | money_without_trailing_zeros }}</p>
+        <p class="percentage{{ forloop.index }}">{{ percentage3 }}% OFF</p>
+      </div>
+    {% endfor %}
+
+   
+    <form class="apply_coupon_initial" style="display:none;">
+      <input class="input_box" placeholder="Enter Coupon Code" />
+      <button class="initial_apply_btn">Apply</button>
+    </form>
+    <div class="sub-footer" style=" width: 100%; background: white; position:relative;">
+<!--     <p class="error_message">Coupon not applicable to your cart items.</p> 
+    <p class="coupon_error_message">Cannot be combined with other offers.</p> 
+    <p class="success_message">Coupon successfully applied.</p> 
+    <p class="available_coupons">Show Available Coupons <i style="padding-left: 5px; font-size: 16px;" class="fa">&#xf105;</i></p>
+      <hr style="border: 0; border-bottom: 2px solid #cacaca; width: 95%; margin: 1rem auto;"> -->
+    <div class="minct_footer">
+      <div class="pricing_details">
+        <strong>Price Summary</strong>
+        <div class="order-total">
+          <p class="title">Order Total</p>
+          <p class="value">{{ cart.total_price | money_with_currency }}</p>
+        </div>
+        <div class="discount">
+          <p class="title">Discount</p>
+          <p class="value" style="color:#f37168">---</p>
+        </div>
+        <div class="sub-total" style="display:none">
+          <p class="title">Sub Total</p>
+          <p class="value">{{ cart.total_price | money_with_currency }}</p>
+        </div>
+        <div class="shipping">
+        <p class="title">Shipping</p>
+          <p class="value">---</p>
+        </div>
+        <div class="items-discount">
+          <p class="title">Coupon Code: <span></span></p>
+          <p class="value">---</p>
+        </div>
+        <div class="grand-total">
+          <p class="title">Total</p>
+          <p class="value"><span style="text-decoration: line-through; margin-right:4px;color:grey;">{{ cart.total_price | money_with_currency }}</span> <span>---</span></p>
+        </div>
+      <div class="saving_message">You are saving <span>---</span> on this order</div>
+      </div>
+      
+      
+
+<!--       <button type="submit" id="checkout" name="checkout" class="btn">
+
+  {{ 'cart.general.checkout' | t }}
+
+</button>
+       -->
+      <a href="/cart" class="simple_txt hide">{{ 'view in cart'}}</a>
+    </div>
+    
+   <div class="checkout_btn" style="z-index:2;">
+     <span>Total {{ cart.total_price | money_with_currency }}</span>
+     <a href="/checkout" class="minct_checkout_btn">Checkout</a>
+   </div>
+
+<!--   apply coupon section -->
+    <div class="coupon_section" style="display:none;">
+      <div class="coupon_header">
+        <div class="coupon_heading"><i style="font-size:26px; font-weight: 800;" class="fa">&#xf104;</i><span>Apply Offers</span></div>
+        <div class="minct_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+      </div>
+      {% if settings.upsell_message != blank %}
+        <div class="cart_upper">
+          <p>{{ settings.upsell_message }}</p>
+        </div>
+      {% endif %}
+      <form class="apply_coupon_form">
+        <div class="form_elements">
+          <input required="" placeholder="Enter Coupon Code" type="text" class="apply_coupon_input" value="" style="width: 75%">
+          <div class="input-apply">Apply</div>
+        </div>
+      </form>
+      {% section 'available-coupons' %}
+      
+    </div>
+ </div>
+</div> 
+</div>
+
+{% comment %}
+<script>
+  {% for item in cart.items %}
+  	webengage.track("Added To Cart", {
+      "Product ID" : "{{ item.id}}",
+      "Price" : {{ item.final_price | divided_by:100 }},
+      });
+  {% endfor %}
+</script>
+{% endcomment %}
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+  
+  $( document ).ready(function() { 
+      const swiper = new Swiper('.swiper10', {
+  speed: 400,
+      loop:false,
+  spaceBetween: 18,
+      slidesPerView: 2.5,
+      breakpoints: {
+      768: {
+      slidesPerView: 3,
+      spaceBetween: 18
+    }
+  }
+});
+  });
+</script>
+<script>
+  function update_cart_price2(response) {
+    
+            if(response.items.length<1){
+              $('.may-also-like').hide()
+            }else{
+              $('.may-also-like').show()
+            }
+          
+            let price = 0
+            let orderTotal = 0
+            const discount_amount = (response.total_discount/100)
+      
+            for(var i=0; i<$('.minct_item_price').length; i++) {
+                  orderTotal = (orderTotal) + (parseInt($('.minct_item_price')[i].attributes['compare_at_price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+            }
+            for(let i=0; i<response.items.length; i++) {
+               price=price+ (response.items[i].original_price* response.items[i].quantity)/100
+            }
+            if(response.cart_level_discount_applications.length<1){
+              if(price>499){
+                $('.shipping .value')[0].innerHTML = '<span style="text-decoration: line-through;">₹ 50 </span><span style="color: #f37168; padding-left: 5px;">FREE</span>'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + 50 + orderTotal - price).toFixed(0)
+              }else{
+                $('.shipping .value')[0].innerText = '₹ 50'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + orderTotal - price).toFixed(0)
+              }
+               $('.items-discount').hide()
+            }else{
+              $('.items-discount').hide()
+               $('.items-discount span')[0].innerText = response.cart_level_discount_applications[0].title
+             if(price>499){
+                $('.shipping .value')[0].innerHTML = '<span style="text-decoration: line-through;">₹ 50 </span><span style="color: #f37168; padding-left: 5px;">FREE</span>'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + 50 + orderTotal - price).toFixed(0)
+              }else{
+                $('.shipping .value')[0].innerText = '₹ 50'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + orderTotal - price).toFixed(0)
+              }
+            }
+           
+            $('.items-discount .value')[0].innerText = '-₹ ' + discount_amount.toFixed(0)
+            $('.grand-total .value')[0].innerText = '₹ ' + response.total_price/100
+            $('.order-total .value')[0].innerText = '₹ ' + orderTotal.toFixed(0)
+            $('.sub-total .value')[0].innerText = '₹ ' + price.toFixed(0)
+            $('.discount .value')[0].innerText = '-₹ ' + (orderTotal - price + discount_amount).toFixed(0)
+            $('.grand-total .value')[0].innerText = '₹ ' + (response.total_price/100).toFixed(0)
+            $('.checkout_btn span')[0].innerText = 'Total ₹ ' + (response.total_price/100).toFixed(0)
+          
+    setTimeout(function(){
+        if($('.items-discount').css('display') == 'none') {
+          $('.apply_coupon_initial .input_box')[0].value = ''
+          $('.apply_coupon_initial .initial_apply_btn')[0].innerText = 'Apply'
+        }
+      },1200)
+    if($('.apply_coupon_initial .input_box')[0].value == 'XXXX') {
+      $('.apply_coupon_initial .input_box')[0].value = ''
+    }
+      // }
+  
+}//end
+  function show_mincart(cart){
+      
+      var html = '';
+      var total = 0;
+      
+      var compare_at_price = 0;
+      var old_price;
+      var final;
+      
+     async function getProductJSON(item,price) {
+          var result = await jQuery.getJSON(window.Shopify.routes.root + 'products/' + item.handle + '.js', function(product) {
+            console.log(product)
+            result = product.compare_at_price 
+          } ).then(
+            (result) => {
+              price = result.compare_at_price
+              return price
+            });
+          
+      }
+    function productJSONData() {
+      var cart_length  = cart.items.length
+      var sum = cart_length*(cart_length-1)/2
+      var loop_sum = 0
+      $(cart.items).each(async function(index, item){
+        console.log(item,'item')
+        getProductJSON(item,item.price)
+        
+          var productData = await jQuery.getJSON(window.Shopify.routes.root + 'products/' + item.handle + '.js', function (productdata) {
+            productData = productdata
+          }).then((productData) => {
+            console.log('productdata.compare_at_price',productData,index,sum,loop_sum)
+            console.log(productData)
+            console.log(item,item[0])
+            var sale_price = item.price
+            if(item.price*item.quantity == item.total_discount){
+              sale_price = 0
+            }
+            if(item.options_with_values[0].value == 'Pack of 1') {
+                compare_at_price = productData.variants[0].compare_at_price
+            }
+            else if(item.options_with_values[0].value == 'Pack of 2') {
+                compare_at_price = productData.variants[1].compare_at_price
+            }
+            else if(item.options_with_values[0].value == 'Pack of 3') {
+                compare_at_price = productData.variants[2].compare_at_price
+            }
+            else {
+              compare_at_price = productData.compare_at_price
+            }
+            if(item.price == item.discounted_price){
+              conpare_at_price = ''
+            }
+         html +='<p class="empty-cart" style="display:none;">'+'Your cart is empty'+'</p>'+
+                 '<div class="item_details" data-line="'+index+'">'+'<div class="minct_item" data-line="'+index+'" data-id="'+item.id+'" data-price="'+item.price+'">'+
+                  '<div class="minct_item_img">';
+                   if(typeof item.image !== 'undefined')
+                   html +='<img src="'+item.image+'"  alt="#"/>';
+                  if(item.variant_title==null)
+                  item.variant_title="";
+                   html +='</div>'+
+                    '<div class="minct_item_title">'+
+                       '<a href="'+item.url+'" class="minct_title">'+item.product_title+'</a>'+
+                        '<p class="product-details__item product-details__item--variant-option">'+item.variant_title+'</p>'+
+                       '<div class="minct_item_price" yash price="'+sale_price+'" compare_at_price="'+compare_at_price+'">'+theme.Currency.formatMoney(sale_price, theme.moneyFormat)+
+                         '<span class="compare_at_price">'+theme.Currency.formatMoney(compare_at_price, theme.moneyFormat)+'</span>'+
+                       '</div>'+
+                       '<div class="remove_and_qty">'+
+                         '<div class="minct_item_qty">'+
+                           '<div class="minct_qty_sign minius_sighn"></div>'+
+                           '<div class="minct_qty">'+ item.quantity +'</div>'+
+                           '<i class="fa fa-circle-o-notch fa-spin hide" style="font-size:24px"></i>'+
+                          ' <div class="minct_qty_sign plus_sign"></div>'+
+                         '</div>'+
+
+                        ' <div class="minct_item_remove hide">remove </div>'+
+                       '</div>'+
+                   ' </div>'+
+                    '</div>'+
+                     '<div class="new_upsell" data-line="'+index+'" variant_title="'+item.variant_title+'">'+
+                      '<p class="fact-msg">'+'Fact: Use consistently for 3 months see best results!'+'</p>'+
+                      '<div class="msg-details" product-id="'+item.product_id+'" variant-id="'+item.id+'" variant-price="'+item.price+'">'+
+                        '<div class="choose_variant">'+
+                          '<input type="radio" style="margin-right: 10px;" />'+
+                          '<p>'+'Switch to pack of 3 '+'<span>'+'Save upto 15%'+'</span>'+'</p>'+
+                        '</div>'+
+                        '<div class="edit-icon" product-id="'+item.product_id+'" variant-id="'+item.id+'" variant-price="'+item.price+'">'+'<i class="fa fa-pencil" aria-hidden="true">'+'</i>'+'</div>'+
+                      '</div>'+
+                    '</div>'+
+                  '</div>'+
+                  '<div class="variant-popup" product-id="'+item.product_id+'" variant-id="'+item.id+'" product-price="'+item.price+'">'+
+                    '<div class="inside_popup">'+
+                      '<div class="top_head">'+
+                        '<p>'+'Purchase Options'+'</p>'+
+                        '<img id="top_head" product-id="'+item.product_id+'" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/button-ui_1.png?v=1675079012" />'
+                      +'</div>'+
+                      '<div class="x upsell_variant upsell_variant-'+item.product_id+'" variant-price="'+item.price+'">'+
+                        '<p class="select_input_error">'+'Select any upsell variant'+'</p>'+
+                        '<div class="buttons">'+
+                          '<button class="cancel" product-id="'+item.product_id+'">Cancel</button>'+
+                          '<button class="save" product-id="'+item.product_id+'" old-id="'+item.id+'">Save</button>'+
+                        '</div>'+
+                      '</div>'+
+                    '</div>'+
+                  '</div>';
+
+          
+          loop_sum = loop_sum+index
+          if(sum == loop_sum){
+             total =theme.Currency.formatMoney(cart.total_price, theme.moneyFormat);
+      
+      
+              $('.minct_detail').html(html); 
+              $('.minct_subtotal__price').html(total);
+          
+           }
+        
+          })
+        
+        
+      });
+
+    }
+      productJSONData()
+       
+      if($('.item_details').length == 1 && $('.minct_qty')[0].innerText == 0) {
+        $('.item_details').hide()  
+        // $('.apply_coupon_initial').hide()
+        $('.sub-footer').hide()
+        $('.empty-cart').show()
+        }
+      else {
+        $('.item_details').show()  
+        // $('.apply_coupon_initial').show()
+        $('.sub-footer').show()
+        $('.empty-cart').hide()
+      }
+      
+      // update_cart_price2(cart)
+}
+  function sortMeBy(arg, sel, elem, order) {
+    var $selector = $(sel),
+      $element = $selector.children(elem);
+  
+    $element.sort(function(a, b) {
+      var an = parseInt(a.getAttribute(arg)),
+        bn = parseInt(b.getAttribute(arg));
+  
+      if (order == 'asc') {
+        if (an > bn)
+          return 1;
+        if (an < bn)
+          return -1;
+      } else if (order == 'desc') {
+        if (an < bn)
+          return 1;
+        if (an > bn)
+          return -1;
+      }
+      return 0;
+    });
+  
+    $element.detach().appendTo($selector);
+  }
+  function get_cart(resuelt){
+    
+      // $('.cart_drawer_loder').removeClass('hide')
+      console.log('resulttttt',resuelt)
+        show_mincart(resuelt);
+        // $('.checkout_btn').css('display','flex')
+      // $('.cart_drawer_loder').addClass('hide')
+        // setTimeout(function(){
+          // sortMeBy('data-line', 'div.minct_detail', 'div.item_details', 'asc');
+          // show_upssell()
+        // },2000)
+
+      nyumi_api.webengage_view_cart(resuelt);
+        if($('.item_details').length == 1 && $('.minct_qty')[0].innerText == 0) {
+          $('.item_details').hide()  
+          // $('.apply_coupon_initial').hide()
+          $('.sub-footer').hide()
+          $('.empty-cart').show()
+          }
+        else {
+          $('.item_details').show()  
+          // $('.apply_coupon_initial').show()
+          $('.sub-footer').show()
+          $('.empty-cart').hide()
+        }
+        
+    show_upsell()
+  }
+
+  function add_upsell_data() {
+
+     add_upsell_data = function(){};
+    
+     var upsell_data_beauty = JSON.parse(localStorage.getItem("upsell_data_beauty"))
+     var upsell_data_radiant = JSON.parse(localStorage.getItem("upsell_data_radiant"))
+     var upsell_data_happy = JSON.parse(localStorage.getItem("upsell_data_happy"))
+     var upsell_data_iron = JSON.parse(localStorage.getItem("upsell_data_iron"))
+     console.log('upsell_data',$(upsell_data_happy)[0])
+     upsell_data_beauty = $(upsell_data_beauty)[0].replace('69000',$('.beauty .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 401',$('.beauty .saveRS1')[0].innerText).replace('₹ 1,100',$('.beauty .compare_price1')[0].innerText).replace('36% OFF',$('.beauty .percentage1')[0].innerText).replace('₹ 699',$('.beauty .price1')[0].innerText).replace('165000',$('.beauty .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 840',$('.beauty .saveRS2')[0].innerText).replace('₹ 2,200',$('.beauty .compare_price2')[0].innerText).replace('38% OFF',$('.beauty .percentage2')[0].innerText).replace('₹ 1,360',$('.beauty .price2')[0].innerText).replace('231000',$('.beauty .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 1,320',$('.beauty .saveRS3')[0].innerText).replace('₹ 3,300',$('.beauty .compare_price3')[0].innerText).replace('40% OFF',$('.beauty .percentage3')[0].innerText).replace('₹ 1,980',$('.beauty .price3')[0].innerText)
+     upsell_data_radiant = $(upsell_data_radiant)[0].replace('88000',$('.radiant .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 220',$('.radiant .saveRS1')[0].innerText).replace('₹ 1,100',$('.radiant .compare_price1')[0].innerText).replace('20% OFF',$('.radiant .percentage1')[0].innerText).replace('₹ 880',$('.radiant .price1')[0].innerText).replace('165000',$('.radiant .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 550',$('.radiant .saveRS2')[0].innerText).replace('₹ 2,200',$('.radiant .compare_price2')[0].innerText).replace('25% OFF',$('.radiant .percentage2')[0].innerText).replace('₹ 1,650',$('.radiant .price2')[0].innerText).replace('231000',$('.radiant .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 990',$('.radiant .saveRS3')[0].innerText).replace('₹ 3,300',$('.radiant .compare_price3')[0].innerText).replace('30% OFF',$('.radiant .percentage3')[0].innerText).replace('₹ 2,310',$('.radiant .price3')[0].innerText)
+     upsell_data_happy = $(upsell_data_happy)[0].replace('79000',$('.happy .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 200',$('.happy .saveRS1')[0].innerText).replace('₹ 990',$('.happy .compare_price1')[0].innerText).replace('20% OFF',$('.happy .percentage1')[0].innerText).replace('₹ 790',$('.happy .price1')[0].innerText).replace('148500',$('.happy .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 495',$('.happy .saveRS2')[0].innerText).replace('₹ 1,980',$('.happy .compare_price2')[0].innerText).replace('25% OFF',$('.happy .percentage2')[0].innerText).replace('₹ 1,485',$('.happy .price2')[0].innerText).replace('207900',$('.happy .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 891',$('.happy .saveRS3')[0].innerText).replace('₹ 2,970',$('.happy .compare_price3')[0].innerText).replace('30% OFF',$('.happy .percentage3')[0].innerText).replace('₹ 2,079',$('.happy .price3')[0].innerText)
+     upsell_data_iron = $(upsell_data_iron)[0].replace('79000',$('.iron .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 200',$('.iron .saveRS1')[0].innerText).replace('₹ 990',$('.iron .compare_price1')[0].innerText).replace('20% OFF',$('.iron .percentage1')[0].innerText).replace('₹ 790',$('.iron .price1')[0].innerText).replace('148500',$('.iron .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 495',$('.iron .saveRS2')[0].innerText).replace('₹ 1,980',$('.iron .compare_price2')[0].innerText).replace('25% OFF',$('.iron .percentage2')[0].innerText).replace('₹ 1,485',$('.iron .price2')[0].innerText).replace('207900',$('.iron .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 891',$('.iron .saveRS3')[0].innerText).replace('₹ 2,970',$('.iron .compare_price3')[0].innerText).replace('30% OFF',$('.iron .percentage3')[0].innerText).replace('₹ 2,079',$('.iron .price3')[0].innerText)
+    
+      console.log('upsell_data',upsell_data)
+     $('.upsell_variant-6094251163815').remove()
+     $('.upsell_variant-6091784978599').remove()
+     $('.upsell_variant-6092022481063').remove()
+        
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[0])
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[2])
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[4])
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[6])
+
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[0])
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[2])
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[4])
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[6])
+
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[0])
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[2])
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[4])
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[6])
+
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[0])
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[2])
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[4])
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[6])
+  
+  }
+  function recursiveUpdate(result,itemString){
+   
+    $.ajax({
+        type: "GET",
+        url: "/cart.json",
+        headers: { "Content-Type": "application/json" },
+    }).then((response) => {
+     
+      if(result!==response.item_count || itemString!==JSON.stringify(response.items)){
+        $('.cart_drawer_loder').addClass('hide')
+       
+         get_cart(response);
+        setTimeout(function(){
+          // sortMeBy('data-line', 'div.minct_detail', 'div.item_details', 'asc')
+          show_upsell()
+          update_cart_price2(response)
+        },1500)
+        
+        
+    }
+      if(parseInt($('.order-total .value')[0].innerText.split(" ")[1]) < parseInt($('.sub-total .value')[0].innerText.split(" ")[1])){
+         setTimeout(function(){
+          update_cart_price2(response)
+        },1000)
+      }
+       setTimeout(recursiveUpdate,2000,response.item_count,JSON.stringify(response.items))
+    })
+  }
+
+  $(function(){
+    const temp=0;
+    const itemString="";
+    $('.cart_drawer_loder').removeClass('hide')
+    recursiveUpdate(temp,itemString)
+  });
+  $('body').on('click', '.msg-details', function(event){
+        event.preventDefault()
+        add_upsell_data()
+        var product_id = event.currentTarget['attributes']['product-id']['value']
+        var variant_id = event.currentTarget['attributes']['variant-id']['value']
+        var variant_price = event.currentTarget['attributes']['variant-price']['value']
+        console.log(variant_id)
+        $('.variant-popup[variant-id=' + variant_id + ']').css('display','flex')
+        show_upsell_variants(product_id,variant_price)
+      })
+  
+</script>
+ 
+<script>
+   
+  $( document ).ready(function() {  
+
+    $('.also-like-btn-container button').click(function(event){
+    console.log(event);
+    var ttl = event.currentTarget.getAttribute("product-name")
+    var tid = event.currentTarget.getAttribute("product-id")
+    
+    var prc = event.currentTarget.getAttribute("price")
+     window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ecommerce:null});
+      window.dataLayer.push({
+        event: 'add_to_cart_cart_recommendation',
+        ecommerce: {
+          items: [{
+            item_name: ttl,
+            item_id: tid,
+            price: parseFloat(prc)/100,
+            quantity: '1'
+          }]
+        }
+      });
+})
+    
+     localStorage.setItem("upsell_data_beauty","")
+    localStorage.setItem("upsell_data_radiant","")
+    localStorage.setItem("upsell_data_happy","")
+    localStorage.setItem("upsell_data_iron","")
+    var upsell_variant_array_beauty = [
+    "\n                <div class=\"upsell upsell1\" variant-price=\"69000\" variant-id=\"43191121576192\" product-id=\"6094251163815\" target-id=\"43191121576192\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option1\">\n                      <label id=\"option1\">\n                        <h2>Pack of 1</h2>\n                        <p>beauty sleep gummies</p>\n                        <span>Save ₹ 401</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                            <div class=\"pricing_discount\">\n                        <p>₹ 1,100</p>\n                        <span>36% OFF</span>\n                      </div>\n         <p>₹ 699</p>\n           </div>\n                  </div>\n                \n                  <div class=\"upsell upsell2\" variant-price=\"165000\" product-id=\"6094251163815\" variant-id=\"43191121608960\" target-id=\"43191121576192\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option2\">\n                      <label id=\"option2\">\n                        <h2>Pack of 2</h2>\n                        <p>beauty sleep gummies</p>\n                        <span>Save ₹ 840</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                         <div class=\"pricing_discount\">\n                        <p>₹ 2,200</p>\n                        <span>38% OFF</span>\n                      </div>\n             <p>₹ 1,360</p>\n          </div>\n                  </div>\n                \n                  <div class=\"upsell upsell3\" variant-price=\"231000\" product-id=\"6094251163815\" variant-id=\"43191121641728\" target-id=\"43191121576192\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" class=\"option3\">\n                      <label id=\"option3\">\n                        <h2>Pack of 3</h2>\n                        <p>beauty sleep gummies</p>\n                        <span>Save ₹ 1,320</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                      <div class=\"pricing_discount\">\n                        <p>₹ 3,300</p>\n                        <span>40% OFF</span>\n                      </div>\n              <p>₹ 1,980</p>\n            </div>\n                  </div>\n                \n              "
+    ]
+    localStorage.setItem("upsell_data_beauty", JSON.stringify(upsell_variant_array_beauty));
+
+    var upsell_variant_array_radiant = [
+    "\n                <div class=\"upsell upsell1\" variant-price=\"88000\" variant-id=\"43191120986368\" product-id=\"6091784978599\" target-id=\"43191120986368\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option1\">\n                      <label id=\"option1\">\n                        <h2>Pack of 1</h2>\n                        <p>radiant skin gummies</p>\n                        <span>Save ₹ 220</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                  <div class=\"pricing_discount\">\n                        <p>₹ 1,100</p>\n                        <span>20% OFF</span>\n                      </div>\n               <p>₹ 880</p>\n               </div>\n                  </div>\n                \n                  <div class=\"upsell upsell2\" variant-price=\"165000\" product-id=\"6091784978599\" variant-id=\"43191121019136\" target-id=\"43191120986368\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option2\">\n                      <label id=\"option2\">\n                        <h2>Pack of 2</h2>\n                        <p>radiant skin gummies</p>\n                        <span>Save ₹ 550</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                      <div class=\"pricing_discount\">\n                        <p>₹ 2,200</p>\n                        <span>25% OFF</span>\n                      </div>\n             <p>₹ 1,650</p>\n             </div>\n                  </div>\n                \n                  <div class=\"upsell upsell3\" variant-price=\"231000\" product-id=\"6091784978599\" variant-id=\"43191121051904\" target-id=\"43191120986368\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" class=\"option3\">\n                      <label id=\"option3\">\n                        <h2>Pack of 3</h2>\n                        <p>radiant skin gummies</p>\n                        <span>Save ₹ 990</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                      <div class=\"pricing_discount\">\n                        <p>₹ 3,300</p>\n                        <span>30% OFF</span>\n                      </div>\n           <p>₹ 2,310</p>\n               </div>\n                  </div>\n                \n              "
+    ]
+    // var upsell_variant_radiant = 
+    localStorage.setItem("upsell_data_radiant", JSON.stringify(upsell_variant_array_radiant));
+
+    var upsell_variant_array_happy = [
+    "\n                <div class=\"upsell upsell1\" variant-price=\"79000\" variant-id=\"43191116792064\" product-id=\"6092022481063\" target-id=\"43191116792064\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option1\">\n                      <label id=\"option1\">\n                        <h2>Pack of 1</h2>\n                        <p>happy hair gummies</p>\n                        <span>Save ₹ 200</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                   <div class=\"pricing_discount\">\n                        <p>₹ 990</p>\n                        <span>20% OFF</span>\n                      </div>\n               <p>₹ 790</p>\n              </div>\n                  </div>\n                \n                  <div class=\"upsell upsell2\" variant-price=\"148500\" product-id=\"6092022481063\" variant-id=\"43191116824832\" target-id=\"43191116792064\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option2\">\n                      <label id=\"option2\">\n                        <h2>Pack of 2</h2>\n                        <p>happy hair gummies</p>\n                        <span>Save ₹ 495</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                     <div class=\"pricing_discount\">\n                        <p>₹ 1,980</p>\n                        <span>25% OFF</span>\n                      </div>\n                <p>₹ 1,485</p>\n           </div>\n                  </div>\n                \n                  <div class=\"upsell upsell3\" variant-price=\"207900\" product-id=\"6092022481063\" variant-id=\"43191116857600\" target-id=\"43191116792064\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" class=\"option3\">\n                      <label id=\"option3\">\n                        <h2>Pack of 3</h2>\n                        <p>happy hair gummies</p>\n                        <span>Save ₹ 891</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                     <div class=\"pricing_discount\">\n                        <p>₹ 2,970</p>\n                        <span>30% OFF</span>\n                      </div>\n            <p>₹ 2,079</p>\n               </div>\n                  </div>\n                \n              "
+    ]
+    console.log('happy upsell',JSON.stringify(upsell_variant_array_happy))
+    localStorage.setItem("upsell_data_happy", JSON.stringify(upsell_variant_array_happy));
+
+    var upsell_variant_array_iron =["\n                <div class=\"upsell upsell1\" variant-price=\"49900\" variant-id=\"43757030932736\" product-id=\"8199164985600\" target-id=\"43757030932736\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option1\">\n                      <label id=\"option1\">\n                        <h2>Pack of 1</h2>\n                        <p>iron gummies</p>\n                        <span>Save ₹ 401</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                            <div class=\"pricing_discount\">\n                        <p>₹ 699</p>\n                        <span>36% OFF</span>\n                      </div>\n         <p>₹ 499</p>\n           </div>\n                  </div>\n                \n                  <div class=\"upsell upsell2\" variant-price=\"165000\" product-id=\"8199164985600\" variant-id=\"43757030965504\" target-id=\"43757030965504\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" id=\"option2\">\n                      <label id=\"option2\">\n                        <h2>Pack of 2</h2>\n                        <p>iron gummies</p>\n                        <span>Save ₹ 50</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                         <div class=\"pricing_discount\">\n                        <p>₹ 999</p>\n                        <span>5% OFF</span>\n                      </div>\n             <p>₹ 949</p>\n          </div>\n                  </div>\n                \n                  <div class=\"upsell upsell3\" variant-price=\"231000\" product-id=\"8199164985600\" variant-id=\"43757030998272\" target-id=\"43757030998272\">\n                    <div class=\"select_input\">\n                      <input type=\"radio\" class=\"option3\">\n                      <label id=\"option3\">\n                        <h2>Pack of 3</h2>\n                        <p>iron gummies</p>\n                        <span>Save ₹ 150</span>\n                      </label>\n                    </div>\n                    <div class=\"pricing\">\n                                      <div class=\"pricing_discount\">\n                        <p>₹ 1,499</p>\n                        <span>10% OFF</span>\n                      </div>\n              <p>₹ 1,349</p>\n            </div>\n                  </div>\n                \n              "] 
+      console.log('happy upsell',JSON.stringify(upsell_variant_array_iron))
+    localStorage.setItem("upsell_data_iron", JSON.stringify(upsell_variant_array_iron));
+  })
+  
+
+  function coupon_section() {
+    $('.minct_header').hide()
+    $('.cart_bdy_wrp').hide()
+    $('.available_coupons').hide()
+    $('.minct_footer').hide()
+    $('.apply_coupon_initial').hide()
+    $('.min_cart_inner hr').hide()
+    $('.error_message').hide()
+    $('.coupon_error_message').hide()
+    $('.success_message').hide()
+    $('.checkout_btn').hide()
+    $('.coupon_section').show()
+  }
+  function cart_section() {
+    $('.minct_header').show()
+    $('.cart_bdy_wrp').show()
+    $('.available_coupons').show()
+    $('.minct_footer').show()
+    $('.min_cart_inner hr').show()
+    $('.apply_coupon_initial').hide() //change
+    $('.checkout_btn').show()
+    $('.coupon_section').hide()
+    if($('.empty-cart').css('display') == 'block') {
+      $('.apply_coupon_initial').hide()
+    }
+    else {
+      $('.apply_coupon_initial').hide() //change
+    }
+    // setTimeout(function(){
+    //   if($('.empty-cart').css('display') == 'block') {
+    //     $('.apply_coupon_initial').hide()
+    //   }
+    //   else {
+    //     $('.apply_coupon_initial').show()
+    //   }
+    // },1000)
+  }
+  function apply_coupon(code) {
+    code = code.trim()
+    // alert(code+"abc")
+    var data = '{"checkout":"Checkout", "discount":"URMI10"}'
+    data = data.replace("URMI10",code)
+    // alert(data)
+    $.ajax({
+        type: "POST",
+        url: "https://nyumi.com/cart?checkout_source=discount_code",
+        headers: { "Content-Type": "application/json" },
+        data: data,
+    }).then((response) => {
+      
+        var n = document.createElement("div");
+            console.log("responce",response.status)
+            n.innerHTML = response;
+            // ($('.nfgb6p0'))
+            console.log("apply coupon",n.querySelector('meta[name="serialized-graphql"]'))
+            var r = "serialized-graphql"
+                , o = n.querySelector('meta[name="serialized-graphql"]')
+      console.log(n.querySelector("[serialized-graphql]"))
+            // var data = JSON.parse(o.getAttribute("data-serialized-value"))
+          console.log($(o),'o')
+          var j = JSON.parse($(o)[0].attributes["content"].value)
+      console.log("jjj",j);
+          var data;
+          for (let key in j) {
+                for (let n_key in j[key]){
+                    if (n_key == 'session'){
+                        console.log(j[key][n_key])
+                      data = j[key][n_key]
+                    }
+                };
+            }
+            // DISCOUNTS_PURCHASE_NOT_IN_RANGE
+      if(data['negotiate']['errors'].find(status => status.code === 'DISCOUNTS_PURCHASE_NOT_IN_RANGE')) {
+        console.log('cant apply coupon')
+        var grand_total;
+        if(data['negotiate']['result']['sellerProposal']['subtotalBeforeTaxesAndShipping']['value']['amount'] <= 499) {
+          grand_total = parseInt(data['negotiate']['result']['sellerProposal']['runningTotal']['value']['amount'])
+          $('.shipping .value')[0].innerText = '₹ 50'
+          $('.grand-total .value')[0].innerText = '₹ ' + grand_total
+          $(".coupon-card").each(function(i,obj){
+            if( $(obj).attr('max-limit') > grand_total ) {
+              $(obj).css('opacity','0.5')
+              $(obj).css('pointer-events','none')
+            }
+            else {
+              $(obj).css('opacity','1')
+              $(obj).css('pointer-events','all')
+            }
+          })
+          let compare_at_price = 0
+          let price = 0
+          // let discount = 0
+          for(var i=0; i<$('.minct_item_price').length; i++) {
+              compare_at_price = (compare_at_price) + (parseInt($('.minct_item_price')[i].attributes['compare_at_price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              if($('.minct_item_price')[i].attributes['price'].value == '0') {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value) * parseInt($('.minct_qty')[i].innerText))
+              }
+              else {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              }
+          }
+          $('.order-total .value')[0].innerText = '₹ ' + parseInt(compare_at_price)
+          $('.sub-total .value')[0].innerText = '₹ ' + (parseInt(price))
+          $('.discount .value')[0].innerText = '-₹ ' + (parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]))
+          $('.grand-total .value')[0].innerText = '₹ ' + (parseInt(price))
+          $('.saving_message span')[0].innerText = '₹ ' + (parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]))
+          $('.checkout_btn span')[0].innerText = 'Total ₹ ' + (parseInt(price))
+        }
+        else {
+          grand_total = data['negotiate']['result']['sellerProposal']['subtotalBeforeTaxesAndShipping']['value']['amount']
+          $('.shipping .value')[0].innerHTML = '<span style="text-decoration: line-through;">₹ 50 </span><span style="color: #f37168; padding-left: 5px;">FREE</span>'
+          $('.grand-total .value')[0].innerText = '₹ ' + grand_total
+          $(".coupon-card").each(function(i,obj){
+            if( $(obj).attr('max-limit') > grand_total ) {
+              $(obj).css('opacity','0.5')
+              $(obj).css('pointer-events','none')
+            }
+            else {
+              $(obj).css('opacity','1')
+              $(obj).css('pointer-events','all')
+            }
+          })
+          let compare_at_price = 0
+          let price = 0
+          // let discount = 0
+          for(var i=0; i<$('.minct_item_price').length; i++) {
+              compare_at_price = (compare_at_price) + (parseInt($('.minct_item_price')[i].attributes['compare_at_price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              if($('.minct_item_price')[i].attributes['price'].value == '0') {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value) * parseInt($('.minct_qty')[i].innerText))
+              }
+              else {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              }
+          }
+          $('.order-total .value')[0].innerText = '₹ ' + parseInt(compare_at_price)
+          $('.sub-total .value')[0].innerText = '₹ ' + (parseInt(price))
+          $('.discount .value')[0].innerText = '-₹ ' + (parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]))
+          $('.grand-total .value')[0].innerText = '₹ ' + (parseInt(price))
+          $('.saving_message span')[0].innerText = '₹ ' + (50 + (parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1])))
+          $('.checkout_btn span')[0].innerText = 'Total ₹ ' + (parseInt(price))
+        }
+        // $('.apply_coupon_initial .input_box')[0].value = ''
+        // $('.apply_coupon_initial .initial_apply_btn')[0].innerText = 'Apply'
+        // $('.initial_apply_btn')[0].innerText = 'Apply'
+        // $( ".apply_coupon_initial .input_box" ).prop( "disabled", false );
+        // $('.initial_apply_btn input').prop("disabled",false)
+        // $('.items-discount').hide()
+        if(code != 'XXXX'){
+          $('.error_message').show()
+        }
+        else {
+          $('.apply_coupon_initial .input_box')[0].value = ''
+          $('.apply_coupon_initial .initial_apply_btn')[0].innerText = 'Apply'
+          $('.initial_apply_btn')[0].innerText = 'Apply'
+          $( ".apply_coupon_initial .input_box" ).prop( "disabled", false );
+          $('.initial_apply_btn input').prop("disabled",false)
+        }
+        $('.success_message').hide()
+        $('.coupon_heading i').click()
+      }
+      else {
+        console.log('coupon applied')
+        $('.items-discount').show()
+        var discount_amount = parseInt(data['negotiate']['result']['sellerProposal']['subtotalBeforeReductions']['value']['amount']) - parseInt(data['negotiate']['result']['sellerProposal']['runningTotal']['value']['amount'])
+        var grand_total;
+        console.log('discount amount',discount_amount.toFixed(1))
+        $('.items-discount .value')[0].innerText = '-₹ ' + (parseInt(discount_amount.toFixed(1)))
+        if(data['negotiate']['result']['sellerProposal']['subtotalBeforeTaxesAndShipping']['value']['amount'] <= 499) {
+          grand_total = parseInt(data['negotiate']['result']['sellerProposal']['subtotalBeforeTaxesAndShipping']['value']['amount']) + 50 - discount_amount.toFixed(1)
+          $('.grand-total .value')[0].innerText = '₹ ' + parseInt(grand_total)
+          $('.shipping .value')[0].innerText = '₹ 50'
+          $(".coupon-card").each(function(i,obj){
+            if( $(obj).attr('max-limit') > grand_total ) {
+              $(obj).css('opacity','0.5')
+              $(obj).css('pointer-events','none')
+            }
+            else {
+              $(obj).css('opacity','1')
+              $(obj).css('pointer-events','all')
+            }
+          })
+          let compare_at_price = 0
+          let price = 0
+          // let discount = 0
+          for(var i=0; i<$('.minct_item_price').length; i++) {
+              compare_at_price = (compare_at_price) + (parseInt($('.minct_item_price')[i].attributes['compare_at_price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              if($('.minct_item_price')[i].attributes['price'].value == '0') {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value) * parseInt($('.minct_qty')[i].innerText))
+              }
+              else {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              }
+          }
+          $('.order-total .value')[0].innerText = '₹ ' + parseInt(compare_at_price)
+          $('.sub-total .value')[0].innerText = '₹ ' + (parseInt(price))
+          $('.discount .value')[0].innerText = '-₹ ' + (parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]))
+          $('.grand-total .value')[0].innerText = '₹ ' + (parseInt(price) - parseInt($('.items-discount .value')[0].innerText.split(' ')[1]))
+          $('.saving_message span')[0].innerText = '₹ ' + (parseInt(discount_amount.toFixed(1)) + parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]))
+          $('.checkout_btn span')[0].innerText = 'Total ₹ ' + (parseInt(price) - parseInt($('.items-discount .value')[0].innerText.split(' ')[1]))
+        }
+        else {
+          grand_total = data['negotiate']['result']['sellerProposal']['subtotalBeforeTaxesAndShipping']['value']['amount']
+          $('.grand-total .value')[0].innerText = '₹ ' + grand_total
+          $('.shipping .value')[0].innerHTML = '<span style="text-decoration: line-through;">₹ 50 </span><span style="color: #f37168; padding-left: 5px;">FREE</span>'
+          $(".coupon-card").each(function(i,obj){
+            if( $(obj).attr('max-limit') > grand_total ) {
+              $(obj).css('opacity','0.5')
+              $(obj).css('pointer-events','none')
+            }
+            else {
+              $(obj).css('opacity','1')
+              $(obj).css('pointer-events','all')
+            }
+          })
+          let compare_at_price = 0
+          let price = 0
+          // let discount = 0
+          for(var i=0; i<$('.minct_item_price').length; i++) {
+              compare_at_price = (compare_at_price) + (parseInt($('.minct_item_price')[i].attributes['compare_at_price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              if($('.minct_item_price')[i].attributes['price'].value == '0') {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value) * parseInt($('.minct_qty')[i].innerText))
+              }
+              else {
+                price = (price) + (parseInt($('.minct_item_price')[i].attributes['price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+              }
+          }
+          $('.order-total .value')[0].innerText = '₹ ' + parseInt(compare_at_price)
+          $('.sub-total .value')[0].innerText = '₹ ' + (parseInt(price))
+          $('.discount .value')[0].innerText = '-₹ ' + (parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]))
+          $('.grand-total .value')[0].innerText = '₹ ' + (parseInt(price) - parseInt($('.items-discount .value')[0].innerText.split(' ')[1]))
+          $('.saving_message span')[0].innerText = '₹ ' + (parseInt(discount_amount.toFixed(1)) + parseInt(compare_at_price) - parseInt($('.sub-total .value')[0].innerText.split(' ')[1]) + 50)
+          $('.checkout_btn span')[0].innerText = 'Total ₹ ' + (parseInt(price) - parseInt($('.items-discount .value')[0].innerText.split(' ')[1]))
+        }
+        
+        $('.coupon_heading i').click()
+        $('.apply_coupon_initial .input_box')[0].value = code
+        $('.apply_coupon_initial .initial_apply_btn')[0].style.display = 'none'
+        $('.initial_apply_btn')[0].style.display = 'none'
+        $( ".apply_coupon_initial .input_box" ).prop( "disabled", true );
+        $('.initial_apply_btn input').prop("disabled",true)
+        $('.error_message').hide()
+        $('.success_message').show()
+      }
+
+      
+    })
+    .fail(function(error) { alert(error.responseJSON) });
+  }
+
+
+
+  function update_cart_price() {
+    
+      // if($('.empty-cart')[0].style.display = 'none'){
+    $.ajax({
+        type: "GET",
+        url: "/cart.json",
+        headers: { "Content-Type": "application/json" },
+    }).then((response) => {
+             if(response.items.length<1){
+              $('.may-also-like').hide()
+             }else{
+              $('.may-also-like').show()
+             }
+          
+            let price = 0
+            let orderTotal = 0
+            const discount_amount = (response.total_discount/100)
+      
+            for(var i=0; i<$('.minct_item_price').length; i++) {
+                  orderTotal = (orderTotal) + (parseInt($('.minct_item_price')[i].attributes['compare_at_price'].value.slice(0,-2)) * parseInt($('.minct_qty')[i].innerText))
+            }
+            for(let i=0; i<response.items.length; i++) {
+               price=price+ (response.items[i].original_price* response.items[i].quantity)/100
+            }
+            if(response.cart_level_discount_applications.length<1){
+              if(price>499){
+                $('.shipping .value')[0].innerHTML = '<span style="text-decoration: line-through;">₹ 50 </span><span style="color: #f37168; padding-left: 5px;">FREE</span>'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + 50 + orderTotal - price).toFixed(0)
+              }else{
+                $('.shipping .value')[0].innerText = '₹ 50'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + orderTotal - price).toFixed(0)
+              }
+               $('.items-discount').hide()
+            }else{
+              $('.items-discount').hide()
+               $('.items-discount span')[0].innerText = response.cart_level_discount_applications[0].title
+             if(price>499){
+                $('.shipping .value')[0].innerHTML = '<span style="text-decoration: line-through;">₹ 50 </span><span style="color: #f37168; padding-left: 5px;">FREE</span>'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + 50 + orderTotal - price).toFixed(0)
+              }else{
+                $('.shipping .value')[0].innerText = '₹ 50'
+                $('.saving_message span')[0].innerText = '₹ ' + (discount_amount + orderTotal - price).toFixed(0)
+              }
+            }
+           
+            $('.items-discount .value')[0].innerText = '-₹ ' + discount_amount.toFixed(0)
+            $('.grand-total .value')[0].innerText = '₹ ' + response.total_price/100
+            $('.order-total .value')[0].innerText = '₹ ' + orderTotal.toFixed(0)
+            $('.sub-total .value')[0].innerText = '₹ ' + price.toFixed(0)
+            $('.discount .value')[0].innerText = '-₹ ' + (orderTotal - price + discount_amount).toFixed(0)
+            $('.grand-total .value')[0].innerText = '₹ ' + (response.total_price/100).toFixed(0)
+            $('.checkout_btn span')[0].innerText = 'Total ₹ ' + (response.total_price/100).toFixed(0)
+          
+    setTimeout(function(){
+        if($('.items-discount').css('display') == 'none') {
+          $('.apply_coupon_initial .input_box')[0].value = ''
+          $('.apply_coupon_initial .initial_apply_btn')[0].innerText = 'Apply'
+        }
+      },1200)
+    if($('.apply_coupon_initial .input_box')[0].value == 'XXXX') {
+      $('.apply_coupon_initial .input_box')[0].value = ''
+    }
+      // }
+  })
+}//end
+
+   async function product_api(url_handle,index) {
+     await jQuery.getJSON(window.Shopify.routes.root + 'products/'  + url_handle + '.js', function(product) {
+      console.log('product', product)
+      // for(var k=0; k<$('.minct_item').length; k++) {
+       if(product['variants'].length <= 1 || product['id'] == '6094251163815') {
+         $('.new_upsell')[index].style.display = 'none'
+       }
+       else{
+        for(var j=0; j<product['variants'].length; j++) {
+          if(parseInt($('.minct_item_price')[index].attributes['price'].value) < product['variants'][j]['price']) {
+            console.log('product price',product['variants'][j]['price']);
+            console.log('cart price',parseInt($('.minct_item_price')[index].attributes['price'].value))
+            $('.new_upsell')[index].style.display = 'block'
+          }
+          else {
+            console.log("didn't found any upsell variant")
+            $('.new_upsell')[index].style.display = 'none'
+          }
+        }
+       }
+    });
+  }
+
+ async function show_upsell() {
+    await $.ajax({
+        type: "GET",
+        url: "https://nyumi.com/cart.json",
+        headers: { "Content-Type": "application/json" },
+    }).then((data) => {
+      console.log('show_upsell',data)
+      for(var i=0; i<data['items'].length; i++) {
+        console.log(data['items'][i]['handle'])
+        var url_handle = data['items'][i]['handle']
+        var x =  product_api(url_handle,i)
+      }
+    })
+  }
+
+  function show_upsell_variants(id, price) {
+    console.log(id, price)
+    for(var y=0; y<$('.upsell[product-id="'+id+'"]').length; y++) {
+      if(parseInt($('.upsell[product-id="'+id+'"]')[y].attributes['variant-price'].value) > parseInt(price)) {
+          $('.upsell[product-id="'+id+'"]')[y].style.display = 'flex'
+      }
+      else {
+          $('.upsell[product-id="'+id+'"]')[y].style.display = 'none'
+      }
+    }
+  }
+
+  function add_upsell_data() {
+    
+    var upsell_data_beauty = JSON.parse(localStorage.getItem("upsell_data_beauty"))
+    var upsell_data_radiant = JSON.parse(localStorage.getItem("upsell_data_radiant"))
+    var upsell_data_happy = JSON.parse(localStorage.getItem("upsell_data_happy"))
+    var upsell_data_iron = JSON.parse(localStorage.getItem("upsell_data_iron"))
+    console.log('upsell_data',$(upsell_data_happy)[0])
+    upsell_data_beauty = $(upsell_data_beauty)[0].replace('69000',$('.beauty .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 401',$('.beauty .saveRS1')[0].innerText).replace('₹ 1,100',$('.beauty .compare_price1')[0].innerText).replace('36% OFF',$('.beauty .percentage1')[0].innerText).replace('₹ 699',$('.beauty .price1')[0].innerText).replace('165000',$('.beauty .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 840',$('.beauty .saveRS2')[0].innerText).replace('₹ 2,200',$('.beauty .compare_price2')[0].innerText).replace('38% OFF',$('.beauty .percentage2')[0].innerText).replace('₹ 1,360',$('.beauty .price2')[0].innerText).replace('231000',$('.beauty .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 1,320',$('.beauty .saveRS3')[0].innerText).replace('₹ 3,300',$('.beauty .compare_price3')[0].innerText).replace('40% OFF',$('.beauty .percentage3')[0].innerText).replace('₹ 1,980',$('.beauty .price3')[0].innerText)
+    upsell_data_radiant = $(upsell_data_radiant)[0].replace('88000',$('.radiant .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 220',$('.radiant .saveRS1')[0].innerText).replace('₹ 1,100',$('.radiant .compare_price1')[0].innerText).replace('20% OFF',$('.radiant .percentage1')[0].innerText).replace('₹ 880',$('.radiant .price1')[0].innerText).replace('165000',$('.radiant .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 550',$('.radiant .saveRS2')[0].innerText).replace('₹ 2,200',$('.radiant .compare_price2')[0].innerText).replace('25% OFF',$('.radiant .percentage2')[0].innerText).replace('₹ 1,650',$('.radiant .price2')[0].innerText).replace('231000',$('.radiant .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 990',$('.radiant .saveRS3')[0].innerText).replace('₹ 3,300',$('.radiant .compare_price3')[0].innerText).replace('30% OFF',$('.radiant .percentage3')[0].innerText).replace('₹ 2,310',$('.radiant .price3')[0].innerText)
+    upsell_data_happy = $(upsell_data_happy)[0].replace('79000',$('.happy .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 200',$('.happy .saveRS1')[0].innerText).replace('₹ 990',$('.happy .compare_price1')[0].innerText).replace('20% OFF',$('.happy .percentage1')[0].innerText).replace('₹ 790',$('.happy .price1')[0].innerText).replace('148500',$('.happy .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 495',$('.happy .saveRS2')[0].innerText).replace('₹ 1,980',$('.happy .compare_price2')[0].innerText).replace('25% OFF',$('.happy .percentage2')[0].innerText).replace('₹ 1,485',$('.happy .price2')[0].innerText).replace('207900',$('.happy .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 891',$('.happy .saveRS3')[0].innerText).replace('₹ 2,970',$('.happy .compare_price3')[0].innerText).replace('30% OFF',$('.happy .percentage3')[0].innerText).replace('₹ 2,079',$('.happy .price3')[0].innerText)
+     upsell_data_iron = $(upsell_data_iron)[0].replace('49900',$('.iron .price1')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 200',$('.iron .saveRS1')[0].innerText).replace('₹ 699',$('.iron .compare_price1')[0].innerText).replace('20% OFF',$('.iron .percentage1')[0].innerText).replace('₹ 499',$('.iron .price1')[0].innerText).replace('94900',$('.iron .price2')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 50',$('.iron .saveRS2')[0].innerText).replace('₹ 999',$('.iron .compare_price2')[0].innerText).replace('25% OFF',$('.iron .percentage2')[0].innerText).replace('₹ 949',$('.iron .price2')[0].innerText).replace('134900',$('.iron .price3')[0].innerText.split(' ')[1].replace(',','')+'00').replace('Save ₹ 891',$('.iron .saveRS3')[0].innerText).replace('₹ 1,499',$('.iron .compare_price3')[0].innerText).replace('30% OFF',$('.iron .percentage3')[0].innerText).replace('₹ 1,349',$('.iron .price3')[0].innerText)
+    
+    
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[0])
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[2])
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[4])
+    $('.upsell_variant-6094251163815').append($(upsell_data_beauty)[6])
+
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[0])
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[2])
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[4])
+    $('.upsell_variant-6091784978599').append($(upsell_data_radiant)[6])
+
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[0])
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[2])
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[4])
+    $('.upsell_variant-6092022481063').append($(upsell_data_happy)[6])
+    
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[0])
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[2])
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[4])
+    $('.upsell_variant-8199164985600').append($(upsell_data_iron)[6])
+  
+  }
+  add_upsell_data()
+show_upsell()
+    
+  
+  $(document).ready(function(){
+    update_cart_price();
+
+    if($('.item_details').length == 0) {
+      $('.apply_coupon_initial').hide()
+      $('.sub-footer').hide()
+      $('.empty-cart').show()
+      $('.may-also-like').hide()
+    }
+    else {
+      $('.apply_coupon_initial').hide() //change
+      $('.sub-footer').show()
+      $('.empty-cart').hide()
+      $('.may-also-like').show()
+    }
+
+
+    
+    $('.available_coupons').click(function(){
+      coupon_section();
+    })
+    
+    $('.min_cart .coupon_header i').click(function(){
+      cart_section();
+    })
+    $('.apply-btn').bind('touchstart click', function(event){
+      event.preventDefault()
+      console.log(event)
+      $('.spinner').css('display','flex');
+      var coupon_code = $(this)[0].parentElement.previousElementSibling.innerText;
+      // alert(coupon_code)
+      console.log($(this)[0].parentElement.previousElementSibling.innerText,'apply clicked')
+      var get_applied = false;
+      $('.minct_item').each(function(i,obj){
+        if($(obj)[0].attributes['data-id'].value == '43711468077312') {
+          get_applied = true
+        }
+      })
+      console.log('your response', get_applied)
+      if(get_applied) {
+        $('.coupon_error_message').show()
+        $('.coupon_heading i').click()
+      }
+      else {
+        apply_coupon(coupon_code)
+      }
+      setTimeout(function(){
+        $('.spinner').css('display','none');
+      },1000);
+    })
+    
+    $('.initial_apply_btn').bind('touchstart click', function(event){
+      event.preventDefault()
+      $('.cart_drawer_loder').removeClass('hide');
+      if($('.initial_apply_btn')[0].innerText == 'Apply') {
+        var coupon_code = $('.apply_coupon_initial input')[0].value.toUpperCase();
+        console.log($(this)[0].parentElement.previousElementSibling.innerText,'apply clicked')
+        $('.apply_coupon_initial input')[0].value = $('.apply_coupon_initial input')[0].value.toUpperCase()
+        var get_applied = false;
+        $('.minct_item').each(function(i,obj){
+          if($(obj)[0].attributes['data-id'].value == '43711468077312') {
+            get_applied = true
+          }
+        })
+        console.log('your response', get_applied)
+        if(get_applied) {
+          $('.coupon_error_message').show()
+        }
+        else {
+          apply_coupon(coupon_code)
+        }
+      }
+      else {
+        apply_coupon('XXXX')
+        // setTimeout(function(){
+        //   $('.error_message').hide()
+        //   // $('.error_message').hide()
+        // },5000);
+      }
+      setTimeout(function(){
+        $('.cart_drawer_loder').addClass('hide');
+      },1000);
+    })
+
+
+    $('.form_elements .input-apply').bind('touchstart click', function(event){
+      event.preventDefault()
+      $('.spinner').css('display','flex');
+      $('.cart_drawer_loder').removeClass('hide');
+      if($('.initial_apply_btn')[0].innerText == 'Apply') {
+        var coupon_code = $('.form_elements input.apply_coupon_input')[0].value.toUpperCase();
+        $('.form_elements input.apply_coupon_input')[0].value = $('.form_elements input.apply_coupon_input')[0].value.toUpperCase()
+        $('.error_message').hide()
+        var get_applied = false;
+        $('.minct_item').each(function(i,obj){
+          if($(obj)[0].attributes['data-id'].value == '43711468077312') {
+            get_applied = true
+          }
+        })
+        console.log('your response', get_applied)
+        if(get_applied) {
+          $('.coupon_error_message').show()
+          $('.coupon_heading i').click()
+        }
+        else {
+          apply_coupon(coupon_code)
+        }
+      }
+      else {
+        apply_coupon('XXXX')
+        $('.error_message').hide()
+      }
+      setTimeout(function(){
+        $('.cart_drawer_loder').addClass('hide');
+        $('.spinner').css('display','none');
+      },1000);
+    })
+
+    $('.available_coupons').click(function(){
+      var grand_total = $('.checkout_btn span')[0].innerText.split(' ')[2]
+      $(".coupon-card").each(function(i,obj){
+        if( $(obj).attr('max-limit') > parseInt(grand_total) ) {
+          $(obj).css('opacity','0.5')
+          $(obj).css('pointer-events','none')
+          console.log('hide')
+        }
+        else {
+          $(obj).css('opacity','1')
+          $(obj).css('pointer-events','all')
+          console.log('show')
+        }
+      })
+    })
+    // $('')(function(){
+    //   show_upsell_variants()
+    // })
+  
+    $('.msg-details').click(function(event){
+      // event.preventDefault()
+      var product_id = event.currentTarget['attributes']['product-id']['value']
+      var variant_id = event.currentTarget['attributes']['variant-id']['value']
+      var variant_price = event.currentTarget['attributes']['variant-price']['value']
+      console.log(variant_id)
+      for(var i=0; i<$('.option3').length; i++) {$('.option3')[i].checked = true}
+      $('.variant-popup[variant-id=' + variant_id + ']').css('display','flex')
+      show_upsell_variants(product_id,variant_price)
+    })
+    
+    $('body').on('click', '.site-header__icon.site-header__cart', function(){
+      $('.checkout_btn').css('display','flex')
+    })
+    $('body').on('click', '.minct_close', function(){
+      $('.checkout_btn').css('display','none')
+    })
+
+
+    $('button.save').click(function(event){
+      event.preventDefault()
+      var new_id
+      var old_id = event.currentTarget.attributes['old-id'].value
+      var product_id = event.currentTarget.attributes['product-id'].value
+      var quantity = $('.minct_item[data-id="'+old_id+'"]')[0].children[1].children[3].children[0].children[1].innerText
+      for(var i=0; i<$('.upsell[product-id="'+product_id+'"]').length; i++) {
+        if($('.upsell[product-id="'+product_id+'"]')[i].children[0].children[0].checked == true) {
+          new_id = $('.upsell[product-id="'+product_id+'"]')[i].attributes['variant-id'].value
+        }
+      }
+      $('.cart_drawer_loder').css('position','fixed')
+      $('.cart_drawer_loder').css('height','100%')
+      $('.cart_drawer_loder').css('position','fixed')
+      $('.cart_drawer_loder').css('right','0')
+      $('.cart_drawer_loder').css('top','0')
+      $('.cart_drawer_loder').removeClass('hide');
+      
+      console.log("old id",old_id)
+      console.log("new id",new_id)
+      console.log("quantity",quantity)
+
+      if(new_id) {
+        setTimeout(function(){
+          $('.cart_drawer_loder').addClass('hide');
+          $('.cart_drawer_loder').css('position','absolute')
+          $('.cart_drawer_loder').css('height','calc(100vh - 120px)')
+          $(event.currentTarget.previousElementSibling).click()
+        },1000);
+        $('.select_input_error').hide()
+        $.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          dataType: 'json',
+          data: {
+            id: parseFloat(new_id),
+            quantity: quantity,
+          },
+       }).then(data => {
+            $.ajax({
+              type: "POST",
+              url: "/cart/change.js",
+              dataType: "json",
+              data: {
+                'id': parseFloat(old_id),
+                'quantity': 0,
+              },
+            }).then(data => {
+              // location.reload()
+            });
+          })
+        }
+      else {
+        setTimeout(function(){
+          $('.cart_drawer_loder').addClass('hide');
+        })
+        $('.select_input_error').show()
+      }
+      })
+    
+      
+    setInterval(function(){
+        if($('.empty-cart').css('display') == 'block') {
+          $('.sub-footer').hide()
+          // $('.apply_coupon_initial').hide()
+        }
+        else {
+          $('.sub-footer').show()
+          // $('.apply_coupon_initial').css('display','flex')
+        }
+      for(var i=0; i<$('.product-details__item.product-details__item--variant-option').length; i++) {
+        
+        if($('.product-details__item.product-details__item--variant-option')[i].innerText == 'Pack of 3') {
+          $('.product-details__item.product-details__item--variant-option')[i].parentElement.parentElement.nextElementSibling.style.display = 'none'
+        }
+      }
+      
+      // if($('.item_details').length == 0 || $('.minct_qty')[0].innerText == 0) {
+      //   $('.apply_coupon_initial').hide()
+      //   $('.sub-footer').hide()
+      //   $('.empty-cart').show()
+      // }
+      $('.items-discount span')[0].innerText = $('.input_box')[0].value
+
+      var count=0
+      for(var i=0; i<$('.minct_qty').length; i++) {
+          count = count + parseInt($('.minct_qty')[i].innerText)
+      }
+      $('#CartCount span')[0].innerText = count
+
+      if($('.apply_coupon_initial .input_box')[0].value == 'XXXX' || $('.apply_coupon_initial .input_box')[0].value == '') {
+        $('.apply_coupon_initial .input_box')[0].value = ''
+        $('.apply_coupon_initial .initial_apply_btn')[0].innerText = 'Apply'
+        $('.initial_apply_btn')[0].innerText = 'Apply'
+        $( ".apply_coupon_initial .input_box" ).prop( "disabled", false );
+        $('.initial_apply_btn input').prop("disabled",false)
+        $('.items-discount').hide()
+      }
+
+      if($('.apply_coupon_initial input')[0].value.length<2) {
+        $('.initial_apply_btn').attr('disabled','disabled')
+      }
+      else {
+        $('.initial_apply_btn').removeAttr('disabled')
+      }
+
+      if($('.items-discount .value')[0].innerText == '-₹ 0') {
+        $('.items-discount').hide()
+      }
+
+    },100)
+    
+    function slickCarousel() {
+      $('.upsells-stacked').slick({
+        dots: false,
+        infinite: false,
+        autoplay:false,
+        arrows: true,
+        cssEase: 'linear',
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        prevArrow: '<div class="slick-prev"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/prev_arrow.png?v=1652207866"></div>',
+        nextArrow: '<div class="slick-next"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/next_arrow.png?v=1652207852"></div>',
+        responsive: [    
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+            }
+          }
+        ]
+      });
+    }
+    function destroyCarousel() {
+      if ($('.upsells-stacked').hasClass('slick-initialized')) {
+        $('.upsells-stacked').slick('unslick');
+      }      
+    }
+
+    destroyCarousel();
+    slickCarousel();
+
+    // add on product
+    $(document).on('click', '.upsell-add button', function(e){
+      e.preventDefault();
+      var addon_id = $(this).attr('product_id');
+      addon_cart(addon_id, 1, 1);  
+      setTimeout(function(){
+        destroyCarousel();
+        slickCarousel();
+      }, 3000);
+    });
+    function addon_cart(id, qty, rdc){
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: {
+          quantity: qty,
+          id: id
+        },
+        dataType: 'json',
+        success: function() { 
+          if(rdc){
+            $(".minct_detail").load(location.href + " .minct_item");
+            $(".upsells_item_wrapper").load(location.href + " .upsells");
+            setTimeout(function(){
+              destroyCarousel();
+              slickCarousel();
+            }, 1000);
+            $(".minct_footer_wrap").load(location.href + " .minct_subtotal");
+            // console.log('added')
+          }else{
+            // window.location.href = '/cart'; 
+          }
+        }
+      });
+    }
+
+    $('.top_head img').click(function(event){
+      event.preventDefault()
+      
+      var product_id = event.currentTarget['attributes']['product-id']['value']
+      $('.variant-popup[product-id=' + product_id + ']').css('display','none')
+    })
+
+    $('.upsell').click(function(event){
+      // event.preventDefault()
+      for(var i=0; i<$('.upsell input').length; i++) { $('.upsell input')[i].checked = false }
+      event.currentTarget.children[0].children[0].checked = true
+      
+    })
+
+    $('.upsell input').click(function(event){
+      // event.preventDefault()
+      for(var i=0; i<$('.upsell input').length; i++) { $('.upsell input')[i].checked = false }
+      event.currentTarget.children[0].children[0].checked = true
+      
+    })
+    
+    // for(var i=0; i<$('.upsell3').length; i++) {$('.upsell3')[i].click()}
+    
+
+
+    $('button.cancel').click(function(event){
+      event.preventDefault()
+      var product_id = event.currentTarget['attributes']['product-id']['value']
+      $('.variant-popup[product-id=' + product_id + ']').css('display','none')
+    })
+  });
+
+
+
+  var obj = {
+    item_id: '',
+    item_name: '',
+    currency: 'INR',
+    price: '',
+    quantity: ''
+  };
+
+  // $('.minct_qty_sign').click(function(){
+  //     if($('.empty-cart').css('display') == 'block') {
+  //       $('.apply_coupon_initial').hide()
+  //     }
+  //     else {
+  //       $('.apply_coupon_initial').show()
+  //     }
+  //   })
+
+  $('.minct_checkout_btn').click(function(event) {
+    event.preventDefault()
+    var name='', count='';
+    cart_data = {{ cart | json}};
+    var product_details = cart_data.items.map(function(item){
+      return {
+        item_id: item.id,
+		item_name: item.product_title,
+		currency: 'INR',
+        price: parseFloat(item.price / 100.0),
+        quantity: item.quantity
+        }
+      });
+    var product_name = cart_data.items.map(function(name){
+      return {
+        item_name: name.product_title
+      }
+    })
+    for(var i=0; i<product_name.length; i++) {
+      name = name + product_name[i].item_name + ', ' 
+    }
+    var product_count = cart_data.items.map(function(qty){
+      return {
+        quantity: qty.quantity
+      }
+    })
+    for(var i=0; i<product_count.length; i++) {
+      count = count + product_count[i].quantity + ', ' 
+    }
+    console.log(product_name,'name')
+     window.fc_begin_checkout({
+        cart_amount: $('.checkout_btn span')[0].innerText.split('₹ ')[1],
+        currency: "INR",
+        items: product_details
+    })
+
+    // Taboola Initiate Checkout
+      _tfa.push({
+        notify: 'event',
+        name: 'start_checkout',
+        id: 1557333,
+        revenue: (parseInt(cart_data.total_price)/100).toString() ,
+        currency: 'INR', 
+        items_name: name ,
+        items_count: count,
+        quantity: cart_data.item_count
+      });
+    // End of Taboola Initiate Checkout
+
+    console.log(product_details[0],'product_details')
+      window.dataLayer = window.dataLayer || {};
+      window.dataLayer.push({
+        "event": "initiate_checkout",
+        "ecommerce": {
+          "items": [product_details]
+       }
+      });
+   console.log('success',obj)
+    window.location.href = '/checkout'
+  })
+</script>

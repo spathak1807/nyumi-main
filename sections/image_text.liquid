@@ -1,0 +1,75 @@
+{% for block in section.blocks %}
+<div class="row">
+  <div class="relative">
+    	<img src="{{ block.settings.img | img_url: 'master' }}" alt="image">
+  
+  <div class="absolute text_right">
+  <div class="container_left">
+  	 <div class="sml_tag">{{ block.settings.text}}</div>
+     <div class="cm_title">{{ block.settings.heading}}</div>
+     <div class="cm_p">{{ block.settings.para}}</div>
+     <div class="cm_but"><a class="button" href="#">Know More></a></div>
+  </div>  
+  </div>
+  
+  </div> 	
+  
+</div>
+
+{% endfor %}
+{% schema %}
+  {
+    "name": "image_text",
+    "settings": [],
+	"blocks":[
+  {
+    "name": "imgtxt",
+    "type": "imgtxt",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "img",
+            "label": "image"
+        },
+  		{
+            "type": "text",
+            "id": "text",
+            "label": "heading"
+        },
+		{
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+        },
+        {
+            "type": "text",
+            "id": "para",
+            "label": "para",
+            "default": "enter text"
+        },
+		{
+            "type": "text",
+            "id": "it6",
+            "label": "text",
+            "default": "No Hidden Ingredients"
+        }
+
+    ]
+  }
+],
+"presets": [
+{
+  "category": "IMAGE",
+  "name": "image_text",
+  "settings": {}
+}
+]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

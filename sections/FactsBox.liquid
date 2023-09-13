@@ -1,0 +1,238 @@
+<style>
+  .cards-container1 {
+    width:80%;
+    margin: 0 auto;
+    justify-content:center;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 40px 0;
+  }
+.section_heading1 {
+  text-align: center;
+  padding: 25px 0;
+  font-family: "corben";
+font-size: 50px;
+font-weight: normal;
+line-height: 45px;
+font-style: normal;
+text-align: center;
+color: #000000;
+}
+  .main-container1 {
+   margin: 25px;
+    border-radius:57px;
+/*     height: 825px; */
+    background-color:#FFF4EE; 
+  }
+
+    .description_wrapper1 {
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+  }
+  .description_wrapper1 span {
+    font-family: "corben";
+    font-size: 80px;
+    font-weight: normal;
+    line-height: 80px;
+    font-style: normal;
+    text-align: center;
+    color: #f37168;
+    opacity: 0.41;
+    position: absolute;
+  }
+  .description_wrapper1 p {
+   font-family: "manrope";
+font-size: 16px;
+font-weight: 400;
+line-height: 26px;
+   width: 75%;
+    text-align: center;
+    margin: 0 auto;
+
+  }
+
+  .block_title1 {
+    height: 270px;
+    width: 270px;
+    border-radius:50%;
+    background-color: #F37168;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'manrope'
+    
+  }
+
+  .cards1 {
+    height: 550px;
+    width: 358px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFF4EE;
+    border-radius: 57px;
+/*     margin-bottom: 25px; */
+    
+    
+
+  }
+  .block_title1 p {
+  color: #ffffff;
+    padding:50px;
+    font-weight: bold;
+    font-family: "manrope";
+font-size: 20px;
+
+line-height: 35px;
+
+  }
+  .block_title1 p:last-child {
+    padding: 62px;
+  }
+  @media (max-width: 768px) {
+    .main-container1 {
+      display: none;
+    }
+    .section_heading1 {
+      display: none;
+    }
+  }
+
+   .section_heading1 p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: #F37168;
+  }
+  .section_heading1 {
+    text-align: center;
+  }
+  .row1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .row1 img {
+    width:111px;
+  }
+  .row1 span {
+    font-size: 30px;
+  }
+  .section_heading1 p {
+    font-size: 50px;
+  }
+  .description_wrapper1 p {
+    font-family: "manrope";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .description_wrapper1 img {
+    height: 35px;
+    width: 35px;
+  }
+  span.open_comma {
+    top: -15px;
+    left: 20px;
+  }
+  span.close_comma {
+    bottom: -25px;
+    right: 50px;
+  }
+  span.open_comma.open-2 {
+    top: -40px !important;
+    left: 25px !important;
+  }
+  span.close_comma.close-2 {
+    bottom: -25px;
+    right: 90px;
+  }
+  span.open_comma.open-3 {
+    top: -40px !important;
+    left: 40px !important;
+  }
+  span.close_comma.close-3 {
+    bottom: -25px;
+    right: 80px;
+  }
+</style>
+<div class="section_heading1">
+    <p>built for women</p>
+    <div class="row1">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/download.png?v=1681922736" alt="">
+      <span>
+      by women
+    </span>
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/download.png?v=1681922736" alt="">
+    </div>
+  </div>
+<div class="main-container1">
+  
+  <div class="cards-container1">
+    {% for block in section.blocks %}
+    <div class="cards1">
+        <div class="block_title1">
+            <p>{{ block.settings.title }}</p>
+        </div>
+        <div class="description_wrapper1">
+<span class="open_comma open-{{ forloop.index }}"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_1_1_9eefb9b2-8969-4d9a-ba62-ab945868f615.png?v=1681970968" /></span>
+    <p>
+     {{ block.settings.description }} 
+  </p>
+    <span class="close_comma close-{{ forloop.index }}"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_2_ea1a411f-8910-4d96-b4db-f2b6152b5e96.png?v=1681970968" /></span>
+  </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+{% schema %}
+  {
+    "name": "FactsBox",
+    "settings": [
+      {
+      "type": "text",
+      "id": "heading",
+      "label": "heading"
+    }
+    ],
+    	"blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "text",
+           "id": "title",
+           "label": "Slide_title"
+         } ,
+         {
+           "type": "text",
+           "id": "description",
+           "label": "Slide_description"
+         }
+       ]
+     }
+  ] ,
+ "presets": [
+    {
+      "name": "FactsBox",
+      "settings": {
+       
+      }
+  }
+ ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

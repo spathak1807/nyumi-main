@@ -1,0 +1,277 @@
+<link rel="preload" href="https://formbuilder.hulkapps.com/corepage/customform?id=c8XrPEBciig0JANYdxU3HQ" as="document">
+<style>
+/*   body {
+    overflow: hidden;
+  } */
+  #shopify-section-header, #shopify-section-footer-custom {
+    display: none;
+  }
+  section.consultDoctor {
+    background: #FFF4EF;
+    height: 100%;
+  }
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f37168;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+  }
+  .loader p {
+    font-size: 26px;
+    padding: 1rem;
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    margin: 0;
+  }
+  .close-popup {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 80%;
+    width: 100%;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+  }
+  .popup {
+    text-align: center;
+    border-color: #707070;
+    border-width: 0.25px;
+    border-style: solid;
+    border-radius: 50px;
+    filter: drop-shadow(0px 0px 1px rgba(172,172,172,0.16 ));
+    background: #ffffff;
+    height: max-content;
+    width: 50%;
+    padding: 3rem;
+  }
+  .close-popup .popup h2 {
+    font-family: "manrope";
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+  }
+  .close-popup .popup p {
+    font-family: "manrope";
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+  }
+  .close-popup .popup button {
+    border-radius: 13px;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.16 ));
+    background: white;
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    margin: 0.5rem;
+    color: black;
+    font-family: "manrope";
+    font-size: 20px;
+  }
+  .close-popup .popup button.resume {
+    background: #ff6662;
+    color: white;
+    font-weight: bold;
+  }
+  .expert-consult {
+/*     background: url('https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Component_2_1.png?v=1674543465'); */
+    background-position: center center;
+    background-size: contain;
+    height: 150vh;
+    padding-top: 5rem;
+    background-repeat: no-repeat;
+  }
+  .expert-close {
+/*     display: none; */
+    padding: 0 5rem;
+    margin: 0;
+    cursor: pointer;
+    text-align: right;
+    font-size: 1.5rem;
+    font-family: 'manropeb';
+    font-weight: 900;
+  }
+  .expert-banner img {
+    height: 28rem;
+    width: 100%;
+  }
+  .mob-img {
+    display: none;
+  }
+  .get-started {
+    display: flex;
+    justify-content: center;
+    width: 45vw;
+    height: 15rem;
+    margin: 3rem auto;
+    align-items: center;
+    background: white;
+    border-radius: 22px;
+    filter: drop-shadow(0px 1px 2.5px rgba(172,172,172,0.16 ));
+  }
+  .doctor-img {
+    width: 45%;
+    height: 100%;
+  }
+  .doctor-img img {
+    width: 100%;
+    height: 100%;
+  }
+  .get-started .content {
+    width: 60%;
+    text-align: right;
+    padding-right: 2rem;
+  }
+  .get-started .content h2 {
+    font-family: 'manropeb';
+    font-size: 25px;
+    font-weight: 800;
+    margin: 0;
+  }
+  .get-started .content p {
+    font-family: "manrope";
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .get-started .content p span {
+    font-family: 'manropeb';
+    font-weight: 800;
+  }
+  .get-started .content button {
+    color: white;
+    border-radius: 15px;
+    filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.16 ));
+    background: #ff6662;
+    font-size: 18px;
+    border: none;
+    padding: 0.5rem 1.5rem;;
+  }
+  .hulk-form {
+/*     display: none; */
+    width: 45%;
+    border-radius: 20px;
+/*     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    margin: 0 auto;
+    background: transparent;
+/*     height: 90%; */
+/*     padding: 3vw 0; */
+  }
+
+  @media (max-width: 768px) {
+    .mob-img {
+      display: block;
+    }
+    .expert-consult {
+      height: 100vh;
+      padding-top: 0 !important;
+    }
+    .expert-close {
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    .desktop-img {
+      display: none;
+    }
+    .get-started {
+      width: 95%;
+      height: auto;
+      margin: 1rem auto;
+    }
+    .get-started .content h2, .get-started .content p {
+      font-size: 12px;
+    }
+    .get-started .content button {
+      font-size: 12px;
+      border: none;
+      padding: 5px 1.5rem;
+    }
+    .hulk-form {
+      width: 95%;
+      height: 95%;
+    }
+    .close-popup {
+     height: 100%;
+   }
+    .popup {
+      border-radius: 30px;
+      width: 95%;
+      padding: 2rem 1.5rem;
+    }
+    .close-popup .popup h2, 
+    .close-popup .popup p {
+      font-size: 14px;
+    }
+    .close-popup .popup button {
+      font-size: 15px;
+    }
+  }
+  @media (max-width: 460px) {
+    .hulk-form {
+      padding: 6% 0;
+    }
+  }
+</style>
+<div class="loader">
+<!--   <img class="logo_shop js  lazyloaded" data-src="//cdn.shopify.com/s/files/1/0412/3027/0631/files/logo-min.png?v=1646584758" alt="" src="//cdn.shopify.com/s/files/1/0412/3027/0631/files/logo-min.png?v=1646584758"> -->
+  <p>Your free consultation<br>is loading</p>
+  <i class="fa fa-circle-o-notch fa-spin" style="font-size:48px"></i>
+</div>
+<section class="consultDoctor">
+  <div class="expert-consult">
+    <p class="expert-close">X</p>
+    <div class="hulk-form">
+      <div style="margin:0 auto;" class="pxFormGenerator" id="c8XrPEBciig0JANYdxU3HQ"></div>
+      <div class="close-popup">
+        <div class="popup">
+          <h2>Do you really want to quit now?</h2>
+          <p>You are a step up away from claiming your <span>FREE</span> doctor consult</p>
+          <button class="resume">I want to claim my FREE consult</button>
+          <button class="quit">Quit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $(window).on('load', function() {
+    dataLayer.push({"event":"expert-consult"})
+  })
+  $('.expert-close').click(function(event) {
+    $('.close-popup').css('display','flex')
+    $('body').css('overflow','hidden')
+  })
+  $('button.resume').click(function(){
+    $('.close-popup').hide()
+    $('body').css('overflow-y','scroll')
+  })
+  $('button.quit').click(function(){
+    $('.close-popup').hide()
+    dataLayer.push({"event":"expert-consult-close"})
+    $('body').css('overflow-y','scroll')
+    window.location.href = '/collections/all'
+  })
+  $('button.quiz-btn').click(function(){
+    dataLayer.push({"event":"start-quiz"})
+    window.location.href = '/pages/quiz-and-questionnaire'
+  })
+</script>
+
+<script>
+  setTimeout(function(){
+      $('.loader').hide()
+      $('.expert-close').show()
+      $('.hulk-form').show()
+      $('.expert-consult').css('padding-top','5rem')
+      $('.expert-consult').css('background','#FFF4EF')
+      $("html, body").animate({
+        scrollTop: 0
+      }, 1000)
+    },3000)
+</script>

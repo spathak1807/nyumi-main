@@ -1,0 +1,177 @@
+<style>
+  {% assign loop_index = 0 %}
+  {% for block in section.blocks %}
+  {% assign product = all_products[block.settings.product]%}
+  .product_section_outer[data-val="{{ loop_index }}"]:before {
+  {% if product.metafields.product_color.product_color != blank %}
+    background-color: {{product.metafields.product_color.product_color}};
+  {% endif %}
+  {% if product.metafields.background_image.background_image != blank %}
+    background-image: url({{product.metafields.background_image.background_image}});
+  {% endif %}
+  }
+  @media only screen and (max-width: 767px) {
+    .pdhome_flx .pdhm_itme.prd_itm_{{ loop_index }}:before {
+    background-image: url({{product.metafields.background_image.background_image}});
+    }
+  }
+  {% assign loop_index = loop_index | plus: 1 %}
+  {% for gummy_img in product.metafields.gummy_img.gummy_img %}
+  .pdhome_flx .pdhm_itme .big_img_box.{{ product.handle }} .pdhm_gummy.pdhm_gummy_{{ forloop.index }}::before {
+    background-image: url('{{ gummy_img }}');
+    }
+  {% if forloop.index == 3%}
+  @media only screen and (max-width: 767px) {
+    .pdhm_gummy.pdhm_gummy_3::after {
+      content: '';
+      background-image: url('{{ gummy_img }}');
+    }
+    
+  }
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+  .pdhome_flx .pdhm_itme:after {
+   display: none; 
+  }
+  
+  
+</style>
+
+<div id="product_section" class="product_section_outer active_animation" data-val="0" style="display: block;">
+  {% if section.settings.title != blank %}
+  <div id="product_heading" class="product-heading">{{ section.settings.title }}</div>
+  {% endif %}
+  <div class="page_width">
+    <div id="productCategory" class="product_Category_item">
+      {% assign lop_tab_index = 0 %}
+      {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product]%}
+      {% if product.metafields.product_category.product_category != blank %}
+      <div class="category_item" data-item="{{ lop_tab_index }}">{{ product.metafields.product_category.product_category }}</div>
+      {% endif %}
+      {% assign lop_tab_index = lop_tab_index | plus: 1 %}
+      {% endfor %}
+    </div>
+    <div class="pdhome_flx" id="product_add_item">
+      {% assign prd_loop_index = 0 %}
+      {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product]%}
+      
+      <div class="pdhm_itme prd_itm_{{ prd_loop_index }}" data-index="{{ prd_loop_index }}">
+        <a class="url_btn_style" href="{{ product.url }}"></a>
+        <div id="product_items" class="product-items">
+          {% if product.metafields.product_title.product_title != blank %}
+          {% assign product_title = product.metafields.product_title.product_title %}
+          {% else %}
+          {% assign product_title = product.title %}
+          {% endif %}
+          {% if product.title != blank %}
+          
+          <div class="productName" style="color:{{product.metafields.prd_title_clr.prd_title_color}}">{{ product_title }}</div>
+          {% endif %}
+          {% if product.metafields.product_subtext.product_subtext != blank %}
+          <div class="productDescription">{{product.metafields.product_subtext.product_subtext}}</div>
+          {% endif %}
+          <div class="product_icon_li">
+            <div class="pdil_itmes" data-index="0">
+              {% if product.metafields.icon_image_one.icon_image_one != blank %}
+              <div class="pdil_img">
+                <img class="lazyload" data-src="{{product.metafields.icon_image_one.icon_image_one}}" alt="{{product.metafields.icon_text_one.icon_text_one}}" loading="lazy">
+              </div>
+              {% endif %}
+              {% if product.metafields.icon_text_one.icon_text_one != blank %}
+              <div class="pdil_txt">{{product.metafields.icon_text_one.icon_text_one}}</div>
+              {% endif %}
+            </div>
+            <div class="pdil_itmes" data-index="1">
+              {% if product.metafields.icon_image_two.icon_image_two != blank %}
+              <div class="pdil_img">
+                <img class="lazyload" data-src="{{product.metafields.icon_image_two.icon_image_two}}" alt="{{product.metafields.icon_text_two.icon_text_two}}" loading="lazy">
+              </div>
+              {% endif %}
+              {% if product.metafields.icon_text_two.icon_text_two != blank %}
+              <div class="pdil_txt">{{product.metafields.icon_text_two.icon_text_two}}</div>
+              {% endif %}
+            </div>
+            <div class="pdil_itmes" data-index="2">
+              {% if product.metafields.icon_image_three.icon_image_three != blank %}
+              <div class="pdil_img">
+                <img class="lazyload" data-src="{{product.metafields.icon_image_three.icon_image_three}}" alt="{{product.metafields.icon_text_three.icon_text_three}}" loading="lazy">
+              </div>
+              {% endif %}
+              {% if product.metafields.icon_text_three.icon_text_three != blank %}
+              <div class="pdil_txt">{{product.metafields.icon_text_three.icon_text_three}}</div>
+              {% endif %}
+            </div>
+          </div>
+          <a class="btn_style_pd" href="{{ product.url }}">shop</a>
+        </div>
+        {% if product.metafields.product_image.product_image != blank %}
+        <div class="big_img_box {{ product.handle }}">
+          <div class="pdhm_gummy pdhm_gummy_1"></div>
+          <div class="pdhm_gummy pdhm_gummy_2"></div>
+          <div class="pdhm_gummy pdhm_gummy_3"></div>
+          <div class="pdhm_gummy pdhm_gummy_4"></div>
+          <img class="big_img_slider lazyload lazy" data-src="{{product.metafields.product_image.product_image}}" alt="{{ product.metafields.product_image.product_image.alt }}" width='2500' height='600' loading="lazy">
+        </div>
+        {% endif %}
+      </div>
+      {% assign prd_loop_index = prd_loop_index | plus: 1 %}
+      {% endfor %}
+    </div>
+    {% if section.settings.more_btn_txt != blank %}
+    <a href="{{ section.settings.more_btn_url }}" class="show_more_product">{{ section.settings.more_btn_txt }}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Our Products",
+    "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "OUR PRODUCTS"
+          },
+          {
+            "type": "text",
+            "id": "more_btn_txt",
+            "label": "Show More Button Text",
+            "default": "show more +"
+          },
+            {
+            "type": "url",
+            "id": "more_btn_url",
+            "label": "Show More Button URL"
+          }
+      ],
+    "blocks":[
+           {
+            "type":"slider",
+            "name":"Slider",
+            "settings":[
+				{
+                  "type": "product",
+                  "id": "product",
+                  "label": "Select product"
+                }
+            ]
+          }
+        ],
+    "presets": [
+        {
+          "category": "Homepage",
+          "name": "Homepage our products"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

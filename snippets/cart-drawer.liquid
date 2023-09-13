@@ -1,0 +1,595 @@
+<style>
+/* Required Menu CSS */
+.js-menu__context {
+  background: rgba(0,0,0, 0.5);
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.5s, visibility 0.5s;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+}
+    
+.js-menu { 
+  position: absolute;
+  height: 100%;
+  width: 400px;
+  max-width: 85vw;
+  margin: 0;
+  background: #fff;
+  z-index: 99;
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  transition: background 0.5s, transform 0.5s;
+}
+
+.js-menu--left {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+.js-menu--right {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    position: absolute;
+    right: 0;
+}
+.js-menu__open {
+  cursor: pointer;
+}
+
+.js-menu__close {
+  cursor: pointer;
+}
+
+.js-menu__expanded {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+  overflow-x:hidden;
+}
+
+/* Extra CSS */  
+.drawer_header{  
+  background: #fff4ef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 400px;
+  height: 60px;
+  z-index: 1;
+}
+.drawer_header_heading {
+    padding: 10px 20px 23px;
+    line-height: 40px;
+    font-weight: 500;
+    color: #231f20;
+    font-family: corbenr;
+    outline: none;
+    font-size: 24px;
+}
+.js-menu__close{
+    cursor: pointer;
+    width: 16px;
+    margin-right: 25px;
+}
+.drawer_product_detail{
+    margin: 15px 15px;
+/*     height: 400px; */
+    height: 380px;
+    overflow-y: auto;
+}
+.drawer_product_detail .minicart_item{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #cacaca;
+    padding-top:15px;
+} 
+.drawer_product_detail .minicart_item:first-child {
+    padding-top: 0;
+}
+.drawer_product_detail .minicart_item_img {
+    width: 65px;
+}
+.drawer_product_detail .minicart_item_title{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 110px);
+}
+.drawer_product_detail .minicart_title{
+  line-height: 24px;
+  font-weight: 500;
+  font-size: 17px;
+  color: #231f20;
+  font-family: corbenr;
+  text-transform: lowercase;
+  width: 100%;
+}
+.drawer_product_detail .minicart_item_price{
+    font-family: manropes;
+    font-weight: 500;
+    font-size: 15px;
+    color: #231f20;
+    width: 50%;
+    margin: 8px 0 0;
+}
+.drawer_remove_and_qty{
+    margin-top: 7px;
+    margin-bottom: 15px;
+    width: 43%;
+    display: flex;
+    align-items: center;
+}    
+.drawer_remove_and_qty .minicart_item_qty{  
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #939393;
+    border-radius: 20px;
+}
+.drawer_remove_and_qty .minicart_item_qty .minius_sign {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+}
+.drawer_remove_and_qty .minicart_item_qty .plus_sign {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+}
+.drawer_remove_and_qty .minicart_item_qty .minicart_qty{
+   padding: 3px 7px;
+   font-family: manropes;
+   font-weight: 500;
+   font-size: 13px;
+   color: #231f20;
+}
+.drawer_remove_and_qty .minicart_item_qty .plus_sign:before{
+    content: "";
+    background-image: url('https://cdn.shopify.com/s/files/1/0412/3027/0631/t/73/assets/plus.png');
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+.drawer_remove_and_qty .minicart_item_qty .minius_sign:before{
+    content: "";
+    background-image: url('https://cdn.shopify.com/s/files/1/0412/3027/0631/t/73/assets/minius.png');
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+.minicart_footer{ 
+    padding: 15px;
+    padding-bottom: 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.minicart_footer .cart__shipping{
+    font-family: manroper;
+    font-size: 14px;
+    color: #9b9b9b;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+.minicart_footer .cart__shipping span{
+    font-family: manroper;
+    font-size: 14px;
+    color: #9b9b9b;  
+}
+.minicart_subtotal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    padding-left: 10px;
+    padding-right:10px;
+    margin-bottom: 0!important;
+}
+.minicart_checkout_btn{
+color: #fff;
+    border-radius: 0px;
+    font-family: manropes;
+    font-size: 20px;
+    padding: 10px;
+    background: #f47169;
+    letter-spacing: .5px;
+    text-align: center;
+    z-index: 9999;
+    bottom: 0;
+    position: absolute;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+.quantity-selector.quantity-input{ 
+    width: 50%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    text-align: center;
+}
+.bundle_div_outer{
+    column-gap: 5px;
+    background-color: #ed716b42;
+    align-items: center;
+    padding: 10px;
+    height: 190px;
+    min-width: 140px;
+    flex: 0 0 140px;
+/*     margin-bottom: 10px; */
+    margin-right: 12px;
+    position: relative;
+    text-align: center;
+    border-radius: 8px;
+}
+.min_cart_drawer_inner .product-details__item--variant-option{
+   font-size:13px;
+   display:block;
+   width:100%;
+}
+.drawer_viewcart_btn{
+     width: 100%;
+    text-align: center;
+    display: block;
+    color: #ed716b;
+    margin-bottom:15px;
+}
+.drawer_viewcart_btn:hover{
+    text-decoration:underline;    
+}
+.minicart_footer h2{
+      font-family: 'corbenr';
+    text-transform: inherit;
+    font-weight: 500;
+    color: #231f20;
+    font-size: 20px;
+} 
+  .bundle_div_outer .bundle_product_title_para {
+    line-height: 19px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #231f20;
+    font-family: corbenr;
+    width: 100%;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+.bundle_div_outer .bundle_add_to_cart_btn { 
+    display: block;
+    color: #fff;
+    border-radius: 0px;
+    font-family: manropes;
+    font-size: 30px;
+    line-height: 17px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #f47169;
+    letter-spacing: .5px;
+    text-align: center;
+    text-transform: capitalize;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.bundle_div_outer .bundle_product_price p{
+    line-height: 24px;
+    font-weight: 500;
+    font-size: 17px;
+    color: #231f20;
+    font-family: corbenr;
+    text-transform: lowercase;
+    width: 100%;
+}
+  .minicart_footer .slick-next:before{
+    display:none;
+  }
+  .minicart_footer .slick-prev:before{
+    display:none;
+  }
+  .minicart_footer .slick-dots li{ 
+    border: 1px solid #f47e75;
+    height: 10px;
+    width: 10px;
+  }
+  .minicart_footer .slick-dots li.slick-active {
+    background: #f47e75;
+  }
+.minicart_footer .slick-dots li button{
+    width: 10px;
+    height: 10px;
+}
+.minicart_footer .slick-dots li button:before{
+    width: 10px;
+    height: 10px;
+}
+.upsells-stacked1{
+    overflow: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    display: flex;
+} 
+.upsell bundle_div_outer{
+  position:relative;
+}  
+ .bundle_prod_variant {
+   margin-bottom:0px;
+ }
+  .bundle_div_outer .bundle_product_title{
+  text-align:left;
+  }
+  .bundle_div_outer .bundle_product_image img{
+    width:80%;
+  }
+  .bundle_div_outer .bundle_product_image {
+    height:100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .min_cart_drawer_inner{
+    max-height: calc(100vh - 0px);
+  }
+/* Extra CSS */  
+
+/* Responsive CSS */
+   
+@media only screen and (max-width: 767px) {
+.drawer_header{
+  width:100%;
+}
+.js-menu {
+    max-width: 95vw;
+}
+.drawer_product_detail {
+    height: 400px;
+}
+
+    
+
+ 
+
+  
+}/*767*/
+
+
+@media only screen and (min-width: 768px) and (max-width: 995px)  {
+ 
+  
+  
+  
+  
+
+}
+
+@media only screen and (min-width: 996px) and (max-width: 1024px)  {
+ 
+  
+  
+
+}
+
+
+
+
+/* Responsive CSS */
+
+  
+</style>
+
+<!-- partial:index.partial.html -->
+
+<div class="js-menu__context new_custom_cart_drawer">
+  <div id="main-nav" class="js-menu js-menu--right">
+<!--     <span class="js-menu__close">✕</span> -->
+
+
+      <div class="min_cart_drawer_inner">
+    <div class="drawer_header">
+      <div class="drawer_header_heading">your cart</div>
+      <div class="js-menu__close"><img src="{{ 'close.png' | asset_url }}" alt="close"/></div>
+    </div>
+    <div class="cart_body_wrapper">
+      <div class="cart_drawer_loder hide">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/t/58/assets/200w.gif">
+      </div>
+      {% if settings.upsell_message != blank %}
+      <div class="cart_upper">
+        <p>{{ settings.upsell_message }}</p>
+      </div>
+      {% endif %}   
+      <div class="drawer_product_detail">  
+        {% for item in cart.items %} 
+        <div class="minicart_item" data-line="{{ item.index }}" data-id="{{ item.id}}" data-price="{{ item.price}}" data-productId ="{{ item.variant.id }}" >
+          <div class="minicart_item_img"> 
+            {% if item.image != null %} 
+            <img src="{{ item | img_url: '120x120' }}"  alt="{{ item.image.alt | escape }}"/>
+            {% endif %}
+          </div>
+
+          <div class="minicart_item_title">
+            <a href="{{ item.url }}" class="minicart_title 1">{{ item.product.title }}</a>
+            {%- assign variant_options = 'template ' | split: ' ' -%}
+            {%- if item.product.has_only_default_variant != true -%}
+            {%- assign variant_options = item.options_with_values -%}
+            {%- endif -%}
+            {%- assign property_size = item.properties | size -%}
+            {%- for option in variant_options -%}
+            <p class="product-details__item product-details__item--variant-option{% if item.product.has_only_default_variant %} hide{% endif %}" data-cart-item-option>{{ option.value }}</p>
+            {%- endfor -%}
+            <div class="minicart_item_price"> 
+          {{ item.price | money }}
+          {% comment %}
+                {% if item.variant.compare_at_price > item.variant.price %}
+                  <s>{{ item.variant.compare_at_price | money }}</s>
+                {% endif %}
+          {% endcomment %} 
+            </div>
+
+            <div class="drawer_remove_and_qty">
+                <div class="qtybox minicart_item_qty">
+                  <div class="minicart_sign minius_sign btnqty qtyminus icon icon-minus" data-variant-id="{{ item.variant_id }}"></div>
+                  <input type="text" id="quantity" name="quantity" value="{{ item.quantity }}" min="0" class="quantity-selector quantity-input" readonly="">
+                  <div class="minicart_qty_sign plus_sign btnqty qtyplus icon icon-plus" data-variant-id="{{ item.variant_id }}"></div>
+                </div>
+
+              <div class="minicart_item_remove hide">remove </div>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+            <div class="minicart_footer">
+
+              <!--[Upsell product]-->
+                  <h2>People also bought</h2>
+
+  <div class="upsells-stacked1">
+    {% assign upsell_products = settings.product_bundle_collection %}
+    {% assign upsell_count = 0 %}
+      {% for product in collections[upsell_products].products %}
+      
+      {% assign upsell_count = upsell_count | plus: 1 %}
+      {% if upsell_count <= 4 %}
+      
+             <div class="upsell bundle_div_outer" data-bundulProId ="{{ product.variants.first.id }}">
+          
+          <div class="bundle_product_image">
+            <img src="{{ product | img_url: 'x100' }}" />
+          </div>
+          <div class="bundle_product_title">
+            <p class="bundle_product_title_para">  {{ product.title }}</p>
+  
+            {% for option in product.options %}
+            {% if option == 'Choose Pack' %}
+            <p class="bundle_prod_variant">{{ product.variants.first.options[forloop.index0] }} </p>
+            {% endif %}
+            {% endfor %}
+            
+            <p class="bundle_product_price_new"> {{ product.price | money }}</p>
+             
+        </div>
+          
+
+      </div>
+      {% endif %}
+       {% endfor %}
+  </div>
+
+            
+              <!--[Upsell product]-->
+              
+      {% if settings.free_shipping_text != blank %}
+      <h4 class="cart__shipping rte text-left"><span>Shipping</span><span>{{ settings.free_shipping_text }}</span></h4>
+      {% endif %}
+      <div class="minicart_footer_wrap">
+       <div class="minicart_subtotal">
+         <span class="minicart_subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
+         <span class="minicart_subtotal__price">{{ cart.total_price | money_with_currency }}</span>
+      </div>
+      </div>
+       
+<!--       <a href="/checkout" class="minicart_checkout_btn">{{ 'cart.general.checkout' | t }}</a> -->
+<!--       <a href="/cart" class="drawer_viewcart_btn">View Cart </a> -->
+    </div>
+
+          
+         <a href="/checkout" class="minicart_checkout_btn">{{ 'cart.general.checkout' | t }}</a> 
+      </div>
+        
+  
+  </div>
+   
+</div>
+<!-- partial -->
+
+
+<script>
+ /*   $(document).ready(function(){
+    function slickCarousel() {
+      $('.upsells-stacked1').slick({
+        dots: true,
+        infinite: false,
+        autoplay:false,
+        arrows: false,
+        cssEase: 'linear',
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        prevArrow: '<div class="slick-prev"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/prev_arrow.png?v=1652207866"></div>',
+        nextArrow: '<div class="slick-next"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/next_arrow.png?v=1652207852"></div>',
+        responsive: [    
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+            }
+          }
+        ]
+      });
+    }
+    function destroyCarousel() {
+      if ($('.upsells-stacked1').hasClass('slick-initialized')) {
+        $('.upsells-stacked1').slick('unslick');
+      }      
+    }
+
+  //  destroyCarousel();
+    slickCarousel();
+
+  });*/
+</script>
+
+<script>
+
+    setInterval(function(){
+      var count = 0
+      for(var i=0; i<$('.upsell.bundle_div_outer').length; i++){
+          if($('.upsell.bundle_div_outer')[i].style.display == 'none') {
+              count++
+          }
+      }
+      if(count == 4) {
+          // $('.min_cart .minct_detail')[0].style.height = '57vh'
+          $('.minicart_footer h2').hide()
+      }
+    },2000) 
+</script>
+ 

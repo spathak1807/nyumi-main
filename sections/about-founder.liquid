@@ -1,0 +1,38 @@
+<div class="founder-des tbpd" id="abut_founder-des">
+  <div class="page_width">
+    <div class="founder_text center">
+      {% if section.settings.title != blank %}
+    	<h3>{{ section.settings.title }}</h3>
+      {% endif %}      
+      {% if section.settings.description != blank %}
+      <p class="txt_founder">{{ section.settings.description | strip_html }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About Founder",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "about ananya"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>A graduate from Harvard Business School and Olin College of Engineering, Ananya is passionate about the intersection of technology, wellness and design. She has worked at Microsoft, and Headspace - a leading mental wellness app. Her design thinking skills, background in technology, and interdisciplinary experience enables her to work with experts across disciplines and build Nyumi into the brand it is today.</p>"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

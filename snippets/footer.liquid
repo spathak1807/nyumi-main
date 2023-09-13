@@ -1,0 +1,119 @@
+ 
+
+<footer class="site-footer" role="contentinfo"   data-section-type="footer-section">
+  <div class="footer1" id="footer1_section">
+    <div class="three " id="address_box">
+      
+    </div>
+    <div class="three menu_footer">
+    	<div class="footer_menu_link">
+      		<ul class="footer_menu_ul" id="footer_menu_left"> 
+               
+              
+          	</ul>   
+          
+           <ul class="footer_menu_ul" id="footer_menu_right"> 
+               
+              
+          	</ul>   
+          
+      	</div>
+      	<div class="mobile mobile_email">
+          <strong><span class="nameset first1"><a href="mailto:hello@nyumi.com">hello@nyumi.com</a></span><span class="nameset first2">  + 91 8291155181 </span></strong>
+      </div>
+      <div class="social_media mobile">
+      	<ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list">
+                 <li class="social-icons__item">
+                   <a class="social-icons__link" target="_blank" href="https://www.facebook.com/hellonyumi"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/newfb.png?v=1606473426" alt="facebook:image"/>
+                  </a>
+                </li><li class="social-icons__item">
+                   <a class="social-icons__link" target="_blank" href="https://www.instagram.com/hellonyumi/"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/it.png?v=1606469610" alt="instagram:image"/>
+                  </a>
+                </li><li class="social-icons__item">
+                   <a class="social-icons__link" target="_blank" href="https://twitter.com/hellonyumi"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/tw.png?v=1606469610" alt="twitter:image"/>
+                  </a>
+                </li>
+                {% comment %}
+                <li class="social-icons__item">
+                  <a class="social-icons__link" target="_blank" href="#"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/yt.png?v=1606469610">
+                  </a>
+                </li>
+        		{% endcomment %}
+             </ul>
+      
+      </div>
+    </div>
+    <div class="three last_footer">
+      <div class="numr_design">100% updates. 0% junk.</div>
+      <div class="newslater_design">
+         {% form 'customer', id: formId, novalidate: 'novalidate' %}
+            {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success" tabindex="-1" data-form-status>
+              {{ 'general.newsletter_form.confirmation' | t }}
+            </p>
+             
+            {%- endif -%}
+            
+           <script>
+             jQuery(document).ready(function(){
+               var url = window.location.href;
+               if(url.indexOf('form_type=customer') != -1){
+                     
+                    $('.form-message--errors_footer').show();
+                }
+             });
+           </script>
+          <div class="form-message form-message--errors_footer">You are already a subscriber</div>
+          <div class="form">
+                   <label><input type="text" id="fname" name="contact[email]" placeholder="your e-mail"><input type="submit" value="subscribe >">	
+
+                </label>
+          </div>
+        {% endform %}
+        
+      </div>
+      <div class="social_media desktop">
+      	<ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list"><li class="social-icons__item">
+                <li class="social-icons__item">
+                   <a class="social-icons__link" target="_blank" href="https://www.facebook.com/hellonyumi"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/newfb.png?v=1606473426" alt="facebook:image" />
+                  </a>
+                </li><li class="social-icons__item">
+                   <a class="social-icons__link" target="_blank" href="https://www.instagram.com/hellonyumi/"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/it.png?v=1606469610" alt="instagram:image" />
+                  </a>
+                </li><li class="social-icons__item">
+                   <a class="social-icons__link" target="_blank" href="https://twitter.com/hellonyumi"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/tw.png?v=1606469610" alt="twitter:image"/>
+                  </a>
+                </li>
+                {% comment %}
+                <li class="social-icons__item">
+                  <a class="social-icons__link" target="_blank" href="#"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/yt.png?v=1606469610">
+                  </a>
+                </li>
+        		{% endcomment %}
+        </ul>
+      
+      </div>
+    </div>
+     
+ 
+  </div>
+
+  <hr class="site-footer__hr">
+
+   
+  <div class="footer_2">
+    <div class="half">
+      <div id="footer_copy_right">
+       
+      </div>
+    </div>
+    <div class="half">
+      <div class="copyryt"><p>{% comment %}© 2020 Nyumi. All rights reserved{% endcomment %}</p></div>
+    </div>
+     
+  </div>
+  
+</footer>
+
+
+ 

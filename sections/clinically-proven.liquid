@@ -1,0 +1,108 @@
+<style>
+    .benefit-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap:25px;
+      justify-content: center;
+    }
+    .benefit-box {
+      text-align:center;
+    }
+    .clinically-proven-section {
+      background-color:#FFF4EF;
+      padding: 2rem 0;
+    }
+    .clinic-heading h3 {
+      font-family: "Corbenr";
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 500;
+    text-align: center;
+    color: #000000;
+    }
+    .benefit-box img {
+      height: 115px;
+    }
+
+    .benefit-box p {
+      font-family: "Manrope";
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
+      font-style: normal;
+      text-align: center;
+    }
+
+    @media (max-width:768px) {
+    .benefit-box img {
+      height: 85px;
+    }
+      .benefit-box p {
+        font-family: "Manrope";
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px;
+        font-style: normal;
+        text-align: center;
+      }
+        .clinic-heading {
+          text-align: center;
+          margin-bottom: 1rem;
+    }
+    }
+</style>
+
+<div class="clinically-proven-section">
+  <div class="clinic-heading">
+    <h3>clinically proven</h3>
+  </div>
+  <div class="benefit-wrapper">
+    {% for block in section.blocks %}
+      <div class="benefit-box">
+        <img src="{{ block.settings.image | img_url: '300x' }}" alt="{{ block.settings.title }}">
+        <p>
+          {{ block.settings.description }}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+ {
+  "name": "ClinicallyProven",
+
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide_image"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Slide_description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Clinivally Proven",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

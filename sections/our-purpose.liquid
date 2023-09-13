@@ -1,0 +1,134 @@
+<div id="Purpose" style="display: block;">
+  <div class="row backgd icboxes">
+    <div class="eqpd">
+      <div class="round_line_bottom"></div>
+      <div class="round_line" style="transform: rotate(2200deg);"></div>
+      <div class="center">
+        {% if section.settings.pre_title != blank %}
+        <div id="Purpose-heading" class="sml_tag">
+          {{ section.settings.pre_title }}
+        </div>
+        {% endif %}
+        {% if section.settings.title != blank %}
+        <p id="Purpose-subheading" class="cm_title">          
+          {{ section.settings.title }}                  
+        </p>
+        {% endif %} 
+        {% if section.settings.purpose_desc != blank %}
+        <div id="Purpose-description" class="cm_p">
+          {{ section.settings.purpose_desc }}
+        </div>
+        {% endif %}
+        {% if section.settings.btn_txt != blank %}
+        <div class="cm_but">
+          <a id="Purpose-button" class="button click_link" href="{{ section.settings.btn_url }}">{{ section.settings.btn_txt }}</a>
+        </div>
+        {% endif %}
+        {% if section.settings.block_title != blank %}
+        <div id="Purpose-text" class="slider_title">
+          {{ section.settings.block_title }}
+        </div>
+        {% endif %}
+        <div class="row icon_boxes" id="hm_icon_boxes">
+          {% for block in section.blocks %}
+          <div class="boxes">
+            <div class="icon_img gif_icon_0 ">
+              {% if block.settings.image != blank %}
+              <img class="res_width1 jpg_png lazyload" data-src="{{block.settings.image | img_url:"master"}}" alt="{{ block.settings.image.alt }}" loading="lazy">
+              {% else %}
+              {% if block.settings.gif_url != blank %}
+              <img class="res_width1 gif lazyload" data-src="{{block.settings.gif_url}}" alt="" loading="lazy">
+              {% endif %}
+              {% endif %}
+            </div>
+            {% if block.settings.icon_title != blank %}
+            <div class="icon_txt">
+              {{block.settings.icon_title}}
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Our Purpose",
+    "settings": [
+		{
+          "type": "text",
+          "id": "pre_title",
+          "label": "Pre-Title",
+          "default": "Our Purpose"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "nutrition shouldn't be a tough pill to swallow"
+        },
+        {
+          "type": "text",
+          "id": "purpose_desc",
+          "label": "Purpose Description",
+          "default": "Our gummies are created to be both effortless and delicious. Now get your daily dose of nutrients, anywhere, anytime."
+        },
+        {
+          "type": "text",
+          "id": "btn_txt",
+          "label": "Button Text",
+          "default": "know more"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text",
+          "id": "block_title",
+          "label": "Block Title",
+          "default": "only good choices. no compromises."
+        }
+	],
+    "blocks":[
+           {
+            "type":"image",
+            "name":"Image",
+            "settings":[
+                {
+                  "type":"image_picker",
+                  "id":"image",
+                  "label":"Image"
+                },
+                {
+                  "type": "text",
+                  "id": "gif_url",
+                  "label": "Gif URL",
+                  "default": "https://images.ctfassets.net/537ig19c198x/61tmKBGh7MTcOKxHN5BvbO/372b0d7d7deef7dfb2e901deff853077/vegan_icon_01.gif"
+                },
+                {
+                  "type": "text",
+                  "id": "icon_title",
+                  "label": "Icon Title",
+                  "default": "Vegan"
+                }
+            ]
+          }
+        ],
+  "presets": [
+      {
+        "category": "Homepage",
+        "name": "Homepage our purpose"
+      }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

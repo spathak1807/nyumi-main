@@ -1,0 +1,90 @@
+<div class="contact_new" id="contact_heading">
+  <div class="product_breadcrumbs" style="text-align: center;">
+    <a href="https://{{ request.host }}">
+      Home 
+    </a>/ Contact
+  </div>
+  {% if section.settings.title != blank %}
+  <h1 class="cm_title center cnth_heading" >
+    {{ section.settings.title }}
+  </h1>
+  {% endif %}
+  {% if section.settings.description != blank %}
+  <div class="cm_p contact_p cnth_txt">
+  {{ section.settings.description }}
+  </div>
+  {% endif %}
+    <div class="contact_form center">
+    {% form 'contact', id: formId %}  
+        {%- if form.errors -%} 
+        <div class="form-message form-message--error">
+          <h2 class="h3 form-message__title " tabindex="-1" data-form-status>{{ 'contact.form.error_heading' | t }}</h2>
+          <ul>
+            {% for error in error_order %}
+              {% for field in form.errors %}
+                {% if error == field %}
+
+                  {% capture field_label %}
+                    {% case field %}
+                      {% when 'author' %}
+                        {{ 'contact.form.name' | t }}
+                      {% when 'body' %}
+                        {{ 'contact.form.message' | t }}
+                      {% else %}
+                        {{ form.errors.translated_fields[field] }}
+                    {% endcase %}
+                  {% endcapture %}
+
+                  <li>
+                    {%- if field == 'form' -%}
+                      {{ form.errors.messages[field] }}
+                    {%- else -%}
+                      {% comment %} the href should match the input's id {% endcomment %}
+                      <a href="#{{ form_id }}-{{ field }}" class="form-message__link">{{ field_label | strip | capitalize }} {{ form.errors.messages[field] }}</a>
+                    {%- endif -%}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success" tabindex="-1" data-form-status>
+          {{ success_message | default: 'contact.form.post_success' | t }}
+        </p>
+      {%- endif -%}
+      <label><input type="text"  required id="name" name="contact[name]" placeholder="full name"></label>
+      <label><input type="email"  required id="email" name="contact[email]" placeholder="e-mail"></label>
+      <label><input type="number"  required id="tel" name="contact[phone]" placeholder="phone"></label>
+      <label><input type="text"   required id="enquiry" name="contact[enquiry]" placeholder="enquiry"></label>
+      <input type="submit" value="submit"/>
+     {% endform %}
+    </div>
+</div> 
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "happy to hear from you"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Be it queries, suggestions, or your experience of Nyumi gummies, we’re all ears. Do take a quick look at our"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

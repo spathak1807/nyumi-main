@@ -1,0 +1,828 @@
+ 
+<script>
+var perfEntries = performance.getEntriesByType("navigation");
+
+if (perfEntries[0].type === "back_forward") {
+    location.reload(true);
+}
+</script> 
+
+ 
+{% comment %} 
+<div class="page-width customer_box">
+  <div class="grid myaccount">
+    <div class="grid__item myaccount__order-history">
+      <h2>{{ 'customer.orders.title' | t }}</h2>
+
+      {% paginate customer.orders by 20 %}
+        {% if customer.orders.size != 0 %}
+
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.orders.order_number' | t }}</th>
+                <th scope="col">{{ 'customer.orders.date' | t }}</th>
+                <th scope="col">{{ 'customer.orders.payment_status' | t }}</th>
+                <th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                <th scope="col">{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <th data-label="{{ 'customer.orders.order_number' | t }}" scope="row">
+                    <a href="{{ order.customer_url }}" class="btn_order" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">{{ order.name }}</a>
+                  </th>
+                  <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | time_tag: format: 'date' }}</td>
+                  <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                  <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                  <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+
+          <p>{{ 'customer.orders.none' | t }}</p>
+
+        {% endif %}
+        {%- if paginate.pages > 1 -%}
+          {% include 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {% endpaginate %}
+    </div>
+    <div class="grid__item myaccount__account-details">
+      <h2>{{ 'customer.account.details' | t }}</h2>
+
+      {{ customer.default_address | format_address }}
+
+      <p><a href="{{ routes.account_addresses_url }}" class="btn btn--small">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+    </div>
+  </div>
+  
+</div>
+
+<div class="account_dashboard customer_box section-header text-center">
+    <h1>{{ 'customer.account.title' | t }}</h1>
+
+</div>
+
+{% endcomment %}
+
+
+
+<div class="account_dashboard account_box">
+  <div class="page_width">
+  <div class="account_flx">
+    <div class="left_side_menu ">  
+      <ul class="account_menu">
+       <li class="active"> {{ 'My account' }} </li>
+
+      <li> {{ 'Address book' }} </li>
+
+      <li class="Refer_friend_btn">  {{ 'Refer a friend' }}</li>
+
+      <li> {{ 'Orders & returns' }} </li>  
+
+      <li class="logout_link">{{ 'layout.customer.log_out' | t | customer_logout_link }}</li>
+    </ul>  
+
+
+
+    </div>
+
+
+    <div class="right_side_detail">
+
+      <div class="rgsd_item active">
+          <div class="account_info">          
+            <div  class="account_info_header">
+              <div class="acut_header">{{ 'My account' }}</div>
+             </div>
+            <div class="acut_full_detal">
+             <h2> Hello <span class="name">{{ customer.name }}</span>! </h2>
+              
+              <div class="acut_form_reset">
+                
+                {% assign datofbirth = '' %}
+                
+                 {% for address in customer.addresses limit:1 %}
+                   
+                     {% assign phone =  address.phone %}
+                     {% assign datofbirth = address.address2 %}
+                	 {% assign Gender = address.company %}
+                 
+                 {% endfor %}
+                
+                {% for ph in customer.tags %}
+                   {% assign phone = ph %}
+                {% endfor %}
+                
+                {% if phone == 'social-user' %}
+                	{% assign phone = '' %}
+                {% endif %}
+                
+                 <div class="acut_customerinfo">
+                 <div class="ac_cstinf_item">
+                   <div class="cstinf_item info_full_detail"> Name </div>
+                   <div class="cstinf_item">{{ customer.first_name }} </div>
+                  </div>
+                  
+                  <div class="ac_cstinf_item">
+                    <div class="cstinf_item info_full_detail">Last Name </div>
+                    <div class="cstinf_item">{{ customer.last_name}}</div>
+                  </div>
+                  
+                  <div class="ac_cstinf_item">
+                    <div class="cstinf_item info_full_detail">Email Address</div>
+                    <div class="cstinf_item">{{ customer.email}}</div>
+                  </div>
+                  
+                  <div class="ac_cstinf_item">
+                    <div class="cstinf_item info_full_detail">Phone</div>
+                    <div class="cstinf_item ">{{ phone}}</div>
+                  </div>
+                  
+                  <div class="ac_cstinf_item">
+                    <div class="cstinf_item info_full_detail">Date of birth </div>
+                    <div class="cstinf_item "> {{ datofbirth}}  </div>
+                  </div>
+                  
+                  <div class="ac_cstinf_item">
+                 	 <div class="cstinf_item info_full_detail"> Gender</div>
+                     <div class="cstinf_item "> {{ Gender}}  </div>
+                  </div>
+                  
+                  <div class="ac_cstinf_item">
+                 	 <div class="cstinf_item info_full_detail password_form">Password</div>
+                  </div>
+                  
+                   <div class="custinf_edit_info acut_but_edit">edit</div>
+                </div>
+                
+               
+                
+              <div class="edit_custinf_form">
+                
+                
+                {% assign address_form = customer.new_address %}
+                
+                {% for address in customer.addresses limit:1 %}
+                   {% assign address_form = address %}
+                 {% endfor %}
+                 
+                <h3 class="acut_subheading align-left">{{ 'Edit Information' }}</h3>
+                 
+                        {% form 'customer_address', address_form, class:'first_address' %}
+                			<div class="error_info"></div>
+                
+                            <div class="acut_input"> 
+                              <label class="show_label">Name</label>
+                              <input placeholder="{{ 'customer.addresses.first_name' | t }}" class="input_style edit_account_input" type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ customer.first_name }}" autocomplete="given-name">
+                            </div>
+                            <div class="acut_input"> 
+                                <label class="show_label">Last Name</label>
+                                <input placeholder="{{ 'customer.addresses.last_name' | t }}" class="input_style edit_account_input" type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">                             
+						   </div> 
+                
+                              
+                            <div class="edit_form hide">  
+                              <input placeholder="{{ 'customer.addresses.address1' | t }}" class="input_style edit_account_input" type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}" autocomplete="street-address address-line1">
+                            </div>
+                            <div class="acut_input"> 
+                              <label class="show_label">Date of birth</label>
+                              
+                              <div class="acut_input_flx">
+                                
+                                <div class="acut_input_flx_item"> 
+                                  <select id="year" class="select_date input_style edit_account_input">
+                                     <option value="0">year</option> 
+                                    <option value="1981">1981</option>
+                                    <option value="1982">1982</option>
+                                    <option value="1983">1983</option>
+                                    <option value="1984">1984</option>
+                                    <option value="1985">1985</option>
+                                    <option value="1986">1986</option>
+                                    <option value="1987">1987</option>                                    
+                                     <option value="1988">1988</option>
+                                     <option value="1989">1989</option>
+                                     <option value="1990">1990</option>
+                                     <option value="1991">1991</option>
+                                     <option value="1992">1992</option>
+                                     <option value="1993">1993</option>
+                                     <option value="1994">1994</option>
+                                     <option value="1995">1995</option>
+                                     <option value="1996">1996</option>
+                                     <option value="1997">1997</option>
+                                     <option value="1998">1998</option>
+                                     <option value="1999">1999</option>
+                                     <option value="2001">2001</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2010">2010</option>
+                                  </select>
+                                </div>
+                                
+                               <div class="acut_input_flx_item"> 
+                                  <select id="month" class="select_date input_style edit_account_input">
+                                     <option value="0">month</option> 
+                                     <option value="01">01</option>
+                                     <option value="02">02</option>
+                                     <option value="03">03</option>
+                                     <option value="04">04</option>
+                                     <option value="05">05</option>
+                                     <option value="06">06</option>
+                                     <option value="07">07</option>
+                                     <option value="08">08</option>
+                                     <option value="09">09</option>
+                                     <option value="10">10</option>
+                                     <option value="11">11</option>
+                                     <option value="12">12</option>
+                                  </select>
+                                </div>
+                                 
+                                
+                                <div class="acut_input_flx_item">
+                                	<select id="day" class="select_date input_style edit_account_input">
+                                    <option value="0">day</option> 
+                                   <option value="01">01</option>
+                                   <option value="02">02</option>
+                                   <option value="03">03</option>
+                                   <option value="04">04</option>
+                                   <option value="05">05</option>
+                                   <option value="06">06</option>
+                                   <option value="07">07</option>
+                                   <option value="08">08</option>
+                                   <option value="09">09</option>
+                                   <option value="10">10</option>
+                                   <option value="11">11</option>
+                                   <option value="12">12</option>
+                                   <option value="13">13</option>
+                                   <option value="14">14</option>
+                                   <option value="15">15</option>
+                                   <option value="16">16</option>
+                                   <option value="17">17</option>
+                                   <option value="18">18</option>
+                                   <option value="19">19</option>
+                                   <option value="20">20</option>
+                                   <option value="21">21</option>
+                                   <option value="22">22</option>
+                                   <option value="23">23</option>
+                                   <option value="24">24</option>
+                                   <option value="25">25</option>
+                                   <option value="26">26</option>
+                                   <option value="27">27</option>
+                                   <option value="28">28</option>
+                                   <option value="29">29</option>
+                                   <option value="30">30</option>
+                                   <option value="31">31</option>                                   
+                                </select>
+                                </div>
+                              </div>
+                              
+                              <input placeholder="Date of birth" class="hide input_style edit_account_input" type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}" autocomplete="street-address address-line2">
+                          	</div> 
+                            <div class="acut_input">
+                             <label class="show_label">Gender</label>
+                              <select name="address[company]" class="input_style edit_account_input">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="other">other</option>
+                              </select>
+						   </div>
+                
+                            <div class="edit_form hide">
+                              <label class="hide_label" for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.city' | t }}" class="input_style" type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                             </div>  
+                            <div class="edit_form hide">
+                              <label class="hide_label" for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
+                              <select class="input_style" id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                            </div>  
+                            <div class="edit_form hide">
+                            <label class="hide_label" for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
+                            <select class="input_style" id="AddressProvince_{{ form.id }}" name="address[province]" data-default="{{ form.province }}" autocomplete="address-level1"></select>
+                           </div>  
+                            <div class="edit_form hide">
+                              <label class="hide_label" for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.zip' | t }}" class="input_style" type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+                            </div>  
+                            <div class="acut_input">
+                              <label class="show_label" for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.phone' | t }}" class="input_style edit_account_input" type="tel" id="AddressPhone_{{ form.id }}" name="address[phone]" value="{{ form.phone }}" autocomplete="phone">
+                            </div>  
+                            <div class="edit_form hide">
+                               {{ form.set_as_default_checkbox }}
+                              <label class="checkbox_label" for="address_default_address_{{ form.id }}">{{ 'customer.addresses.set_default' | t }}</label>
+                            </div>
+                            <div class="acut_input text-right">
+                              <input type="submit" class="btn acut_but_edit" value="{{ 'Update' }}">
+                            </div>
+                
+                			{% comment %}
+                           <div class="edit_password">
+                             <div class="updata_password_btn cancel-btn">updata password</div>
+                		   </div>
+                			{% endcomment %}
+                        {% endform %}
+                         
+                 
+                
+                
+                
+                 <div class="password_form_box">
+                  {% form 'recover_customer_password' %}
+
+                    <h3 id="{{ customer.id}}" class="acut_subheading align-left">{{ 'customer.reset_password.title' | t }}</h3>
+					 
+                    {%- if form.errors -%}
+                      <div class="form-message form-message--error">
+                        {{ form.errors | default_errors }}
+                      </div>
+                    {%- endif -%}
+
+ 
+                    <div class="acut_input">
+                      <label class="show_label" for="PasswordConfirmation">{{ 'customer.recover_password.email' | t }}</label>
+                      <input type="email" value="{{ customer.email}}" placeholder="{{ 'customer.login.email' | t }}" name="email" class="input_style edit_account_input "/>
+                    </div>
+
+                    <div class="acut_input ">
+                       <div class="acut_input_flx_btn">
+                        <div class="cancel-btn customer_cancel_form"> cancel </div>
+                        <input type="submit" class="btn text-center cus_but_input" value="{{ 'customer.reset_password.submit' | t }}">
+                      </div>
+                    </div>
+                   
+                    
+                  {% endform %}
+                </div>
+                
+              </div>
+                
+             
+                
+              </div>
+              
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="rgsd_item ac_address">        
+        
+          <div class="account_info">
+            
+            <div  class="account_info_header">
+              <div class="acut_header">{{ 'Address book' }}</div>
+             </div>
+                
+ 			 <div class="acut_full_detal">
+                <ul class="row-set">
+                  {% for address in customer.addresses %}
+                    <li class="acut_addfull_deatil">
+                      <div class="address text-left relative">
+                        {% if address == customer.default_address %}
+                          <h3 class="h4 acut_subheading">{{ 'customer.addresses.default' | t }}</h3>
+                        {% endif %}
+
+                        {{ address | format_address }}
+
+                        <ul class="list--inline">
+                          <li>
+                            <button
+                              id="EditFormButton_{{ address.id }}"
+                              type="button"
+                              class="btn btn--small address-edit-toggle acut_but_edit"
+                              data-form-id="{{ address.id }}"
+                              aria-owns="EditAddress_{{ address.id }}"
+                              aria-expanded="false"
+                            >
+                              {{ 'customer.addresses.edit' | t }}
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              type="button"
+                              class="btn btn--secondary btn--small address-delete cancel-btn"
+                              data-target="{{ address.url }}"
+                              data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+                            >
+                              {{ 'customer.addresses.delete' | t }}
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {% comment %} {% endcomment %}
+                      <div id="EditAddress_{{ address.id }}" class="form-vertical hide">
+                        {% form 'customer_address', address, class:'first_address'  %}
+
+                          <h4 class="acut_subheading">{{ 'customer.addresses.edit_address' | t }}</h4>
+                        
+						  <div class="error_info"></div>
+                           <div class="acut_input">                            
+                              <label class="show_label" for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.first_name' | t }}" class="input_style edit_account_input" type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+                            </div>  
+                            <div class="acut_input">
+                              <label class="show_label" for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.last_name' | t }}" class="input_style edit_account_input" type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+                            
+                         
+						   </div>  
+                            <div class="acut_input">
+                          <label class="show_label" for="AddressCompany_{{ form.id }}">Gender</label>
+						   </div>  
+                            <div class="acut_input">                          <input placeholder="{{ 'customer.addresses.company' | t }}" class="input_style edit_account_input" type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+
+                          <label class="show_label" for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label>
+                          <input placeholder="{{ 'customer.addresses.address1' | t }}" class="input_style edit_account_input" type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}" autocomplete="street-address address-line1">
+						   </div>  
+                            <div class="acut_input">
+                          <label class="show_label" for="AddressAddress2_{{ form.id }}">Date of birth</label>
+                          <input placeholder="{{ 'customer.addresses.address2' | t }}" class="input_style edit_account_input" type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}" autocomplete="street-address address-line2">
+
+                          	</div>  
+                            <div class="acut_input">
+                              <label class="show_label" for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.city' | t }}" class="input_style edit_account_input" type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                             </div>  
+                            <div class="acut_input">
+                              <label class="show_label" for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
+                              <select class="input_style edit_account_input" id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                            </div>  
+                            <div class="acut_input">
+                            <label class="show_label" for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
+                            <select class="input_style edit_account_input" id="AddressProvince_{{ form.id }}" name="address[province]" data-default="{{ form.province }}" autocomplete="address-level1"></select>
+                           </div>  
+                            <div class="acut_input">
+                              <label class="show_label" for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.zip' | t }}" class="input_style edit_account_input" type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+                            </div>  
+                            <div class="acut_input">
+                              <label class="show_label" for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+                              <input placeholder="{{ 'customer.addresses.phone' | t }}" class="input_style edit_account_input" type="tel" id="AddressPhone_{{ form.id }}" name="address[phone]" value="{{ form.phone }}" autocomplete="phone">
+                            </div>  
+                            <div class="acut_input">
+                               {{ form.set_as_default_checkbox }}
+                              <label class="checkbox_label edit_account_input" for="address_default_address_{{ form.id }}">{{ 'customer.addresses.set_default' | t }}</label>
+                            </div>
+                            <div class="acut_input">
+                              <input type="submit" class="btn acut_but_edit " value="{{ 'customer.addresses.update' | t }}">
+                            </div>
+                        
+                            <div class="acut_input"><button type="button" class="cancel-btn text-link address-edit-toggle" data-form-id="{{ form.id }}">{{ 'customer.addresses.cancel' | t }}</button></div>
+                          
+                        {% endform %}
+                        
+                      </div>
+                      
+                      
+                    </li>
+                  {% endfor %}
+                </ul>
+
+                <div id="AddressNewForm" class="form-vertical hide">
+                  {% form 'customer_address', customer.new_address %}
+                    <h2>{{ 'customer.addresses.add_new' | t }}</h2>
+
+                    <div class="grid">
+                      <div class="grid__item medium-up--one-half">
+                        <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                        <input type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+                      </div>
+
+                      <div class="grid__item medium-up--one-half">
+                        <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                        <input type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+                      </div>
+                    </div>
+
+                    <div class="grid">
+                      <div class="grid__item">
+                        <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+                        <input type="text" id="AddressCompanyNew" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+
+                        <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                        <input type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}" autocomplete="street-address address-line1">
+
+                        <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                        <input type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}" autocomplete="street-address address-line2">
+                      </div>
+                    </div>
+
+                    <div class="grid">
+                      <div class="grid__item medium-up--one-half">
+                        <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                        <input type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                      </div>
+
+                      <div class="grid__item medium-up--one-half">
+                        <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                        <select id="AddressCountryNew" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                      </div>
+                    </div>
+
+                    <div id="AddressProvinceContainerNew" style="display:none">
+                      <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                      <select id="AddressProvinceNew" name="address[province]" data-default="{{ form.province }}" autocomplete="address-level1"></select>
+                    </div>
+
+                    <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                    <input type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+
+                    <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                    <input type="tel" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}" autocomplete="phone">
+
+                    {{ form.set_as_default_checkbox }}
+                    <label for="address_default_address_new">{{ 'customer.addresses.set_default' | t }}</label>
+
+                    <div><input type="submit" class="btn acut_but_edit" value="{{ 'customer.addresses.add' | t }}"></div>
+                    <div><button type="button" class="text-link address-new-toggle cancel-btn">{{ 'customer.addresses.cancel' | t }}</button></div>
+
+                  {% endform %}
+                  <hr>
+                </div>
+
+                {%- if paginate.pages > 1 -%}
+                  {% include 'pagination', paginate: paginate %}
+                {%- endif -%}
+             
+        
+               <div class="account_dashboard_outer  section-header text-center">
+                   <p class="center">
+                      <button type="button" class="acut_but_edit btn address-new-toggle" id="AddressNewButton" aria-expanded="false" aria-owns="AddressNewForm">{{ 'customer.addresses.add_new' | t }}</button>
+                    </p>
+                </div>
+            </div>
+       </div>
+
+      </div>
+      
+      
+      <div class="rgsd_item Refer_friend">
+        
+        <div class="account_info">          
+            <div  class="account_info_header">
+              <div class="acut_header">{{ 'Refer a friend' }}</div>
+             </div>
+            <div class="acut_full_detal acut_refar_box">
+              
+              {% comment %}
+              <div class="refar_header">
+                <img src="{{ 'coming-01.jpeg' | asset_url }}" alt="#"/>
+              </div>
+              {% endcomment %}
+              
+                <div class="acut_refar_info">
+                  <div class="refar_inner remove_padding">
+                    {% comment %}
+                      <div class="refar_header">
+                        <h3>Share Nyumi: ₹200 off for your friends, ₹200 off for you</h3>
+                        <p>Share your personalized URL with all your friends. They will get a ₹200 off discount code, and you will get ₹200 off for every referred purchase.</p>
+                      </div>
+                     
+                   		 
+                     {% endcomment %}
+                    
+
+                      <iframe id="refcandy-candyjar" data-id="h1p3bxrnbwm6scs324rbijxbz" data-height="900" data-width="100%" frameborder=0></iframe>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//portal.referralcandy.com/assets/widgets/refcandy-candyjar.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","refcandy-candyjar-js");</script>
+
+                    
+                  </div>
+              	</div>
+              
+               {% comment %}
+              <div class="acut_refar_info">
+                <div class="acut_refar_box">
+                  <div class="acut_refar_heading">referrals</div>                  
+                 
+                  <p> 20% off for your friends, 20% off for you. Share your personalized URL with all your friends. 
+                    They will get a 20% off discount code, and you will get 20% off for every referred purchase.</p>
+                  
+                   <h4 class="acut_refar_Points "> Your Points Balance: <span class="sweettooth-points-balance"></span> </h4>
+                  
+                  <div class="acut_icon">
+                    <div class="acut_icon_img">
+                     <img src="https://cdn.sweettooth.io/v1/images/rewards/fixed-amount.svg?color=%23fe6c65&theme=light"/>
+                    </div>
+                    <div class="acut_icon_txt">
+                      They get <br/>₹200 off coupon
+                    </div>
+                  </div>
+                  
+                </div>                  
+              </div>
+               {% endcomment %}
+             
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <div class="rgsd_item orderdetails">
+        <div class="account_info">          
+            <div  class="account_info_header">
+              <div class="acut_header">{{ 'Orders & returns' }}</div>
+             </div>
+            <div class="acut_full_detal"> 
+       			 <div> <h2> Orders & returns </h2></div>
+      {% paginate customer.orders by 20 %}
+          {% if customer.orders.size != 0 %}
+             
+             
+                {% for order in customer.orders %}
+                
+                <div class="order_items_box">
+                  <div class="order_items_box_flx">
+                    <div class="order_item order_number">
+                        <div class="order_heading">{{ 'customer.orders.order_number' | t }}</div>
+                        <div class="order_value">{{ order.name }}</div>
+                    </div>
+                    <div class="order_item order_date">
+                        <div class="order_heading">{{ 'customer.orders.date' | t }} </div>
+                        <div class="order_value">{{ order.created_at | time_tag: format: 'date' }}</div>
+                    </div>
+                    {% comment %}
+                    <div class="order_item order_status">
+                        <div class="order_heading">{{ 'customer.orders.payment_status' | t }}</div>
+                        <div class="order_value">{{ order.fulfillment_status_label }}</div>
+                    </div>
+                    {% endcomment %}
+                  </div>
+                  
+                  <div class="oditems_fullDetial">
+                    
+                    <div class="oditems_order">
+                      {%- for line_item in order.line_items -%} 
+                        <div class="oditem_line">
+                           <div class="oditem_img">
+                             <img src="{{ line_item.image | img_url: '90x90'}}" alt="#"/>
+                            </div>
+                          
+                            <div class="oditem_name">
+                              {{ line_item.title | link_to: line_item.product.url }}
+                              {%- if line_item.line_level_discount_allocations != blank -%}
+                                <ul class="order-discount order-discount--list order-discount--title" aria-label="{{ 'customer.order.discount' | t }}">
+                                  {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                                    <li class="order-discount__item">
+                                      {% include 'icon-saletag' %}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- endif -%}
+
+                              {%- if line_item.fulfillment -%}
+                                <div class="note">
+                                {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                                {{ 'customer.order.fulfilled_at_html' | t: date: created_at }}
+                                <div>
+                                  {%- if line_item.fulfillment.tracking_url -%}
+                                    <a href="{{ line_item.fulfillment.tracking_url }}">
+                                      {{ 'customer.order.track_shipment' | t }}
+                                    </a>
+                                  {%- endif -%}
+                                  <div>
+                                    {{ line_item.fulfillment.tracking_company }}
+                                    {%- if line_item.fulfillment.tracking_number -%} #{{ line_item.fulfillment.tracking_number }} {%- endif -%}
+                                  </div>
+                                </div>
+                              </div>
+                              {%- endif -%}
+
+                            </div> 
+                            <div class="oditem_price">
+                              {%- if line_item.original_line_price != line_item.final_line_price -%}
+                                <dl>
+                                  <dt>
+                                    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                                  </dt>
+                                  <dd>
+                                    <s>{{ line_item.original_line_price | money }}</s>
+                                  </dd>
+                                  <dt>
+                                    <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+                                  </dt>
+                                  <dd>
+                                    <span class="order-discount">{{ line_item.final_line_price | money }}</span>
+                                  </dd>
+                                </dl>
+                              {%- else -%}
+                                {{ line_item.original_line_price | money }}
+                              {%- endif -%}
+                            </div> 
+                        </div>  
+                      {%- endfor -%}
+                    </div>
+                     
+                     <div class="oditem_footer">
+                       	 
+                          <div class="oditem_footer_item">
+                            <div class="oditem_footer_value">{{ 'customer.order.subtotal' | t }}</div>
+                            <div class="oditem_footer_heading" >{{ order.line_items_subtotal_price | money }}</div>
+                          </div>
+
+                          {%- if order.cart_level_discount_applications != blank -%}
+                            <div class="oditem_footer_item">
+                              {%- for discount_application in order.cart_level_discount_applications -%}
+                                <div class="oditem_footer_value">
+                                  {{ 'customer.order.discount' | t }}
+                                  <span class="order-discount order-discount--title">
+                                    {% include 'icon-saletag' %}{{- discount_application.title -}}
+                                  </span>
+                                </div>
+                                <div class="oditem_footer_heading">
+                                  <div class="order-discount-wrapper">
+                                    <span class="order-discount order-discount--title text-left medium-up--hide">
+                                      {% include 'icon-saletag' %}{{- discount_application.title -}}
+                                    </span>
+                                    <span class="order-discount">-{{ discount_application.total_allocated_amount | money }}</span>
+                                  </div>
+                                </div>
+                              {%- endfor -%}
+                            </div>
+                          {%- endif -%}
+
+                          {%- for shipping_method in order.shipping_methods -%}
+                            <div class="oditem_footer_item">
+                              <div class="oditem_footer_value">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</div>
+                              <div class="oditem_footer_heading">{{ shipping_method.price | money }}</div>
+                            </div>
+                          {%- endfor -%}
+
+                          {%- for tax_line in order.tax_lines -%}
+                            <div class="oditem_footer_item">
+                              <div class="oditem_footer_value">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</div>
+                              <div class="oditem_footer_heading">{{ tax_line.price | money }}</div>
+                            </div>
+                          {%- endfor -%}
+
+                          <div class="oditem_footer_item">
+                            <div class="oditem_footer_value">{{ 'customer.order.total' | t }}</div>
+                            <div class="oditem_footer_heading">{{ order.total_price | money_with_currency }}</div>
+                          </div>
+        
+                     </div>
+                  
+                    <div class="order_shipping_address"> 
+                        {% comment %}
+                        <p class="heading_shipping"><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
+                         {% endcomment %}
+                        {{ order.shipping_address | format_address }}
+                    </div>
+                  
+                    
+                  </div>
+                </div>
+                 
+                {% endfor %}
+               
+              
+              
+
+          {% else %}
+
+            <p>{{ 'customer.orders.none' | t }}</p>
+
+          {% endif %}
+          {%- if paginate.pages > 1 -%}
+            {% include 'pagination', paginate: paginate %}
+          {%- endif -%}
+        {% endpaginate %}
+        
+          </div>
+        </div>
+        
+      </div>
+       
+		 <div class="rgsd_item">
+        
+          <div class="account_info ">          
+              <div  class="account_info_header ">
+                <div class="acut_header remove_btn">{{ 'layout.customer.log_out' | t | customer_logout_link }}</div>
+               </div>
+           </div>
+        </div>
+     
+
+    </div>  
+  </div>
+  </div>
+</div>
+
+ <script>
+
+        	webengage.track("User Login", {
+              "User Email" : {{customer.email | json}}
+            });
+</script>

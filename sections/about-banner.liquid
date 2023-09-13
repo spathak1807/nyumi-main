@@ -1,0 +1,45 @@
+<div class="about_banner">
+  <div class="page_width">
+    <div class="about_banner_inner">
+      <div class="product_breadcrumbs">
+        <a href="https://{{ request.host }}">
+          Home 
+        </a>/ About
+      </div>
+      {% if section.settings.title != blank %}
+      <h1>{{ section.settings.title }}</h1>
+      {% endif %}
+      {% if section.settings.description != blank %}
+      <div class="abbn_txt">
+        {{ section.settings.description }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About page banner",
+    "settings": [
+	  {
+	    "type": "text",
+	    "id": "title",
+	    "label": "Title",
+		"default": "be new. be you."
+	  },
+	  {
+	    "type": "richtext",
+	    "id": "description",
+	    "label": "Description",
+	    "default": "<p>With each day comes the need to balance the outside world of duties and inner world of ambitions. In all of this, how often has wellbeing become an afterthought? At Nyumi, our purpose is to make good health a daily companion in your journey towards personal progress.</p>"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

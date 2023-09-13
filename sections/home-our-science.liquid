@@ -1,0 +1,95 @@
+<style>
+  .Science_section:after {
+    background-image: url({{ section.settings.gif_logo_img }}) !important;
+  }
+</style>
+<div id="Science" class="Science_section active" style="display: block;">
+  <div class="relative imgtextani">
+    {% if section.settings.image != blank %}
+    <img class="lazyload" data-src="{{section.settings.image | img_url:"800x800"}}" alt="{{ section.settings.image.alt }}" loading="lazy">
+    {% endif %}
+    <div class="absolute text_right">
+      <div class="container_left">
+        {% if section.settings.pre_title != blank %}
+        <div class="sml_tag" id="Science-heading">          
+          {{ section.settings.pre_title }}          
+        </div>
+        {% endif %}
+        {% if section.settings.title != blank %}
+        <div class="cm_title" id="Science-subheading">          
+          {{ section.settings.title }}          
+        </div>
+        {% endif %}
+        {% if section.settings.description != blank %}
+        <div class="cm_p" id="Science-description">          
+          {{ section.settings.description }}          
+        </div>
+        {% endif %}
+        {% if section.settings.btn_txt != blank %}
+        <div class="cm_but">
+          <a class="button" id="Science-btn" href="{{ section.settings.btn_url }}">{{ section.settings.btn_txt }}</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Our science",
+    "settings": [
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+		{
+          "type": "text",
+          "id": "gif_logo_img",
+          "label": "GIF logo image URL"
+        },
+		{
+          "type": "text",
+          "id": "pre_title",
+          "label": "Pre-Title",
+          "default": "Our Science"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "we're born out of science"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Our team of German and Indian health experts created a formulation that perfectly blends the benefits of western and Indian ingredients."
+        },
+        {
+          "type": "text",
+          "id": "btn_txt",
+          "label": "Button Text",
+          "default": "know more"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button URL"
+        }
+],
+"presets": [
+	{
+	  "category": "Homepage",
+	  "name": "Homepage our science"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

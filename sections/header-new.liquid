@@ -1,0 +1,436 @@
+<div id="shopify-section-header" class="shopify-section">
+{% include 'search-drawer' %}
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-header-section>
+  <header class="site-header border-bottom logo--left" role="banner">
+    <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
+        {%- assign logo_classes = 'medium-up--one-quarter logo-align--left' -%}
+	  <div class="before_logo">
+        <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
+          <img class="hanburger_show" src="{{ 'mobile_menu.png' | asset_url }}" alt="hanburger"/>          
+          <img class="hanburger_close" src="{{ 'close.png' | asset_url }}" alt="hanburger"/>
+        </button>
+      </div> 
+     {% if section.settings.logo != blank %}
+      <div class="grid__item {{ logo_classes }}">
+        <div class="h2 site-header__logo">
+          <a id="site-header__logo" href="https://{{ request.host }}" class="site-header__logo-image">
+            <img class="logo_shop js  lazyload"  data-src="{{ section.settings.logo | img_url: 'master' }}"  alt="{{ section.settings.logo.alt | escape }}">
+          </a>
+        </div>
+      </div>
+      {% endif %}
+
+      <nav class="grid__item medium-up--one-half small--hide" id="AccessibleNav" role="navigation">
+        <ul id="menu_list" class="site-nav mega_menu_top list--inline">
+          {% assign data_order = 0 %}
+          {% for link in linklists[section.settings.menu_linklist].links %}
+          <li class="{% unless link.title == 'Shop' %}no_hover_img{% endunless %}" data-order="{{ data_order }}">
+            <a href="{{ link.url }}" class="site-nav__link site-nav__link--main ">
+              <span class="site-nav__label">
+                {{ link.title }}
+              </span>
+            </a>
+            {% assign link_title = link.title | downcase | handleize %}
+            {% for block in section.blocks %}
+            {% if block.type == 'mega_menu_style_2' %}
+            {% assign block_title = block.settings.mega_menu_title | downcase | handlize %}
+            {% if block_title == link_title%}
+            <div class="site_mega_menut"> 
+              <ul>
+                {% for b in (1..3) %}
+                {% assign block_img = 'mega_menu_image_' | append: b %}
+                {% assign block_title = 'mega_menu_title_' | append: b %}
+                {% assign block_url = 'mega_menu_url_' | append: b %}
+                <li class="mega_items " data-hover="">
+                  <a class="_new" href="{{ block.settings[block_url] }}">
+                    <img class="lazy lazyload" data-src="{{  block.settings[block_img] | img_url: '200x200' }}" alt="{{ block.settings[block_img].alt }}">
+                    <span class="mega_txt"> 
+                      <span class="mega_txt_style">
+                        {{ block.settings[block_title] }}
+                      </span> 
+                      <span class="menu_sign"> 
+                        &gt; 
+                      </span> 
+                    </span>
+                  </a>
+                </li>
+                {% endfor %}
+              </ul> 
+            </div>
+            {% endif %}
+            {% assign data_order = data_order | plus: 1 %}
+            {% endif %}
+            {% if block.type == 'mega_menu_product' %}
+            {% assign block_title = block.settings.mega_menu_title | downcase | handlize %}
+            {% if block_title == link_title%}
+            <div class="site_mega_menut">
+              <ul>
+                {% assign prd_menu = block.settings.mega_menu_linklist %}
+                {% for prd_link in linklists[prd_menu].links %}
+                {% if block.settings.combo_pack_url != blank  and forloop.last == true %}
+                {% assign prd_url = block.settings.combo_pack_url %}
+                {% else %}
+                {% assign prd_url = prd_link.url %}
+                {% endif %}
+                {% assign prd_handle = prd_link.url | split: '/' | last %}
+                {% assign product = all_products[prd_handle] %}
+                <li class="mega_items " data-hover="{{product.metafields.my_fields.product_hover_image | img_url: '300' }}">
+                  {% if product.metafields.my_fields.product_hover_image != blank %}
+                  <div class="mega_items_hover" style="background-image:url({{product.metafields.my_fields.product_hover_image | img_url: '300' }})">
+                  </div>
+                  {% endif %}
+                  <a class="_new" href="{{ prd_url }}">
+                    {% if product.featured_image != blank %}
+                    <img class="lazyload" data-src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}">
+                    {% endif %}
+                    <span class="mega_txt"> 
+                      <span class="mega_txt_style">
+                        {{ prd_link.title }}
+                      </span> 
+                      <span class="menu_sign">
+                        &gt; 
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                {% endfor %}
+                <li class="mega_items " data-hover="{{product.metafields.my_fields.product_hover_image | img_url: '300' }}">
+                  <a newlink class="_new" href="/pages/kriti-sanon-favourite">
+                    <img data-src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Kriti_navigation_210x167_e99f912b-97fa-4d35-8aa1-1ff9b530c6c7.png" class="lazyload" alt="Kriti Sanon X Nyumi">
+                    <span class="mega_txt"> 
+                      <span class="mega_txt_style">
+                        Kriti Sanon X Nyumi
+                      </span> 
+                      <span class="menu_sign">
+                        &gt; 
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                
+              </ul> 
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+     
+
+      <div class="grid__item  medium-up--one-quarter  text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
+        <div class="site-header__icons-wrapper">
+
+          <button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top">
+             
+            <img src="{{'search.png' | asset_url}}" alt="image">
+            <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
+          </button>
+			
+          
+            {% if customer %}
+          
+              <a href="https://{{ request.host }}/account" class="desktop site-header__icon site-header__account"> 
+                <img src="{{ 'login.png' | asset_url }}" alt="login"/>
+                <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
+              </a>
+            {% else %}
+              <a href="https://{{ request.host }}/account/login" class="desktop site-header__icon site-header__account"> 
+                <img src="{{ 'login.png' | asset_url }}" alt="login"/>
+                <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
+              </a>
+            {% endif %}
+       
+
+          <a href="#" class="site-header__icon site-header__cart">
+            
+            <img src="{{ 'shop.png' | asset_url }}" alt="cart"/>
+            <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+            <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
+              <span data-cart-count>{{ cart.item_count }}</span>
+              <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
+            </div>
+          </a>
+ 
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
+      <ul id="MobileNav" class="mobile-nav">
+        {% for mobile_link in linklists[section.settings.mobile_menu_linklist].links %}
+        <li data-order="{{ forloop.index }}" class="mobile-nav__item">
+          {% if mobile_link.links != blank %}
+          <button type="button" class="btn--link mobile_child_item mobile-nav__link {% if forloop.index == 1 %}active{% endif %}" data-target="menu-0" data-level="1" aria-expanded="false">
+            <span class="mobile-nav__label">{{ mobile_link.title }}</span>
+            <div class="mobile-nav__toggle">
+              <img class="plus_img" src="//cdn.shopify.com/s/files/1/0412/3027/0631/t/87/assets/plus.png?v=19405718348818129421657192459" alt="plus">
+              <img class="minis_img" src="//cdn.shopify.com/s/files/1/0412/3027/0631/t/87/assets/minus.png?v=19405718348818129421657192459" alt="minis">
+            </div>
+          </button>
+          <ul class="mobile-nav__dropdown" data-parent="menu-0" data-level="2" {% if forloop.index == 1 %}style="display: block;"{% else %}style="display: none;"{% endif %}>
+            {% for grand_mobile_link in mobile_link.links %}
+            <li class="mobile-nav__item">
+              <a href="{{ grand_mobile_link.url }}" class="mobile-nav__sublist-link">
+                <span class="mobile-nav__label">{{ grand_mobile_link.title }}</span>
+              </a>
+            </li>
+            {% endfor %}
+            <li class="mobile-nav__item">
+              <a href="/pages/kriti-sanon-favourite" class="mobile-nav__sublist-link">
+                <span class="mobile-nav__label">Kriti Sanon X Nyumi</span>
+              </a>
+            </li>
+          </ul>
+          {% else %}
+           <a href="{{ mobile_link.url }}" class="mobile-nav__link">
+             <span class="mobile-nav__label">
+             {{ mobile_link.title }}
+             </span>
+          </a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      <ul>
+         <li class="mobile-nav__item ">
+           <a href="https://{{ request.host }}/account" class="mobile-nav__link"><span class="mobile-nav__label">
+           {% if customer %}
+          	  My Account
+           {% else %}
+                Login
+            {% endif %}
+             </span>
+           </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  {% if section.settings.show_anouncement_bar and section.settings.announcement_bar_text != blank %}
+  <a href="{{ section.settings.announcement_link }}">
+    <div id="announcement_bar" class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}">
+      <p class="announcement-bar__message">
+        {{ section.settings.announcement_bar_text }}
+      </p>
+    </div>
+  </a>
+  {% endif %}
+  
+</div>
+
+
+  {% comment %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+  {% endif %}
+  "sameAs": [
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_pinterest_link | json }},
+    {{ settings.social_instagram_link | json }},
+    {{ settings.social_tumblr_link | json }},
+    {{ settings.social_snapchat_link | json }},
+    {{ settings.social_youtube_link | json }},
+    {{ settings.social_vimeo_link | json }}
+  ],
+  "url": {{ shop.url | append: page.url | json }}
+}
+</script>
+  {% endcomment %}
+
+{% if request.page_type == 'index' %}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "Nyumi",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+  
+  <script type="application/ld+json">
+     { "@context": "https://schema.org",
+     "@type": "Organization",
+     "name": "Nyumi",
+     "legalName" : "Ikaria Wellness Pvt Ltd",
+     "url": "https://nyumi.com/",
+     "logo": "https://cdn.shopify.com/s/files/1/0412/3027/0631/t/1/assets/logo.png?v=845613955905552972",
+     "founders": 
+     {
+     "@type": "Person",
+     "name": "Ananya Kejriwal"
+     },
+     "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Ikaria Wellness Pvt Ltd, 412-B, The Capital, Bandra Kurla Complex",
+     "addressLocality": "Mumbai",
+     "addressRegion": "MH",
+     "postalCode": "400051",
+     "addressCountry": "IN"
+     },
+     "contactPoint": {
+     "@type": "ContactPoint",
+     "contactType": "customer support",
+     "telephone": "+918291155181",
+     "email": "hello@nyumi.com"
+     },
+     "sameAs": [ 
+     "https://www.facebook.com/hellonyumi",
+     "https://www.instagram.com/hellonyumi/",
+     "https://twitter.com/hellonyumi"
+     ]}
+</script>
+
+  
+{% endif %}
+  
+</div>
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+	  {
+	    "type": "header",
+		"content": "Anouncement Bar"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "show_anouncement_bar",
+		"label": "Show Anouncement bar"
+	  },
+	  {
+		"type": "text",
+		"id": "announcement_bar_text",
+		"label": "Anouncement bar text",
+		"default": "Use code NEWME for 15% off on your first purchase. Free Shipping on all orders."
+	  },
+	  {
+		"type": "url",
+		"id": "announcement_link",
+		"label": "Anouncement bar link"
+	  },
+	  {
+		"type": "header",
+		"content": "Navigation"
+	  },
+	  {
+	    "type": "image_picker",
+		"id": "logo",
+		"label": "Logo image"
+	  },
+	  {
+		"type": "link_list",
+		"id": "menu_linklist",
+		"label": "Select menu"
+	  },
+	  {
+		"type": "link_list",
+		"id": "mobile_menu_linklist",
+		"label": "Select mobile menu"
+	  }
+
+],
+"blocks": [
+	{
+	  "name": "Mega menu product",
+	  "type": "mega_menu_product",
+	  "settings": [
+		{
+		  "type": "text",
+		  "id": "mega_menu_title",
+		  "label": "Text title",
+		  "info": "please add menu title where this mega menu will show"
+		},
+		{
+		  "type": "link_list",
+		  "id": "mega_menu_linklist",
+		  "label": "Select menu"
+		},
+		{
+		  "type": "url",
+		  "id": "combo_pack_url",
+		  "label": "Combo pack URL"
+		}
+	]
+	},
+	{
+	  "name": "Mega menu style 2",
+	  "type": "mega_menu_style_2",
+	  "settings": [
+		{
+		  "type": "text",
+		  "id": "mega_menu_title",
+		  "label": "Text title",
+		  "info": "please add menu title where this mega menu will show"
+		},
+		{
+		  "type": "image_picker",
+		  "id": "mega_menu_image_1",
+		  "label": "Select Image 1"
+		},
+		{
+		  "type": "text",
+		  "id": "mega_menu_title_1",
+		  "label": "Select title 1"
+		},
+		{
+		  "type": "url",
+		  "id": "mega_menu_url_1",
+		  "label": "Select URL 1"
+		},
+		{
+		  "type": "image_picker",
+		  "id": "mega_menu_image_2",
+		  "label": "Select Image 2"
+		},
+		{
+		  "type": "text",
+		  "id": "mega_menu_title_2",
+		  "label": "Select title 2"
+		},
+		{
+		  "type": "url",
+		  "id": "mega_menu_url_2",
+		  "label": "Select URL 2"
+		},
+		{
+		  "type": "image_picker",
+		  "id": "mega_menu_image_3",
+		  "label": "Select Image 3"
+		},
+		{
+		  "type": "text",
+		  "id": "mega_menu_title_3",
+		  "label": "Select title 3"
+		},
+		{
+		  "type": "url",
+		  "id": "mega_menu_url_3",
+		  "label": "Select URL 3"
+		}
+	]
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

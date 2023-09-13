@@ -1,0 +1,145 @@
+<div class="ingredient_full_list" id="ingredient_full_list">
+  <div class="ingd_section">
+    <div class="ingd_wrapper">
+      {% if section.settings.description != blank %}
+      <div class="ingfl_top">
+        {{ section.settings.description }}
+      </div>
+      {% endif %}
+      <div class="page_width_right">
+        <div class="ingf_flx" id="Ingredients_item">
+          <div class="ingf_list">
+            <ul>
+              {% for block in section.blocks %}
+              <li data-id="{{ forloop.index }}" class="">
+                {% if block.settings.ingre_image != blank %}
+                <img class="lazyload" data-src="{{ block.settings.ingre_image | img_url:"master" }}" alt="{{ block.settings.ingre_image.alt }}">
+                {% else %}
+                <img class="lazyload" data-src="//images.ctfassets.net/537ig19c198x/3kV7gYAuqXhE3ezoUxl6gE/c030cb98e078643ddfa77078a690fc9a/Vitamin_A__Liquid__6.png" alt="#">
+                {% endif %}
+                <span>
+                  {% if block.settings.ingre_title != blank %}
+                  {{ block.settings.ingre_title }}
+                  {% endif %}
+                  <img class="lazyload" data-src="//cdn.shopify.com/s/files/1/0412/3027/0631/t/59/assets/arrow-right.png?v=5777047212194894879" alt="#">
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="ingf_description">
+            <div class="ingf_description_inner">
+              <div class="fade-wrapper_new">
+                <ul class="ingf-slider">
+                  {% for block in section.blocks %}
+                  <li class="{% if forloop.first %}active{% endif %}">
+                    {% if block.settings.ingre_image != blank %}
+                    <img class="ing-image lazyload" data-src="{{ block.settings.ingre_image | img_url:"master" }}" class="ing-image" alt="{{ block.settings.ingre_image.alt }}">
+                    {% else %}
+                    <img class="ing-image lazyload" data-src="//images.ctfassets.net/537ig19c198x/3kV7gYAuqXhE3ezoUxl6gE/c030cb98e078643ddfa77078a690fc9a/Vitamin_A__Liquid__6.png" alt="#">
+                    {% endif %}
+                    <div class="ingf_txt_box">
+                      {% if block.settings.ingre_title != blank %}
+                      <h4>{{ block.settings.ingre_title }}</h4>
+                      {% endif %}
+                      <div class="ingf_txt_style">
+                        {% if block.settings.html_text != blank %}
+                        {{ block.settings.html_text }}
+                        {% endif %}                        
+                        <span class="simple_box">
+                          <strong>Source</strong>
+                          <span class="smp_txt"> 
+                            {% if block.settings.source != blank %}
+                            {{ block.settings.source }}
+                            {% endif %}
+                          </span>
+                        </span>
+                        <span class="simple_box">
+                          <strong>You’ll find it in:</strong>
+                          <span class="smp_txt">
+                            {% if block.settings.find_here != blank %}
+                            {{ block.settings.find_here }}
+                            {% endif %}
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if section.settings.show_more != blank %}
+        <div class="ingf_flx_btn">
+          {{ section.settings.show_more }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Ingredients Summary",
+    "settings": [
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>We’ve only kept the ingredients that deserved to stay. They’ve been checked not just for their clinically proven nutritional benefits, but also for the quality of their source, bioavailability, and compatibility with other ingredients. Perfecting this led us across the globe, and we’re excited for our diverse family of ingredients to be part of yours, soon.</p>"
+        },
+        {
+          "type": "text",
+          "id": "show_more",
+          "label": "Show More Button",
+          "default": "show more +"
+        }
+	],
+    "blocks":[
+           {
+            "type":"ingredients_detail",
+            "name":"Ingredients Detail",
+            "settings":[
+                {
+                  "type":"image_picker",
+                  "id":"ingre_image",
+                  "label":"Ingredients Image"
+                },
+                {
+                  "type": "text",
+                  "id": "ingre_title",
+                  "label": "Ingredients Title",
+                  "default": "Vitashine™ D3"
+                },
+                {
+                  "type": "html",
+                  "id": "html_text",
+                  "label": "Add Ingredients Detail Below",
+				  "default": "Vitamin A deserves our love for more reasons than one. It plays an important role in maintaining good skin health as well as promoting immune function. We’re made of cells and tissues, and Vitamin A works to keep surface tissues healthy by reducing pigmentation and assisting the natural production of collagen. It also helps in the creation of cells that form a part of immune responses against infectious diseases."
+                },
+				{
+                  "type": "text",
+                  "id": "source",
+                  "label": "Source Location",
+                  "default": "Europe"
+                },
+				{
+                  "type": "text",
+                  "id": "find_here",
+                  "label": "Find Here",
+                  "default": "Core Immunity"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

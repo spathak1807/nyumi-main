@@ -1,0 +1,308 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+/>
+
+
+<style>
+  .carousel_container {
+        height: 370px;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #FFF4EE;
+    border-radius: 57px;
+    margin-bottom: 25px;
+    margin-top: 1.2rem;
+    display: none;
+    text-align: center;
+    padding: 10px;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    
+}
+    
+
+  }
+ 
+  .swiper {
+display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    align-items: center;
+    gap: 22px;  
+    height: 100%;
+    width:100%;
+  }
+  .swiper-slide {
+/*     width: 358px !important; */
+    text-align: center;
+    padding: 10px;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+
+  }
+
+  .swiper-pagination-bullet {
+    background: #F37068 !important;
+    
+  }
+  .swiper-pagination-bullet-active {
+    background: #F37068 !important;
+  }
+
+   .block_title {
+    height: 155px;
+    width: 155px;
+    border-radius:50%;
+    background-color: #F37168;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'manrope'
+    
+  }
+
+  .block_title p {
+  color: #ffffff;
+    padding:10px;
+    font-weight: bold;
+    font-family: "manrope";
+font-size: 14px;
+  }
+  .block_title p:last-child {
+    padding: 25px;
+  }
+  .section_heading p {
+    font-family: 'corbenr';
+    font-size: 24px;
+    
+  }
+  .section_heading {
+    padding-top: 25px;
+    
+  }
+
+  .description_wrapper {
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+  }
+  .description_wrapper span {
+/*     font-family: Roboto; */
+    font-size: 80px;
+    font-weight: normal;
+    line-height: 80px;
+    font-style: normal;
+    text-align: center;
+    color: #f37168;
+    opacity: 0.41;
+    position: absolute;
+  }
+  .description_wrapper p {
+   font-family: "manrope";
+font-size: 12px;
+font-weight: 600;
+line-height: 22px;
+   width: 100%;
+    text-align: center;
+    margin: 0 auto;
+
+  }
+  .swiper-pagination {
+    bottom: 40% !important;
+  }
+  .description_wrapper img {
+    height: 50px;
+    width: 50px;
+  }
+  @media (max-width: 768px) {
+    .swiper {
+      display: block;
+    }
+  }
+  @media (min-width: 768px) {
+    .swiper {
+      display: none;
+    }
+  }
+   @media (min-width: 500px) {
+    .carousel_container {
+      width: 270px;
+    }
+  }
+  span.open_comma-mob img,
+  span.close_comma-mob img {
+    height: 35px;
+    width: 35px;
+  }
+  span.open_comma-mob {
+    top: -50px;
+    left: -5px;
+  }
+  span.close_comma-mob {
+    bottom: -30px;
+    right: 0px;
+  }
+  span.open_comma-mob.open-2 {
+    top: -45px !important;
+    left: 5px !important;
+  }
+  span.close_comma-mob.close-2 {
+    bottom: -28px;
+    right: 0px;
+  }
+  span.open_comma-mob.open-3 {
+    top: -45px !important;
+    left: 10px !important;
+  }
+  span.close_comma-mob.close-3 {
+    bottom: -30px;
+    right: 40px;
+  }
+  .section_heading p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: #F37168;
+  }
+  .section_heading {
+    text-align: center;
+  }
+  .roww {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .roww img {
+    width:78px;
+  }
+  .roww span {
+    font-size: 20px;
+  }
+  .section_heading p {
+    font-size: 30px;
+    line-height: 1;
+    padding-top: 1rem;
+  }
+</style>
+
+<div class="mobile">
+  <div class="swiper">
+ 
+  <div class="section_heading">
+    <p>built for women</p>
+    <div class="roww">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/download.png?v=1681922736" alt="">
+      <span>
+      by women
+    </span>
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/download.png?v=1681922736" alt="">
+    </div>
+  </div>
+  <div class="swiper-wrapper">
+    
+   {% for block in section.blocks %}
+     <div class="swiper-slide">
+     <div class="carousel_container ">
+    <div class="block_title">
+      <p>{{ block.settings.title }}</p>
+    </div>
+
+         
+        
+  <div class="description_wrapper">
+<span class="open_comma-mob open-{{ forloop.index }}"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_1_1_9eefb9b2-8969-4d9a-ba62-ab945868f615.png?v=1681970968" /></span>
+    <p>
+     {{ block.settings.description }} 
+  </p>
+    <span class="close_comma-mob close-{{ forloop.index }}"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_2_ea1a411f-8910-4d96-b4db-f2b6152b5e96.png?v=1681970968" /></span>
+  </div>
+    </div>
+    </div>
+       
+    
+  
+  {% endfor %}
+    
+ 
+  </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+ 
+  direction: 'horizontal',
+
+     slidesPerView: 1.2, 
+  centeredSlides: true,
+    centeredSlidesBounds: true,
+    
+   
+  spaceBetween: 15,
+    slidesOffsetAfter: 15,
+
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+  },
+// autoplay: {
+//     delay: 3000, // time between each slide transition, in milliseconds
+//   }
+  
+});
+</script>
+
+
+{% schema %}
+  {
+    "name": "FactsCarousel",
+    "settings": [
+      {
+      "type": "text",
+      "id": "heading",
+      "label": "heading"
+    }
+    ],
+    	"blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "text",
+           "id": "title",
+           "label": "Slide_title"
+         } ,
+         {
+           "type": "text",
+           "id": "description",
+           "label": "Slide_description"
+         }
+       ]
+     }
+  ] ,
+ "presets": [
+    {
+      "name": "FactsCarousel",
+      "settings": {
+       
+      }
+  }
+ ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,57 @@
+<div class="careers_banner" id="careers_banner">
+  <div class="crsbn_inner">
+    <div class="crsbn_description">
+      {% if section.settings.title != blank %}
+      <h1>{{ section.settings.title }}</h1>
+      {% endif %}      
+      {% if section.settings.description != blank %}
+      <div class="crsbn_txt">
+        {{ section.settings.description }}
+      </div>
+      {% endif %}
+      {% if section.settings.btn_txt != blank %}
+      <a class="crsbn_btn" href="{{ section.settings.btn_url }}">{{ section.settings.btn_txt }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <style>.careers_banner:before{background-image:url(//images.ctfassets.net/537ig19c198x/3qg6AtKoBw63NRIAAWGaZT/6316197f4febd4d1d30800062268ce26/arrow_line__1_.png)}</style><style>.careers_banner:after{background-image:url(//images.ctfassets.net/537ig19c198x/3Rph19o8kGl7mSL8CEipOI/bbe3bfbc859969e1c42095c37fa31d8a/careergif.gif)}</style>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Careers Banner",
+    "settings": [
+	 {
+	    "type": "text",
+	    "id": "title",
+	    "label": "Title",
+		"default": "Work with Us"
+	  },
+	  {
+	    "type": "richtext",
+	    "id": "description",
+	    "label": "Description",
+	    "default": "<p>Nyumi was established to enable each one’s personal journey of growth and progress by ensuring good nutrition isn’t compromised. We’re a close-knit collaborative team that believes in brainstorms, getting things rolling, and giving it all we’ve got. Our growing work family is always happy to welcome the right talent aboard.</p>"
+	  },
+      {
+        "type": "text",
+        "id": "btn_txt",
+        "label": "Button Text",
+		"default": "View Opportunities"
+      },
+      {
+        "type": "url",
+        "id": "btn_url",
+        "label": "Button URL"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

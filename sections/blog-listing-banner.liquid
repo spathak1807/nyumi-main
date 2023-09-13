@@ -1,0 +1,56 @@
+<div class="blog_border">
+  {% if section.settings.banner_image != blank %}
+  <div class="inner_box">
+    <img class="lazyload" data-src="{{section.settings.banner_image | img_url:"master"}}" alt="{{ section.settings.banner_image.alt }}">
+  </div>
+  {% endif %}
+  <div class="bgbd_txt">
+    {% if section.settings.upper_title != blank %}
+    <h3>{{ section.settings.upper_title }}</h3>
+    {% endif %}
+    {% if section.settings.lower_title != blank %}
+    <p>{{ section.settings.lower_title }}</p>
+    {% endif %}
+  </div>
+  <div class="blog_search">
+    <div class="bgserch_box">
+      <form class="serch_blog_form">
+        <div class="bgsh_form">
+          <input type="text" class="bgsh_input" placeholder="Search">
+          <button value="search" class="bgsh_btn"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Blog banner",
+    "settings": [
+          {
+          "type": "text",
+          "id": "upper_title",
+          "label": "Upper Title",
+          "default": "the secret ingredient"
+        },
+        {
+          "type": "text",
+          "id": "lower_title",
+          "label": "Lower Title",
+          "default": "is wellbeing"
+        },
+        {
+          "type":"image_picker",
+          "id":"banner_image",
+          "label":"Banner Image"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

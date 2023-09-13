@@ -1,0 +1,85 @@
+{% for block in section.blocks %}
+<div class="row tbpd" style="background:{{block.settings.color}};">
+  <div class="center">
+  <div class="sml_tag">{{ block.settings.text}}</div>
+   {% if block.settings.heading != blank %}<div class="cm_title min-center">{{ block.settings.heading}}</div>{% endif %}
+   {% if block.settings.para != blank %} <div class="cm_p min-center">{{ block.settings.para}}</div>{% endif %}
+    {% if block.settings.subtext != blank %}  <div class="cm_subti min-center">{{ block.settings.subtext}}</div>{% endif %}
+  </div>
+  <div class="icon_box_text">
+    <div class="three"><img class="res_width1" src="{{ block.settings.ig | img_url: 'master' }}" alt="image"></div>
+    <div class="three"><img class="res_width1" src="{{ block.settings.ig2 | img_url: 'master' }}" alt="image"></div>
+    <div class="three"><img class="res_width1" src="{{ block.settings.ig3 | img_url: 'master' }}" alt="image"></div>
+  </div>
+</div>
+{% endfor %}
+{% schema %}
+  {
+    "name": "text-block",
+    "settings": [],
+	"blocks":[
+  {
+    "name": "txt-block",
+    "type": "txt-block",
+    "settings": [
+       
+  		{
+            "type": "color",
+            "id": "color",
+            "label": "background-color"
+        },{
+            "type": "text",
+            "id": "text",
+            "label": "heading"
+        },
+		{
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+        },
+        {
+            "type": "text",
+            "id": "para",
+            "label": "para",
+            "default": "enter text"
+        },
+		{
+            "type": "text",
+            "id": "subtext",
+            "label": "text"
+        },
+		 {
+            "type": "image_picker",
+            "id": "ig",
+            "label": "image"
+        },
+		{
+            "type": "image_picker",
+            "id": "ig2",
+            "label": "image"
+        },
+		{
+            "type": "image_picker",
+            "id": "ig3",
+            "label": "image"
+        }
+
+    ]
+  }
+],
+"presets": [
+{
+  "category": "IMAGE",
+  "name": "text_block",
+  "settings": {}
+}
+]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

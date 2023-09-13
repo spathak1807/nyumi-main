@@ -1,0 +1,92 @@
+<div class="ingredients_banner" id="ingredients_banner">
+  <div class="ingd_img">
+    {% if section.settings.desktop_image != blank %}
+    <img class="desktop_img lazyload" data-src="{{ section.settings.desktop_image | img_url: 'master' }}" alt="{{ section.settings.desktop_image.alt }}"/>
+    {% else %}
+    <img class="desktop_img lazyload" data-src="//cdn.shopify.com/s/files/1/0412/3027/0631/t/59/assets/banner.png?v=642070979907654133925" alt="#">
+    {% endif %}
+    {% if section.settings.mobile_image != blank %}
+    <img class="mobile_img lazyload" data-src="{{ section.settings.mobile_image | img_url: 'master' }}" alt="{{ section.settings.mobile_image.alt }}"/>
+    {% else %}
+    <img class="mobile_img lazyload" data-src="//cdn.shopify.com/s/files/1/0412/3027/0631/t/59/assets/mobile-banner.png?v=511304187589696952342" alt="#">
+    {% endif %}    
+    {% for block in section.blocks %}
+    {% if forloop.index == 6 or forloop.index == 7 %}
+    {% assign six_class = "big_podinfo" %}
+    {% assign span_class = "ingd_big_txt" %}
+    {% endif %}
+    {% if block.settings.ingr_point != blank %}
+    <div class="ingd_podinfo {{ six_class }} ingd_point_{{ forloop.index }}">
+      <span class="{{ span_class }}">{{ block.settings.ingr_point }}</span>
+    </div>
+    {% endif %}
+    {% assign six_class = "" %}
+    {% assign span_class = "" %}
+    {% endfor %}
+  </div>
+  <div class="ingd_txt">
+    <div class="ingd_txt_inner">
+      <div class="product_breadcrumbs">
+        <a href="https://{{ request.host }}">
+          Home 
+        </a>/ Ingredients
+      </div>
+      {% if section.settings.upper_title != blank %}
+      <h3>{{ section.settings.upper_title }}</h3>
+      {% endif %}
+      {% if section.settings.lower_title != blank %}
+      <h1>{{ section.settings.lower_title }}</h1>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Ingredients Banner",
+    "settings": [
+        {
+          "type": "text",
+          "id": "upper_title",
+          "label": "Upper Title",
+          "default": "our family of ingredients"
+        },
+        {
+          "type": "text",
+          "id": "lower_title",
+          "label": "Lower Title",
+          "default": "from around the world"
+        },
+        {
+          "type":"image_picker",
+          "id":"desktop_image",
+          "label":"Desktop Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"mobile_image",
+          "label":"Mobile Image"
+        }
+	],
+    "blocks":[
+           {
+            "type":"ingredients_point",
+            "name":"Ingredients Point",
+            "settings":[
+              {
+                "type":"text",
+                "id":"ingr_point",
+                "label":"Points",
+                "default":"Cranberry Extract (PacRan)®"
+              }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

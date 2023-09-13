@@ -1,0 +1,66 @@
+<div class="pd_icon_section" id="pdp_icon">
+  {% if section.settings.title != blank %}
+  <div class="pdi_heading">{{ section.settings.title }}</div>
+  {% endif %}
+  <div class="row icon_boxes">
+    {% for block in section.blocks %}
+    <div class="boxes">
+      <div class="icon_img">
+        {% if block.settings.image != blank %}
+        <img height="60" width="60" class="res_width1 lazyload" data-src="{{block.settings.image | img_url:"master"}}" alt="{{ block.settings.image.alt }}">
+        {% else %}
+        <img height="60" width="60" class="res_width1 lazyload" data-src="{{block.settings.gif_url}}" alt="">
+        {% endif %}
+      </div>
+      {% if block.settings.icon_title != blank %}
+      <div class="icon_txt">{{block.settings.icon_title}}</div>
+      {% endif %}
+    </div>
+    {% endfor %}  
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product icon section",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "only good choices. no compromises."
+        }
+	],
+    "blocks":[
+           {
+            "type":"image",
+            "name":"Image",
+            "settings":[
+                {
+                  "type":"image_picker",
+                  "id":"image",
+                  "label":"Image"
+                },
+                {
+                  "type": "text",
+                  "id": "gif_url",
+                  "label": "Gif URL",
+                  "default": "https://images.ctfassets.net/537ig19c198x/61tmKBGh7MTcOKxHN5BvbO/372b0d7d7deef7dfb2e901deff853077/vegan_icon_01.gif"
+                },
+                {
+                  "type": "text",
+                  "id": "icon_title",
+                  "label": "Icon Title",
+                  "default": "Vegan"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,179 @@
+<div class="cart_mini_wrap">
+  <div class="min_cart">
+    <div class="min_cart_outer"></div>
+
+    <div class="min_cart_inner">
+      <div class="minct_header">
+        <div class="minct_heading">your cart</div>
+        <div class="minct_close"><img src="{{ 'close.png' | asset_url }}" alt="close"/></div>
+      </div>
+      <div class="cart_height">
+        <div class="cart_drawer_loder hide">
+         <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/t/58/assets/200w.gif">
+        </div>
+      {% if settings.upsell_message != blank %}
+      <div class="cart_upper">
+        <p>{{ settings.upsell_message }}</p>
+      </div>
+      {% endif %}
+      <div class="minct_detail aaa">
+        {% for item in cart.items %}
+        <div class="minct_item" data-id="{{ item.id}}" data-price="{{ item.price}}">
+          <div class="minct_item_img">
+            {% if item.image != null %} 
+            <img src="{{ item | img_url: 'x120' }}"  alt="{{ item.image.alt | escape }}"/>
+            {% endif %}
+          </div>
+
+          <div class="minct_item_title">
+            <a href="{{ item.url }}" class="minct_title">{{ item.product.title }}</a>
+            <div class="minct_item_price"> {{ item.price | money }}</div>
+
+            <div class="remove_and_qty">
+              <div class="minct_item_qty">
+                <div class="minct_qty_sign minius_sighn"></div>
+                <div class="minct_qty">{{ item.quantity }}</div>
+                <div class="minct_qty_sign plus_sign"></div>
+              </div>
+
+              <div class="minct_item_remove hide">remove </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        {% endfor %}
+      </div>
+{% comment %}
+      <div class="upsells">
+        <div class="upsells-header">
+          <h2>You also like</h2>
+        </div>
+        <div class="upsells-stacked">
+          {% assign upsell_products = settings.upsell_collection %}
+          {% assign upsell_count = 0 %}
+          {% for product in collections[upsell_products].products %}
+          {% if product.available %}
+          
+          {% assign show_prd = true %}
+          {% for item in cart.items %}
+          {% if item.product.id == product.id %}
+            {% assign show_prd = false %}
+          {% endif %}
+          {% endfor %}
+          
+          {% if show_prd %}
+          {% assign upsell_count = upsell_count | plus: 1 %}
+          {% if upsell_count <= 4 %}
+          <div class="upsell">
+            <div class="upsell-item">
+              <div class="upsell-image">
+                <a href="{{ product.url }}">
+                  <img alt="{{ product.featured_image.alt }}" class="small" src="{{ product.featured_image | img_url: 'master' }}">
+                </a>
+              </div>
+              <div class="upsell-text">
+                <h3>
+                  <a href="{{ product.url }}">
+                    {{ product.title }}
+                  </a>
+                </h3>
+                <div class="upsell-text-prices">
+                  <p>{{ product.price | money }}</p>
+                  <p class="upsell-compare-at">{{ product.compare_at_price | money }}</p>
+                </div>
+              </div>
+              <div class="upsell-add">
+                <button product_id="{{ product.first_available_variant.id }}">
+                  <svg width="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M11 5H7V1a1 1 0 00-2 0v4H1a1 1 0 000 2h4v4a1 1 0 002 0V7h4a1 1 0 000-2z" fill="currentColor" fill-rule="nonzero"></path></svg>
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+        {% endcomment %}
+      </div>
+
+      <div class="minct_footer">
+        {% comment %}
+        {%- capture taxes_shipping_checkout -%}
+        {%- if shop.taxes_included and shop.shipping_policy.body != blank -%}
+        {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+        {%- elsif shop.taxes_included -%}
+        {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+        {%- elsif shop.shipping_policy.body != blank -%}
+        {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+        {%- else -%}
+        {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
+        {%- endif -%}
+        {%- endcapture -%}
+        <div class="cart__shipping rte">{{ taxes_shipping_checkout }}</div>
+        {% endcomment %}
+
+        <div class="cart_drawer_footer_sticky">
+          <div class="minct_subtotal">
+            <span class="minct_subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
+            <span class="minct_subtotal__price">{{ cart.total_price | money_with_currency }}</span>
+          </div>
+          <div class="chkout_drawer_foot">
+            <a href="/checkout" class="minct_checkout_btn" name="checkout">{{ 'cart.general.checkout' | t }}</a>
+          </div>
+          <div class="cart_link_drawer_foot hide">
+            <a href="/cart" class="simple_txt">{{ 'view in cart'}}</a>
+          </div> 
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% comment %}
+<script>
+  {% for item in cart.items %}
+  	webengage.track("Added To Cart", {
+      "Product ID" : "{{ item.id}}",
+      "Price" : {{ item.final_price | divided_by:100 }},
+      });
+  {% endfor %}
+</script>
+
+
+<script>
+
+ // add on product
+  $('.upsell-add button').on('click', function(e){
+    e.preventDefault();
+    var addon_id = $(this).attr('product_id');
+    addon_cart(addon_id, 1, 1);    
+  });
+  function addon_cart(id, qty, rdc){
+   $.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: {
+              	quantity: qty,
+              	id: id
+            },
+      dataType: 'json',
+      success: function() { 
+        if(rdc){
+          $(".minct_detail").load(location.href + " .minct_item");
+          $(".cart_mini_wrap .minct_subtotal").load(location.href + " .cart_mini_wrap .minct_subtotal");
+        }else{
+           window.location.href = '/cart'; 
+        }
+      }
+    });
+  }
+
+</script>
+{% endcomment %}

@@ -1,0 +1,65 @@
+<div class="science_banner" id="science_banner">
+  <div class="scbn_top">
+    <div class="product_breadcrumbs">
+      <a href="https://{{ request.host }}">
+        Home 
+      </a>/ Science
+    </div>
+    {% if section.settings.title != blank %}
+    	<h1>{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.description != blank %}
+    <div class="scbn_txt">
+      {{ section.settings.description }}
+    </div>
+    {% endif %}
+  </div>
+  <div class="scbn_img">
+    {% if section.settings.desktop_image != blank %}
+    	<img class="desktop_show lazyload" data-src="{{section.settings.desktop_image | img_url:"master"}}" alt="{{ section.settings.desktop_image.alt }}">
+    {% else %}
+    	<img class="desktop_show lazyload" data-src="//images.ctfassets.net/537ig19c198x/3BhthGLSVxmNDCrOv2S7LW/a73f7d5a6e34f2e4c0edc7ec5cfb0b8f/AnyConv.com__banner-top.webp" alt="#">
+    {% endif %}    
+    {% if section.settings.mobile_image != blank %}
+    	<img class="mobile_show lazyload" data-src="{{section.settings.mobile_image | img_url:"master"}}" alt="{{ section.settings.mobile_image.alt }}">
+    {% else %}
+    	<img class="mobile_show lazyload" data-src="//images.ctfassets.net/537ig19c198x/1nqyZloN4yXDL7AJshbOVz/d6d88e803e3669767ecc6614d53f0619/science_diagram-01_for_mobile_updated-1st_April_2021.png" alt="#">
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Science banner",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "science and us go way back"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>For us, science isn’t a linear process. It’s a continuous journey. We tirelessly researched and revisited diets, deficiencies, and ingredient sources to mindfully create nutrition that works for you.</p>"
+        },
+		{
+          "type":"image_picker",
+          "id":"desktop_image",
+          "label":"Desktop Image"
+		},
+		{
+          "type":"image_picker",
+          "id":"mobile_image",
+          "label":"Mobile Image"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,241 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+/>
+
+<style>
+
+  .benefits-section {
+    padding-top: 2rem;
+/*     padding: 1rem; */
+    width: 95%;
+    margin: 0 auto;
+  }
+  .benefit-card {
+    
+     
+    width: 100%;
+    height: 100%;
+    /* max-width: 1110px; */
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 30px;
+    
+    filter: drop-shadow(0px 1px 2.5px rgba(172,172,172,0.16 ));
+    
+    padding: 4rem 0;
+    /* padding-top: 0; */
+    text-align: center;
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+/*     justify-content: center; */
+    gap: 30px;
+
+  }
+  .swiper2 .swiper-slide {
+/*     padding-left: 20px; */
+    padding-right: 0;
+  }
+  .benefit-title {
+    text-align: center;
+        margin-bottom: 30px;
+  }
+  .card-title {
+    font-family: "Manropeb";
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 5px;
+    font-style: normal;
+    text-align: center;
+    letter-spacing: 5px;
+    color: #f37168;
+}
+  }
+  .card-description ul {
+    text-align: left;
+  }
+  .card-description ul li {
+    list-style-type: circle;
+    font-family: "Manrope";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 37px;
+    font-style: normal;
+    text-align: left;
+    letter-spacing: 1px;
+    color: #000000;
+}
+  .swiper {
+    padding: 0px !important;
+  }
+
+  .card-description ul li::marker {
+    color: #F37168;
+    background-color: #F37168;
+    fill: #F37168;
+    content: "•";
+    font-size: 20px;
+}
+
+  @media (max-width: 768px) {
+    .card-title {
+    font-family: "Manrope";
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 5px;
+    font-style: normal;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #f37168;
+
+  }
+    .benefit-title {
+      font-family: "Corbenr";
+      font-size: 24px;
+      font-weight: normal;
+      line-height: 0px;
+      letter-spacing: 0;
+      text-transform: lowercase;
+      font-weight: 500;
+      text-align: center;
+      color: #000000;
+  }
+    .benefits-section .page-width {
+      padding: 0;
+    }
+  .card-description  {
+        padding: 10px 20px;
+        padding-right: 5px;
+  }
+  .card-description ul li {
+    list-style-type: circle;
+    font-family: "Manrope";
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: normal;
+    text-align: left;
+    letter-spacing: unset;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+    .benefit-card {
+        padding: 2.5rem 1rem;
+    padding-bottom: 1rem;
+    gap: 10px;
+    height: 180px !important;
+    }
+  }
+
+  @media (min-width: 768px){
+    .benefit-title {
+      font-family: 'corbenr';
+    font-size: 28px;
+    text-align: center;
+    color: black;
+    padding: 0 5px;
+    font-weight: 700;
+    text-transform: lowercase;
+    }
+    .benefit-card {
+    width: 80%;
+  }
+  }
+  
+</style>
+
+<div class="benefits-section">
+  <div class="page-width">
+  <div class="benefit-title"> look forward to</div>
+  <div class="swiper4">
+    
+  <div class="swiper-wrapper">
+    
+    
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+    <div class="benefit-card">
+      <div class="card-title">{{ block.settings.title }}</div>
+        <div class="card-description" >
+          {{ block.settings.description }}
+        </div>
+    </div>
+    
+    </div>
+    {% endfor %}
+    
+    
+  </div>
+ 
+</div>
+    </div>
+</div>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+  const swiper4 = new Swiper('.swiper4', {
+ 
+  direction: 'horizontal',
+centeredSlides: true,
+    centeredSlidesBounds: true,
+     slidesPerView: 1.05, 
+  
+    
+    
+   
+  spaceBetween: 5,
+    slidesOffsetAfter: 5,
+
+  
+// autoplay: {
+//     delay: 3000, // time between each slide transition, in milliseconds
+//   }
+  
+});
+</script>
+{% schema %}
+  {
+    "name": "benefits-carousel",
+    "settings": [
+      {
+      "type": "text",
+      "id": "heading",
+      "label": "heading"
+    }
+    ],
+    	"blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "text",
+           "id": "title",
+           "label": "Slide_title"
+         } ,
+         {
+           "type": "richtext",
+           "id": "description",
+           "label": "Slide_description"
+         }
+       ]
+     }
+  ] ,
+ "presets": [
+    {
+      "name": "FactsBox",
+      "settings": {
+       
+      }
+  }
+ ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

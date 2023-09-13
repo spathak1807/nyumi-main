@@ -1,0 +1,85 @@
+<div class="row">
+      <div class="slicks">
+        {% for block in section.blocks %}
+        <div>
+          <div class="slide_one" {% if block.settings.image != blank %}
+       style="background-image: url({{ block.settings.image | img_url: 'master'}})"
+       {% endif %}>
+          
+          <div class="slide_content bst">
+         {% if block.settings.heading != blank %}<div class="slider_title">{{ block.settings.heading}}</div>{% endif %}
+   {% if block.settings.para != blank %} <div class="slider_p">{{ block.settings.para}}</div>{% endif %}
+    <div class="cm_but"><a class="button" href="#">Shop ></a></div>
+          </div>
+            <div class="mobile"><img src="{{'Image.png' | asset_url}}" alt="image"></div>    
+  </div>
+       
+        
+        
+        
+  </div>
+  {% endfor %}
+  
+</div> 
+  </div> 
+  
+  <script>
+$(document).ready(function(){
+$('.slicks').slick({
+dots: true,
+infinite: true,
+arrows: false,  
+speed: 300,
+slidesToShow: 1,
+adaptiveHeight: true
+});
+});  
+$('.single-item').slick();
+</script> 
+
+{% schema %}
+  {
+    "name": "slider",
+    "settings": [],
+"blocks":[
+  {
+    "name": "Slide",
+    "type": "slide",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "image"
+        },
+  		{
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+        },
+        {
+            "type": "text",
+            "id": "para",
+            "label": "para",
+            "default": "enter text"
+        }
+		
+
+    ]
+  }
+],
+	
+"presets": [
+{
+  "category": "IMAGE",
+  "name": "slider",
+  "settings": {}
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

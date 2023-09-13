@@ -1,0 +1,96 @@
+<div class="component_section ingred_slider" id="comp_ingred_slider">
+  <div class="component-wrapper">
+    {% if section.settings.title != blank %}
+    <h4 class="section_heading">
+      {{ section.settings.title }}
+    </h4>
+    {% endif %}
+    {% if section.settings.description != blank %}
+    <p class="section_subheading">
+      {{ section.settings.description | strip_html }}
+    </p>
+    {% endif %}
+    <div class="component_slider_wrapper">
+      <ul class="component_slider">
+        {% for block in section.blocks %}
+        <li>
+          {% if block.settings.ingre_image != blank %}
+          <img class="lazyload" data-src="{{ block.settings.ingre_image | img_url:"master" }}" alt="{{ block.settings.ingre_image.alt }}">
+          {% else %}
+          <img class="lazyload" data-src="//images.ctfassets.net/537ig19c198x/4sGi6At4PCab1Feagu0m0L/112997b81a3ed869e1af9b24d0f94da5/coconut_oil.png" alt="#">
+          {% endif %}
+          {% if block.settings.ingre_title != blank %}
+          <h4>{{ block.settings.ingre_title }}</h4>
+          {% endif %}
+          {% if block.settings.ingr_desc != blank %}
+          {{ block.settings.ingr_desc }}
+          {% endif %}
+          {% if block.settings.location != blank %}
+          <span class="component_location">
+            <img class="lazyload" data-src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/map-black.png" alt="#">
+            {{ block.settings.location }}
+          </span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Ingredients Slider",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "quiet companions"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Our non-active ingredients help with important tasks like binding active ingredients, nutrient stability and absorption.</p>"
+        }
+	],
+    "blocks":[
+           {
+            "type":"slider",
+            "name":"Slider",
+            "settings":[
+                {
+                  "type":"image_picker",
+                  "id":"ingre_image",
+                  "label":"Ingredients Image"
+                },
+                {
+                  "type": "text",
+                  "id": "ingre_title",
+                  "label": "Ingredients Title",
+                  "default": "Coconut Oil"
+                },
+                {
+                  "type": "richtext",
+                  "id": "ingr_desc",
+                  "label": "ingredients Description",
+				  "default": "<p>Gummies are no fun if they turn sticky, mushy or too hard. We use Virgin Coconut oil to make sure your gummies stay the way they arrived.</p>"
+                },
+				{
+                  "type": "text",
+                  "id": "location",
+                  "label": "Location",
+                  "default": "Chennai"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

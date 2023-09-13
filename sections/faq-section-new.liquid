@@ -1,0 +1,92 @@
+<div id="shopify-section-product-template" class="shopify-section">
+  <div class="faq_section relative" id="product_faq" style="display: block;">
+    <div class="faq_title center">
+      got doubts? get answers.
+    </div>
+    <section class="ac-container">
+      {% for block in section.blocks %}
+      <div class="product_tab_item faq-item" data-id="{{ forloop.index }}">
+        <div class="pdtb_heading">
+          {{ block.settings.faq_ques }}
+        </div>
+        <div class="pdtb_detail" style="display: none;">
+          {{ block.settings.faq_ans }}
+        </div>
+      </div>
+      {% endfor %}    
+    </section>
+    <div class="cm_but center">
+      <a class="button read_more_faq" href="#" style="">Read More</a>
+    </div>
+    <style>
+      .faq_section:before {
+        background-image: url(https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Skin_Left_400x650_425caea6-c892-492a-bd7d-afee8d601dcb.png?v=1647095765)
+      }
+      .faq_section:after {
+        background-image: url(https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Skin_Right_400x650_00d13cfa-8924-4f72-81d0-655bbba9e081.png?v=1647096295)
+      }
+    </style>
+  </div>
+</div>
+
+<script>
+//   document.addEventListener("DOMContentLoaded", function () {
+//     const faqItems = document.querySelectorAll(".faq-item");
+    
+//     for (let i = 4; i < faqItems.length; i++) {
+//         faqItems[i].classList.add("hidden");
+//     }
+
+//     faqItems.forEach(item => {
+//         const readMoreButton = item.querySelector(".read_more_faq");
+
+//         readMoreButton.addEventListener("click", () => {
+//             item.classList.remove("hidden");
+//             readMoreButton.style.display = "none";
+//         });
+//     });
+// });
+
+</script>
+
+{% schema %}
+  {
+    "name": "Faq Section New",
+    "settings": [],
+	"blocks":[
+         {
+          "type":"product_type",
+          "name":"Types",
+          "settings":[         
+                {
+                  "type":"text",
+                  "id":"faq_ques",
+                  "label":"Faq Question",
+                  "default":"How do you recommend eating Nyumi gummies?"
+                },
+                {
+                  "type":"richtext",
+                  "id":"faq_ans",
+                  "label":"Faq Answer",
+                  "default":"<p>Yes, we highly recommend it. Our gummies are intended as a daily dose of essential nutrients for you. </p>"
+                }
+             ]
+          }             
+                            
+     ],
+    "presets": [
+    {
+      "name": "FaqSectionNew",
+      "settings": {
+       
+      }
+  }
+ ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

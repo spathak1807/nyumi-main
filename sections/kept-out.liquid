@@ -1,0 +1,52 @@
+<div class="strikewords" id="pdp_kept" style="display: block;">
+  {% if section.settings.title != blank %}
+  <div class="faq_title center">      
+    {{ section.settings.title }}
+  </div>
+  {% endif %}
+  <ul class="strikeout">
+    {% for block in section.blocks %}
+    <li>
+      {% if block.settings.flavour != blank %}
+      <span class="inner">
+        {{block.settings.flavour}}
+      </span>
+      {% endif %}
+    </li>
+    {% endfor %}      
+  </ul>
+</div>
+
+{% schema %}
+  {
+    "name": "Kept Out For Good",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "kept out for good"
+        }
+	],
+    "blocks":[
+           {
+            "type":"flavour",
+            "name":"Flavour",
+            "settings":[
+                {
+                  "type":"text",
+                  "id":"flavour",
+                  "label":"Flavour title",
+                  "default":"gelatin"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,119 @@
+
+<div id="top_section">
+  <div id="top_section_slider" class="flx_slider_top">
+    {% for block in section.blocks %}
+    <div class="item_top">
+      {% if block.settings.banner_title_text_color != blank or block.settings.banner_description_text_color != blank %}
+      <style>
+        {% if block.settings.banner_title_text_color != blank %}
+        .flx_slider_top .top_heading_{{ forloop.index }} {
+          color: {{ block.settings.banner_title_text_color }};
+        }
+        {% endif %}
+        {% if block.settings.banner_description_text_color != blank %}
+        .flx_slider_top .top_sunheading_{{ forloop.index }} {
+          color: {{ block.settings.banner_description_text_color }};
+        }
+        {% endif %}
+      </style>
+      {%  endif %}
+      <div class="top_section_flx top_sec_{{ forloop.index }}">
+        <div class="top_section_txt" data-index="{{ forloop.index }}">
+          {% if block.settings.banner_title != blank %}
+          <div id="banner_heading" class="top_heading top_heading_{{ forloop.index }}">{{ block.settings.banner_title }}</div>
+          {% endif %}
+          {% if block.settings.banner_desc != blank %}
+          <div id="banner_subheading" class="top_sunheading top_sunheading_{{ forloop.index }}">{{ block.settings.banner_desc }}</div>
+          {% endif %}
+          {% if block.settings.btn_txt != blank %}
+          <a href="{{ block.settings.btn_url }}" id="banner_btn" class="top_btn_style button top_button_{{ forloop.index }}">{{ block.settings.btn_txt }}</a>
+          {% endif %}
+        </div>
+        <div class="top_section_img">
+          {% if block.settings.banner_image != blank %}
+          <div id="banner_img" class="desktop_img">
+            <img class="lazyload" data-src="{{ block.settings.banner_image | img_url:"1500x800" }}" alt="{{ block.settings.banner_image.alt }}">
+          </div>
+          {% endif %}
+          <div id="" class="mobile_img">
+            {% if block.settings.mob_banner_image != blank %}
+            <img class="lazyload" data-src="{{ block.settings.mob_banner_image | img_url: 'master' }}" alt="{{ block.settings.mob_banner_image.alt }}">
+            {% endif %}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Homepage slider",
+    "settings": [],
+    "blocks":[
+           {
+            "type":"slider",
+            "name":"Slider",
+            "settings":[
+                {
+                  "type": "text",
+                  "id": "banner_title",
+                  "label": "Banner Title",
+                  "default": "daily nutrition."
+                },
+				{
+                  "type": "color",
+                  "id": "banner_title_text_color",
+                  "label": "Banner title text color"
+                },
+                {
+                  "type": "html",
+                  "id": "banner_desc",
+                  "label": "Banner Description",
+                  "default": "backed by science. <br>packed as gummies."
+                },
+				{
+                  "type": "color",
+                  "id": "banner_description_text_color",
+                  "label": "Banner description text color"
+                },
+                {
+                  "type": "text",
+                  "id": "btn_txt",
+                  "label": "Button Text",
+                  "default": "shop now"
+                },
+                {
+                  "type": "url",
+                  "id": "btn_url",
+                  "label": "Button URL"
+                },
+                {
+                  "type":"image_picker",
+                  "id":"banner_image",
+                  "label":"Desktop banner image"
+                },
+                {
+                  "type":"image_picker",
+                  "id":"mob_banner_image",
+                  "label":"Mobile banner image"
+                }
+            ]
+          }
+        ],
+    "presets": [
+        {
+          "category": "Homepage",
+          "name": "Homepage slider"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

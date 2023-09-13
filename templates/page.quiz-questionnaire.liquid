@@ -1,0 +1,3231 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<style>
+  body {
+    font-family: 'Manrope';
+  }
+  #shopify-section-header, #shopify-section-footer-custom, .whatapp_chat {
+    display: none;
+  }
+  input[type=checkbox], input[type=radio] {
+    line-height: 1;
+  }
+  html{scroll-behavior:smooth;padding-bottom:0 !important;}
+  .quiz {
+    height: 100vh;
+    overflow-y: scroll;
+    background: #FFF4EF;
+  }
+  .loader {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  .loader p {
+    margin: 1rem;
+    font-size: 26px;
+    font-weight: 600;
+    color: #FF6662;
+  }
+  .quiz-background {
+    background: #FFF4EF;
+/*     height: 100%; */
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .carousel_container {
+    width: 100%;
+  }
+  .header strong {
+    background: gray;
+    opacity: 0.5;
+    color: white !important;
+    padding: 1rem;
+    width: 25%;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .section_heading {
+    padding-top: 0 !important;
+  }
+  .section_heading h3 {
+    margin-top: 0 !important;
+  }
+  section {
+    width: 50%;
+    padding: 6rem 2rem;
+    margin: 0 auto;
+    display: none;
+  }
+/*   Mobile view changes  */
+  @media (max-width:640px) {
+     section {
+       padding:  1.4rem 2rem 0.5rem 2rem !important;
+     }
+    .step3 h1 {
+         margin-bottom: 1.5rem !important;
+    }
+    .step3 .step3_options > label {
+      margin-bottom: 1.25rem !important;
+    }
+    .step3 .footer .previous, .step3 .footer .next {
+      margin: 1rem 0 !important;
+      width: 30%;
+    }
+    .step4b_options > label {
+      margin-bottom: 1.2rem;
+    }
+    section.step_result .card h2,
+  section.step_result .card h3 {
+    letter-spacing: inherit;
+    margin-top: 0rem !important;
+  }
+
+    .cliniccally_proven {
+      margin-bottom: 0rem !important;
+    }
+    section.step_result h1.user_name {
+    font-size: 20px !important;
+    color: #FF6662;
+    margin-bottom: 0rem !important;
+      letter-spacing: normal;
+  }
+    
+
+   .section.step_result .card {
+      margin-top: 0rem !important; 
+     margin-bottom: 0;
+    }
+    
+    .step_result h2.subheading {
+    text-transform: initial;
+    font-size: 17px !important;
+    margin-bottom: 1rem;
+    letter-spacing: normal;
+      margin-top: 0;
+
+  }
+
+    .clinically_proven > div {
+      height:150px;
+      width: 100px;
+    }
+    .clinically_proven > div p {
+      padding-top: 0px !important;
+    }
+    section.step_result .card p {
+    font-size: 13px !important;
+    padding-top: 5px;
+    color: black;
+  }
+  }
+  section h1 {
+    font-family: "manrope";
+    margin-bottom: 3rem;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    letter-spacing: inherit;
+  }
+  
+  section label {
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    background: white;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    list-style: circle;
+    filter: drop-shadow(0px 0px 4px rgba(172,172,172,0.16 ));
+    font-weight: 500;
+  }
+  
+  
+  section input[type='radio']:checked:after, section input[type='checkbox']:checked:after {
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #FF6662;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+  }
+
+  section input[type='checkbox']:checked:after {
+    width: 20px;
+    height: 20px;
+    content: '\2713';
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  section label.label_txt {
+    padding: 0;
+    filter: none;
+    font-weight: 500;
+  }
+
+  div.footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  div.footer .previous, div.footer .next {
+    background: #FF6662;
+    color: white;
+    padding: 0.5rem 2rem;
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    margin: 2rem 0;
+    width: 30%;
+  }
+
+  #step3-prevBtn {
+    background: gray;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .step9 h1,
+  .step10 h1 {
+    font-size: 20px;
+  }
+
+  .step9 label.mob {
+    width: 22%;
+    justify-content: start;
+    pointer-events: none;
+  }
+
+  .step9 label.mob input {
+    border: none;
+    pointer-events: none;
+    font-size: 24px;
+    padding: 0;
+  }
+
+  .step9 label.mob_number,
+  .step10 label{
+    width: 100%;
+    justify-content: start;
+  }
+
+  .step9 label.mob_number {
+    margin-left: 2rem;
+  }
+
+  .step9 label.mob_number input,
+  .step10 label input{
+    border: none;
+    font-size: 24px;
+    padding: 0;
+    color: black;
+  }
+
+  .step9 label.mob_number input:focus-visible,
+  .step10 label input:focus-visible {
+    border: none;
+    outline: none;
+  }
+
+  .step9 .mobile-contact {
+    display: flex;
+  }
+
+  .step10 label {
+    color: #FF6662;
+  }
+
+  .step10 p {
+    position: absolute;
+    top: -10px;
+    font-size: 16px;
+    color: #FF6662;
+    display: none;
+    transition: all .2s;
+  }
+
+  .step10 input {
+    font-size: 18px !important;
+  }
+
+  ::placeholder {
+    color: #FF6662;
+    opacity: 1; /* Firefox */
+    font-size: 18px;
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #FF6662;
+    font-size: 18px;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: #FF6662;
+    font-size: 18px;
+  }
+
+  section.step10 button.submit {
+    background: #FF6662;
+    color: white;
+    padding: 1rem 2rem;
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    margin: 2rem 0;
+    width: 100%;
+  }
+  section.step_result h1.user_name {
+    font-size: 30px;
+    color: #FF6662;
+    margin-bottom: 1rem;
+  }
+  section.step_result .card {
+    text-align: center;
+    border-radius: 31px;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ));
+    background: #ffffff;
+    padding: 2rem 1rem;
+    margin: 3rem 0;
+    margin-bottom: 0;
+  }
+  .swiper {
+    padding: 0 !important;
+  }
+  section.step_result input.btn {
+    width: 85%;
+    margin: 2rem 0;
+    border-radius: 31px;
+    background: #f37168;
+    font-size: 16px;
+    letter-spacing: inherit;
+    padding: 1rem;
+    margin-top: 0;
+  }
+  section.step_result input.btn:hover {
+    background: #F37168;
+  }
+  section.step_result .card h2,
+  section.step_result .card h3 {
+    font-family: corbenr;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: inherit;
+    text-transform: lowercase;
+    color: black;
+    margin-top: 1rem;
+  }
+  section.step_result .card img {
+    width: 60%;
+  }
+  section.step_result .card p {
+    font-size: 16px;
+    padding-top: 5px;
+    color: black;
+  }
+  section.step_result .card .key_ingredients p {
+    color: #F37168;
+    padding: 0.5rem 0;
+  }
+  .clinically_proven {
+    margin: 3rem 0;
+  }
+  section.step_result .card .key_ingredients,
+  section.step_result .card .clinically_proven,
+  .why_nyumi{
+    display: flex;
+    justify-content: space-around;
+  }
+  section.step_result .card h2.clinically {
+    font-family: 'corbenr';
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.3;
+    margin-top: 0;
+  }
+  section.step_result .card .clinically_proven h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  section.step_result .card .clinically_proven p {
+    font-size: 12px;
+    color: black;
+    text-transform: lowercase;
+  }
+  .why_nyumi p {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+  }
+  section.step_result .card .key_ingredients img {
+    width: 50%;
+  }
+  section.step_result .card.fitness {
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+  section.step_result .card.gut-health {
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+  section.step_result .card.fitness h2{
+    display: flex;
+    justify-content: space-between;
+    font-family: manrope;
+    color: #FF6662;
+    border-bottom: solid 1px #707070;
+    padding-bottom:4px;
+    margin-right: 2rem;
+  }
+  section.step_result .card.gut-health h2 {
+    display: flex;
+    justify-content: space-between;
+    font-family: manrope;
+    color: #FF6662;
+    border-bottom: solid 2px #707070;
+    padding-bottom:4px;
+    margin-left: 2rem;
+  }
+  section.step_result .card.gut-health p {
+    width: 46%;
+    text-align: right;
+    padding-top: 2rem;
+    font-size: 20px;
+  }
+  section.step_result .card.gut-health p span {
+    color: #FF6662;
+    font-weight: 600;
+  }
+  section.step_result .card.fitness p {
+    width: 46%;
+    text-align: left;
+    padding-top: 2rem;
+    font-size: 20px;
+  }
+  section.step_result .card.fitness .fitness-content {
+    display: flex;
+    justify-content: space-between;
+/*     align-items: center; */
+  }
+  section.step_result .card.gut-health .acidity-content,
+  section.step_result .card.gut-health .constipation-content,
+  section.step_result .card.gut-health .gas-bloating-content{
+    display: none;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+  section.step_result .card.gut-health .constipation-content, section.step_result .card.gut-health .gas-bloating-content{align-items: center;}
+  section.step_result .card.fitness .fitness-content img,
+  section.step_result .card.gut-health .acidity-content img,
+  section.step_result .card.gut-health .constipation-content img,
+  section.step_result .card.gut-health .gas-bloating-content img{
+    width: 40%;
+    padding-top: 2rem;
+  }
+
+  section.see-result h1 {
+    font-size: 26px;
+    font-family: 'corbenr';
+    text-transform: lowercase;
+  }
+  section.see-result .card {
+    border-radius: 31px;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ));
+    background: white;
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  section.see-result .card h2,
+  section.see-result .card ul{
+    width: 50%;
+  }
+  section.see-result .card ul li {
+    list-style: disc;
+    text-align: left;
+    color: black;
+  }
+  section.see-result {
+  padding-top: 0 !important;
+  }
+  section.see-result h1 {
+    font-size: 26px;
+    font-family: 'corbenr';
+    margin-bottom: 10px;
+  }
+  section.see-result .card {
+    border-radius: 31px;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ));
+    background: white;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  section.see-result .card h2{
+    width: 35%;
+    color: #FF6662;
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0;
+  }
+  section.see-result .card hr{
+    transform: rotate(90deg);
+    border-bottom: 1px solid black;
+    width: 15%;
+  }
+  section.see-result .card ul {
+    width: 80%;
+    border-left: solid 1px black;
+    padding-left: 3rem;
+  }
+  section.see-result .card ul li {
+    list-style: disc;
+    text-align: left;
+    margin: 0.5rem 0;
+    width: 100%;
+    padding-top: 0;
+  }
+  section.see-result .card ul li::marker {
+    color: #FF6662;
+  }
+  
+/*   section.step_result .card .key_ingredients p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FF6662;
+    text-transform: capitalize;
+    padding: 5px 0;
+    font-family: manrope;
+  }*/
+  .clinically_proven .key1 img,
+  .clinically_proven .key2 img,
+  .clinically_proven .key3 img {
+    width: 15rem !important;
+  } 
+  .why_nyumi .key1 img,
+  .why_nyumi .key2 img {
+    width: 100%;
+  }
+  .why_nyumi .key3 img {
+    width: 75%;
+  }
+  .carousel-indicators {
+    bottom: -35px;
+    display: none;
+  }
+  ol.carousel-indicators li {
+    border: none;
+    background-color: #F37168;
+    opacity: 0.5;
+/*     height:20px;
+    width: 20px; */
+  }
+  .carousel-indicators .active {
+    background-color: #F37168;
+    opacity: 1;
+  }
+  .carousel-inner .item {
+    border-radius: 31px;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ));
+    background: white;
+    margin: 10px 0;
+    padding: 1rem;
+  }
+  .carousel-inner .item.active {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .d-flex.item img {
+    width: 25%;
+  }
+  .d-flex.item p {
+    width: 50%;
+    text-align: left;
+    font-size: 18px;
+    color: black;
+/*     padding: 1rem; */
+  }
+  .d-flex.item p span {
+    color: #F37168;
+  }
+  button.try-it-now {
+    width: 100%;
+    margin: 2rem 0;
+    margin-top: 0;
+    border-radius: 31px;
+    border: none;
+    color: white;
+    background: #f37168;
+    font-size: 18px;
+    padding: 1rem;
+  }
+  .why_nyumi .key3 img {
+    width: auto;
+  }
+  .why_nyumi p {
+    font-size: 12px;
+  }
+  button.try-it-now a,
+  button.try-it-now a:hover {
+    color: white;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+  }
+  .step_result h2.subheading {
+    text-transform: initial;
+    font-size: 22px;
+/*     margin-bottom: 1rem;
+    letter-spacing: normal; */
+  }
+  .step9 label.mob_number input, .step10 label input {
+    width: 100%;
+  }
+  .header img {
+    height: 80px;
+    width: 80px;
+  }
+  .header img.line {
+    height: fit-content;
+    width: 90px;
+  }
+
+  @media (max-width: 768px) {
+    section {
+      width: 100%;
+    }
+    .header img.line {
+      width: 40px;
+    }
+     section.step_result .card.fitness h2{
+       margin-bottom: 0;
+     }
+    section.step_result .card.fitness p {
+      padding-top: 0;
+    }
+    .row.icon_boxes .boxes {
+      margin: 5px 0;
+    }
+    .wellness_subheading {
+      font-size: 16px;
+      margin-top: 0;
+    }
+    section h1 {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    section.step_result .card.fitness .fitness-content img {
+      width: 54%;
+      padding-top: 1rem;
+    }
+    .row.icon_boxes .boxes {
+      padding: 0;
+    }
+    .boxes .icon_txt {
+      font-size: 10px;
+    }
+    .step9 label.mob {
+      width: 30%;
+    }
+    .d-flex.item img {
+      width: 35%;
+    }
+    .header {
+      width: 100%;
+      margin: 0 auto;
+    }
+    .header img {
+      height: 90px;
+      width: 90px;
+/*       image-rendering: pixelated; */
+/*       max-width: fit-content !important;
+      overflow: revert;
+      filter: blur(0); */
+/*       -webkit-backface-visibility: hidden;
+      -ms-transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0); */
+    }
+    .step9 label.mob input {
+      border: none;
+      pointer-events: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0;
+    }
+    .step9 label.mob_number {
+      width: 65%;
+    }
+    .step9 label.mob_number input, .step10 label input {
+      font-size: 20px;
+    }
+    section.step_result .card h2.clinically,
+    section.step_result .card h2 {
+      margin-top: 2rem;
+    }
+    section.step_result .card .key_ingredients, section.step_result .card .clinically_proven, .why_nyumi {
+      margin-top: 1rem;
+    }
+    section.step_result .card .key_ingredients p {
+      padding: 1rem 0;
+      font-size: 12px;
+    }
+    section.step_result .card .key_ingredients img {
+      width: 75%;
+    }
+    section.step_result .card.gut-health p, section.step_result .card.fitness p {
+      width: 60%;
+      font-size: 14px;
+      padding-bottom: 1rem;
+    }
+    section.step_result .card.gut-health .constipation-content, section.step_result .card.gut-health .gas-bloating-content, section.step_result .card.fitness .fitness-content {
+      align-items: end;
+    }
+    section.step_result .card.gut-health .acidity-content, section.step_result .card.gut-health .constipation-content, section.step_result .card.gut-health .gas-bloating-content {
+      align-items: end
+    }
+    section.see-result .card {
+      margin: 1rem;
+    }
+    section.see-result .card hr {
+      width: 65%;
+    }
+    section.see-result .card h2{
+      width: 60%;
+      font-size: 13px;
+    }
+    section.see-result .card ul {
+      width: 100%;
+    }
+    .d-flex.item p {
+      padding: 1rem 0;
+      font-size: 14px;
+    }
+    .clinically_proven .key1 img,
+    .clinically_proven .key2 img,
+    .clinically_proven .key3 img {
+      width: 10rem !important;
+    }
+
+    .header strong {
+      padding: 0.5rem;
+      width: 28%;
+      font-size: 16px;
+    }
+    .carousel-control-prev {
+      left: -4% !important;
+    }
+    .carousel-control-next {
+      right: -4% !important;
+    }
+    button.try-it-now {
+      width: 95%;
+    }
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    text-decoration: none !important;
+    font-size: 16px;
+    font-weight: 600;
+    height: 35px;
+    width: 35px;
+    color: white !important;
+    border: solid 2px #f37168;
+    border-radius: 50%;
+    background-color: #f37168;
+    padding: 5px;
+    margin: 0;
+    position: absolute;
+    left: -10%;
+    top: 45%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+  .carousel-control-next {
+    right: -10%;
+    left: auto;
+  }
+  
+</style>
+<div class="quiz">
+  <div class="loader">
+    <i class="fa fa-spinner fa-spin" style="font-size:32px; color: #FF6662;"></i>
+    <p>Calculating Results</p>
+  </div>
+  <div class="quiz-background">
+    <section class="step1">
+      <h1>What is your gender?*</h1>
+      <div class="step1_options">
+        <label class="male">
+          <input type="radio" id="step1_male" value="Male" name="What is your gender?">
+          <label class="label_txt" for="step1_male">
+            <span class="" id="male_txt"></span>Male
+          </label>
+        </label>
+        <label class="female">
+          <input type="radio" id="step1_female" value="Female" name="What is your gender?">
+          <label class="label_txt" for="step1_female">
+            <span class="" id="female_txt"></span>Female
+          </label>
+        </label>
+        <label class="non-binary">
+          <input type="radio" id="step1_non-binary" value="Non-binary" name="What is your gender?">
+          <label class="label_txt" for="step1_non-binary">
+            <span class="" id="non-binary_txt"></span>Non binary
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step1-prevBtn">Previous</button>
+        <button class="next" id="step1-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step2">
+      <h1>What is your age?*</h1>
+      <div class="step2_options">
+        <label class="age1">
+          <input type="radio" id="step2_age1" value="18-25" name="What is your age?">
+          <label class="label_txt" for="step2_age1">
+            <span class="" id="age1_txt"></span>18-25
+          </label>
+        </label>
+        <label class="age2">
+          <input type="radio" id="step2_age2" value="26-35" name="What is your age?">
+          <label class="label_txt" for="step2_age2">
+            <span class="" id="age2_txt"></span>26-35
+          </label>
+        </label>
+        <label class="age3">
+          <input type="radio" id="step2_age3" value="36-45" name="What is your age?">
+          <label class="label_txt" for="step2_age3">
+            <span class="" id="age3_txt"></span>36-45
+          </label>
+        </label>
+        <label class="age4">
+          <input type="radio" id="step2_age4" value="46-55" name="What is your age?">
+          <label class="label_txt" for="step2_age4">
+            <span class="" id="age4_txt"></span>46-55
+          </label>
+        </label>
+        <label class="age5">
+          <input type="radio" id="step2_age5" value="56-65" name="What is your age?">
+          <label class="label_txt" for="step2_age5">
+            <span class="" id="age5_txt"></span>56-65
+          </label>
+        </label>
+        <label class="age6">
+          <input type="radio" id="step2_age6" value="65+" name="What is your age?">
+          <label class="label_txt" for="step2_age6">
+            <span class="" id="age6_txt"></span>65+
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step2-prevBtn">Previous</button>
+        <button class="next" id="step2-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step3">
+      <div class="header">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_24.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_28.png?v=1681331055" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>What are your top concerns?*</h1>
+      <div class="step3_options">
+        <label class="hair1">
+          <input type="checkbox" id="step3_hair1" value="Hair Loss" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair1">
+            <span class="" id="hair1_txt"></span>Hair loss
+          </label>
+        </label>
+        <label class="hair2">
+          <input type="checkbox" id="step3_hair2" value="Hair Fall and Breakage" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair2">
+            <span class="" id="hair2_txt"></span>Hair fall and breakage
+          </label>
+        </label>
+        <label class="hair3">
+          <input type="checkbox" id="step3_hair3" value="Hair greying" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair3">
+            <span class="" id="hair3_txt"></span>Hair greying
+          </label>
+        </label>
+        <label class="hair4">
+          <input type="checkbox" id="step3_hair4" value="Hair Thinning and Low Volume" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair4">
+            <span class="" id="hair4_txt"></span>Hair thinning and low volume
+          </label>
+        </label>
+        <label class="hair5">
+          <input type="checkbox" id="step3_hair5" value="Dull and rough hair" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair5">
+            <span class="" id="hair5_txt"></span>Dull and rough hair
+          </label>
+        </label>
+        <label class="hair6">
+          <input type="checkbox" id="step3_hair6" value="Dry and Itchy Scalp" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair6">
+            <span class="" id="hair6_txt"></span>Dry and itchy scalp
+          </label>
+        </label>
+        <label class="hair7">
+          <input type="checkbox" id="step3_hair7" value="Nails break easily" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair7">
+            <span class="" id="hair7_txt"></span>Nails break easily
+          </label>
+        </label>
+        <label class="hair8">
+          <input type="checkbox" id="step3_hair8" value="None of these" name="What are your top concerns?">
+          <label class="label_txt" for="step3_hair8">
+            <span class="" id="hair8_txt"></span>None of these
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step3-prevBtn">Previous</button>
+        <button class="next" id="step3-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step3a">
+      <div class="header">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_24.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_28.png?v=1681331055" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>When did you first notice your hairfall?*</h1>
+      <div class="step3a_options">
+        <label class="hair1">
+          <input type="radio" id="step3a_hair1" value="0-3 months ago" name="When did you first notice your hairfall?">
+          <label class="label_txt" for="step3a_hair1">
+            <span class="" id="hair1_txt"></span>0-3 months ago
+          </label>
+        </label>
+        <label class="hair2">
+          <input type="radio" id="step3a_hair2" value="3 -6 months ago" name="When did you first notice your hairfall?">
+          <label class="label_txt" for="step3a_hair2">
+            <span class="" id="hair2_txt"></span>3 -6 months ago
+          </label>
+        </label>
+        <label class="hair3">
+          <input type="radio" id="step3a_hair3" value="6-12 months ago" name="When did you first notice your hairfall?">
+          <label class="label_txt" for="step3a_hair3">
+            <span class="" id="hair3_txt"></span>6-12 months ago
+          </label>
+        </label>
+        <label class="hair4">
+          <input type="radio" id="step3a_hair4" value="More than a year ago" name="When did you first notice your hairfall?">
+          <label class="label_txt" for="step3a_hair4">
+            <span class="" id="hair4_txt"></span>More than a year ago
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step3a-prevBtn">Previous</button>
+        <button class="next" id="step3a-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step3b">
+      <div class="header">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_24.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_28.png?v=1681331055" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>How much hairfall are you experiencing?*</h1>
+      <div class="step3b_options">
+        <label class="hair1">
+          <input type="radio" id="step3b_hair1" value="Extreme hair fall " name="How much hairfall are you experiencing?">
+          <label class="label_txt" for="step3b_hair1">
+            <span class="" id="hair1_txt"></span>Extreme hair fall 
+          </label>
+        </label>
+        <label class="hair2">
+          <input type="radio" id="step3b_hair2" value="Mild Hair Fall" name="How much hairfall are you experiencing?">
+          <label class="label_txt" for="step3b_hair2">
+            <span class="" id="hair2_txt"></span>Mild hair fall
+          </label>
+        </label>
+        <label class="hair3">
+          <input type="radio" id="step3b_hair3" value="No hair fall" name="How much hairfall are you experiencing?">
+          <label class="label_txt" for="step3b_hair3">
+            <span class="" id="hair3_txt"></span>No hair fall
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step3b-prevBtn">Previous</button>
+        <button class="next" id="step3b-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step3c">
+      <div class="header">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_24.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_28.png?v=1681331055" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>What does a single strand of your hair feel like?*</h1>
+      <div class="step3c_options">
+        <label class="hair1">
+          <input type="radio" id="step3c_hair1" value="Thin" name="What does a single strand of your hair feel like?">
+          <label class="label_txt" for="step3c_hair1">
+            <span class="" id="hair1_txt"></span>Thin
+          </label>
+        </label>
+        <label class="hair2">
+          <input type="radio" id="step3c_hair2" value="Medium" name="What does a single strand of your hair feel like?">
+          <label class="label_txt" for="step3c_hair2">
+            <span class="" id="hair2_txt"></span>Medium
+          </label>
+        </label>
+        <label class="hair3">
+          <input type="radio" id="step3c_hair3" value="Thick" name="What does a single strand of your hair feel like?">
+          <label class="label_txt" for="step3c_hair3">
+            <span class="" id="hair3_txt"></span>Thick
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step3c-prevBtn">Previous</button>
+        <button class="next" id="step3c-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step3d">
+      <div class="header">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_24.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_28.png?v=1681331055" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>How dense is your hair?*</h1>
+      <div class="step3d_options">
+        <label class="hair1">
+          <input type="radio" id="step3d_hair1" value="Very dense" name="How dense is your hair?">
+          <label class="label_txt" for="step3d_hair1">
+            <span class="" id="hair1_txt"></span>Very dense
+          </label>
+        </label>
+        <label class="hair2">
+          <input type="radio" id="step3d_hair2" value="Medium volume" name="How dense is your hair?">
+          <label class="label_txt" for="step3d_hair2">
+            <span class="" id="hair2_txt"></span>Medium volume
+          </label>
+        </label>
+        <label class="hair3">
+          <input type="radio" id="step3d_hair3" value="Low volume" name="How dense is your hair?">
+          <label class="label_txt" for="step3d_hair3">
+            <span class="" id="hair3_txt"></span>Low volume
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step3d-prevBtn">Previous</button>
+        <button class="next" id="step3d-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step3e">
+      <div class="header">
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_24.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_28.png?v=1681331055" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>Where do you notice your hair loss?*</h1>
+      <div class="step3e_options">
+        <label class="hair1">
+          <input type="radio" id="step3e_hair1" value="Receding hairline (temples)" name="Where do you notice your hair loss?">
+          <label class="label_txt" for="step3e_hair1">
+            <span class="" id="hair1_txt"></span>Receding hairline (temples)
+          </label>
+        </label>
+        <label class="hair2">
+          <input type="radio" id="step3e_hair2" value="Hair thinning where I part my hair" name="Where do you notice your hair loss?">
+          <label class="label_txt" for="step3e_hair2">
+            <span class="" id="hair2_txt"></span>Hair thinning where I part my hair
+          </label>
+        </label>
+        <label class="hair3">
+          <input type="radio" id="step3e_hair3" value="Overall thinning throughout scalp" name="Where do you notice your hair loss?">
+          <label class="label_txt" for="step3e_hair3">
+            <span class="" id="hair3_txt"></span>Overall thinning throughout scalp
+          </label>
+        </label>
+        <label class="hair4">
+          <input type="radio" id="step3e_hair4" value="Bald spots" name="Where do you notice your hair loss?">
+          <label class="label_txt" for="step3e_hair4">
+            <span class="" id="hair4_txt"></span>Bald spots
+          </label>
+        </label>
+        <label class="hair5">
+          <input type="radio" id="step3e_hair5" value="None of the above" name="Where do you notice your hair loss?">
+          <label class="label_txt" for="step3e_hair5">
+            <span class="" id="hair5_txt"></span>None of the above
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step3e-prevBtn">Previous</button>
+        <button class="next" id="step3e-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step4a">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_25.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>How does your skin usually feel?*</h1>
+      <div class="step4a_options">
+        <label class="skin1">
+          <input type="radio" id="step4a_skin1" value="Dry skin" name="How does your skin usually feel?">
+          <label class="label_txt" for="step4a_skin1">
+            <span class="" id="skin1_txt"></span>Dry skin
+          </label>
+        </label>
+        <label class="skin2">
+          <input type="radio" id="step4a_skin2" value="Oily skin" name="How does your skin usually feel?">
+          <label class="label_txt" for="step4a_skin2">
+            <span class="" id="skin2_txt"></span>Oily skin
+          </label>
+        </label>
+        <label class="skin3">
+          <input type="radio" id="step4a_skin3" value="Acne prone" name="How does your skin usually feel?">
+          <label class="label_txt" for="step4a_skin3">
+            <span class="" id="skin3_txt"></span>Acne prone
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step4a-prevBtn">Previous</button>
+        <button class="next" id="step4a-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step4b">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_25.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>Which problems do you identify with?*</h1>
+      <div class="step4b_options">
+        <label class="skin1">
+          <input type="checkbox" id="step4b_skin1" value="Dull skin" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin1">
+            <span class="" id="skin1_txt"></span>Dull skin
+          </label>
+        </label>
+        <label class="skin2">
+          <input type="checkbox" id="step4b_skin2" value="Under eye darkness or redness" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin2">
+            <span class="" id="skin2_txt"></span>Under eye darkness or redness
+          </label>
+        </label>
+        <label class="skin3">
+          <input type="checkbox" id="step4b_skin3" value="Aging" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin3">
+            <span class="" id="skin3_txt"></span>Aging
+          </label>
+        </label>
+        <label class="skin4">
+          <input type="checkbox" id="step4b_skin4" value="Pigmentation" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin4">
+            <span class="" id="skin4_txt"></span>Pigmentation
+          </label>
+        </label>
+        <label class="skin5">
+          <input type="checkbox" id="step4b_skin5" value="Wrinkles (fine or coarse)" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin5">
+            <span class="" id="skin5_txt"></span>Wrinkles (fine or coarse)
+          </label>
+        </label>
+        <label class="skin6">
+          <input type="checkbox" id="step4b_skin6" value="Rough texture" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin6">
+            <span class="" id="skin6_txt"></span>Rough texture
+          </label>
+        </label>
+        <label class="skin7">
+          <input type="checkbox" id="step4b_skin7" value="None of the above" name="Which problems do you identify with?">
+          <label class="label_txt" for="step4b_skin7">
+            <span class="" id="skin7_txt"></span>None of the above
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step4b-prevBtn">Previous</button>
+        <button class="next" id="step4b-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step4c">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_25.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>Does your skin feel dehydrated?*</h1>
+      <div class="step4c_options">
+        <label class="skin1">
+          <input type="radio" id="step4c_skin1" value="Yes" name="Does your skin feel dehydrated?">
+          <label class="label_txt" for="step4c_skin1">
+            <span class="" id="skin1_txt"></span>Yes
+          </label>
+        </label>
+        <label class="skin2">
+          <input type="radio" id="step4c_skin2" value="No" name="Does your skin feel dehydrated?">
+          <label class="label_txt" for="step4c_skin2">
+            <span class="" id="skin2_txt"></span>No
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step4c-prevBtn">Previous</button>
+        <button class="next" id="step4c-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step4d">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_25.png?v=1681331054" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_30.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_29.png?v=1681331054" />
+      </div>
+      <h1>Describe your Skin elasticity*</h1>
+      <div class="step4d_options">
+        <label class="skin1">
+          <input type="radio" id="step4d_skin1" value="Loose and saggy" name="Describe your Skin elasticity">
+          <label class="label_txt" for="step4d_skin1">
+            <span class="" id="skin1_txt"></span>Loose and saggy
+          </label>
+        </label>
+        <label class="skin2">
+          <input type="radio" id="step4d_skin2" value="Less firm than earlier" name="Describe your Skin elasticity">
+          <label class="label_txt" for="step4d_skin2">
+            <span class="" id="skin2_txt"></span>Less firm than earlier
+          </label>
+        </label>
+        <label class="skin3">
+          <input type="radio" id="step4d_skin3" value="Firm skin" name="Describe your Skin elasticity">
+          <label class="label_txt" for="step4d_skin3">
+            <span class="" id="skin3_txt"></span>Firm skin
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step4d-prevBtn">Previous</button>
+        <button class="next" id="step4d-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step5a">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_49.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_30.png?v=1681331055" />
+      </div>
+      <h1>How many hours do you normally sleep at night?*</h1>
+      <div class="step5a_options">
+        <label class="sleep1">
+          <input type="radio" id="step5a_sleep1" value="Less than 6" name="How many hours do you normally sleep at night?">
+          <label class="label_txt" for="step5a_sleep1">
+            <span class="" id="sleep1_txt"></span>Less than 6
+          </label>
+        </label>
+        <label class="sleep2">
+          <input type="radio" id="step5a_sleep2" value="6-8" name="How many hours do you normally sleep at night?">
+          <label class="label_txt" for="step5a_sleep2">
+            <span class="" id="sleep2_txt"></span>6-8
+          </label>
+        </label>
+        <label class="sleep3">
+          <input type="radio" id="step5a_sleep3" value="More than 8" name="How many hours do you normally sleep at night?">
+          <label class="label_txt" for="step5a_sleep3">
+            <span class="" id="sleep3_txt"></span>More than 8
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step5a-prevBtn">Previous</button>
+        <button class="next" id="step5a-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step5b">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_49.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_30.png?v=1681331055" />
+      </div>
+      <h1>How well do you sleep?*</h1>
+      <div class="step5b_options">
+        <label class="sleep1">
+          <input type="radio" id="step5b_sleep1" value="Sleep peacefully" name="How well do you sleep?">
+          <label class="label_txt" for="step5b_sleep1">
+            <span class="" id="sleep1_txt"></span>Sleep peacefully
+          </label>
+        </label>
+        <label class="sleep2">
+          <input type="radio" id="step5b_sleep2" value="Disturbed sleep, I wake up at least once a night" name="How well do you sleep?">
+          <label class="label_txt" for="step5b_sleep2">
+            <span class="" id="sleep2_txt"></span>Disturbed sleep, I wake up at least once a night
+          </label>
+        </label>
+        <label class="sleep3">
+          <input type="radio" id="step5b_sleep3" value="Have difficulty falling asleep" name="How well do you sleep?">
+          <label class="label_txt" for="step5b_sleep3">
+            <span class="" id="sleep3_txt"></span>Have difficulty falling asleep
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step5b-prevBtn">Previous</button>
+        <button class="next" id="step5b-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step5c">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_49.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_30.png?v=1681331055" />
+      </div>
+      <h1>How stressed are you?*</h1>
+      <div class="step5c_options">
+        <label class="sleep1">
+          <input type="radio" id="step5c_sleep1" value="Not at all" name="How stressed are you?">
+          <label class="label_txt" for="step5c_sleep1">
+            <span class="" id="sleep1_txt"></span>Not at all
+          </label>
+        </label>
+        <label class="sleep2">
+          <input type="radio" id="step5c_sleep2" value="Low" name="How stressed are you?">
+          <label class="label_txt" for="step5c_sleep2">
+            <span class="" id="sleep2_txt"></span>Low
+          </label>
+        </label>
+        <label class="sleep3">
+          <input type="radio" id="step5c_sleep3" value="Moderate" name="How stressed are you?">
+          <label class="label_txt" for="step5c_sleep3">
+            <span class="" id="sleep3_txt"></span>Moderate
+          </label>
+        </label>
+        <label class="sleep4">
+          <input type="radio" id="step5c_sleep4" value="High" name="How stressed are you?">
+          <label class="label_txt" for="step5c_sleep4">
+            <span class="" id="sleep4_txt"></span>High
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step5c-prevBtn">Previous</button>
+        <button class="next" id="step5c-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step6">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_49.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_30.png?v=1681331055" />
+      </div>
+      <h1>Do you experience any of the following symptoms?*</h1>
+      <div class="step6_options">
+        <label class="general1">
+          <input type="checkbox" id="step6_general1" value="Constipation" name="Do you experience any of the following symptoms?">
+          <label class="label_txt" for="step6_general1">
+            <span class="" id="general1_txt"></span>Constipation
+          </label>
+        </label>
+        <label class="general2">
+          <input type="checkbox" id="step6_general2" value="Acidity" name="Do you experience any of the following symptoms?">
+          <label class="label_txt" for="step6_general2">
+            <span class="" id="general2_txt"></span>Acidity
+          </label>
+        </label>
+        <label class="general3">
+          <input type="checkbox" id="step6_general3" value="Gas and Bloating" name="Do you experience any of the following symptoms?">
+          <label class="label_txt" for="step6_general3">
+            <span class="" id="general3_txt"></span>Gas and bloating
+          </label>
+        </label>
+        <label class="general4">
+          <input type="checkbox" id="step6_general4" value="None" name="Do you experience any of the following symptoms?">
+          <label class="label_txt" for="step6_general4">
+            <span class="" id="general4_txt"></span>None
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step6-prevBtn">Previous</button>
+        <button class="next" id="step6-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step7">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_49.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_30.png?v=1681331055" />
+      </div>
+      <h1>How often do you exercise?*</h1>
+      <div class="step7_options">
+        <label class="general1">
+          <input type="radio" id="step7_general1" value="Once a week or less" name="How often do you exercise?">
+          <label class="label_txt" for="step7_general1">
+            <span class="" id="general1_txt"></span>Once a week or less
+          </label>
+        </label>
+        <label class="general2">
+          <input type="radio" id="step7_general2" value="Few times a week" name="How often do you exercise?">
+          <label class="label_txt" for="step7_general2">
+            <span class="" id="general2_txt"></span>Few times a week
+          </label>
+        </label>
+        <label class="general3">
+          <input type="radio" id="step7_general3" value="Daily" name="How often do you exercise?">
+          <label class="label_txt" for="step7_general3">
+            <span class="" id="general3_txt"></span>Daily
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step7-prevBtn">Previous</button>
+        <button class="next" id="step7-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step8">
+      <div class="header">
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_48.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img style="height: 75px; width: 75px;" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_49.png?v=1681892418" />
+        <img class="line" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Line_29.png?v=1680676711" />
+        <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_30.png?v=1681331055" />
+      </div>
+      <h1>What foods make up your daily diet?*</h1>
+      <div class="step8_options">
+        <label class="general1">
+          <input type="checkbox" id="step8_general1" value="Fruits" name="What foods make up your daily diet?">
+          <label class="label_txt" for="step8_general1">
+            <span class="" id="general1_txt"></span>Fruits
+          </label>
+        </label>
+        <label class="general2">
+          <input type="checkbox" id="step8_general2" value="Nuts and seeds" name="What foods make up your daily diet?">
+          <label class="label_txt" for="step8_general2">
+            <span class="" id="general2_txt"></span>Nuts and seeds
+          </label>
+        </label>
+        <label class="general3">
+          <input type="checkbox" id="step8_general3" value="Green Leafy Vegetables" name="What foods make up your daily diet?">
+          <label class="label_txt" for="step8_general3">
+            <span class="" id="general3_txt"></span>Green leafy vegetables
+          </label>
+        </label>
+        <label class="general4">
+          <input type="checkbox" id="step8_general4" value="Processed Foods" name="What foods make up your daily diet?">
+          <label class="label_txt" for="step8_general4">
+            <span class="" id="general4_txt"></span>Processed foods
+          </label>
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step8-prevBtn">Previous</button>
+        <button class="next" id="step8-nextBtn">Next</button>
+      </div>
+    </section>
+  
+    <section class="step9">
+      <h1>Mobile Number*</h1>
+      <div class="mobile-contact">
+        <label class="mob">
+          <input type="input" id="step9_mob" value="India +91" name="Mobile Number" disabled>
+        </label>
+        <label class="mob_number">
+          <input type="tel" id="step9_mob_number" value="" maxlength="10" name="Mobile Number">
+        </label>
+      </div>
+      <div class="footer">
+        <button class="previous" id="step9-prevBtn">Previous</button>
+        <button class="next" id="step9-nextBtn">Next</button>
+      </div>
+    </section>
+    
+    <section class="step10">
+      <h1>Fill Your Details</h1>
+      <label class="first_name">
+        <p>First Name*</p>
+        <input type="input" id="step10_first_name" value="" name="First Name" placeholder="First Name*">
+      </label>
+      <label class="last_name">
+        <p>Last Name*</p>
+        <input type="input" id="step10_last_name" value="" name="Last Name" placeholder="Last Name*">
+      </label>
+      <label class="email_id">
+        <p>Email ID*</p>
+        <input type="input" id="step10_email_id" value="" name="Email ID" placeholder="Email ID*">
+      </label>
+      <span class="error" style="color: red;">Please add more than 3 characters.</span>
+      <button class="submit" >Submit</button>
+      <div class="footer">
+        <button class="previous" id="step10-prevBtn">Previous</button>
+  <!--       <button class="next" id="step9-nextBtn">Next</button> -->
+      </div>
+    </section>
+  
+    <section class="step_result" style="padding-bottom: 1rem;">
+      <h1 class="user_name">Hi <span>XXX</span>,</h1>
+      <h2 class="subheading">Your personalised wellness plan is ready!</h2>
+      {% for product in collections['quiz-questionare'].products %}
+        <div class="card {{ product.title }}">
+          <img src="{{ product.images[0] | product_img_url: 'large' }}">
+          <h3>{{ product.title }}</h3>
+          <h3>{{ product.price | money_without_trailing_zeros }}</h3>
+          <div class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+          {% if product.id == 6092022481063 %}
+            <p>
+              Happy Hair gummies are formulated using an
+              enriching blend of western and Indian
+              ingredients like Biotin, Choline, Inositol, Zinc,
+              Selenium and Amla to give you hair that is
+              healthy and full of life.
+            </p>
+            
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="43191116792064" />
+              <input min="1" type="number" id="quantity" name="quantity" value="1" hidden/>
+              <input type="submit" value="Add to cart" class="btn" name="{{ product.title }}" id="{{ product.id }}" price="{{ product.price | divided_by: 100 }}" variant_id="43191116792064" />
+            </form>
+            <h2>Key ingredients</h2>
+            <div class="key_ingredients">
+              <div class="key1">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Biotin_2.png?v=1650373536" />
+                <p>BIOTIN</p>
+              </div>
+              <div class="key2">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Amla_1.png?v=1650373617" />
+                <p>AMLA EXTRACT</p>
+              </div>
+              <div class="key3">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Choline_3.png?v=1650373684" />
+                <p>CHOLINE</p>
+              </div>
+            </div>
+            <br>
+            <h2 class="clinically">India's First Clinically Proven hair gummies</h2>
+            <div class="clinically_proven" id="first-atc">
+              <div class="key1">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_32.png?v=1681331055" />
+                <p>Reduction in <br>hair fall</p>
+              </div>
+              <div class="key2">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_33.png?v=1681331055" />
+            <p>Increase in <br>hair growth</p>
+              </div>
+              <div class="key3">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_36.png?v=1681331055" />
+            <p>Enhanced <br>hair volume</p>
+              </div>
+            </div>
+            
+          {% endif %}
+          {% if product.id == 6094251163815 %}
+            <p>
+              Our beauty sleep gummies pack in the best of
+              Indian herbs and Western ingredients to help
+              you improve your sleep time and quality.
+              Additionally, they are packed with nutrients to
+              restore your skin health as you sleep.
+            </p>
+            
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="43191121576192" />
+              <input min="1" type="number" id="quantity" name="quantity" value="1" hidden/>
+              <input type="submit" value="Add to cart" class="btn" name="{{ product.title }}" id="{{ product.id }}" price="{{ product.price | divided_by: 100 }}" variant_id="43191121576192" />
+            </form>
+            <h2>Key ingredients</h2>
+            <div class="key_ingredients">
+              <div class="key1">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Melatonin_3.png?v=1649822163" />
+                <p>MELATONIN</p>
+              </div>
+              <div class="key2">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/vitamin_E_11.png?v=1649824017" />
+                <p>VITAMIN E</p>
+              </div>
+              <div class="key3">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/I-Theanine_only_greentea__2.png?v=1649822365" />
+                <p>L-THEANINE</p>
+              </div>
+            </div>
+            <br>
+            <h2 class="clinically">India's First Clinically Proven sleep gummies</h2>
+            <div class="clinically_proven">
+              <div class="key1">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_34.png?v=1681331055" />
+            <p>fall asleep within 15 minutes</p>
+              </div>
+              <div class="key2">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_40.png?v=1681331055" />
+            <p>slept longer & deeper</p>
+              </div>
+              <div class="key3">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_36.png?v=1681331055" />
+            <p>reduction in stress</p>
+              </div>
+            </div>
+            
+          {% endif %}
+          {% if product.id == 6091784978599 %}
+            <p>
+              Glowing skin is always in! Our radiant skin
+              gummies are formulated using a blend of 8
+              essential Indian herbs and Western ingredients.
+              Give your skin much needed nutrient-love for
+              that healthy glow, and build collagen from within.
+            </p>
+            
+          <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="43191120986368" />
+              <input min="1" type="number" id="quantity" name="quantity" value="1" hidden/>
+              <input type="submit" value="Add to cart" class="btn" name="{{ product.title }}" id="{{ product.id }}" price="{{ product.price | divided_by: 100 }}" variant_id="43191120986368" />
+            </form>
+            <h2>Key ingredients</h2>
+            <div class="key_ingredients">
+              <div class="key1">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Biotin_2.png?v=1650373536" />
+                <p>BIOTIN</p>
+              </div>
+              <div class="key2">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Amla_1.png?v=1650373617" />
+                <p>AMLA EXTRACT</p>
+              </div>
+              <div class="key3">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Choline_3.png?v=1650373684" />
+                <p>CHOLINE</p>
+              </div>
+            </div>
+            <br>
+            <h2 class="clinically">India's First Clinically Proven skin gummies</h2>
+            <div class="clinically_proven">
+              <div class="key1">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_38.png?v=1681331055" />
+                <p>Increase in <br>glow</p>
+              </div>
+              <div class="key2">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_35.png?v=1681331055" />
+                <p>reduction in dryness</p>
+              </div>
+              <div class="key3">
+                <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_50_1.png?v=1681891806" />
+                <p>reduction in fine lines & wrinkles</p>
+              </div>
+            </div>
+            
+          {% endif %}
+        </div>
+      {% endfor %}
+      <h1 class="wellness_heading" style="text-align: center; font-family: 'corbenr'; font-size: 26px; margin-bottom: 0;">wellness is holistic.</h1>
+      <h3 class="wellness_subheading" style="text-align: center;">Not just products, but a holistic approach.</h3>
+      <div class="card fitness">
+        <h2>Fitness</h2>
+        <div class="fitness-content">
+          <p>Get some movement in every day. Walk for 30 minutes, practice Yoga, go for a run. Exercise is critical to flushing out toxins, and enabling your organs to work at their best. It reduces stress and cortisol levels in the body.</p>
+          <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_10_7bf30bea-4767-4716-aa00-4cd0513e0227.png?v=1681720684" />
+        </div>
+      </div>
+  
+      <div class="card gut-health">
+        <h2>Gut health</h2>
+        <div class="acidity-content">
+          <p><span>Acidity-</span><br>Get some movement in every day. Walk for 30 minutes, practice Yoga, go for a run. Exercise is critical to flushing out toxins, and enabling your organs to work at their best. It reduces stress and cortisol levels in the body.</p>
+          <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_12_3cd1ec95-ebe3-4f64-9b08-9435a0651dc6.png?v=1681720683" />
+        </div>
+        <div class="constipation-content">
+          <p><span>Constipation-</span><br>Avoid large spicy greasy fatty meals. Have an early dinner, at least 2 hours before sleeping. Have small and frequent meals; not large intervals between meals.</p>
+          <img id="img1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_11_757b94e6-d9f0-41f5-b032-70a216257c92.png?v=1681720684" />
+          <img id="img2" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_45.png?v=1681741255" />
+        </div>
+        <div class="gas-bloating-content">
+          <p><span>Gas and Bloating-</span><br>Make sure your gut microbiome is healthy. Include fermented foods with good bacteria. It’s essential to have probiotics such as fermented foods and prebiotics like legumes and whole grain cereals.</p>
+          <img  src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_11_757b94e6-d9f0-41f5-b032-70a216257c92.png?v=1681720684" />
+          
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="see-result" style="padding: 1rem 0 !important; text-align: center;">
+    <h1>when will I see result?</h1>
+    <div class="card one-month">
+      <h2>1 month</h2>
+<!--       <hr> -->
+      <ul>
+        <li class="one">Treat internal root causes behind your hair and skin issues. Hair and Skin will start to feel more nourished.</li>
+        <li class="two">You will fall asleep more easily and sleep better through the night. </li>
+      </ul>
+    </div>
+    <div class="card two-month">
+      <h2>2 months</h2>
+<!--       <hr> -->
+      <ul>
+        <li class="one">Hair shine will improve, and hair will grow faster.</li>
+        <li class="two">Hairfall will reduce.</li>
+        <li class="three">Nails will chip less.</li>
+        <li class="four">Skin will feel hydrated and glossyness will increase.</li>
+      </ul>
+    </div>
+    <div class="card three-four-month">
+      <h2>3-4 months</h2>
+<!--       <hr> -->
+      <ul>
+        <li class="one">Hair fall and breakage will reduce significantly.</li>
+        <li class="two">Hair thickness and density will start to improve.</li>
+        <li class="three">Volume will increase.</li>
+        <li class="four">Wrinkles will reduce.</li>
+        <li class="five">Dryness will reduce.</li>
+        <li class="six">Skin will feel smooth.</li>
+        <li class="seven">Collagen synthesis will accelerate.</li>
+      </ul>
+    </div>
+    <div class="card five-six-month">
+      <h2>5-6 months</h2>
+<!--       <hr> -->
+      <ul>
+        <li class="one" class="one">New healthy hair will grow. Hair will be stronger and more resilient.</li>
+        <li class="two">Skin Pigmentation will reduce and Under eye, darkness will reduce.</li>
+        <li class="three">Skin firmness will increase.</li>
+      </ul>
+    </div>
+    <br>
+    {% section 'testimonial' %}
+    <a href="#first-atc"><button class="try-it-now">TRY IT NOW</button></a>
+  <br>
+  <h1>why nyumi?</h1>
+  <div class="why_nyumi">
+    <div class="key1">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_41.png?v=1681720996" />
+      <p>clinically<br>proven</p>
+    </div>
+    <div class="key2">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_42.png?v=1681720996" />
+      <p>indian natural<br>ingredients</p>
+    </div>
+    <div class="key3">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_43.png?v=1681720996" />
+      <p>advanced<br>western nutrients</p>
+    </div>
+  </div>
+    {% section 'product-page-icon' %}
+  </section>
+</div>
+<!-- <div style="margin:0 auto;" class="pxFormGenerator" id="FAY-8khQTA0mMBEbey9_nQ"></div> -->
+
+
+<script>
+
+  $('.carousel').carousel({
+  interval: 0
+})
+  
+  $('section input#step10_first_name').focusin(function(){
+    $('label.first_name p').show()
+    // $('label.first_name').css('padding-bottom','5px')
+    $('label.first_name p').css('font-size','15px')
+    $('section input#step10_first_name')[0].placeholder = ''
+  })
+  $('section input#step10_first_name').focusout(function(){
+    $('label.first_name p').hide()
+    // $('label.first_name').css('padding-bottom','1rem')
+    $('section input#step10_first_name')[0].placeholder = 'First Name*'
+  })
+
+  $('section input#step10_last_name').focusin(function(){
+    $('label.last_name p').show()
+    // $('label.last_name').css('padding-bottom','5px')
+    $('label.last_name p').css('font-size','15px')
+    $('section input#step10_last_name')[0].placeholder = ''
+  })
+  $('section input#step10_last_name').focusout(function(){
+    $('label.last_name p').hide()
+    // $('label.last_name').css('padding-bottom','1rem')
+    $('section input#step10_last_name')[0].placeholder = 'Last Name*'
+  })
+
+  $('section input#step10_email_id').focusin(function(){
+    $('label.email_id p').show()
+    // $('label.email_id').css('padding-bottom','5px')
+    $('label.email_id p').css('font-size','15px')
+    $('section input#step10_email_id')[0].placeholder = ''
+  })
+  $('section input#step10_email_id').focusout(function(){
+    $('label.email_id p').hide()
+    // $('label.email_id').css('padding-bottom','1rem')
+    $('section input#step10_email_id')[0].placeholder = 'Email ID*'
+  })
+  
+  setInterval(function(){
+    if($('#step1_male')[0].checked == true || $('#step1_female')[0].checked == true || $('#step1_non-binary')[0].checked == true){
+      $('#step1-nextBtn').css('pointer-events','all')
+      $('#step1-nextBtn').css('opacity','1')
+      $('#step1-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step1-nextBtn').css('pointer-events','none')
+      $('#step1-nextBtn').css('opacity','0.5')
+      $('#step1-nextBtn').css('background','gray')
+    }
+    
+    if($('#step2_age1')[0].checked == true || $('#step2_age2')[0].checked == true || $('#step2_age3')[0].checked == true || $('#step2_age4')[0].checked == true || $('#step2_age5')[0].checked == true || $('#step2_age6')[0].checked == true){
+      $('#step2-nextBtn').css('pointer-events','all')
+      $('#step2-nextBtn').css('opacity','1')
+      $('#step2-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step2-nextBtn').css('pointer-events','none')
+      $('#step2-nextBtn').css('opacity','0.5')
+      $('#step2-nextBtn').css('background','gray')
+    }
+    
+    if($('#step3_hair1')[0].checked == true || $('#step3_hair2')[0].checked == true || $('#step3_hair3')[0].checked == true || $('#step3_hair4')[0].checked == true || $('#step3_hair5')[0].checked == true || $('#step3_hair6')[0].checked == true || $('#step3_hair7')[0].checked == true || $('#step3_hair8')[0].checked == true){
+      $('#step3-nextBtn').css('pointer-events','all')
+      $('#step3-nextBtn').css('opacity','1')
+      $('#step3-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step3-nextBtn').css('pointer-events','none')
+      $('#step3-nextBtn').css('opacity','0.5')
+      $('#step3-nextBtn').css('background','gray')
+    }
+    
+    if($('#step3a_hair1')[0].checked == true || $('#step3a_hair2')[0].checked == true || $('#step3a_hair3')[0].checked == true || $('#step3a_hair4')[0].checked == true){
+      $('#step3a-nextBtn').css('pointer-events','all')
+      $('#step3a-nextBtn').css('opacity','1')
+      $('#step3a-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step3a-nextBtn').css('pointer-events','none')
+      $('#step3a-nextBtn').css('opacity','0.5')
+      $('#step3a-nextBtn').css('background','gray')
+    }
+    
+    if($('#step3b_hair1')[0].checked == true || $('#step3b_hair2')[0].checked == true || $('#step3b_hair3')[0].checked == true){
+      $('#step3b-nextBtn').css('pointer-events','all')
+      $('#step3b-nextBtn').css('opacity','1')
+      $('#step3b-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step3b-nextBtn').css('pointer-events','none')
+      $('#step3b-nextBtn').css('opacity','0.5')
+      $('#step3b-nextBtn').css('background','gray')
+    }
+    
+    if($('#step3c_hair1')[0].checked == true || $('#step3c_hair2')[0].checked == true || $('#step3c_hair3')[0].checked == true){
+      $('#step3c-nextBtn').css('pointer-events','all')
+      $('#step3c-nextBtn').css('opacity','1')
+      $('#step3c-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step3c-nextBtn').css('pointer-events','none')
+      $('#step3c-nextBtn').css('opacity','0.5')
+      $('#step3c-nextBtn').css('background','gray')
+    }
+    
+    if($('#step3d_hair1')[0].checked == true || $('#step3d_hair2')[0].checked == true || $('#step3d_hair3')[0].checked == true){
+      $('#step3d-nextBtn').css('pointer-events','all')
+      $('#step3d-nextBtn').css('opacity','1')
+      $('#step3d-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step3d-nextBtn').css('pointer-events','none')
+      $('#step3d-nextBtn').css('opacity','0.5')
+      $('#step3d-nextBtn').css('background','gray')
+    }
+    
+    if($('#step3e_hair1')[0].checked == true || $('#step3e_hair2')[0].checked == true || $('#step3e_hair3')[0].checked == true || $('#step3e_hair4')[0].checked == true || $('#step3e_hair5')[0].checked == true){
+      $('#step3e-nextBtn').css('pointer-events','all')
+      $('#step3e-nextBtn').css('opacity','1')
+      $('#step3e-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step3e-nextBtn').css('pointer-events','none')
+      $('#step3e-nextBtn').css('opacity','0.5')
+      $('#step3e-nextBtn').css('background','gray')
+    }
+    
+    if($('#step4a_skin1')[0].checked == true || $('#step4a_skin2')[0].checked == true || $('#step4a_skin3')[0].checked == true){
+      $('#step4a-nextBtn').css('pointer-events','all')
+      $('#step4a-nextBtn').css('opacity','1')
+      $('#step4a-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step4a-nextBtn').css('pointer-events','none')
+      $('#step4a-nextBtn').css('opacity','0.5')
+      $('#step4a-nextBtn').css('background','gray')
+    }
+    
+    if($('#step4b_skin1')[0].checked == true || $('#step4b_skin2')[0].checked == true || $('#step4b_skin3')[0].checked == true || $('#step4b_skin4')[0].checked == true || $('#step4b_skin5')[0].checked == true || $('#step4b_skin6')[0].checked == true || $('#step4b_skin7')[0].checked == true){
+      $('#step4b-nextBtn').css('pointer-events','all')
+      $('#step4b-nextBtn').css('opacity','1')
+      $('#step4b-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step4b-nextBtn').css('pointer-events','none')
+      $('#step4b-nextBtn').css('opacity','0.5')
+      $('#step4b-nextBtn').css('background','gray')
+    }
+    
+    if($('#step4c_skin1')[0].checked == true || $('#step4c_skin2')[0].checked == true){
+      $('#step4c-nextBtn').css('pointer-events','all')
+      $('#step4c-nextBtn').css('opacity','1')
+      $('#step4c-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step4c-nextBtn').css('pointer-events','none')
+      $('#step4c-nextBtn').css('opacity','0.5')
+      $('#step4c-nextBtn').css('background','gray')
+    }
+    
+    if($('#step4d_skin1')[0].checked == true || $('#step4d_skin2')[0].checked == true || $('#step4d_skin3')[0].checked == true){
+      $('#step4d-nextBtn').css('pointer-events','all')
+      $('#step4d-nextBtn').css('opacity','1')
+      $('#step4d-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step4d-nextBtn').css('pointer-events','none')
+      $('#step4d-nextBtn').css('opacity','0.5')
+      $('#step4d-nextBtn').css('background','gray')
+    }
+    
+    if($('#step5a_sleep1')[0].checked == true || $('#step5a_sleep2')[0].checked == true || $('#step5a_sleep3')[0].checked == true){
+      $('#step5a-nextBtn').css('pointer-events','all')
+      $('#step5a-nextBtn').css('opacity','1')
+      $('#step5a-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step5a-nextBtn').css('pointer-events','none')
+      $('#step5a-nextBtn').css('opacity','0.5')
+      $('#step5a-nextBtn').css('background','gray')
+    }
+    
+    if($('#step5b_sleep1')[0].checked == true || $('#step5b_sleep2')[0].checked == true || $('#step5b_sleep3')[0].checked == true){
+      $('#step5b-nextBtn').css('pointer-events','all')
+      $('#step5b-nextBtn').css('opacity','1')
+      $('#step5b-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step5b-nextBtn').css('pointer-events','none')
+      $('#step5b-nextBtn').css('opacity','0.5')
+      $('#step5b-nextBtn').css('background','gray')
+    }
+    
+    if($('#step5c_sleep1')[0].checked == true || $('#step5c_sleep2')[0].checked == true || $('#step5c_sleep3')[0].checked == true || $('#step5c_sleep4')[0].checked == true){
+      $('#step5c-nextBtn').css('pointer-events','all')
+      $('#step5c-nextBtn').css('opacity','1')
+      $('#step5c-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step5c-nextBtn').css('pointer-events','none')
+      $('#step5c-nextBtn').css('opacity','0.5')
+      $('#step5c-nextBtn').css('background','gray')
+    }
+    
+    if($('#step6_general1')[0].checked == true || $('#step6_general2')[0].checked == true || $('#step6_general3')[0].checked == true || $('#step6_general4')[0].checked == true){
+      $('#step6-nextBtn').css('pointer-events','all')
+      $('#step6-nextBtn').css('opacity','1')
+      $('#step6-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step6-nextBtn').css('pointer-events','none')
+      $('#step6-nextBtn').css('opacity','0.5')
+      $('#step6-nextBtn').css('background','gray')
+    }
+    
+    if($('#step7_general1')[0].checked == true || $('#step7_general2')[0].checked == true || $('#step7_general3')[0].checked == true){
+      $('#step7-nextBtn').css('pointer-events','all')
+      $('#step7-nextBtn').css('opacity','1')
+      $('#step7-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step7-nextBtn').css('pointer-events','none')
+      $('#step7-nextBtn').css('opacity','0.5')
+      $('#step7-nextBtn').css('background','gray')
+    }
+    
+    if($('#step8_general1')[0].checked == true || $('#step8_general2')[0].checked == true || $('#step8_general3')[0].checked == true || $('#step8_general4')[0].checked == true){
+      $('#step8-nextBtn').css('pointer-events','all')
+      $('#step8-nextBtn').css('opacity','1')
+      $('#step8-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step8-nextBtn').css('pointer-events','none')
+      $('#step8-nextBtn').css('opacity','0.5')
+      $('#step8-nextBtn').css('background','gray')
+    }
+
+    const regexExNo = /^[6-9]\d{9}$/gi;
+    if(regexExNo.test($('#step9_mob_number')[0].value)) {
+      $('#step9-nextBtn').css('pointer-events','all')
+      $('#step9-nextBtn').css('opacity','1')
+      $('#step9-nextBtn').css('background','#FF6662')
+    }
+    else {
+      $('#step9-nextBtn').css('pointer-events','none')
+      $('#step9-nextBtn').css('opacity','0.5')
+      $('#step9-nextBtn').css('background','gray')
+    }
+
+    const regexExMailID = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if($('#step10_first_name')[0].value.length > 3 && $('#step10_last_name')[0].value.length > 3) {
+      $('.step10 span.error').css('display','none')
+    }
+    else {
+      $('.step10 span.error').css('display','block')
+    }
+    if($('#step10_first_name')[0].value.length > 3 && $('#step10_last_name')[0].value.length > 3 && regexExMailID.test($('#step10_email_id')[0].value)) {
+      $('.step10 button.submit').css('pointer-events','all')
+      $('.step10 button.submit').css('opacity','1')
+      $('.step10 button.submit').css('background','#FF6662')
+    }
+    else {
+      $('.step10 button.submit').css('pointer-events','none')
+      $('.step10 button.submit').css('opacity','0.5')
+      $('.step10 button.submit').css('background','gray')
+    }
+  },500)
+  
+  $('section.step3').show()
+  $('#step1-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').show()
+    $('section.step3').hide()
+  })
+  $('#step1-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step8').show()
+    $('section.step3').hide()
+  })
+  $('#step2-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step9').show()
+  })
+  $('#step2-prevBtn').click(function(){
+    $('section.step1').show()
+    $('section.step2').hide()
+    $('section.step9').hide()
+  })
+  $('#step3-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    if($('#step3_hair2')[0].checked == true) {
+      $('section.step3a').show()
+    }
+    else if($('#step3_hair4')[0].checked == true) {
+      $('section.step3c').show()
+    }
+    else if($('#step3_hair1')[0].checked == true) {
+      $('section.step3e').show()
+    }
+    else {
+      $('section.step4a').show()
+    }
+  })
+  $('#step3-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').show()
+    $('section.step3').hide()
+  })
+  $('#step3a-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').show()
+    $('section.step4a').hide()
+  })
+  $('#step3a-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').show()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step4a').hide()
+  })
+  $('#step3b-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    if($('#step3_hair4')[0].checked == true) {
+      $('section.step3c').show()
+    }
+    else{
+      $('section.step4a').show()
+    }
+  })
+  $('#step3b-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').show()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step4a').hide()
+  })
+   $('#step3c-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').show()
+    $('section.step4a').hide()
+  })
+  $('#step3c-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').show()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step4a').hide()
+  })
+  $('#step3d-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    if($('#step3_hair1')[0].checked == true) {
+      $('section.step3e').show()
+    }
+    else{
+      $('section.step4a').show()
+    }
+  })
+  $('#step3d-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').show()
+    $('section.step3c').hide()
+    $('section.step4a').hide()
+  })
+  $('#step3e-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').show()
+  })
+  $('#step3e-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').show()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+  })
+  $('#step4a-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').show()
+  })
+  $('#step4a-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').show()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+  })
+  $('#step4b-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').show()
+  })
+  $('#step4b-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').show()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+  })
+  $('#step4c-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    if($('#step4b_skin3')[0].checked == true) {
+      $('section.step4d').show()
+    }
+    else {
+      $('section.step5a').show()
+    }
+  })
+  $('#step4c-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').show()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+  })
+  $('#step4d-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').show()
+  })
+  $('#step4d-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').show()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+  })
+  $('#step5a-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').show()
+  })
+  $('#step5a-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').show()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+  })
+  $('#step5b-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').show()
+  })
+  $('#step5b-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').show()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+  })
+  $('#step5c-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').show()
+  })
+  $('#step5c-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').show()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+  })
+  $('#step6-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').show()
+  })
+  $('#step6-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').show()
+    $('section.step6').hide()
+    $('section.step7').hide()
+  })
+  $('#step7-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').hide()
+    $('section.step8').show()
+  })
+  $('#step7-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').show()
+    $('section.step7').hide()
+    $('section.step8').hide()
+  })
+  $('#step8-nextBtn').click(function(){
+    $('section.step1').show()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').hide()
+    $('section.step8').hide()
+    $('section.step9').hide()
+  })
+  $('#step8-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').show()
+    $('section.step8').hide()
+    $('section.step9').hide()
+  })
+  $('#step9-nextBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').hide()
+    $('section.step8').hide()
+    $('section.step9').hide()
+    $('section.step10').show()
+  })
+  $('#step9-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').hide()
+    $('section.step8').show()
+    $('section.step9').hide()
+    $('section.step10').hide()
+  })
+  $('.step10 button.submit').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').hide()
+    $('section.step8').hide()
+    $('section.step9').hide()
+    $('section.step10').hide()
+    $('section.step_result').show()
+    $('section.see-result').show()
+    dataLayer.push({"event":"submit-quiz"})
+    })
+  $('#step10-prevBtn').click(function(){
+    $('section.step1').hide()
+    $('section.step2').hide()
+    $('section.step3').hide()
+    $('section.step3a').hide()
+    $('section.step3b').hide()
+    $('section.step3c').hide()
+    $('section.step3d').hide()
+    $('section.step3e').hide()
+    $('section.step4a').hide()
+    $('section.step4b').hide()
+    $('section.step4c').hide()
+    $('section.step4d').hide()
+    $('section.step5a').hide()
+    $('section.step5b').hide()
+    $('section.step5c').hide()
+    $('section.step6').hide()
+    $('section.step7').hide()
+    $('section.step8').hide()
+    $('section.step9').show()
+    $('section.step10').hide()
+    $('section.step_result').hide()
+    $('section.see-result').hide()
+  })
+  $('.step10 button.submit').click(function(){
+    $('.loader').css('display','flex')
+    $('.user_name span')[0].innerText = $('#step10_first_name')[0].value
+    if($('#step3_hair8')[0].checked) {
+      $('.step_result .card.hair').hide()
+    }
+    if($('#step4b_skin7')[0].checked) {
+      $('.step_result .card.skin').hide()
+    }
+    if($('#step5b_sleep1')[0].checked) {
+      $('.step_result .card.sleep').hide()
+    }
+    if($('#step7_general1')[0].checked) {
+      $('.card.fitness').show()
+    }
+    else{
+      $('.card.fitness').hide()
+    }
+    if($('#step6_general1')[0].checked) {
+      $('.constipation-content').css('display','flex')
+    }
+    if($('#step6_general2')[0].checked) {
+      $('.acidity-content').css('display','flex')
+    }
+    if($('#step6_general3')[0].checked) {
+      $('.gas-bloating-content').css('display','flex')
+    }
+    if($('#step6_general1')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').css('display','flex')
+      $('.acidity-content').hide()
+      $('.gas-bloating-content').hide()
+    }
+    if($('#step6_general2')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').hide()
+      $('.acidity-content').css('display','flex')
+      $('.gas-bloating-content').hide()
+    }
+    if($('#step6_general3')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').hide()
+      $('.acidity-content').hide()
+      $('.gas-bloating-content').css('display','flex')
+    }
+    if($('#step6_general1')[0].checked && $('#step6_general2')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').css('display','flex')
+      $('.acidity-content').css('display','flex')
+      $('.gas-bloating-content').hide()
+    }
+    if($('#step6_general1')[0].checked && $('#step6_general3')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').css('display','flex')
+      $('.acidity-content').hide()
+      $('.gas-bloating-content').css('display','flex')
+    }
+    if($('#step6_general2')[0].checked && $('#step6_general3')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').hide()
+      $('.acidity-content').css('display','flex')
+      $('.gas-bloating-content').css('display','flex')
+    }
+    if($('#step6_general1')[0].checked && $('#step6_general2')[0].checked && $('#step6_general3')[0].checked && $('#step6_general4')[0].checked) {
+      $('.constipation-content').css('display','flex')
+      $('.acidity-content').css('display','flex')
+      $('.gas-bloating-content').css('display','flex')
+    }
+    // Constipation image change script
+    var gasBloatingSection = $('.gas-bloating-content');
+    var image1 = $('#img1');
+    var image2 = $('#img2');
+    if (gasBloatingSection.css('display') == 'flex') {
+      image1.css('display', 'none');
+      image2.css('display', 'block');
+    } else {
+      image1.css('display', 'block');
+      image2.css('display', 'none');
+    }
+    
+    if($('#step6_general4')[0].checked && !$('#step6_general1')[0].checked && !$('#step6_general2')[0].checked && !$('#step6_general3')[0].checked) {
+      $('.card.gut-health').hide()
+    }
+    
+    if($('.step_result .card.hair').css('display') != 'none') {
+      $('.card.one-month li.one').show()
+      $('.card.two-month li.one').show()
+      $('.card.five-six-month li.one').show()
+    }
+    else{
+      $('.card.one-month li.one').hide()
+      $('.card.two-month li.one').hide()
+      $('.card.five-six-month li.one').hide()
+    }
+    if($('.step_result .card.sleep').css('display') != 'none') {
+      $('.card.one-month li.two').show()
+    }
+    else {
+      $('.card.one-month li.two').hide()
+    }
+    if($('.step_result .card.skin').css('display') != 'none') {
+      $('.card.one-month li.one').show()
+      $('.card.two-month li.four').show()
+      $('.card.three-four-month li.four').show()
+      $('.card.five-six-month li.two').show()
+      $('.card.five-six-month li.three').show()
+    }
+    else {
+      $('.card.one-month li.one').hide()
+      $('.card.two-month li.four').hide()
+      $('.card.three-four-month li.four').hide()
+      $('.card.five-six-month li.two').hide()
+      $('.card.five-six-month li.three').hide()
+    }
+    if($('#step3_hair2')[0].checked) {
+      $('.card.two-month li.two').show()
+      $('.card.three-four-month li.one').show()
+    }
+    else {
+      $('.card.two-month li.two').hide()
+      $('.card.three-four-month li.one').hide()
+    }
+    if($('#step3_hair7')[0].checked) {
+      $('.card.two-month li.three').show()
+    }
+    else {
+      $('.card.two-month li.three').hide()
+    }
+    if($('#step3_hair4')[0].checked) {
+      $('.card.three-four-month li.two').show()
+      $('.card.three-four-month li.three').show()
+    }
+    else {
+      $('.card.three-four-month li.two').hide()
+      $('.card.three-four-month li.three').hide()
+    }
+    if($('#step4c_skin1')[0].checked) {
+      $('.card.three-four-month li.five').show() 
+    }
+    else{
+      $('.card.three-four-month li.five').hide() 
+    }
+    if($('.card.one-month .one').css('display') == 'none' && $('.card.one-month .two').css('display') == 'none') {
+      $('.card.one-month').hide()
+    }
+    if($('.card.two-month .one').css('display') == 'none' && $('.card.two-month .two').css('display') == 'none' && $('.card.two-month .three').css('display') == 'none' && $('.card.two-month .four').css('display') == 'none') {
+      $('.card.two-month').hide()
+    }
+    if($('.card.three-four-month .one').css('display') == 'none' && $('.card.three-four-month .two').css('display') == 'none' && $('.card.three-four-month .three').css('display') == 'none' && $('.card.three-four-month .four').css('display') == 'none' && $('.card.three-four-month .five').css('display') == 'none' && $('.card.three-four-month .six').css('display') == 'none' && $('.card.three-four-month .seven').css('display') == 'none') {
+      $('.card.three-four-month').hide()
+    }
+    if($('.card.five-six-month .one').css('display') == 'none' && $('.card.five-six-month .two').css('display') == 'none') {
+      $('.card.five-six-month').hide()
+    }
+
+    var a=b=c=d=e=f=g=h=i=j=k=l=m=n=o=p=q=r=s=t=u=v='';
+    
+    if($('#step1_male')[0].checked) {
+      a = 'Male'
+    }
+    else if($('#step1_female')[0].checked) {
+      a = 'Female'
+    }
+    else {
+      a = 'Non Binary'
+    }
+    
+    if($('#step2_age1')[0].checked) {
+      b = '18-25'
+    }
+    else if($('#step2_age2')[0].checked) {
+      b = '26-35'
+    }
+    else if($('#step2_age3')[0].checked) {
+      b = '36-45'
+    }
+    else if($('#step2_age4')[0].checked) {
+      b = '46-55'
+    }
+    else if($('#step2_age5')[0].checked) {
+      b = '56-65'
+    }
+    else {
+      b = '65+'
+    }
+
+    for(var x=0; x<$('.step3_options input').length; x++) {
+      if($('.step3_options input')[x].checked) {
+          c = c + $('.step3_options input')[x].value + ' || '
+      }
+    }
+
+    if($('#step3a_hair1')[0].checked) {
+      d = $('#step3a_hair1')[0].value
+    }
+    else if($('#step3a_hair2')[0].checked) {
+      d = $('#step3a_hair2')[0].value
+    }
+    else if($('#step3a_hair3')[0].checked) {
+      d = $('#step3a_hair3')[0].value
+    }
+    else {
+      d = $('#step3a_hair4')[0].value
+    }
+
+    if($('#step3b_hair1')[0].checked) {
+      e = $('#step3b_hair1')[0].value
+    }
+    else if($('#step3b_hair2')[0].checked) {
+      e = $('#step3b_hair2')[0].value
+    }
+    else {
+      e = $('#step3b_hair3')[0].value
+    }
+
+    if($('#step3c_hair1')[0].checked) {
+      f = $('#step3c_hair1')[0].value
+    }
+    else if($('#step3c_hair2')[0].checked) {
+      f = $('#step3c_hair2')[0].value
+    }
+    else {
+      f = $('#step3c_hair3')[0].value
+    }
+
+    if($('#step3d_hair1')[0].checked) {
+      g = $('#step3d_hair1')[0].value
+    }
+    else if($('#step3d_hair2')[0].checked) {
+      g = $('#step3d_hair2')[0].value
+    }
+    else {
+      g = $('#step3d_hair3')[0].value
+    }
+
+    if($('#step3e_hair1')[0].checked) {
+      h = $('#step3e_hair1')[0].value
+    }
+    else if($('#step3e_hair2')[0].checked) {
+      h = $('#step3e_hair2')[0].value
+    }
+    else if($('#step3e_hair3')[0].checked) {
+      h = $('#step3e_hair3')[0].value
+    }
+    else if($('#step3e_hair4')[0].checked) {
+      h = $('#step3e_hair4')[0].value
+    }
+    else {
+      h = $('#step3e_hair5')[0].value
+    }
+
+    if($('#step4a_skin1')[0].checked) {
+      i = $('#step4a_skin1')[0].value
+    }
+    else if($('#step4a_skin2')[0].checked) {
+      i = $('#step4a_skin2')[0].value
+    }
+    else if($('#step4a_skin3')[0].checked) {
+      i = $('#step4a_skin3')[0].value
+    }
+    else {
+      i = $('#step4a_skin4')[0].value
+    }
+
+    for(var y=0; y<$('.step4b_options input').length; y++) {
+      if($('.step4b_options input')[y].checked) {
+          j = j + $('.step4b_options input')[y].value + ' || '
+      }
+    }
+
+    if($('#step4c_skin1')[0].checked) {
+      k = $('#step4c_skin1')[0].value
+    }
+    else {
+      k = $('#step4c_skin2')[0].value
+    }
+
+    if($('#step4d_skin2')[0].checked) {
+      l = $('#step4d_skin2')[0].value
+    }
+    else if($('#step4d_skin2')[0].checked) {
+      l = $('#step4d_skin2')[0].value
+    }
+    else {
+      l = $('#step4d_skin2')[0].value
+    }
+    
+    if($('#step5a_sleep1')[0].checked) {
+      m = $('#step5a_sleep1')[0].value
+    }
+    else if($('#step5a_sleep2')[0].checked) {
+      m = $('#step5a_sleep2')[0].value
+    }
+    else {
+      m = $('#step5a_sleep3')[0].value
+    }
+
+    for(var y=0; y<$('.step5b_options input').length; y++) {
+      if($('.step5b_options input')[y].checked) {
+          n = n + $('.step5b_options input')[y].value + ' || '
+      }
+    }
+
+    if($('#step5c_sleep1')[0].checked) {
+      o = $('#step5c_sleep1')[0].value
+    }
+    else if($('#step5c_sleep2')[0].checked) {
+      o = $('#step5c_sleep2')[0].value
+    }
+    else if($('#step5c_sleep3')[0].checked) {
+      o = $('#step5c_sleep3')[0].value
+    }
+    else {
+      o = $('#step5c_sleep4')[0].value
+    }
+    
+    if($('#step6_general1')[0].checked) {
+      p = $('#step6_general1')[0].value
+    }
+    else if($('#step6_general2')[0].checked) {
+      p = $('#step6_general2')[0].value
+    }
+    else if($('#step6_general3')[0].checked) {
+      p = $('#step6_general3')[0].value
+    }
+    else {
+      p = $('#step6_general4')[0].value
+    }
+    
+    
+    if($('#step7_general1')[0].checked) {
+      q = $('#step7_general1')[0].value
+    }
+    else if($('#step7_general2')[0].checked) {
+      q = $('#step7_general2')[0].value
+    }
+    else {
+      q = $('#step7_general3')[0].value
+    }
+    
+    for(var y=0; y<$('.step8_options input').length; y++) {
+      if($('.step8_options input')[y].checked) {
+          r = r + $('.step8_options input')[y].value + ' || '
+      }
+    }
+
+    s = $('#step9_mob_number')[0].value
+    t = $('#step10_first_name')[0].value
+    y = $('#step10_last_name')[0].value
+    v = $('#step10_email_id')[0].value
+
+    // var myHeaders = new Headers();
+    // myHeaders.append("X-Form-Access-Token", "fa6107e8728c6cfc");
+    // myHeaders.append("Content-Type", "application/json");
+    
+    // var raw = JSON.stringify({
+    //   "formResponse": {
+    //       "What is your gender": a,
+    //       "What is your age": b,
+    //       "What are your top concerns / Which of the following do you identify with": c,
+    //       "When did you first notice your hairfall": d,
+    //       "How much hairfall are you experiencing": e,
+    //       "What does a single strand of your hair feel like": f,
+    //       "How dense is your hair": g,
+    //       "Where do you notice your hair loss": h,
+    //       "How does your skin usually feel": i,
+    //       "Which problems do you identify with": j,
+    //       "Does your skin feel dehydrated": k,
+    //       "Describe your Skin elasticity": l,
+    //       "How many hours do you normally sleep at night": m,
+    //       "How well do you sleep": n,
+    //       "How stressed are you? / what are stress levels": o,
+    //       "Do you experience any of the following symptoms": p,
+    //       "How often do you exercise": q,
+    //       "Diet .. what all they eat daily": r,
+    //       "Phone No.": s,
+    //       "First Name": t,
+    //       "Last Name": u,
+    //       "Email ID": v
+    //     }
+    // });
+    
+    var isSubmitted = "TRUE"
+
+    //Login
+    webengage.user.login(v)
+    webengage.user.setAttribute({'Quiz Form Submitted': isSubmitted.toString()});
+    webengage.user.setAttribute({'What is your gender': a.toString()});
+    webengage.user.setAttribute({'What is your age': b.toString()});
+    webengage.user.setAttribute({'What are your top concerns': c.toString()});
+    webengage.user.setAttribute({'When did you first notice your hairfall': d.toString()});
+    webengage.user.setAttribute({'How much hairfall are you experiencing': e.toString()});
+    webengage.user.setAttribute({'What does a single strand of your hair feel like': f.toString()});
+    webengage.user.setAttribute({'How dense is your hair': g.toString()});
+    webengage.user.setAttribute({'Where do you notice your hair loss': h.toString()});
+    webengage.user.setAttribute({'How does your skin usually feel': i.toString()});
+    webengage.user.setAttribute({'Which problems do you identify with': j.toString()});
+    webengage.user.setAttribute({'Does your skin feel dehydrated': k.toString()});
+    webengage.user.setAttribute({'Describe your Skin elasticity': l.toString()});
+    webengage.user.setAttribute({'How many hours do you normally sleep at night': m.toString()});
+    webengage.user.setAttribute({'How well do you sleep': n.toString()});
+    webengage.user.setAttribute({'How stressed are you': o.toString()});
+    webengage.user.setAttribute({'Do you experience any of the following symptoms': p.toString()});
+    webengage.user.setAttribute({'How often do you exercise': q.toString()});
+    webengage.user.setAttribute({'Diet .. what all they eat daily': r});
+    webengage.user.setAttribute({'First Name': t});
+    webengage.user.setAttribute({'Last Name': u});
+    webengage.user.setAttribute({"Quiz Email ID": v})
+    webengage.user.setAttribute({"Quiz Phone No.": s})
+    
+    webengage.user.setAttribute("Quiz and Questionare", {
+        "formResponse": {
+          "What is your gender": a,
+          "What is your age": b,
+          "What are your top concerns / Which of the following do you identify with": c,
+          "When did you first notice your hairfall": d,
+          "How much hairfall are you experiencing": e,
+          "What does a single strand of your hair feel like": f,
+          "How dense is your hair": g,
+          "Where do you notice your hair loss": h,
+          "How does your skin usually feel": i,
+          "Which problems do you identify with": j,
+          "Does your skin feel dehydrated": k,
+          "Describe your Skin elasticity": l,
+          "How many hours do you normally sleep at night": m,
+          "How well do you sleep": n,
+          "How stressed are you? / what are stress levels": o,
+          "Do you experience any of the following symptoms": p,
+          "How often do you exercise": q,
+          "Diet .. what all they eat daily": r,
+          "Phone No.": s,
+          "First Name": t,
+          "Last Name": u,
+          "Email ID": v
+        }
+    });
+    //Set user attributes
+    
+    
+    //Logout
+    webengage.user.logout()
+    console.log(a)
+    console.log(b)
+    console.log(c)
+    console.log(d)
+    console.log(e)
+    console.log(f)
+    console.log(g)
+    console.log(h)
+    console.log(i)
+    console.log(j)
+    console.log(k)
+    console.log(l)
+    console.log(m)
+    console.log(n)
+    console.log(o)
+    console.log(p)
+    console.log(q)
+    console.log(r)
+    console.log(s)
+    console.log(t)
+    console.log(u)
+    console.log(v)
+    
+    console.log(a)
+    setTimeout(function(){
+      $('.loader').hide()
+    },1000)
+  })
+
+
+  // Disabling None of the above option for step 3
+
+$(document).ready(function() {
+  // get the none of the above checkbox and all other checkboxes
+  var noneOfTheAbove = $("#step3_hair8");
+  var allCheckboxes = $("div.step3_options input[type='checkbox']").not(noneOfTheAbove);
+  console.log("hi",allCheckboxes);
+  // when none of the above checkbox is clicked
+  noneOfTheAbove.on("click", function() {
+    if($(this).is(":checked")) {
+      // disable all other checkboxes
+      allCheckboxes.prop("disabled", true);
+    } else {
+      // enable all other checkboxes
+      allCheckboxes.prop("disabled", false);
+    }
+  });
+  
+  // when any other checkbox is clicked
+  allCheckboxes.on("click", function() {
+    for (var i=0 ; i<allCheckboxes.length ; i++) {
+      if (allCheckboxes[i].checked == true) {
+         noneOfTheAbove.prop("disabled", true) ;
+         break; 
+      }
+      else {
+      // enable none of the above checkbox
+      noneOfTheAbove.prop("disabled", false);
+    }
+    }
+   
+  });
+});
+
+
+    // Disabling None of the above option for step 4 B
+
+  $(document).ready(function() {
+  // get the none of the above checkbox and all other checkboxes
+  var noneOfTheAbove = $("#step4b_skin7");
+  var allCheckboxes = $("div.step4b_options input[type='checkbox']").not(noneOfTheAbove);
+  
+  // when none of the above checkbox is clicked
+  noneOfTheAbove.on("click", function() {
+    if($(this).is(":checked")) {
+      // disable all other checkboxes
+      allCheckboxes.prop("disabled", true);
+    } else {
+      // enable all other checkboxes
+      allCheckboxes.prop("disabled", false);
+    }
+  });
+  
+  // when any other checkbox is clicked
+  allCheckboxes.on("click", function() {
+    for (var i=0 ; i<allCheckboxes.length ; i++) {
+      if (allCheckboxes[i].checked == true) {
+         noneOfTheAbove.prop("disabled", true);
+        break;
+      }
+      else {
+      // enable none of the above checkbox
+      noneOfTheAbove.prop("disabled", false);
+    }
+    }
+   
+  });
+
+     // Disabling None of the above option for step 4 B
+
+    $(document).ready(function() {
+  // get the none of the above checkbox and all other checkboxes
+  var noneOfTheAbove = $("#step6_general4");
+  var allCheckboxes = $("div.step6_options input[type='checkbox']").not(noneOfTheAbove);
+  
+  // when none of the above checkbox is clicked
+  noneOfTheAbove.on("click", function() {
+    if($(this).is(":checked")) {
+      // disable all other checkboxes
+      allCheckboxes.prop("disabled", true);
+    } else {
+      // enable all other checkboxes
+      allCheckboxes.prop("disabled", false);
+    }
+  });
+  
+   allCheckboxes.on("click", function() {
+    for (var i=0 ; i<allCheckboxes.length ; i++) {
+      if (allCheckboxes[i].checked == true) {
+         noneOfTheAbove.prop("disabled", true);
+        break;
+      }
+      else {
+      // enable none of the above checkbox
+      noneOfTheAbove.prop("disabled", false);
+    }
+    }
+   
+  });
+});
+});
+
+
+$('.step_result .card form input.btn').click(function(event){
+  var name, id, price, variant_id
+  name = event.currentTarget.attributes['name'].value
+  id = event.currentTarget.attributes['id'].value
+  price = event.currentTarget.attributes['price'].value
+  variant_id = event.currentTarget.attributes['variant_id'].value
+  console.log(name, id, price, variant_id)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'quiz_add_to_cart',
+    ecommerce: {
+      currency: "INR",
+      ecomm_totalvalue: price,
+      items: [{
+        item_name: name,
+        item_id: id,
+        price: price,
+        item_brand: 'nyumi',
+        item_variant: variant_id
+      }],
+      value: price
+    }
+  });
+})
+   
+</script>

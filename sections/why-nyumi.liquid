@@ -1,0 +1,89 @@
+<style>
+  .bottom_section {
+    background-color: {{product.metafields.product_color.product_color}} !important;
+  }
+  #why_nyumi h3.cm_title {
+  	color: {{product.metafields.why_nyumi_titleColor.why_nyumi_titleColor}} !important;
+  }
+  #why_nyumi .icon_txts.white {
+    color: {{product.metafields.why_nyumi_titleColor.why_nyumi_titleColor}} !important;
+  }
+  #why_nyumi .icon_des {
+   color: {{product.metafields.description_color.description_color}} !important;
+  }
+</style>
+<div class="bottom_section bst icon-section2  {{ product.handle }}" id="why_nyumi" style="display: block;">
+  <div class="page_width">
+    {% if section.settings.title != blank %}
+    <h3 class="center white cm_title">
+      {{ section.settings.title }}
+    </h3>
+    {% endif %}
+    <div class="three-icon_box flx">
+      {% for block in section.blocks %}
+      <div class="three" data-index="{{ forloop.index }}">
+        {% if block.settings.image != blank %}
+        <div class="icon_img">
+          <img class="res_width1 lazyload" data-src="{{ block.settings.image | img_url:"master" }}" alt="{{ block.settings.image.alt }}">
+        </div>
+        {% endif %}
+        {% if block.settings.block_title != blank %}
+        <div class="icon_txts white">
+          {{ block.settings.block_title }}
+        </div>
+        {% endif %}
+        {% if block.settings.block_desc != blank %}
+        <div class="icon_des">
+          {{ block.settings.block_desc }}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Ehy Nyumi",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "why Nyumi"
+        }
+	],
+    "blocks":[
+           {
+            "type":"slider",
+            "name":"Slider",
+            "settings":[
+                {
+                  "type":"image_picker",
+                  "id":"image",
+                  "label":"Image"
+                },
+                {
+                  "type": "text",
+                  "id": "block_title",
+                  "label": "Block Title",
+                  "default": "power of two"
+                },
+                {
+                  "type": "html",
+                  "id": "block_desc",
+                  "label": "Block Description",
+				  "default": "When it comes to your nutrition, you shouldn’t have to choose just one. Our holistic nutrition combines the age-old science of Indian herbs like haldi, amla, tulsi, with advanced western nutrients like biotin and hyaluronic acid."
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

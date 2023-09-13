@@ -1,0 +1,80 @@
+<style>
+  #shopify-section-summer-video {
+    padding: 1rem 0;
+    border: solid 1px #E3786D;
+    border-left: 0;
+    border-right: 0;
+    background: #FFF4EF;
+  }
+  .summer-videos video {
+    width: 100%;
+    padding: 5px;
+    border-radius: 15px;
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<div class="summer-videos">
+  <div class="swiper-video">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          {{ block.settings.video | video_tag: autoplay: true, loop: false, muted: true, controls: true, playsinline: "playsinline", preload: "auto"}}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper_video = new Swiper('.swiper-video', {
+    slidesPerView: 2.2,
+    centeredSlides: false,
+    centeredSlidesBounds: false,
+    
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+
+    breakpoints: {
+    // when window width is >= 768px
+    768: {
+      slidesPerView: 5.5,
+      loop: true
+    }
+  }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Summer Video",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Video",
+        "type": "video",
+        "settings": [
+          {
+            "type": "video",
+            "id": "video",
+            "label": "Assign your video"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Summer Video"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

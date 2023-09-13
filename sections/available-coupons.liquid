@@ -1,0 +1,72 @@
+<div class="all_coupons">
+  <strong>Available Offers</strong>
+  {% for block in section.blocks %}
+    <div class="coupon-card" id="coupon-{{ forloop.index }}" max-limit={{ block.settings.max_limit }}>
+<!--       <img class="logo" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/logo-min.png?v=1646584758" /> -->
+      <div id="{{ block.settings.coupon_code }}" class="coupon-code">
+<!--         <div class="empty-stripe"></div> -->
+        <span>{{ block.settings.coupon_code }}</span>
+      </div>
+      <div class="apply_section">
+        <div class="apply-btn">Apply</div>
+      </div>
+      <p class="coupon-title">{{ block.settings.coupon_title }}</p>
+      <p class="coupon-description">{{ block.settings.coupon_description }}</p>
+    </div>
+  {% endfor %}
+</div>
+<script>
+  // setInterval(function(){
+  //   if(parseInt({{ block.settings.max_limit }}) < parseInt($('.grand-total .value')[0].innerText.split(' ')[1])) {
+  //     $('.apply_coupon_initial .input_box')[0].value = ''
+  //     $('.apply_coupon_initial .initial_apply_btn')[0].innerText = 'Apply'
+  //   }
+  // },1000)
+</script>
+
+{% schema %}
+  {
+    "name": "Available Coupons",
+    "class": "available-coupons",
+    "settings": [],
+    "blocks": [
+    {
+      "type": "text",
+      "name": "Coupon Details",
+      "settings": [
+          {
+            "type": "text",
+            "id": "coupon_title",
+            "label": "Coupon Title"
+          },
+          {
+            "type": "text",
+            "id": "coupon_description",
+            "label": "Coupon Description"
+          },
+          {
+            "type": "text",
+            "id": "coupon_code",
+            "label": "Coupon code"
+          },
+          {
+            "type": "text",
+            "id": "max_limit",
+            "label": "Max limit(at what cart price coupon will be activated)"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Coupon Details"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

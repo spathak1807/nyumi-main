@@ -1,0 +1,28 @@
+{%- for block in section.blocks -%}
+  <link rel="preload" href="{{block.settings.link}}" as="image">
+{%- endfor -%}
+{% schema %}
+  {
+    "name": "Preload Your Images",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "header",
+        "name": "Preload Link",
+        "settings": [
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,677 @@
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+
+<style>html {
+    scroll-behavior: smooth;
+}
+#shopify-section-summer-product1 {
+  background: #FFF4EF;
+  padding-top: 1rem;
+}
+  .all-products {
+        display: flex;
+    justify-content: space-around;
+    padding: 3rem 1rem;
+    background: #FFF4EF;
+  }
+.reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.reviews p {
+    margin: 0;
+}
+
+.reviews p.line {
+    margin: 0 0.5rem;
+}
+
+.reviews p.sold_unit {
+    font-size: 16px;
+    font-family: 'manropes';
+}
+
+div.wc_review_badge_wrap {
+    display: flex;
+}
+
+.wc_product_review_badge .wc_review_badge_inner {
+    width: unset;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+}
+
+.sold_unit {
+    padding-top: 2px;
+}
+
+.slick-dots li {
+    height: 3px !important;
+    width: 3px !important;
+}
+.slick-dots button {
+    padding: 4px !important;
+}
+
+.wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+    padding-left: 0;
+    font-size: 16px;
+    margin-top: 0;
+}
+.product-price {
+      font-size: 20px;
+    margin: 0.5rem 0;
+    margin-bottom: 0;
+  font-family: "Corbenr";
+}
+.product-price span {
+      font-size: 20px;
+    
+}
+#product1-carousel {
+    border-radius: 15px;
+    max-width: 30%;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ));
+    height: 100%;
+    padding-bottom: 4rem;
+    margin: 0 auto;
+    background: white;
+    margin-top: 4%;
+}
+
+#product1-carousel .product-images img {
+    padding-top: 60px;
+    max-height: 550px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#product1-carousel h2 {
+    font-family: "corbenr";
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 26px;
+    font-style: normal;
+    text-align: center;
+    color: #f37168;
+    padding-top: 35px;
+    text-transform: lowercase;
+}
+
+.wc_product_review_badge {
+    width: auto;
+    text-align: center;
+    font-size: 26px;
+    font-family: "manropes";
+
+
+}
+h2.clinically {
+  font-family: 'manropeb' !important;
+    color: black !important;
+    font-size: 16px !important;
+    width: 100%;
+    margin: 0 auto;
+    text-transform: inherit !important;
+}
+
+
+#product1-carousel .slick-dots {
+    padding-top: 80px;
+}
+
+#product1-carousel .slick-dots li button {
+    /*                 box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); */
+    border-radius: 50%;
+}
+
+#product1-carousel .slick-dots li button {
+    width: 5px;
+    height: 5px;
+    /*       margin: 0 1px; */
+    background-color: #ffcccc;
+
+
+}
+
+#product1-carousel .slick-dots li.slick-active button {
+    background-color: #f37168;
+    box-shadow: none;
+}
+
+
+
+
+
+
+.product-features {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.feature-column {
+    margin-right: 80px;
+}
+
+.feature-column:last-child {
+    margin-right: 0;
+}
+
+.feature-column ul {
+    margin: 0;
+    padding: 0;
+}
+
+.feature-column li {
+
+    margin-bottom: 10px;
+    font-family: "manropes";
+    font-size: 24px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.feature-column li:before {
+
+    color: #f37168;
+
+}
+
+
+.feature-column li:before {
+    content: "\2022";
+    color: #f37168;
+    margin-right: 10px;
+}
+
+
+form {
+    margin-top: 25px;
+}
+
+
+.add-to-cart-btn {
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    padding: 0.3rem;
+    font-family: 'corbenr';
+    text-transform: lowercase;
+    border-radius: 20px;
+    background: #f37168;
+}
+.clinically_proven {
+      display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: baseline;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.clinically_proven .key1 img,
+  .clinically_proven .key2 img,
+  .clinically_proven .key3 img {
+    width: 6rem !important;
+  }
+
+.wc_product_review_text {
+  display: none;
+}
+
+
+
+/* Media queries for mobile devices */
+@media screen and (max-width: 767px) {
+    #product1-carousel {
+        max-width: 100%;
+        height: 850px;
+        margin-top: 2%;
+        margin-bottom: 10%;
+    }
+    .all-products {
+      flex-direction: column;
+      padding: 2rem 1rem;
+    }
+    #product1-carousel .slick-dots li button {
+        margin: 0 0.5px;
+    }
+
+    #product1-carousel .product-images img {
+        padding-top: 30px;
+        max-height: 260px;
+    }
+
+    #product1-carousel h2 {
+        font-size: 20px;
+        padding-top: 30px;
+    }
+
+    .wc_product_review_badge {
+        padding-right: 0;
+
+    }
+
+    .feature-column {
+        margin-right: 50px;
+    }
+
+    .add-to-cart-btn {
+        width: 90%;
+    }
+
+    #product1-carousel form {
+        margin-bottom: 15px;
+    }
+
+    .product-features {
+        padding: 0 5px;
+        /*               padding-left: 30px; */
+
+
+    }
+  .clinically_proven .key1 img,
+    .clinically_proven .key2 img,
+    .clinically_proven .key3 img {
+      width: 4rem !important;
+    }
+  .clinically_proven {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+  .clinically_proven p {
+    font-size:12px;
+  }
+  form {
+    margin-top: 15px !important;
+}
+  h2.clinically {
+        width: 100%;
+    font-size: 14px !important;
+  }
+  .features-product {
+    margin-top: 5px !important;
+  }
+  #product1-carousel h2 {
+        padding-top: 5px !important;
+  }
+}
+
+
+@media screen and (max-width: 550px) {
+    #product1-carousel {
+        max-width: 100%;
+        height: 100%;
+        margin-top: 2%;
+        margin-bottom: 10%;
+        padding: 5px;
+        padding-bottom: 1rem;
+    }
+
+    .reviews p.sold_unit {
+        font-size: 12px;
+    }
+
+    .wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+        font-size: 13px;
+      padding-top: 3px;
+    }
+
+    .wc_product_review_badge {
+        width: auto;
+    }
+
+    .wc_review_badge_wrap .wc_icon_color svg,
+    #wc_review_section .wc_review_badge_wrap .wc_icon_color svg {
+        width: 80px !important;
+    }
+
+    #product1-carousel .slick-dots {
+        padding-top: 45px;
+    }
+
+    #product1-carousel h2 {
+        padding-top: 15px;
+        font-size: 24px;
+        margin: 5px;
+        letter-spacing: inherit;
+        font-weight: 500;
+    }
+
+    .feature-column li {
+        display: block;
+        margin-bottom: 10px;
+        font-family: "manrope";
+        font-size: 12px;
+        line-height: 1.5;
+        color: black;
+        font-weight: 500;
+    }
+
+    .add-to-cart-btn {
+        font-size: 16px;
+        font-family: "manrope";
+        font-weight: 500;
+        color: white;
+        border: none;
+        display: block;
+        letter-spacing: inherit;
+        margin: 0 auto;
+        width: 85%;
+        padding: 5px;
+        line-height: 1.5;
+        text-transform: lowercase;
+        border-radius: 20px;
+        background: #f37168;
+    }
+
+    .feature-box-img {
+        height: 45px;
+        width: 45px;
+        margin: 0 auto;
+    }
+
+    .wc_product_review_title {
+        padding-top: 2px;
+    }
+
+    .wc_product_review_text {
+        display: none;
+    }
+
+
+    .features-product {
+        width: 100% !important;
+    }
+
+    .feature-txt {
+        font-size: 12px;
+    }
+  
+}
+
+.features-product {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.feature-box-img {
+    height: 55px;
+    width: 55px;
+
+    margin: 0 auto;
+}
+
+.feature-box-img img {
+    height: 90%
+}
+
+.feature-txt {
+    margin-top: 10px;
+}
+
+ 
+  }
+ .product-price {
+        text-align: center;
+    font-family: "Corbenr";
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 16px;
+    font-style: normal;
+    margin: 10px 10px;
+    /* text-align: left; */
+    color: #000000;
+  }
+
+  .product-price span {
+        opacity: 0.40;
+    font-family: "Corbenr";
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 16px;
+    font-style: normal;
+    text-align: left;
+    color: #707070;
+    text-decoration: line-through;
+}
+
+  .benefit-title {
+        font-family: "Corben";
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 0px;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+}
+  }
+
+  .pd_icon_section {
+    background-color: white;
+  }
+  .product-price {
+    text-align:center;
+  }
+
+  .key1 , .key2 , .key3 {
+    width: 31%;
+  }
+</style>
+<div class="all-products">
+  {% for product in collections['quiz-questionare'].products %}
+    {% if product.id == 6092022481063 %}
+    <div id="product1-carousel">
+      <div id="add_to_cart" class="product-images">
+        {% for image in product.images %}
+          {% if forloop.index <= 10 %}
+            <img class="{{ forloop.index }}" src="{{ image | img_url: '' }}">
+          {% endif %}
+        {% endfor %}
+      </div>
+      <h2>{{ product.title }}</h2>
+      <p class="product-price"> {{ product.price | money_without_trailing_zeros }} <span>{{ product.compare_at_price | money_without_trailing_zeros }}</span> </p>
+      <div class="reviews">
+        <div class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+        <p class="line"> | </p>
+        <p class="sold_unit">Trusted by 50k+ women</p>
+      </div>
+
+  <div class="features-product">
+    <div class="feature-box"> 
+    <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_23_26389f47-89f3-4c8e-ba9e-ab85910d234a.png?v=1667480266" ></div>
+      <div class="feature-txt" >Reduces Hairfall</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_26_7b9561a3-473b-4c92-b4dd-b10fb92acd3a.png?v=1667480285"></div>
+      <div class="feature-txt" >Delays Grey Hair</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img"> 
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_28_789fbf8e-b0ec-40ea-b09a-911a8c0f4664.png?v=1667480250" ></div>
+      <div class="feature-txt" >Nourished Hair</div>
+        
+    </div>
+  </div>
+
+  <h2 class="clinically">India's First Clinically Proven sleep gummies</h2>
+  <div class="clinically_proven">
+    <div class="key1">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_32.png?v=1681331055" />
+  <p>reduction in <br>hair fall</p>
+    </div>
+    <div class="key2">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_33.png?v=1681331055" />
+  <p>increase in <br>hair growth</p>
+    </div>
+    <div class="key3">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_36.png?v=1681331055" />
+  <p>enhanced <br>hair volume</p>
+    </div>
+  </div>
+
+      <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+    </div>
+    {% endif %}
+
+  {% if product.id == 6094251163815 %}
+    <div id="product1-carousel">
+    <div id="add_to_cart" class="product-images">
+        {% for image in product.images %}
+          {% if forloop.index <= 10 %}
+            <img class="{{ forloop.index }}" src="{{ image | img_url: '' }}">
+          {% endif %}
+        {% endfor %}
+      </div>
+      <h2>{{ product.title }}</h2>
+      <p class="product-price"> {{ product.price | money_without_trailing_zeros }} <span>{{ product.compare_at_price | money_without_trailing_zeros }}</span> </p>
+      <div class="reviews">
+        <div class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+        <p class="line"> | </p>
+        <p class="sold_unit">Trusted by 50k+ women</p>
+      </div>
+
+  <div class="features-product">
+    <div class="feature-box"> 
+    <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_6.png?v=1649820463" ></div>
+      <div class="feature-txt" >Ensures Sound Sleep</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_7.png?v=1649820537"></div>
+      <div class="feature-txt" >Relaxes Mind</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img"> 
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_8.png?v=1649820990" ></div>
+      <div class="feature-txt" >Reduces Stress</div>
+        
+    </div>
+  </div>
+
+  <h2 class="clinically">India's First Clinically Proven sleep gummies</h2>
+  <div class="clinically_proven">
+    <div class="key1">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_34.png?v=1681331055" />
+  <p>fall asleep within 15 minutes</p>
+    </div>
+    <div class="key2">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_40.png?v=1681331055" />
+  <p>slept longer & deeper</p>
+    </div>
+    <div class="key3">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_36.png?v=1681331055" />
+  <p>reduction in stress</p>
+    </div>
+  </div>
+
+      <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+    </div>
+  {% endif %}
+
+  {% if product.id == 6091784978599 %}
+    <div id="product1-carousel">
+    <div id="add_to_cart" class="product-images">
+        {% for image in product.images %}
+          {% if forloop.index <= 10 %}
+            <img class="{{ forloop.index }}" src="{{ image | img_url: '' }}">
+          {% endif %}
+        {% endfor %}
+      </div>
+      <h2>{{ product.title }}</h2>
+      <p class="product-price"> {{ product.price | money_without_trailing_zeros }} <span>{{ product.compare_at_price | money_without_trailing_zeros }}</span> </p>
+      <div class="reviews">
+        <div class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+        <p class="line"> | </p>
+        <p class="sold_unit">Trusted by 50k+ women</p>
+      </div>
+
+  <div class="features-product">
+    <div class="feature-box"> 
+    <div class="feature-box-img">
+    <img src="https://images.ctfassets.net/537ig19c198x/54kne6Ve3WvMKtWe3BR1Qy/7169e3fe7ba296593148ecaceda235fc/Group_22.png" ></div>
+      <div class="feature-txt" >Builds Collagen</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/skin_benefit_icon_reduces_wrinkles.png?v=1649248251"></div>
+      <div class="feature-txt" >Reduces Wrinkles</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img"> 
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/skin_benefit_icon_nourishing_skin.png?v=1649821082" ></div>
+      <div class="feature-txt" >Nourished Skin</div>
+        
+    </div>
+  </div>
+
+  <h2 class="clinically">India's First Clinically Proven sleep gummies</h2>
+  <div class="clinically_proven">
+    <div class="key1">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_38.png?v=1681331055" />
+  <p>increase in <br>glow</p>
+    </div>
+    <div class="key2">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_35.png?v=1681331055" />
+  <p>reduction in dryness</p>
+    </div>
+    <div class="key3">
+      <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_50_1.png?v=1681891806" />
+  <p>reduction in fine lines & wrinkles</p>
+    </div>
+  </div>
+
+      <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+    </div>
+  {% endif %}
+  {% endfor %}
+</div>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#product1-carousel .product-images').slick({
+      arrows: false,
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      centerMode: true,
+      swipe: true,
+      variableWidth: true
+    });
+  });
+</script>

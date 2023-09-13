@@ -1,0 +1,52 @@
+<style>
+  .desktop_banner {
+    display: block;
+  }
+  .mobile_banner {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop_banner {
+      display: none;
+    }
+    .mobile_banner {
+      display: block;
+    }
+  }
+</style>
+
+<div class="desktop_banner">
+  <img src="{{ section.settings.desktop_banner | img_url: '' }}" />
+</div>
+<div class="mobile_banner">
+  <img src="{{ section.settings.mobile_banner | img_url: '' }}" />
+</div>
+
+{% schema %}
+  {
+    "name": "New Collection Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "desktop_banner",
+        "label": "Desktop Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_banner",
+        "label": "Mobile Image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "New Collection Banner"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

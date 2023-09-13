@@ -1,0 +1,39 @@
+<div class="careers_bottom_banner" id="careers_bottom_banner">
+  <div class="crbb_inner">
+    {% if section.settings.title != blank %}
+    <h2 class="crbb_heading">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.description != blank %}
+    <div class="crbb_txt">
+      {{ section.settings.description }}
+      <br><br><br>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Career Chat",
+    "settings": [
+	 {
+	    "type": "text",
+	    "id": "title",
+	    "label": "Title",
+		"default": "think outside the list"
+	  },
+	  {
+	    "type": "richtext",
+	    "id": "description",
+	    "label": "Description",
+	    "default": "<p>If you believe you can bring value to our team through a role that’s not yet on our list, let’s chat.<br><br>write in to&nbsp;</p>"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,57 @@
+{% form 'product', product, class:'product-form product-form-product-template', novalidate: 'novalidate', data-product-form: '' %}
+           
+            
+        
+           <div class="btn_qty_flx">
+           
+<div class="product-form__controls-group">
+                
+                  
+                  <div class="prodcut_qty_box">
+                    <div class="product_sign qty_minis"><img src="{{ 'minus.png' | asset_url }}" alt="#"/></div> 
+                    <input type="text" id="Quantity-{{ section.id }}"
+                      name="quantity" value="1" min="1" pattern="[0-9]*"
+                      class="product-form__input product-form__input--quantity" data-quantity-input
+                    >
+                    <div class="product_sign qty_plus"><img src="{{ 'plus.png' | asset_url }}" alt="#"/></div>
+                  </div>
+                  
+                
+              </div>
+             
+            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}"
+              data-error-message-wrapper
+              role="alert"
+            >
+              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+              {% include 'icon-error' %}
+              <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+            </div>
+
+            <div class="product-form__controls-group--submit_new">
+              <div class="product-form__item--submit_new"
+              >
+                <button type="submit" name="add"
+                  {% unless product.available %} aria-disabled="true"{% endunless %}
+                  aria-label="{% unless product.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                  class="btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"
+                  {% if settings.enable_ajax %}aria-haspopup="dialog"{% endif %}
+                  data-add-to-cart>
+                  <span data-add-to-cart-text>
+                    {% unless product.available %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% else %}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {% endunless %}
+                  </span>
+                  <span class="hide" data-loader>
+                    {% include 'icon-spinner' %}
+                  </span>
+                </button>
+                
+              </div>
+            </div>
+        
+         </div>
+        
+          {% endform %}

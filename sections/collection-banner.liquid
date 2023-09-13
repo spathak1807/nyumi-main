@@ -1,0 +1,58 @@
+<div id="collectino_banner" class="collection_banner relative">
+  {% if section.settings.image != blank %}
+  <img src="{{ section.settings.image | img_url: 'master' }}" class="collection_desktop_img" alt="{{ section.settings.image.alt }}">
+  {% endif %}
+  {% if section.settings.mobile_image != blank %}
+  <img src="{{ section.settings.mobile_image | img_url: 'master' }}" class="collection_mob_img lazyload" alt="{{ section.settings.mobile_image.alt }}">
+  {% endif %}
+  <div class="absolute">
+    <div class="banner_text">
+      {% if section.settings.title1 != blank %}
+      <div class="small_text center cm_title comcol">
+        {{ section.settings.title1 }}
+      </div>
+      {% endif %}
+      {% if section.settings.title2 != blank %}
+      <h1 class="banner_heading center top_heading">
+        {{ section.settings.title2 }}
+      </h1>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection banner",
+    "settings": [
+	  {
+		"type": "image_picker",
+		"id": "image",
+		"label": "Desktop background image"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "mobile_image",
+		"label": "Mobile background image"
+	  },
+	  {
+		"type": "text",
+		"id": "title1",
+		"label": "Title 1",
+	    "default": "goodbye pills & powders"
+	  },
+	  {
+		"type": "text",
+		"id": "title2",
+		"label": "Title 2",
+	    "default": "hello gummies"
+	  }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

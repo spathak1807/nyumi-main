@@ -1,0 +1,1389 @@
+<link rel="preload" href="{{ 'jquery.js' | asset_url }}" as="script">
+<link rel="preload" href="{{ 'slick.js' | asset_url }}" as="script">
+
+
+<style>
+.product-price-btn {
+  display: none;
+}
+  .price__regular, span.price-item.price-item--sale {
+/*     margin-left: 1rem; */
+/*     font-size: 18px; */
+  }
+  .product__price_ab_test {
+    display: none;
+  }
+  .product-template__container .product-single .btn_qty_flx [type=submit] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+  }
+  .price-item {
+    color: white !important;
+  }
+  .concern-option p {
+    font-size: 18px;
+  }
+  .options p {
+    width: 31% !important;
+    text-align: center;
+    margin-bottom: 0 !important;
+    background: gray; 
+    opacity: 0.5;
+    color: white;
+    padding: 8px 0;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  .options p.active {
+    background: #f37168;
+    opacity: 01;
+  }
+  #product_slider_thumb img {
+    height: 65px;
+    width: 65px;
+  }
+  .component_location img {
+    height: auto !important;
+    width: 100% !important;
+  }
+  .variant-section {
+    display: flex;
+    flex-flow: row wrap;
+    border: none;
+    margin: 0;
+    padding-left: 0;
+    padding-top: 0;
+  }
+  .variant-section > div {
+    flex: 1;
+    padding: 0.5rem;
+  }
+  input[type=radio] {
+    display: none;
+  }
+  input[type=radio]:checked + label {
+    background: #FFEAEA;
+    border-radius: 5px;
+  }
+  .variant-title, .variant-desc, .variant-price, .variant-discount {
+    display: block;
+    font-family: Helvetica,Helvetica Neue,Arial,Lucida Grande,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  input[type=radio]:checked + label .variant-title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .variant-title {
+    margin-bottom: 7px;
+  }
+  label {
+    width:100%;
+    height: 100%;
+    display: block;
+    background: #F9F9F9;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .variant-desc {
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.02em;
+  }
+  .variant-price {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  .variant-discount {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: #f37168;
+  }
+  @media only screen and (max-width: 900px) {
+    #product_slider_thumb img {
+      height: 50px;
+      width: 50px;
+    }
+    .variant-section > div {
+      flex: 0 0 200px;
+      padding: 0;
+    }
+    .variant-section {
+    display: flex;
+    flex-flow: nowrap;
+    gap: 5px;
+    border: none;
+    margin: 0;
+    padding-left: 0;
+    padding-top: 0;
+    overflow-x: auto;
+    padding-right: 0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+   }
+  }
+  @media only screen and (max-width: 500px) {
+    .concern-option p {
+      font-size: 14px;
+    }
+    .options p {
+      font-size: 11px;
+    }
+    #product_slider_thumb img {
+      height: 28px;
+      width: 28px;
+    }
+    .product_breadcrumbs {
+      padding-bottom: 1rem;
+    }
+    .product_sub_type,
+    .shipping_label {
+      display: none !important;
+    }
+    .product__price {
+      display: none !important;
+    }
+    .product__price_ab_test .price--on-sale .price__sale {
+      font-size: 16px !important;
+      color: gray;
+    }
+    .product__price_ab_test .price__pricing-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+    .product__price_ab_test .price-item--sale {
+      color: black;
+      font-family: 'corbenr';
+      font-size: 24px !important;
+    }
+    .product__price_ab_test {
+      display: block;
+    }
+    .product-price-btn {
+      display: block;
+    }
+  }
+
+ .product_thumb .slider_thumb.packs_img{
+    display:none;
+  }
+  
+</style>
+<div class="product-template__container page-width"
+  id="ProductSection-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="product"
+  data-enable-history-state="true"
+  data-ajax-enabled="{{ settings.enable_ajax }}"
+  itemscope itemtype=" http://schema.org/Product"
+>
+   
+  {% comment %}
+    Get first variant, or deep linked one
+  {% endcomment %}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign product_image_zoom_size = '1024x1024' -%}
+  {%- assign product_image_scale = '2' -%}
+  {%- assign enable_image_zoom = section.settings.enable_image_zoom -%}
+  {%- assign compare_at_price = current_variant.compare_at_price -%}
+  {%- assign price = current_variant.price -%}
+
+  {% case section.settings.media_size %}
+    {% when 'small' %}
+      {%- assign product_media_width = 'medium-up--one-third' -%}
+      {%- assign product_description_width = 'medium-up--two-thirds' -%}
+      {%- assign height = 345 -%}
+    {% when 'medium' %}
+      {%- assign product_media_width = 'medium-up--one-half' -%}
+      {%- assign product_description_width = 'medium-up--one-half' -%}
+      {%- assign height = 530 -%}
+    {% when 'large' %}
+      {%- assign product_media_width = 'medium-up--two-thirds' -%}
+      {%- assign product_description_width = 'medium-up--one-third' -%}
+      {%- assign height = 720 -%}
+    {% when 'full' %}
+      {%- assign product_media_width = '' -%}
+      {%- assign product_description_width = '' -%}
+      {%- assign height = 1090 -%}
+      {%- assign enable_image_zoom = false -%}
+  {% endcase %}
+
+  <div class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.media_size }}-media{% endif %}">
+    <div class="grid__item product-single__media-group {{ product_media_width }}{% if section.settings.media_size == 'full' %} product-single__media-group--full{% endif %}" data-product-single-media-group>
+      <div class="product_image" id="product_slider">
+        {% for image in product.images %}
+        <div class="slider_itmes">
+          <img src="{{ image.src | product_img_url: 'master' }}" alt="{{ image.alt }}" />
+        </div>
+        {% endfor %}
+      </div>
+       <div class="product_thumb_outer">
+         <ul class="product_thumb" id="product_slider_thumb" style="min-width: 100%;"">
+           {% assign data_index_value = 0 %}
+           {% for image in product.images %}
+           <li data-index="{{ data_index_value }}" class="slider_thumb {{ image.src.alt }}" style="width: 8px; height: 8px; margin: 5px; background: grey; border-radius: 50%; opacity: 0.5;>
+             <span class="dots" style="height: 50px; width: 50px; border-radius: 50%; background: gray;"></span>
+           {% assign data_index_value = data_index_value | plus: 1 %}
+           </li>
+           {% endfor %}
+         </ul>
+      </div>
+      
+      {% comment %}
+      {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+
+      {%- for media in product.media -%}
+        {% include 'media', media: media, featured_media: featured_media, height: height, enable_image_zoom: enable_image_zoom, image_zoom_size: product_image_zoom_size, image_scale: product_image_scale %}
+      {%- endfor -%}
+
+      <noscript>
+        {% capture product_image_size %}{{ height }}x{% endcapture %}
+        <img src="{{ featured_media | img_url: product_image_size, scale: product_image_scale }}" alt="{{ featured_media.alt }}" id="FeaturedMedia-{{ section.id }}" class="product-featured-media" style="max-width: {{ height }}px;">
+      </noscript>
+
+      {% assign first_3d_model = product.media | where: "media_type", "model" | first %}
+
+      {%- if first_3d_model -%}
+        <button
+          aria-label="{{ 'products.product.view_in_space_label' | t }}"
+          class="product-single__view-in-space"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ first_3d_model.id }}"
+          data-shopify-title="{{ product.title | escape }}"
+          data-shopify-xr-hidden
+        >
+          {% include 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
+        </button>
+      {%- endif -%}
+
+
+      {% if product.media.size > 1 %}
+        {% if product.media.size > 4 %}
+          {%- assign enable_thumbnail_slides = true -%}
+        {% endif %}
+
+        <div class="thumbnails-wrapper{% if enable_thumbnail_slides == true %} thumbnails-slider--active{% endif %}">
+          {% if enable_thumbnail_slides == true %}
+            <button type="button" class="btn btn--link medium-up--hide thumbnails-slider__btn thumbnails-slider__prev thumbnails-slider__prev--{{ section.id }}">
+              {% include 'icon-chevron-left' %}
+              <span class="icon__fallback-text">{{ 'sections.slideshow.previous_slide' | t }}</span>
+            </button>
+          {% endif %}
+          <ul class="product-single__thumbnails product-single__thumbnails-{{ section.id }}">
+            {% for media in product.media %}
+              <li class="product-single__thumbnails-item product-single__thumbnails-item--{{ section.settings.media_size }} js">
+                <a href="{{ media.preview_image | img_url: product_image_zoom_size, scale: product_image_scale }}"
+                   class="text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                   data-thumbnail-id="{{ section.id }}-{{ media.id }}"
+                   {% if enable_image_zoom %}data-zoom="{{ media.preview_image | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+
+                    {%- capture thumbnailAlt -%}
+                      {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                        {{ 'sections.featured_product.video_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                      {%- elsif media.media_type == 'model' -%}
+                        {{ 'sections.featured_product.model_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                      {%- else -%}
+                        {{ 'sections.featured_product.gallery_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+                      {%- endif -%}
+                    {%- endcapture -%}
+
+                    <img class="product-single__thumbnail-image" src="{{ media.preview_image | img_url: '450x450', scale: 2 }}" alt="{{ thumbnailAlt }}">
+                    {%- if media.media_type == 'video' or media.media_type =='external_video' -%}
+                      <div class="product-single__thumbnail-badge">
+                        {% include 'icon-video-badge-full-color' %}
+                      </div>
+                    {%- endif -%}
+                    {%- if media.media_type == 'model' -%}
+                      <div class="product-single__thumbnail-badge">
+                        {% include 'icon-3d-badge-full-color' %}
+                      </div>
+                    {%- endif -%}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% if enable_thumbnail_slides == true %}
+            <button type="button" class="btn btn--link medium-up--hide thumbnails-slider__btn thumbnails-slider__next thumbnails-slider__next--{{ section.id }}">
+              {% include 'icon-chevron-right' %}
+              <span class="icon__fallback-text">{{ 'sections.slideshow.next_slide' | t }}</span>
+            </button>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% endcomment %}
+      
+    </div>
+
+    <div class="grid__item {{ product_description_width }}">
+      <div class="product-single__meta">
+        {% comment %}
+        <div class="product_breadcrumbs">
+          <a href="https://{{ request.host }}">
+            Home 
+          </a>/
+          <a href="https://{{ request.host }}/collections/all">
+            Products 
+          </a>/ {{ product.title }}
+        </div>
+        {% endcomment %}
+        <h1 class="product-single__title">{{ product.title }}</h1>
+        
+        
+        {% if product.metafields.my_fields.product_subtitle != blank %}
+        <div class="product_sub_title">{{ product.metafields.my_fields.product_subtitle }}</div>
+        {% endif %}
+        <div class="reviews" style="display: flex; align-items: end; margin-bottom: 1.5rem; margin-top: 5px;">
+          <div style="width: fit-content;" class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+          <span style="padding: 0 5px"> | </span>
+          <span>1.1k units sold</span>
+        </div>
+        
+
+        
+        {% if product.metafields.my_fields.product_flavour_text != blank or product.metafields.my_fields.product_flavour_image != blank %}
+        <div class="product_sub_type">
+          <img src="{{ product.metafields.my_fields.product_flavour_image | img_url: 'small' }}" alt="{{ product.metafields.my_fields.product_flavour_image.alt }}"/>
+          <div class="pd_sty_txt">{{ product.metafields.my_fields.product_flavour_text }}</div>
+        </div>
+        {% endif %}
+
+          <div class="product__price">
+            {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
+          </div>
+
+        {% comment %}
+      {% if current_variant.compare_at_price > current_variant.price %}
+         <div class="save_txt_pd">
+            {% assign cPrice =  current_variant.compare_at_price | divided_by: 100 %}
+            {% assign rPrice =  current_variant.price | divided_by: 100 %}
+            {% assign decPrice = cPrice | minus:rPrice %}
+            Save {{ cPrice | minus:rPrice | times:100.0 | divided_by:cPrice | round }}%
+        </div>
+         {% endif %}
+         {% endcomment %}
+        
+          {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+            <div class="product__policies rte hide" data-product-policies>
+              {%- if shop.taxes_included -%}
+                {{ 'products.product.include_taxes' | t }}
+              {%- endif -%}
+              {%- if shop.shipping_policy.body != blank -%}
+                {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {% capture "form_classes" -%}
+            product-form product-form-{{ section.id }}
+            {%- unless section.settings.show_variant_labels %} product-form--hide-variant-labels {% endunless %}
+            {%- if section.settings.enable_payment_button and product.has_only_default_variant %} product-form--payment-button-no-variants {%- endif -%}
+            {%- if current_variant.available == false %} product-form--variant-sold-out {%- endif -%}
+          {%- endcapture %}
+
+          {% form 'product', product, class:form_classes, novalidate: 'novalidate', data-product-form: '' %}
+            {% comment %}
+            {% unless product.has_only_default_variant %}
+              <div class="product-form__controls-group">
+                {% for option in product.options_with_values %}
+                  <div class="selector-wrapper js product-form__item">
+                    <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+                      {{ option.name }}
+                    </label>
+                    <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input"
+                      id="SingleOptionSelector-{{ forloop.index0 }}"
+                      data-index="option{{ forloop.index }}"
+                    >
+                      {% for value in option.values %}
+                        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endunless %}
+            {% endcomment %}
+
+             {% unless product.has_only_default_variant %}
+               <div class="concern-option" style="display: flex; justify-content: space-between; align-items: center">
+                <p style="margin: 0;">Concern: </p>
+                <div class="options" style="display: flex; flex-wrap: wrap; width: 100%; justify-content: space-evenly;">
+                  <p>Nourish Hair</p>
+                  <p>Light Hair Fall</p>
+                  <p>Severe Hair Fall</p>
+                </div>
+                </div>
+              </div>
+        <div class="product-form__controls-group1">
+          {% for option in product.options_with_values %}
+          {% assign i = forloop.index %}
+          {% assign i0 = forloop.index0 %}
+
+            <fieldset style="overflow-x: hidden;" class="product_variant_outer_div variant-section product-form__controls-group" 
+              id="SingleOptionSelector-{{ i0 }}" 
+            >
+            <!--<legend>{{ option.name }}</legend>-->
+              
+              {%- for value in option.values -%}
+              {%- assign variant_label_state = true -%}
+              {%- if product.options.size == 1 -%}
+                {%- unless product.variants[forloop.index0].available -%}
+                  {%- assign variant_label_state = false -%}
+                {%- endunless -%}
+              {%- endif -%}
+			   <div style="height: 100% !important; flex: 0 0 33% !important;" {{product.options.size}} class="variant_outer {% cycle 'variant_first_outer', 'variant_second_outer', 'variant_third_outer' %}">
+                  <input type="radio" 
+                      class="single-option-selector single-option-selector-{{ section.id }} product-form__input"
+                 {% if option.selected_value == value %} checked="checked"{% endif %}
+                      {% unless variant_label_state %} disabled="disabled"{% endunless %}
+                      value="{{ value | escape }}"
+                      data-index="option{{ i }}"
+                      name="{{ option.name | handleize }}"
+                      id="SingleOptionSelector-{{ option.name | handleize }}-{{ value | escape }}"
+                  >
+                  <label style="padding: 1rem 0 !important;" for="SingleOptionSelector-{{ option.name | handleize }}-{{ value | escape }}">
+                  
+                 {% assign var-disc = product.variants[forloop.index0].compare_at_price | minus: product.variants[forloop.index0].price %}
+                    {% assign var-disc-percent = var-disc | times:100.0 %}
+                
+                    <span class="variant-title">{{ value | escape }}</span>
+                    <small class="variant-desc">{{ product.variants[forloop.index0].metafields.global.PacksOf.value }}</small>
+                    <span class="variant-price" style="display: flex; justify-content: space-evenly; flex-direction: row-reverse; margin: 0.5rem 0 !important;">
+                      {% if product.variants[forloop.index0].compare_at_price > product.variants[forloop.index0].price %}
+                        <p><small><s style="color: gray !important" class="price-item--regular" data-regular-price="">{{product.variants[forloop.index0].compare_at_price | money}}</s></small></p>
+                      {% endif %}
+                      <p>{{product.variants[forloop.index0].price | money}}</p>
+                    </span>
+                {% comment %}
+                    {% assign var-disc = product.variants[forloop.index0].compare_at_price | minus: product.variants[forloop.index0].price %}
+                    {% assign var-disc-percent = var-disc | times:100.0 %}
+                    {% if product.variants[forloop.index0].compare_at_price >= product.variants[forloop.index0].price %}
+                    <span class="variant-discount">You Save {{var-disc | money}} ({{ var-disc-percent | divided_by: product.variants[forloop.index0].compare_at_price | round }}% Off)</span>
+                    {% endif %}
+                {% endcomment %}
+
+                     <!--[Variant discount % price]-->
+          {% assign var-disc = product.variants[forloop.index0].compare_at_price | minus: product.variants[forloop.index0].price %}
+            {% assign var-disc-percent = var-disc | times:100.0 %}
+            {% if product.variants[forloop.index0].compare_at_price > product.variants[forloop.index0].price %}
+              <p style="background: none !important; color: #ec716a !important;" class="save_txt_pd_inner_variant_box">SAVE {{ var-disc-percent | divided_by: product.variants[forloop.index0].compare_at_price | round }}%</p>
+            {% endif %}
+      <!--[Variant discount % price]-->
+          <!--[Most popular]-->
+{% comment %}                      <p class="most_popular_text">Most Popular</p>  {% endcomment %}
+<!--                 <p class="most_popular_text">BOGO</p> -->
+                <!--[Most popular]-->
+                
+                  </label>
+              </div>
+             
+                  {%- endfor -%} 
+            </fieldset>
+          {% endfor %}
+        </div>
+        {% endunless %}
+
+            <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}"
+                  {%- if variant == current_variant %} selected="selected" {%- endif -%}
+                >
+                  {{ variant.title }}  {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                </option>
+              {% endfor %}
+            </select>
+
+        
+           <div class="btn_qty_flx">
+            {% if section.settings.show_quantity_selector %}
+              <div class="product-form__controls-group">
+                  <div class="prodcut_qty_box">
+                    <div class="product_sign qty_minis">
+                      <img src="{{ 'minus.png' | asset_url }}" alt="#"/>
+                    </div> 
+                    <input type="text" id="Quantity-{{ section.id }}"
+                      name="quantity" value="1" min="1" pattern="[0-9]*"
+                      class="product-form__input product-form__input--quantity" data-quantity-input
+                    >
+                    <div class="product_sign qty_plus">
+                      <img src="{{ 'plus.png' | asset_url }}" alt="#"/>
+                    </div>
+                  </div>
+              </div>
+            {% endif %}
+
+            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}"
+              data-error-message-wrapper
+              role="alert"
+            >
+              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+              {% include 'icon-error' %}
+              <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+            </div>
+
+            <div class="product-form__controls-group--submit_new">
+              <div class="product-form__item--submit_new
+                {%- if section.settings.enable_payment_button %} product-form__item--payment-button {%- endif -%}
+                {%- if product.has_only_default_variant %} product-form__item--no-variants {%- endif -%}"
+              >
+                <button type="submit" name="add" variant-id="{{ current_variant.id }}" variant-name="{{ current_variant.title }}" product-name="{{ product.title }}" product-price="{{ product.price }}"
+                  {% unless current_variant.available %} aria-disabled="true"{% endunless %}
+                  aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                  class="btn product-form__cart-submit{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"
+                  {% if settings.enable_ajax %}aria-haspopup="dialog"{% endif %}
+                  data-add-to-cart>
+                  <span data-add-to-cart-text>
+                    {% unless current_variant.available %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% else %}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {% endunless %}
+                  </span>
+                  <span class="hide" data-loader>
+                    {% include 'icon-spinner' %}
+                  </span>
+                  <span class="product-price-btn">
+                  {% include 'product-price-btn', variant: current_variant, show_vendor: section.settings.show_vendor %}
+                  </span>
+                </button>
+                {% if section.settings.enable_payment_button %}
+                  {{ form | payment_button }}
+                {% endif %}
+              </div>
+            </div>
+        
+         </div>
+        <div class="product__price_ab_test" style="display: none;">
+            {% include 'product-price-ab-test', variant: current_variant, show_vendor: section.settings.show_vendor %}
+          </div>
+          {% endform %}
+       
+
+        {%- comment -%}
+          Live region for announcing updated price and availability to screen readers
+        {%- endcomment -%}
+        <p class="visually-hidden" data-product-status
+          aria-live="polite"
+          role="status"
+        ></p>
+
+        {%- comment -%}
+          Live region for announcing that the product form has been submitted and the
+          product is in the process being added to the cart
+        {%- endcomment -%}
+        <p class="visually-hidden" data-loader-status
+          aria-live="assertive"
+          role="alert"
+          aria-hidden="true"
+        >{{ 'products.product.loader_label' | t }}</p>
+      {% if section.settings.enable_free_shipping %}
+       <div class="shipping_label" id="shipping_info">
+         {% if section.settings.free_shipping_icon != blank %}
+         <div class="shipping_img">
+           <img src="{{ section.settings.free_shipping_icon | img_url: 'master' }}" alt="shipping image" />
+         </div>
+         {% endif %}
+         {% if section.settings.free_shipping_text != blank %}
+         <div class="shipping_txt">
+           <p>{{ section.settings.free_shipping_text }}</p>
+         </div>
+         {% endif %}
+        </div>
+        {% endif %}
+        {% if product.metafields.information.custom_message != blank %}
+        	<div class="nyumi_custom_message" style="margin-top: 1em; font-weight: bold">{{ product.metafields.information.custom_message }}</div>
+        {% endif %}
+        {% if product.description != blank %}
+        <div class="product-single__description rte">
+          {{ product.description }}
+        </div>
+        {% endif %}
+        <div class="product_tab_section">
+          {% if product.metafields.my_fields.product_gummies_text != blank %}
+          <div class="product_tab_heading">
+            {{ product.metafields.my_fields.product_gummies_text }}
+          </div>
+          {% endif %}
+          <div class="product_tab">
+            {% if product.metafields.look_forward_title.look_forward_title != blank %}
+            <div class="product_tab_item active" data-id="1" id="lookForwardTo">
+              {% if product.metafields.look_forward_title.look_forward_title != blank %}
+              <div class="pdtb_heading ">{{product.metafields.look_forward_title.look_forward_title}}</div>
+              {% endif %}
+              <div class="pdtb_detail" style="display:block">
+              	<div class="pdtb_flx">
+                  {% for image in product.metafields.look_forward_name.look_forward_name %}
+                  <div class="pdtb_item">
+                    <div class="pdtb_img">
+                      <img class="lazyload" data-src="{{product.metafields.look_forward_img_url.look_forwar_img[forloop.index0]}}" alt="{{product.metafields.look_forward_name.look_forward_name[forloop.index0]}}" />
+                    </div>
+                    <div class="pdtb_txt">{{product.metafields.look_forward_name.look_forward_name[forloop.index0]}}</div>
+                  </div>
+                  {% endfor %}
+                  
+                </div>
+                
+              </div>
+            </div>
+            {% endif %}
+            {% for tab_item in product.metafields.tab_title.tab_title %}
+            {% if tab_item != blank %}
+            <div class="product_tab_item" data-id="3" id="dailyDosage">
+              <div class="pdtb_heading">{{ tab_item }}</div>
+              <div class="pdtb_detail">
+                <div class="pdtb_flx">
+                  {{product.metafields.tab_description.tab_description[forloop.index0]}}
+                  <br>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+           
+          </div>
+          
+        </div>
+        
+        </div>
+      
+
+        {% if section.settings.show_share_buttons %}
+          {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media %}
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+ 
+
+<div class="ingredient_section">
+  <div class="ingredient-wrapper" id="ingredients">
+    <p class="section_subheading">A perfect balance of Western and Indian nutrients</p>
+    
+    <div class="ingredient_combo_menu">
+      <ul></ul>
+    </div>
+    
+    <div class="content_wrapper" data-id="1">
+      <ul class="vertical-scroller">
+        {% comment %}
+        <li class="active"><img src="{{ "ing1.png" | asset_url }}" alt="#"> <span>Hyaluronic Acid <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing2.png" | asset_url }}" alt="#"> <span>Vitamin E <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing3.png" | asset_url }}" alt="#"> <span>Selenium <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing4.png" | asset_url }}" alt="#"> <span>Curcumin <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing5.png" | asset_url }}" alt="#"> <span>XYZ Acid <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        {% endcomment %}
+      </ul>
+      <div class="fade-wrapper">
+        <ul class="fade-slider" id="fade-sliders">
+          {% comment %}
+          <li class="active">
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Hyaluronic Acid</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Vitamin E</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Selenium</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Curcumin</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>XYZ Acid</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+           {% endcomment %}
+        </ul>
+        	<div class="mobile center">
+        	<button onclick="myFunction()" class="button show_all_list">show more +</button>
+        	</div>
+            
+      </div>
+    </div>
+    
+     <div class="content_wrapper" data-id="2">
+      <ul class="vertical-scroller">
+        {% comment %}
+        <li class="active"><img src="{{ "ing1.png" | asset_url }}" alt="#"> <span>Hyaluronic Acid <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing2.png" | asset_url }}" alt="#"> <span>Vitamin E <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing3.png" | asset_url }}" alt="#"> <span>Selenium <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing4.png" | asset_url }}" alt="#"> <span>Curcumin <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing5.png" | asset_url }}" alt="#"> <span>XYZ Acid <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        {% endcomment %}
+      </ul>
+      <div class="fade-wrapper">
+        <ul class="fade-slider" id="fade-sliders">
+          {% comment %}
+          <li class="active">
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Hyaluronic Acid</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Vitamin E</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Selenium</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Curcumin</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>XYZ Acid</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+           {% endcomment %}
+        </ul>
+        	<div class="mobile center">
+        	<button onclick="myFunction()" class="button">show more +</button>
+        	</div>
+            
+      </div>
+    </div>
+    
+    
+     <div class="content_wrapper" data-id="3">
+      <ul class="vertical-scroller">
+        {% comment %}
+        <li class="active"><img src="{{ "ing1.png" | asset_url }}" alt="#"> <span>Hyaluronic Acid <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing2.png" | asset_url }}" alt="#"> <span>Vitamin E <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing3.png" | asset_url }}" alt="#"> <span>Selenium <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing4.png" | asset_url }}" alt="#"> <span>Curcumin <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        <li><img src="{{ "ing5.png" | asset_url }}" alt="#"> <span>XYZ Acid <img src="{{ "arrow-right.png" | asset_url }}" alt="#"></span></li>
+        {% endcomment %}
+      </ul>
+      <div class="fade-wrapper">
+        <ul class="fade-slider" id="fade-sliders">
+          {% comment %}
+          <li class="active">
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Hyaluronic Acid</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Vitamin E</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Selenium</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>Curcumin</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+          <li>
+              <img src="{{ 'hyaluronic-acid.png' | asset_url }}" class="ing-image" alt="#">
+            <h4>XYZ Acid</h4>
+            <p>This wonder ingredient is best friends with water.<br/>That means it absorbs 1000X more water than its own weight, resulting in hydrated and supple skin. It also works to delay wrinkles, and improve your skin’s natural firmness.</p>
+          </li>
+           {% endcomment %}
+        </ul>
+        	<div class="mobile center">
+        	<button onclick="myFunction()" class="button">show more +</button>
+        	</div>
+            
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+<div class="component_section" id="nonActiveIngredients">
+  <div class="component-wrapper">
+    <p class="section_subheading">Our non-active ingredients help with important tasks like binding active ingredients, nutrient stability and absorption.</p>
+    <div class="component_slider_wrapper">
+      
+      <ul class="component_slider">
+        {% comment %}
+        <li>
+          <img src="{{ "comp1.png" | asset_url }}" alt="#">
+          <h4>Citric Acid</h4>
+          <p>Source: Italy &amp; Germany<br/>To help gummies stick together</p>
+        </li>
+        <li>
+          <img src="{{ "comp2.png" | asset_url }}" alt="#">
+          <h4>Friut Pectin</h4>
+          <p>Source: Italy &amp; Germany<br/>To help gummies stick together</p>
+        </li>
+        <li>
+          <img src="{{ "comp3.png" | asset_url }}" alt="#">
+          <h4>Sodium Benzoate</h4>
+          <p>Source: Italy &amp; Germany<br/>To help gummies stick together</p>
+        </li>
+        <li>
+          <img src="{{ "comp4.png" | asset_url }}" alt="#">
+          <h4>Benzoic Acid</h4>
+          <p>Source: Italy &amp; Germany<br/>To help gummies stick together</p>
+        </li>
+        <li>
+          <img src="{{ "comp1.png" | asset_url }}" alt="#">
+          <h4>Citric Acid</h4>
+          <p>Source: Italy &amp; Germany<br/>To help gummies stick together</p>
+        </li>
+        {% endcomment %}
+      </ul>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="button_heading" id="nutritionInfo">
+<div class="faq_title center black">we don’t need fine print</div>
+<div class="cm_but center line-but"><a class="button toggle-nutrition" href="#">nutrition info +</a></div>
+  <div class="show-nutrition">
+    <div class="nutrition_flx">
+    </div>
+  {% comment %}
+  <img src="{{ 'p3.png' | asset_url }}" class="show-nutrition" alt="#">
+  {% endcomment %}
+  </div>
+</div>
+
+
+<div class="strikewords" id="pdp_kept">
+	 <div class="faq_title center"> </div>
+  
+  		<ul class="strikeout">
+          {% comment %}
+          <li><span class="inner">gelatin</span></li>
+          <li><span class="inner">preservatives</span></li>
+          <li><span class="inner">titanium dioxide</span></li>
+          <li><span class="inner">stevia</span></li>
+          <li><span class="inner">artificial  sweeteners</span></li>
+          <li><span class="inner">malic acid</span></li>
+          {% endcomment %}
+  		</ul>  
+</div>
+
+<div class="bottom_section bst icon-section2  {{ product.handle }}" id="why_nyumi">
+  <div class="page_width">
+  <div class="three-icon_box flx">
+    {% comment %} 
+  <div class="three">
+           <div class="icon_img"><img class="res_width1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Image_32.png?v=1606804552" alt="color"></div>
+           <div class="icon_txts white">born from science</div>
+    	   <div class="icon_des">Our German-developed formulation works double hard for you. It uses the most effective nutrients, and also balances an enriching blend of Indian and western ingredients, bringing you the best of both sciences.</div>	
+  </div>
+  <div class="three">
+           <div class="icon_img"><img class="res_width1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Image_34.png?v=1606804561" alt="color"></div>
+           <div class="icon_txts white">superior ingredients</div>
+    		<div class="icon_des">We found that all nutrients are not created equal. So we handpicked ingredients only from the best sources, and ensured optimum extract ratios, to enable better nutrient absorption from every gummy. </div>	
+  </div>
+  <div class="three">
+           <div class="icon_img"><img class="res_width1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Image_33.png?v=1606804561" alt="color"></div>
+           <div class="icon_txts white">deliciously simple </div>
+    	   <div class="icon_des">Taking care of yourself should be a joy, not a chore. That’s why we really took our time to create these gummies as a flavourful and easy way for you to stay nourished. Bon appétit!</div>	
+  </div> 
+    {% endcomment %}
+    
+  </div>
+  </div>
+</div>
+
+ {% comment %}
+<div class="bottom_section bst icon-with-text" id="product_whatWereNotAbout">
+  <div class="page_width"><h3 class="center white cm_title">what we’re not about</h3>
+  <div class="three-icon_box flx">
+   
+  <div class="three">
+           <div class="icon_img imgk"><img class="res_width1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/cal.png?v=1607164410" alt="color"></div>
+           <div class="icon_txts white">overnight results </div>
+    	   <div class="icon_des">Good things take time, and the same goes for nutrition. While the effect begins from Day 1 of starting our gummies, it is a gradual process. A month of dailyuse may begin to show results, and 2-3 months can make all the difference.</div>	
+  </div>
+  <div class="three">
+           <div class="icon_img imgk"><img class="res_width1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/time.png?v=1607164324" alt="color"></div>
+           <div class="icon_txts white">superior ingredients</div>
+    		<div class="icon_des">Until that mystical elixir of youth is discovered, ageing will continue to be a natural process of life. But slowing it down by reducing the appearance of wrinkles, pigmentation and dullness is well within reach. And that’s exactly what we’re here for.</div>	
+  </div>
+  <div class="three">
+           <div class="icon_img imgk"><img class="res_width1" src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Image_23.png?v=1606981975" alt="color"></div>
+           <div class="icon_txts white">deliciously simple </div>
+    	   <div class="icon_des">Skin is a result of many factors besides good nourishment. Like restful sleep, physical activity, protection from the sun, and care routines. While you mindfully include these factors in your daily life, we have you covered on daily nutrition.</div>	
+  </div> 
+    
+    
+  </div>
+  </div>
+</div>
+{% endcomment %}
+
+{% comment %}
+<div class="product-reviews-section">
+  <img src="{{ "red-heart.png" | asset_url }}" alt="heart" class="section-icon">
+  <p class="section_subheading">It tells us how you’re doing and that’s always good to hear.</p>            
+</div>
+{% endcomment %}
+
+<div class="faq_section relative" id="product_faq">
+  {% comment %}
+  <div class="image_left absolute"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/flower_2x_7aa4aaae-62a8-4905-811f-4c47eb8e130c.png?v=1610709792"></div>
+  <div class="image_right absolute"><img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/flower_2x_7aa4aaae-62a8-4905-811f-4c47eb8e130c.png?v=1610709792"></div>
+  {% endcomment %}
+  
+  <div class="faq_title center">got doubts? get answers.</div>
+<section class="ac-container">
+  
+  {% comment %}
+    <div class="product_tab_item active" data-id="1">
+    <div class="pdtb_heading">Why do you make only Gummies & not pills or powder?</div>
+    <div class="pdtb_detail">
+      <p>The only habits that matter for our skin are the ones we keep. If we’re honest with ourselves, outside of Instagram, most people aren’t making green smoothies every morning! And 45% of Indians have a hard time swallowing pills at all. Our gummies taste amazing, so you’ll actually remember them every day… and that means you’ll see results.</p>
+
+  </div>
+    </div>
+   <div class="product_tab_item" data-id="2">
+    <div class="pdtb_heading">Why do you make only Gummies & not pills or powder?</div>
+    <div class="pdtb_detail">
+      <p>The only habits that matter for our skin are the ones we keep. If we’re honest with ourselves, outside of Instagram, most people aren’t making green smoothies every morning! And 45% of Indians have a hard time swallowing pills at all. Our gummies taste amazing, so you’ll actually remember them every day… and that means you’ll see results.</p>
+  </div>
+    </div>
+     <div class="product_tab_item" data-id="3">
+    <div class="pdtb_heading">Why do you make only Gummies & not pills or powder?</div>
+    <div class="pdtb_detail">
+      <p>The only habits that matter for our skin are the ones we keep. If we’re honest with ourselves, outside of Instagram, most people aren’t making green smoothies every morning! And 45% of Indians have a hard time swallowing pills at all. Our gummies taste amazing, so you’ll actually remember them every day… and that means you’ll see results.</p>
+   
+  </div>
+    </div>
+     <div class="product_tab_item" data-id="4">
+    <div class="pdtb_heading">Why do you make only Gummies & not pills or powder?</div>
+    <div class="pdtb_detail">
+      <p>The only habits that matter for our skin are the ones we keep. If we’re honest with ourselves, outside of Instagram, most people aren’t making green smoothies every morning! And 45% of Indians have a hard time swallowing pills at all. Our gummies taste amazing, so you’ll actually remember them every day… and that means you’ll see results.</p>
+       </div>
+  </div>
+   <div class="product_tab_item" data-id="5">
+    <div class="pdtb_heading"> Why do you make only Gummies & not pills or powder?</div>
+    <div class="pdtb_detail">
+    
+      <p>The only habits that matter for our skin are the ones we keep. If we’re honest with ourselves, outside of Instagram, most people aren’t making green smoothies every morning! And 45% of Indians have a hard time swallowing pills at all. Our gummies taste amazing, so you’ll actually remember them every day… and that means you’ll see results.</p>
+     </div>
+  </div>
+   {% endcomment %}
+ </section>
+  <div class="cm_but center"><a class="button read_more_faq" href="#" >read more</a></div>
+
+  </div>
+
+
+
+
+
+
+
+{% unless product == empty %}
+  <script type="application/json" id="ProductJson-{{ section.id }}">
+    {{ product | json }}
+  </script>
+  <script type="application/json" id="ModelJson-{{ section.id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+  </script>
+{% endunless %}
+
+<script>
+
+  $(document).ready(function() {
+    
+    for(var i=0; i<$('.single-option-selector').length; i++) {
+      if($('.single-option-selector')[i].checked) {
+          $('.concern-options p')[0].classList.remove('active')
+          $('.concern-options p')[1].classList.remove('active')
+          $('.concern-options p')[2].classList.remove('active')
+          $('.concern-options p')[i+1].classList.add('active')
+          $('.pack-options p')[0].classList.remove('active')
+          $('.pack-options p')[1].classList.remove('active')
+          $('.pack-options p')[2].classList.remove('active')
+          $('.pack-options p')[i+1].classList.add('active')
+          console.log(i)
+      }
+    }
+  });
+
+  function myFunction() {
+//   var x = document.getElementById("ul#fade-sliders li:nth-child(n+4)");
+//   if (x.style.display === "none") {
+//     x.style.display = "block";
+//   } else {
+//     x.style.display = "none";
+//   }
+    $("ul#fade-sliders li").show();
+    $('.show_all_list').hide();
+}
+  $('.options p')[0].classList.add('active')
+  $('.variant_outer').click(function(){
+    var variant_index;
+    for(var i=0; i<$('.single-option-selector').length; i++){
+      $('.options p')[i].classList.remove('active')
+      if($('.single-option-selector')[i].checked) {
+          variant_index = i
+      }
+    }
+    $('.options p')[variant_index].classList.add('active')
+  })
+
+  setInterval(function(){
+    for(var i=1; i<$('.slider_itmes').length-2; i++){
+      if($('.slider_itmes')[i].classList.contains('slick-active')) {
+        $('.slider_thumb')[i].style.opacity = 1
+      }
+      else {
+        $('.slider_thumb')[i].style.opacity = 0.5
+      }
+    }
+    $('.product__price_ab_test .save_txt_pd_inner_variant_box')[0].innerText = $('input[type=radio]:checked + label .save_txt_pd_inner_variant_box')[0].innerText
+  },100)
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('.product-recommendations__inner .add_to_cart_custom').click(function(event){
+      console.log('recommend event', event)
+      window.fc_addtocart({
+        product_name: event.currentTarget.attributes['product-name'].value,
+        product_id: parseInt(event.currentTarget.attributes['product-id'].value),
+        quantity: 1,
+        product_price: parseInt(event.currentTarget.attributes['price'].value)/100,
+        currency: "INR",
+        variant: event.currentTarget.attributes['variant-name'].value
+      })
+    })
+  })
+</script>
+
+<script>
+
+  
+  <!-- Snapchat CAPI - AddToCart -->
+    $(document).ready(function() {
+      dataLayer.push({"event":"view_item"})
+      $('.btn.product-form__cart-submit').click(function(event){
+        console.log('farziengineer')
+          
+        $.get('http://jsonip.com', function (res) {
+          console.log(event)
+          // console.log(event.currentTarget.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText)
+          // console.log(event.currentTarget.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].children[0].children[1].children[1].innerText.split(' ')[1])
+          var index;
+          for (var i=0; i<$('.single-option-selector').length; i++) {
+              if($('.single-option-selector')[i].checked) {
+                  index = i
+              }
+          }
+          var ip_address;
+          var variant_id = event.currentTarget.attributes['variant-id'].value
+          var variant_name = $('.variant-title')[index].innerText
+          var qty = $('#Quantity-product-template')[0].value;
+          var product_id = event.currentTarget.parentElement.parentElement.parentElement.parentElement.attributes['id'].value.split('_')[2]
+          var product_name = event.currentTarget.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+          if(variant_name == 'Pack of 1') {
+            var product_price = event.currentTarget.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].children[0].children[0].children[1].innerText.trim().split(' ')[1].replace(',','');
+          }
+          else {
+            var product_price = event.currentTarget.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].children[0].children[1].children[1].innerText.trim().split(' ')[1].replace(',','');
+          }
+          console.log(event)
+          console.log(product_price,'product_price')
+          console.log(event.currentTarget.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].children[0].children[0].children[1].innerText.trim().split(' ')[1].replace(',',''))
+          console.log('IP Address is: ' + res.ip);
+          ip_address = res.ip
+          console.log("ip_address",String(ip_address))
+          var hashed_ip =  sha256(String(ip_address))
+          console.log("hashed_ip",String(hashed_ip))
+          console.log(product_id,'product-id')
+          console.log(product_price,'product_price')
+          window.fc_addtocart({
+              product_name: product_name,
+              product_id: parseInt(product_id),
+              quantity: parseInt(qty),
+              product_price: parseInt(product_price),
+              currency: "INR",
+              variant: variant_name
+          })
+
+          <!-- Taboola Events - ATC -->
+            _tfa.push({
+              notify: 'event',
+              name: 'add_to_cart',
+              id: 1557333,
+              revenue: product_price.toString() , // Product price 
+              currency: 'INR', 
+              orderid: variant_id , // Product variant Id of selected variant
+              quantity: qty // Product qty
+            });
+          <!-- End of Taboola Events - ATC -->
+          var addToCart_event = {
+            "url": "https://tr.snapchat.com/v2/conversion",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNjY5NjI0MzM1LCJzdWIiOiJjZTliNWE5MC1hYmY5LTRhMmYtOTVhMC05ZjFmMWVhMjIxNzd-UFJPRFVDVElPTn5jYTlkYjQ1Ni0zZTNlLTQ0ZDctODYyNi1jNTRjZjlkMTliY2MifQ.IR3xglvOb1eTyCGRycXU9U5f9x4X_mKRW8oWrx303HE",
+              "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+              "pixel_id": "365b768d-8a9e-40d9-86fc-fdeb94acba98",
+              "timestamp": String($.now()),
+              "event_type": "ADD_CART",
+              "event_conversion_type": "WEB",
+              "event_tag": "add_cart",
+              "description": product_name,
+              "price": product_price,
+              "currency":"INR",
+              "page_url": String(window.location.href),
+              "user_agent": String(navigator.userAgent),
+              "hashed_ip_address": String(hashed_ip)
+            }),
+          };
+    
+          $.ajax(addToCart_event).done(function (response) {
+            console.log('CAPI Add To Cart',response);
+          });
+        });
+      })
+    })
+  <!-- Snapchat CAPI - AddToCart -->
+</script>
+
+
+
+{% schema %}
+{
+  "name": {
+    "da": "Produktsider",
+    "de": "Produktseiten",
+    "en": "Product pages",
+    "es": "Páginas de productos",
+    "fi": "Tuotesivut",
+    "fr": "Pages de produits",
+    "hi": "उत्पाद पेज",
+    "it": "Pagine di prodotto",
+    "ja": "商品ページ",
+    "ko": "제품 페이지",
+    "nb": "Produktsider",
+    "nl": "Productpagina's",
+    "pt-BR": "Páginas de produtos",
+    "pt-PT": "Páginas de produtos",
+    "sv": "Produktsidor",
+    "th": "หน้าสินค้า",
+    "zh-CN": "产品页面",
+    "zh-TW": "產品頁面"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_quantity_selector",
+      "label": {
+        "da": "Vis antalsvælger",
+        "de": "Mengenauswahl anzeigen",
+        "en": "Show quantity selector",
+        "es": "Mostrar selector de cantidad",
+        "fi": "Näytä määrän valitsin",
+        "fr": "Afficher le sélecteur de quantité",
+        "hi": "मात्रा चयनकर्ता दिखाएं",
+        "it": "Mostra selettore quantità",
+        "ja": "数量セレクターを表示する",
+        "ko": "수량 선택기 표시",
+        "nb": "Vis mengdevelger",
+        "nl": "Hoeveelheidskiezer weergeven",
+        "pt-BR": "Exibir seletor de quantidade",
+        "pt-PT": "Mostrar um seletor de quantidade",
+        "sv": "Visa kvantitetsväljare",
+        "th": "แสดงตัวเลือกจำนวน",
+        "zh-CN": "显示数量选择器",
+        "zh-TW": "顯示數量選擇器"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": {
+        "da": "Vis leverandør",
+        "de": "Lieferanten anzeigen",
+        "en": "Show vendor",
+        "es": "Mostrar proveedor",
+        "fi": "Näytä myyjä",
+        "fr": "Afficher les vendeurs",
+        "hi": "विक्रेता दिखाएं",
+        "it": "Mostra fornitore",
+        "ja": "販売元を表示する",
+        "ko": "공급업체 표시",
+        "nb": "Vis leverandør",
+        "nl": "Leverancier weergeven",
+        "pt-BR": "Exibir fornecedor",
+        "pt-PT": "Mostrar fornecedor",
+        "sv": "Visa säljare",
+        "th": "แสดงผู้ขาย",
+        "zh-CN": "显示厂商",
+        "zh-TW": "顯示廠商"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_payment_button",
+      "label": {
+        "da": "Vis dynamisk betalingsknap",
+        "de": "Dynamischen Checkout Button anzeigen",
+        "en": "Show dynamic checkout button",
+        "es": "Mostrar botón de pago dinámico",
+        "fi": "Näytä dynaaminen kassapainike",
+        "fr": "Afficher le bouton de paiement dynamique",
+        "hi": "डायनेमिक चेकआउट बटन दिखाएं",
+        "it": "Mostra pulsante di check-out dinamico",
+        "ja": "動的チェックアウトボタンを表示する",
+        "ko": "동적 결제 버튼 표시",
+        "nb": "Vis dynamisk knapp for å gå til kassen",
+        "nl": "Dynamische betaalknop weergeven",
+        "pt-BR": "Exibir botão de checkout dinâmico",
+        "pt-PT": "Mostrar o botão dinâmico de finalização da compra",
+        "sv": "Visa dynamiska utcheckningsknappar",
+        "th": "แสดงปุ่มชำระเงินแบบไดนามิก",
+        "zh-CN": "显示动态结账按钮",
+        "zh-TW": "顯示動態結帳按鈕"
+      },
+      "info": {
+        "da": "Den enkelte kunde vil se sin foretrukne betalingsmetode blandt dem, der er tilgængelige i din butik, f.eks. PayPal eller Apple Pay. [Få mere at vide](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "de": "Jeder Kunde sieht seine bevorzugte Zahlungsmethode aus den in deinem Shop verfügbaren Zahlungsmethoden wie PayPal oder Apple Pay. [Mehr Informationen](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "en": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "es": "Cada cliente verá su forma de pago preferida entre las disponibles en tu tienda, como PayPal o Apple Pay. [Más información](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "fi": "Kukin asiakas näkee ensisijaisen valintansa kauppasi tarjoamista maksutavoista, esim. PayPal tai Apple Pay. [Lisätietoja](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "fr": "Chaque client verra son moyen de paiement préféré parmi ceux qui sont proposés sur votre boutique, tels que PayPal ou Apple Pay. [En savoir plus](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "hi": "प्रत्येक ग्राहक आपके स्टोर पर उपलब्ध अपनी पसंदीदा भुगतान की विधि देखेंगे जैसे PayPal या Apple Pay. [अधिक जानें](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "it": "Ogni cliente vedrà il suo metodo di pagamento preferito tra quelli disponibili nel tuo negozio, come PayPal o Apple Pay. [Maggiori informazioni](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "ja": "PayPalやApple Payなど、ストアで利用可能な希望の決済方法がお客様に表示されます。[詳しくはこちら](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "ko": "각 고객은 PayPal 또는 Apple Pay와 같이 스토어에서 사용 가능한 지불 방법을 확인할 수 있습니다. [자세히 알아보기](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "nb": "Hver enkelt kunde vil se sin foretrukne betalingsmåte blant de som er tilgjengelig i butikken din, som PayPal eller Apple Pay. [Finn ut mer](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "nl": "Elke klant ziet zijn of haar beschikbare voorkeursmethode om af te rekenen, zoals PayPal of Apple Pay. [Meer informatie](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "pt-BR": "Cada cliente verá a forma de pagamento preferencial dele dentre as disponíveis na loja, como PayPal ou Apple Pay. [Saiba mais](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "pt-PT": "Cada cliente irá ver o seu método de pagamento preferido entre os disponíveis na loja, como o PayPal ou Apple Pay. [Saiba mais](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "sv": "Varje kund kommer att se den föredragna betalningsmetoden från de som finns tillgängliga i din butik, till exempel PayPal eller Apple Pay. [Läs mer](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "th": "ลูกค้าแต่ละรายจะเห็นวิธีการชำระเงินที่ต้องการจากวิธีที่ใช้ได้ในร้านค้าของคุณ เช่น PayPal หรือ Apple Pay [ดูข้อมูลเพิ่มเติม](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "zh-CN": "每位客户都可在您商店提供的付款方式中看到他们的首选付款方式，例如 PayPal 或 Apple Pay。[了解详细信息](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "zh-TW": "每位顧客都可以在您商店內開放使用的付款方式中看見他們偏好使用的方式，如 PayPal、Apple Pay 等。[深入瞭解](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": {
+        "da": "Vis knapper til deling på sociale medier",
+        "de": "Buttons für Social Media anzeigen",
+        "en": "Show social sharing buttons",
+        "es": "Mostrar botones para compartir en redes sociales",
+        "fi": "Näytä sosiaalisen median jakamispainikkeet",
+        "fr": "Affichez les boutons de partage sur les médias sociaux",
+        "hi": "सोशल शेयरिंग बटन दिखाएं",
+        "it": "Mostra i pulsanti per la condivisione sui social",
+        "ja": "ソーシャルメディアでの共有ボタンを表示する",
+        "ko": "소셜 공유 버튼 표시",
+        "nb": "Vis knapper for deling på sosiale medier",
+        "nl": "Knoppen voor sociaal delen weergeven",
+        "pt-BR": "Exibir botões de compartilhamento em redes sociais",
+        "pt-PT": "Mostrar botões de partilha nas redes sociais",
+        "sv": "Visa knappar för delning i sociala medier",
+        "th": "แสดงปุ่มสำหรับแชร์ลงโซเชียล",
+        "zh-CN": "显示社交分享按钮",
+        "zh-TW": "顯示社群分享按鈕"
+      },
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": {
+        "da": "Medie",
+        "de": "Medien",
+        "en": "Media",
+        "es": "Elementos multimedia",
+        "fi": "Media",
+        "fr": "Support multimédia",
+        "hi": "मीडिया",
+        "it": "Media",
+        "ja": "メディア",
+        "ko": "미디어",
+        "nb": "Medier",
+        "nl": "Media",
+        "pt-BR": "Mídia",
+        "pt-PT": "Multimédia",
+        "sv": "Media",
+        "th": "สื่อ",
+        "zh-CN": "媒体",
+        "zh-TW": "媒體"
+      },
+      "info": {
+        "da": "Få mere at vide om [media types](https://help.shopify.com/manual/products/product-media)",
+        "de": "Mehr Informationen über [Medientypen ](https://help.shopify.com/manual/products/product-media)",
+        "en": "Learn more about [media types](https://help.shopify.com/manual/products/product-media)",
+        "es": "Más información sobre [tipos de archivos multimedia](https://help.shopify.com/manual/products/product-media)",
+        "fi": "Lue lisää [mediatyypeistä](https://help.shopify.com/manual/products/product-media)",
+        "fr": "En savoir plus sur les [types de supports multimédia](https://help.shopify.com/manual/products/product-media)",
+        "hi": "[मीडिया प्रकार](https://help.shopify.com/manual/products/product-media) के बारे में और जानें",
+        "it": "Scopri di più sulle [tipologie di file multimediali](https://help.shopify.com/manual/products/product-media)",
+        "ja": "[メディアのタイプ](https://help.shopify.com/manual/products/product-media) について詳しくはこちら",
+        "ko": "[미디어 유형](https://help.shopify.com/manual/products/product-media)에 대해 자세히 알아보기",
+        "nb": "Lær mer om [medietyper](https://help.shopify.com/manual/products/product-media)",
+        "nl": "Meer informatie over [mediatypen](https://help.shopify.com/manual/products/product-media)",
+        "pt-BR": "Saiba mais sobre [tipos de mídia](https://help.shopify.com/manual/products/product-media)",
+        "pt-PT": "Saiba mais sobre [media types](https://help.shopify.com/manual/products/product-media)",
+        "sv": "Läs mer om [mediatyper](https://help.shopify.com/manual/products/product-media)",
+        "th": "ดูข้อมูลเพิ่มเติมเกี่ยวกับ [ประเภทของสื่อ](https://help.shopify.com/manual/products/product-media)",
+        "zh-CN": "详细了解[媒体类型](https://help.shopify.com/manual/products/product-media)",
+        "zh-TW": "深入瞭解 [媒體類型](https://help.shopify.com/manual/products/product-media)"
+      }
+    },
+	{
+	  "type": "checkbox",
+	  "id": "enable_free_shipping",
+	  "label": "Enable free shipping",
+	  "info": "check to show free shipping text"
+	},
+	{
+	  "type": "image_picker",
+	  "id": "free_shipping_icon",
+	  "label": "Free shipping icon"
+	},
+	{
+	  "type": "text",
+	  "id": "free_shipping_text",
+	  "label": "Free shipping",
+	  "info": "Free Delivery "
+	}
+  ]
+}
+{% endschema %}

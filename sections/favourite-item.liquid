@@ -1,0 +1,58 @@
+<div class="sci_prodcuts">
+  <div class="page_width">
+    {% if section.settings.title != blank %}
+    <div class="spd_top">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    {% endif %}
+    <div class="spd_flx">
+      {% for product in collections[section.settings.collection].products limit:4 %}
+      <div class="spd_pditem">
+        {% if product.featured_image  %}
+        <div class="spd_img">
+          <a href="{{ product.url }}">
+            <img class="lazyload" data-src="{{ product.featured_image | img_url: '550x' }}" alt="{{ product.featured_image.alt }}">
+          </a>
+        </div>
+        {% endif %}
+        <div class="spd_description">
+          <div class="spd_title">{{ product.title }}</div>
+          <div class="spd_price">
+            <span class="spd_price__sale">{{ product.price | money | remove: ',' }} </span>
+            {% if product.compare_at_price > product.price %}
+            <spam class="spd_compare_at_price">{{ product.compare_at_price | money | remove: ',' }} </spam>
+            {% endif %}                    
+          </div>
+          <a href="/cart/add?id={{ product.selected_or_first_available_variant.id }}" class="spd_add_to_cart">add to cart</a> 
+        </div> 
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Favourite item",
+    "settings": [
+	  {
+		"type": "text",
+		"id": "title",
+		"label": "Title",
+		"default": "have you found your favourites yet?"
+	  },
+	  {
+		"type": "collection",
+		"id": "collection",
+		"label": "Select collection"
+	  }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

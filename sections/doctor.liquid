@@ -1,0 +1,167 @@
+<style>
+      #shopify-section-16594380063e9bf78f {
+        padding-bottom: 0;
+      }
+      #shopify-section-24c0af1e-8de9-40c4-a403-798e4faa87f8 {
+        background: #fff4ef;
+        padding: 2rem;
+      }
+
+      .expert-consult {
+        background-position: center center;
+  /*       padding: 1rem 0 !important; */
+        background: #FFF4EF;
+        background-size: contain;
+        background-repeat: no-repeat;
+
+      }
+      .mob-img {
+        display: none;
+      }
+      .expert-close {
+        display: none;
+        padding: 0 5rem;
+        margin-bottom: 0;
+        cursor: pointer;
+        text-align: right;
+        font-size: 1.5rem;
+        font-family: 'manropeb';
+        font-weight: 900;
+      }
+      .get-started {
+        display: flex;
+        justify-content: center;
+        width: 60%;
+        height: 100%;
+        margin: 3rem auto;
+        align-items: center;
+        background: white;
+        border-radius: 22px;
+        filter: drop-shadow(0px 1px 2.5px rgba(172,172,172,0.16 ));
+      }
+      .doctor-img {
+        width: 40%;
+        height: 100%;
+      }
+      .doctor-img img {
+        width: 100%;
+        height: 100%;
+        border-radius: 22px;
+      }
+      .get-started .content {
+        width: 45%;
+        text-align: right;
+      }
+      .get-started .content h2 {
+        font-family: 'corbenr';
+        font-size: 30px;
+        font-weight: 500;
+        margin: 0;
+        margin-bottom:20px;
+        text-transform: none;
+        color: black;
+        letter-spacing: initial;
+      }
+
+      .get-started .content p span {
+        font-family: 'manropeb';
+        font-weight: 800;
+      }
+      .get-started .content button {
+        color: white;
+        border-radius: 40px;
+        filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.16 ));
+        background: #ff6662;
+        font-size: 24px;
+        border: none;
+        padding: 0.6rem 2rem;;
+      }
+
+
+      @media (max-width: 768px) {
+        #shopify-section-24c0af1e-8de9-40c4-a403-798e4faa87f8 {
+          padding: 1rem;
+        }
+        
+    /*  .expert-consult {
+          padding-top: 0 !important;
+        }    */
+        .mob-img {
+          display: block;
+        }
+        .desktop-img {
+          display: none;
+        }
+        .expert-close {
+          padding: 1rem;
+          font-size: 1.2rem;
+        }
+        .get-started {
+          width: 90%;
+          height: auto;
+          margin: 1rem auto;
+/*           padding-top: 1rem; */
+        }
+        .get-started .content {
+          width: 60%;
+          text-align: right;
+          padding-right: 16px;
+        }
+        .doctor-img {
+          width: 50%;
+        }
+        .get-started .content h2 {
+          font-size: 17px;
+          margin-bottom: 10px;
+        }
+        .get-started .content button {
+          font-size: 12px;
+          border: none;
+          padding: 5px 1.5rem;
+        }
+      }
+</style>
+<div class="expert-consult">
+  <p class="expert-close">X</p>
+  <div class="get-started">
+    <div class="doctor-img">
+      <a>
+        <img
+          src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/expert-image---desktop.png?v=1675865545"
+          class="desktop-img"
+        >
+        <img
+          src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Artboard_2_1_41b4fb5b-c889-450e-9b07-382aba895238.png?v=1682330553"
+          class="mob-img"
+        >
+      </a>
+    </div>
+    <div class="content">
+      <h2>free doctor consult</h2>
+
+      <button class="expert-btn">Book appointment</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.expert-btn').click(function(){
+    window.location.href = '/pages/schedule-appointment'
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Expert Consultation",
+  "settings": [],
+  "presets": [{
+    "name": "Expert Consultation"
+  }]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

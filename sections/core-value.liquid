@@ -1,0 +1,106 @@
+<div class="core_value" id="core_value">
+  <div class="page_width">
+    <div class="crv_header">      
+      {% if section.settings.core_title != blank %}
+      <h2>{{ section.settings.core_title }}</h2>
+      {% endif %} 
+      {% if section.settings.core_des != blank %}
+      <div class="crv_description">
+        {{ section.settings.core_des }}
+      </div>
+      {% endif %}
+    </div>
+    <div class="crv_flx">
+      <div class="crv_list">	
+        {% for block in section.blocks %}
+        <div class="crv_items">
+          <div class="crv_icon">
+            {% if block.settings.block_image != blank %}
+            <img src="{{block.settings.block_image | img_url:"master"}}" alt="{{block.settings.block_image.alt}}">
+            {% else %}
+            <img src="//images.ctfassets.net/537ig19c198x/3K4DMPZwwAl4lsFElqs9MT/19bd7b90589fdbc08443a43f7e0507be/p3.png" alt="#">
+            {% endif %}            
+          </div>
+          <div class="crv_itme_txt">
+            {% if block.settings.value_title != blank %}
+            <div class="crv_item_headiing">
+              {{block.settings.value_title}}
+            </div>
+            {% endif %}
+            {% if block.settings.value_desc != blank %}
+            <div class="crv_item_descrption">
+              {{block.settings.value_desc}}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>      
+      <div class="crv_img">
+        <div class="crv_inner">
+          {% if section.settings.value_image != blank %}
+          <img src="{{section.settings.value_image | img_url:"master"}}" alt="{{section.settings.value_image.alt}}">
+          {% else %}
+          <img src="//images.ctfassets.net/537ig19c198x/7CySfipjnVPiJDx4jxR9L1/4fbffa668d6244390efe0d90174a3861/Careers__1_.png" alt="#">
+          {% endif %}          
+        </div>
+      </div>      
+    </div> 
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Core Value",
+    "settings": [
+		{
+          "type": "text",
+          "id": "core_title",
+          "label": "Title",
+          "default": "our core values"
+        },
+        {
+          "type": "richtext",
+          "id": "core_des",
+          "label": "Core Description",
+          "default": "<p>As a company that works to bridge the gap between good nutrition and wellbeing, we take our work seriously. Our actions and decisions are guided by our core values every day.</p>"
+        },
+        {
+          "type":"image_picker",
+          "id":"value_image",
+          "label":"Right Image"
+        }
+	],
+	"blocks":[
+           {
+              "type":"value",
+              "name":"Value",
+              "settings":[
+                {
+                  "type":"text",
+                  "id":"value_title",
+                  "label":"Value Title",
+                  "default":"BEING RESOURCEFUL"
+                },
+                {
+                  "type":"richtext",
+                  "id":"value_desc",
+                  "label":"Value Description",
+                  "default":"<p>A lot is achievable with less, when we are creative. We're scrappy, hands-on, and up for a challenge. Bring it on.</p>"
+                },
+                {
+                  "type":"image_picker",
+                  "id":"block_image",
+                  "label":"Block Image"
+                }
+              ]
+            }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

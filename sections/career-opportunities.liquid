@@ -1,0 +1,139 @@
+<div class="carrer_opp_section" id="carrer_opp_section">
+  <div class="page_width">
+    <div class="crpp_top">
+      {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+      <div class="crrpp_description">
+        {{ section.settings.description }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="crpp_accouding_outer">
+    <div class="crpp_accouding">
+      <div class="crrpac_item crrpac_item_top">
+        <div class="crpac_flx crrpac_top">
+          {% if section.settings.title_role != blank %}
+          <div class="crpac_flx_item crrpac_heading">
+            {{ section.settings.title_role }}
+          </div>
+          {% endif %}
+          {% if section.settings.title_location != blank %}
+          <div class="crpac_flx_item crrpac_heading">
+            {{ section.settings.title_location }}
+          </div>
+          {% endif %}
+        </div>
+      </div> 
+    </div>
+    {% for block in section.blocks %}
+    <div class="crpp_accouding">
+      <div class=" crrpac_item" data-id="{{ forloop.index }}">
+        <div class="crpac_flx crrpac_text">
+          {% if block.settings.profile != blank %}
+          <div class="crpac_flx_item">
+            {{block.settings.profile}}
+          </div>
+          {% endif %}
+          {% if block.settings.job_location != blank %}
+          <div class="crpac_flx_item">
+            {{block.settings.job_location}}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="crpac_description" data-id="{{ forloop.index }}">
+        <div class="crpac_description_inner">
+          {% if block.settings.job_desc != blank %}
+          <div class="crpac_description_txt">
+            {{block.settings.job_desc}}
+          </div>
+          {% endif %}
+          {% if block.settings.btn_txt != blank %}
+          <div class="crpac_btn_outer">
+            <a href="mailto:{{ block.settings.btn_url }}?subject={{block.settings.profile}}" class="crpac_btn">{{ block.settings.btn_txt }}</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Career Opportunities",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "career opportunities"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Please send in your application for the position you are qualified for, and we’ll be in touch with you.</p>"
+        },
+        {
+          "type": "text",
+          "id": "title_role",
+          "label": "Role",
+          "default": "Role"
+        },
+        {
+          "type": "text",
+          "id": "title_location",
+          "label": "Location",
+          "default": "location"
+        }
+	],
+    "blocks":[
+           {
+            "type":"opportunitiy",
+            "name":"Opportunitiy",
+            "settings":[
+                {
+                  "type": "text",
+                  "id": "profile",
+                  "label": "Job Profile",
+                  "default": "Key Account Manager"
+                },
+                {
+                  "type": "text",
+                  "id": "job_location",
+                  "label": "Job Location",
+                  "default": "Mumbai"
+                },
+                {
+                  "type": "html",
+                  "id": "job_desc",
+                  "label": "Job Description",
+                  "default": "Add Description Here"
+                },
+                {
+                  "type": "text",
+                  "id": "btn_txt",
+                  "label": "Button Text",
+                  "default": "apply now"
+                },
+                {
+                  "type": "url",
+                  "id": "btn_url",
+                  "label": "Button URL"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

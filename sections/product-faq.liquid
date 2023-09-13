@@ -1,0 +1,109 @@
+<div id="shopify-section-product-template" class="shopify-section">
+  <div class="faq_section relative" id="product_faq" style="display: block;">
+    {% if section.settings.title != blank %}
+    <div class="faq_title center">
+      {{ section.settings.title }}
+    </div>
+    {% endif %}
+    <section class="ac-container">
+      {% for faq in product.metafields.product_faq_title.product_faq_title %}
+      {% if faq != blank %}
+      <div class="product_tab_item" data-id="{{ forloop.index }}">
+        {% if faq != blank %}
+        <div class="pdtb_heading">
+          {{ faq }}
+        </div>
+        {% endif %}
+        {% if product.metafields.product_faq_des.product_faq_des[forloop.index0] != blank %}
+        <div class="pdtb_detail" style="display: none;">
+          {{product.metafields.product_faq_des.product_faq_des[forloop.index0]}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endfor %}    
+    </section>
+    {% if section.settings.btn_text != blank %}
+    <div class="cm_but center">
+      <a class="button read_more_faq" href="#" style="">{{ section.settings.btn_text }}</a>
+    </div>
+    {% endif %}
+    
+    <style>
+      .faq_section:before {
+        background-image: url(https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Skin_Left_400x650_425caea6-c892-492a-bd7d-afee8d601dcb.png?v=1647095765)
+      }
+      .faq_section:after {
+        background-image: url(https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Skin_Right_400x650_00d13cfa-8924-4f72-81d0-655bbba9e081.png?v=1647096295)
+      }
+    </style>
+  </div>
+</div>
+
+
+<!-- FAQ SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in product.metafields.product_faq_title.product_faq_title %}
+      {
+        "@type": "Question",
+        "name": "{{ faq }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ product.metafields.custom.schema_faq_description.value[forloop.index0] }}" 
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+
+{% schema %}
+  {
+    "name": "Product Faq",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "got doubts? get answers."
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Text",
+          "default": "read more"
+        }
+	],
+    "blocks":[
+           {
+            "type":"faq",
+            "name":"Faq",
+            "settings":[                
+                {
+                  "type": "text",
+                  "id": "faq_title",
+                  "label": "Faq Title",
+                  "default": "Who can take Radiant Skin?"
+                },                
+				{
+                  "type": "richtext",
+                  "id": "faq_detail",
+                  "label": "Faq Detail",
+                  "default": "<p>Anyone above 18 years of age can safely eat Radiant Skin gummies. Our formulation brings you the right dose of essential nutrients, and keeps out bad preservatives and additives</p>"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,76 @@
+<div id="Press" style="display: block;">
+  <div class="row tbpd" style="background:#fff4ee;">
+    <div class="center">
+      {% if section.settings.title != blank %}
+      <div class="sml_tag" id="Press_heading">
+        {{ section.settings.title }}
+      </div>
+      {% endif %}
+      <div id="Press_txt">
+        {% for block in section.blocks %}
+        {% if block.settings.press_desc != blank %}
+        <div class="cm_p min-center">
+          {{block.settings.press_desc}}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div id="Press_logo" class="icon_box_text">
+        {% for block in section.blocks %}
+        <div class="three">
+          {% if block.settings.press_image != blank %}
+          <img class="res_width1 lazyload" data-src="{{block.settings.press_image | img_url:"150x50"}}" alt="{{ block.settings.press_image.alt }}">
+          {% endif %}          
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Press",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "PRESS"
+         }
+	],
+	"blocks":[
+         {
+          "type":"description",
+          "name":"Description",
+          "settings":[
+            {
+              "type":"text",
+              "id":"press_desc",
+              "label":"Press Description",
+              "default":"If you need to boost your immunity, Nyumi gummies are a great alternative to regular pills—the citrus flavour will actually have you excited to take them."
+            },
+			{
+              "type":"image_picker",
+              "id":"press_image",
+              "label":"Press Image"
+            }
+           ]
+          }            
+                            
+     ],
+"presets": [
+	{
+	  "category": "Homepage",
+	  "name": "Homepage press"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

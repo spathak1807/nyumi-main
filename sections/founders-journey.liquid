@@ -1,0 +1,148 @@
+<div class="founder-journey" id="founder-journey">
+  <div class="abtct_box">
+    {% if section.settings.founders_title != blank %}
+    	<h2>{{ section.settings.founders_title }}</h2>    
+    {% endif %}
+  </div>
+  <div class="behind-scienc-image founder-image">
+    {% if section.settings.founders_image != blank %}
+    	<img class="lazyload" data-src="{{ section.settings.founders_image | img_url:"master"}}" alt="{{ section.settings.founders_image.alt }}">
+    {% else %}
+    	<img class="lazyload" data-src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/img-01.png?v=1609327297" alt="image">
+    {% endif %}    
+  </div>
+  <div class="abt_center_txt">
+    <div class="page_width">
+      <div class="abtct_box">
+        {% if section.settings.founders_des != blank %}
+        <div class="abtct_txt">
+          {{ section.settings.founders_des }}
+        </div>
+        {% endif %}
+        <div class="abtct_small">
+          {% if section.settings.founders_bold_desc != blank %}
+          	<h3>{{ section.settings.founders_bold_desc }}</h3>
+          {% endif %}
+          <div class="abtct_sml_txt bottom_sml_txt">
+            {% if section.settings.founders_bot_desc != blank %}
+              {{ section.settings.founders_bot_desc }}
+            {% endif %}            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="abt_txt_full">
+    {% for block in section.blocks %}
+    {% if block.type == 'imageWithcontent' %}
+    <div class="abt_left_image ">
+      <div class="page_width">
+        <div class="abtlf_flx {% if block.settings.style == 'img-left' %}flx_reverse{% endif %}">
+          <div class="abtlf_txt">
+            {% if block.settings.block_title != blank %}
+            	<h3>{{ block.settings.block_title }}</h3>
+            {% endif %}
+            <div class="abtlth_description">
+              {% if block.settings.block_desc != blank %}
+            	{{ block.settings.block_desc }}
+            {% endif %}              
+            </div>
+          </div>  
+          <div class="abtlf_img">
+            {% if block.settings.block_image != blank %}
+                <img class="lazyload" data-src="{{block.settings.block_image | img_url:"master"}}" alt="#">
+            {% else %}
+                <img class="lazyload" data-src="//images.ctfassets.net/537ig19c198x/O4Vk3YG8PKW12EKSMr4fV/0049d035f8cd6ab02ad8bf66814d9bfa/About_Page_saftey_over.webp" alt="#">
+            {% endif %}            
+          </div> 
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Founders Journey",
+    "settings": [
+	 {
+	    "type": "text",
+	    "id": "founders_title",
+	    "label": "Founders Title",
+		"default": "our founder’s journey"
+	  },
+      {
+        "type":"image_picker",
+        "id":"founders_image",
+        "label":"Founders Image"
+      },
+	  {
+	    "type": "richtext",
+	    "id": "founders_des",
+	    "label": "Founders Description",
+	    "default": "<p>I grew up drinking neem kadhas and wheat germ juices reluctantly, often pouring it into my brother’s glass when no one was looking. At boarding school, each Wednesday was a struggle, as we were handed our weekly pink vitamin tablet. I’d place it at the back of my throat and gulp a glass full of water, only to find the pill still in my mouth. As a teen, the strong smell of my Omega 3 capsule made me nauseous before I could even swallow it. I knew there had to be a better way.</p>"
+	  },
+      {
+        "type": "text",
+        "id": "founders_bold_desc",
+        "label": "Founders quote",
+        "default": "“Good nutrition shouldn’t be a compromise”"
+      },
+      {
+        "type": "text",
+        "id": "founders_bot_desc",
+        "label": "Founders Bottom Description",
+        "default": "and that’s why I built Nyumi."
+      }
+	],
+    "blocks": [
+        {
+            "type": "imageWithcontent",
+            "name": "Image With Content",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "style",
+                    "label": "Select Style",
+                    "options": [
+                        {
+                            "value": "img-left",
+                            "label": "Image Left & Content Right"
+                        },
+                        {
+                            "value": "img-right",
+                            "label": "Image Right & Content Left"
+                        }
+                    ]
+                },
+                {
+                    "type": "image_picker",
+                    "id": "block_image",
+                    "label": "Block Image"
+                },
+                {
+                    "type": "text",
+                    "id": "block_title",
+                    "label": "Block Title",
+					"default": "safety over quick results"
+                },
+                {
+                    "type": "richtext",
+                    "id": "block_desc",
+                    "label": "Block Description",
+					"default": "<p>A biotin-based hair supplement gave me great results, until a routine blood test reported a spike in my thyroid level. I found out that too much biotin could interfere with test results and lead to misdiagnosis. For Nyumi, our formulation panel ensured precise dosages as established by WHO and ICMR (Indian Council of Medical Research), to create nutrition that’s safe and effective.</p>"
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

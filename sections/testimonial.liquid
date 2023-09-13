@@ -1,0 +1,306 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+>
+
+<style>
+      body{
+      background-color: #FFF4EE;
+    }
+    h3 {
+      text-align: centre;
+    }
+
+    .carousel_container {
+      width: 100%;
+      height: 100%;
+  /*     max-width: 1110px; */
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 30px;
+      margin-bottom: 25px;
+      margin-top: 35px;
+      filter: drop-shadow(0px 1px 2.5px rgba(172,172,172,0.16 ));
+    }
+
+    .block_title {
+      height: 180px;
+      width: 180px;
+      border-radius: 50%;
+      background-color: #F37168;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 20px;
+      font-family: 'manrope';
+    }
+
+    .swiper {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      align-items: center;
+      gap: 22px;
+      height: 100%;
+      width: 100%;
+    }
+
+    .swiper-slide {
+      position: relative;
+      right: -5%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .swiper-slide img {
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .description_wrapper {
+      width: 100%;
+      max-width: 40%;
+      position: relative;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .description_wrapper p {
+      font-family: "manrope";
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 26px;
+      text-align: justify;
+      margin: 0 auto;
+      bottom: -5%;
+    }
+
+    .description_wrapper p span {
+      color: #F37068;
+      font-family: "manropes";
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 26px;
+      text-align: justify;
+      margin: 0 auto;
+    }
+
+    .swiper-pagination {
+      bottom: 10% !important;
+    }
+
+    .swiper-pagination-bullet {
+      background: #F37068 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #F37068 !important;
+    }
+
+    .section_heading h3 {
+      font-family: 'corbenr';
+      font-size: 30px;
+      text-align: center;
+      color: black;
+
+    }
+
+    .section_heading {
+      padding-top: 30px;
+    }
+
+    @media only screen and (min-width: 768px) {
+      .carousel_container {
+        height: 300px;
+        padding: 4rem 0;
+        padding-top: 0;
+      }
+      .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+        bottom: 0% !important;
+      }
+      .swiper-slide {
+        flex-direction: row;
+        align-items: center;
+        gap: 45px;
+      }
+
+      .swiper {
+        padding: 0;
+      }
+
+      .description_wrapper {
+        width: 100%;
+        max-width: 60%;
+        position: relative;
+        margin-top: 20px;
+        text-align: right;
+      }
+
+      .section_heading h3 {
+      font-family: 'corbenr';
+      font-size: 28px;
+      text-align: center;
+      color: black;
+      padding: 0 5px;
+
+    }
+
+      .description_wrapper p {
+        color: black;
+        font-family: "manrope";
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 26px;
+        width: 75%;
+        text-align: justify;
+        margin: 0 auto;
+        bottom: auto;
+      }
+
+      .swiper-pagination {
+        bottom: 20px !important;
+      }
+    }
+
+
+    /* Media queries */
+    @media only screen and (max-width: 767px) {
+      .carousel_container {
+        width: 95%;
+        height: 100%;
+        margin-bottom: 30px;
+      }
+
+      .swiper-slide {
+        display: flex;
+        flex-direction: row;
+        right: 0;
+        gap: 10px;
+      }
+
+      .swiper-slide img {
+        height: 130px;
+        width: 130px;
+        margin-bottom: 10px;
+      }
+
+      .description_wrapper {
+        width: 100%;
+        margin-bottom: 15px;
+        max-width: 100%;
+
+      }
+
+      .description_wrapper p {
+        font-family: "manrope";
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 26px;
+
+        text-align: justify;
+        margin: 0 auto;
+        bottom: auto;
+      }
+
+      .section_heading h3 {
+        font-size: 24px;
+      }
+      .description_wrapper p {
+        font-size: 12px;
+        line-height: 1.4;
+        text-align: left;
+      }
+      .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+        bottom: 3% !important;
+      }
+    }
+</style>
+
+<div class="section_heading">
+  <h3>customer testimonials</h3>
+</div>
+<div class="carousel_container ">
+  <div class="swiper">
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <img src="{{ block.settings.image | img_url: '300x' }}" alt="{{ block.settings.title }}">
+
+          <div class="description_wrapper">
+            <p>
+              {{ block.settings.description }}
+            </p>
+            <p>
+              <span>{{ block.settings.name }}</span>
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper', {
+
+    direction: 'horizontal',
+    loop: true,
+
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+    }
+
+  });
+</script>
+
+{% schema %}
+ {
+  "name": "TestimonialCarousel",
+
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide_image"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Slide_description"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Slide_name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TestimonialCarousel",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

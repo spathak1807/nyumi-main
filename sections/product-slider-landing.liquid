@@ -1,0 +1,493 @@
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+
+<style>html {
+    scroll-behavior: smooth;
+}
+
+.reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.reviews p {
+    margin: 0;
+}
+
+.reviews p.line {
+    margin: 0 0.5rem;
+}
+
+.reviews p.sold_unit {
+    font-size: 16px;
+    font-family: 'manropes';
+}
+
+div.wc_review_badge_wrap {
+    display: flex;
+}
+
+.wc_product_review_badge .wc_review_badge_inner {
+    width: unset;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+}
+
+.sold_unit {
+    padding-top: 2px;
+}
+
+.slick-dots li {
+    height: 3px !important;
+    width: 3px !important;
+}
+.slick-dots button {
+    padding: 4px !important;
+}
+
+.wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+    padding-left: 0;
+    font-size: 16px;
+    margin-top: 0;
+}
+.product-price {
+      font-size: 20px;
+    margin: 0.5rem 0;
+    margin-bottom: 0;
+  font-family: "Corbenr";
+}
+.product-price span {
+      font-size: 20px;
+    
+}
+#product-carousel {
+    border-radius: 5%;
+    max-width: 60%;
+    height: 100%;
+    padding-bottom: 4rem;
+    margin: 0 auto;
+    background: white;
+    margin-top: 4%;
+}
+
+#product-carousel .product-images img {
+    padding-top: 60px;
+    max-height: 550px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#product-carousel h2 {
+    font-family: "corbenr";
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 26px;
+    font-style: normal;
+    text-align: center;
+    color: #f37168;
+    padding-top: 35px;
+    text-transform: lowercase;
+}
+
+.wc_product_review_badge {
+    width: auto;
+    text-align: center;
+    font-size: 26px;
+    font-family: "manropes";
+
+
+}
+
+
+
+#product-carousel .slick-dots {
+    padding-top: 80px;
+}
+
+#product-carousel .slick-dots li button {
+    /*                 box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); */
+    border-radius: 50%;
+}
+
+#product-carousel .slick-dots li button {
+    width: 5px;
+    height: 5px;
+    /*       margin: 0 1px; */
+    background-color: #ffcccc;
+
+
+}
+
+#product-carousel .slick-dots li.slick-active button {
+    background-color: #f37168;
+    box-shadow: none;
+}
+
+
+
+
+
+
+.product-features {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.feature-column {
+    margin-right: 80px;
+}
+
+.feature-column:last-child {
+    margin-right: 0;
+}
+
+.feature-column ul {
+    margin: 0;
+    padding: 0;
+}
+
+.feature-column li {
+
+    margin-bottom: 10px;
+    font-family: "manropes";
+    font-size: 24px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.feature-column li:before {
+
+    color: #f37168;
+
+}
+
+
+.feature-column li:before {
+    content: "\2022";
+    color: #f37168;
+    margin-right: 10px;
+}
+
+
+form {
+    margin-top: 25px;
+}
+
+
+.add-to-cart-btn {
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    padding: 0.3rem;
+    font-family: 'corbenr';
+    text-transform: lowercase;
+    border-radius: 20px;
+    background: #f37168;
+}
+
+
+
+
+
+
+
+/* Media queries for mobile devices */
+@media screen and (max-width: 767px) {
+    #product-carousel {
+        max-width: 90%;
+        height: 850px;
+        margin-top: 2%;
+        margin-bottom: 10%;
+    }
+
+    #product-carousel .slick-dots li button {
+        margin: 0 0.5px;
+    }
+
+    #product-carousel .product-images img {
+        padding-top: 30px;
+        max-height: 260px;
+    }
+
+    #product-carousel h2 {
+        font-size: 20px;
+        padding-top: 30px;
+    }
+
+    .wc_product_review_badge {
+        padding-right: 0;
+
+    }
+
+    .feature-column {
+        margin-right: 50px;
+    }
+
+    .add-to-cart-btn {
+        width: 90%;
+    }
+
+    #product-carousel form {
+        margin-bottom: 15px;
+    }
+
+    .product-features {
+        padding: 0 5px;
+        /*               padding-left: 30px; */
+
+
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    #product-carousel {
+        max-width: 90%;
+        height: 100%;
+        margin-top: 2%;
+        margin-bottom: 10%;
+        padding: 5px;
+        padding-bottom: 1rem;
+    }
+
+    .reviews p.sold_unit {
+        font-size: 12px;
+    }
+
+    .wc_product_review_badge .wc_review_badge_inner .wc_product_review_title {
+        font-size: 13px;
+      padding-top: 3px;
+    }
+
+    .wc_product_review_badge {
+        width: auto;
+    }
+
+    .wc_review_badge_wrap .wc_icon_color svg,
+    #wc_review_section .wc_review_badge_wrap .wc_icon_color svg {
+        width: 80px !important;
+    }
+
+    #product-carousel .slick-dots {
+        padding-top: 45px;
+    }
+
+    #product-carousel h2 {
+        padding-top: 15px;
+        font-size: 24px;
+        margin: 5px;
+        letter-spacing: inherit;
+        font-weight: 500;
+    }
+
+    .feature-column li {
+        display: block;
+        margin-bottom: 10px;
+        font-family: "manrope";
+        font-size: 12px;
+        line-height: 1.5;
+        color: black;
+        font-weight: 500;
+    }
+
+    .add-to-cart-btn {
+        font-size: 16px;
+        font-family: "manrope";
+        font-weight: 500;
+        color: white;
+        border: none;
+        display: block;
+        letter-spacing: inherit;
+        margin: 0 auto;
+        width: 85%;
+        padding: 5px;
+        line-height: 1.5;
+        text-transform: lowercase;
+        border-radius: 20px;
+        background: #f37168;
+    }
+
+    .feature-box-img {
+        height: 45px;
+        width: 45px;
+        margin: 0 auto;
+    }
+
+    .wc_product_review_title {
+        padding-top: 2px;
+    }
+
+    .wc_product_review_text {
+        display: none;
+    }
+
+
+    .features-product {
+        width: 100% !important;
+    }
+
+    .feature-txt {
+        font-size: 12px;
+    }
+}
+
+.features-product {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.feature-box-img {
+    height: 55px;
+    width: 55px;
+
+    margin: 0 auto;
+}
+
+.feature-box-img img {
+    height: 100%
+}
+
+.feature-txt {
+    margin-top: 10px;
+}
+
+ 
+  }
+ .product-price {
+        text-align: center;
+  
+    font-family: "Corbenr";
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 16px;
+    font-style: normal;
+    margin: 10px 10px;
+    /* text-align: left; */
+    color: #000000;
+  }
+
+  .product-price span {
+        opacity: 0.40;
+    font-family: "Corbenr";
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 16px;
+    font-style: normal;
+    text-align: left;
+    color: #707070;
+    text-decoration: line-through;
+}
+
+  .benefit-title {
+        font-family: "Corben";
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 0px;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+}
+  }
+
+  .pd_icon_section {
+    background-color: white;
+  }
+  .product-price {
+    text-align:center;
+  }
+</style>
+
+<div id="product-carousel">
+  {% for product in collections['quiz-questionare'].products %}
+    {% if product.id == 6092022481063 %}
+      <div id="add_to_cart" class="product-images">
+        {% for image in product.images %}
+          {% if forloop.index <= 10 %}
+            <img class="{{ forloop.index }}" src="{{ image | img_url: "" }}">
+          {% endif %}
+        {% endfor %}
+      </div>
+      <h2>{{ product.title }}</h2>
+      <p class="product-price"> {{ product.price | money_without_trailing_zeros }} <span>{{ product.compare_at_price | money_without_trailing_zeros }}</span> </p>
+      <div class="reviews">
+        <div class="wc_product_review_badge" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}"></div>
+        <p class="line"> | </p>
+        <p class="sold_unit">Trusted by 50k+ women</p>
+      </div>
+
+  <div class="features-product">
+    <div class="feature-box"> 
+    <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_23_26389f47-89f3-4c8e-ba9e-ab85910d234a.png?v=1667480266" ></div>
+      <div class="feature-txt" >Reduces Hairfall</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_26_7b9561a3-473b-4c92-b4dd-b10fb92acd3a.png?v=1667480285"></div>
+      <div class="feature-txt" >Delays Grey Hair</div>
+        
+    </div>
+    <div class="feature-box"> 
+      <div class="feature-box-img"> 
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Group_28_789fbf8e-b0ec-40ea-b09a-911a8c0f4664.png?v=1667480250" ></div>
+      <div class="feature-txt" >Nourished Hair</div>
+        
+    </div>
+  </div>
+
+<!--       <div class="product-features">
+        <div class="feature-column">
+          <ul>
+            <li>Reduces Hairfall</li>
+            <li>Healthy Nails</li>
+            <li>Nourished Hair</li>
+          </ul>
+        </div>
+        <div class="feature-column">
+          <ul>
+            <li>Reduces Hair Breakage</li>
+            <li>Delaying Grey Hair</li>
+            <li>Increased Root Strength</li>
+          </ul>
+        </div>
+      </div> -->
+
+      <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#product-carousel .product-images').slick({
+      arrows: false,
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      centerMode: true,
+      swipe: true,
+      variableWidth: true
+    });
+  });
+</script>

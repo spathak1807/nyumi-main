@@ -1,0 +1,80 @@
+<div class="hire_exp_section" id="hire_exp">
+  <div class="hrxp_box page_width">
+    {% if section.settings.title != blank %}
+    <div class="hrxp_top">      
+      <h2>{{ section.settings.title }}</h2>      
+    </div>
+    {% endif %}
+    <div class="hrxp_outer_flx">
+      {% for block in section.blocks %}
+      <div class="hrxp_flx">
+        <div class="hrxp_icon">
+          <div class="hrxp_img">
+            {% if block.settings.block_image != blank %}
+                <img class="lazyload" data-src="{{block.settings.block_image | img_url:"master"}}" alt="{{ block.settings.block_image.alt }}">
+            {% else %}
+                <img class="lazyload" data-src="//images.ctfassets.net/537ig19c198x/49aoioigIu1AG4BnvVsUkd/6fcf239b7324c011a4d5b73bf0e55912/icon-01.png" alt="#">
+            {% endif %}            
+          </div>
+        </div>
+        <div class="hrxp_txt">
+          {% if block.settings.block_title != blank %}
+          	<h3>{{block.settings.block_title}}</h3>
+          {% endif %}
+          {% if block.settings.block_desc != blank %}
+          <div class="hrxp_description">
+            {{block.settings.block_desc}}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Science hire",
+	"max_blocks": 2,
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "we hire experts"
+        }
+	],
+	"blocks":[
+           {
+            "type":"data",
+            "name":"data",
+            "settings":[
+                {
+                  "type":"image_picker",
+                  "id":"block_image",
+                  "label":"Block Image"
+                },
+                {
+                  "type":"text",
+                  "id":"block_title",
+                  "label":"Block title",
+                  "default":"formulation panel"
+                },
+                {
+                  "type":"richtext",
+                  "id":"block_desc",
+                  "label":"Block Description",
+                  "default":"<p>Along with doctors, our team includes nutritionists, pharmacists and health experts. They bring on board their experience and knowledge on latest development in nutrition science, vitamin formulation, and compliance with nutrition regulations.</p>"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

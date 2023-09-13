@@ -1,0 +1,67 @@
+<div class="page-width">
+  <table class="map_table">
+    <tr>
+      <th>URL</th>
+      <th>Last Mod</th>
+      <th>Priority</th>
+    </tr>
+    {% for block in section.blocks %}
+    <tr>
+      {% if block.settings.url_link != blank %}
+      <td>
+        <a href="{{block.settings.url_link}}">{{block.settings.url_link}}</a>
+      </td>
+      {% endif %}
+      {% if block.settings.time_period != blank %}
+      <td>
+        {{block.settings.time_period}}
+      </td>
+      {% endif %}
+      {% if block.settings.preority != blank %}
+      <td>
+        {{block.settings.preority}}
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}    
+  </table>
+</div>
+
+{% schema %}
+  {
+    "name": "Site-Map",
+    "settings": [],
+    "blocks":[
+           {
+            "type":"sitemap",
+            "name":"Sitemap",
+            "settings":[
+                {
+                  "type": "text",
+                  "id": "url_link",
+                  "label": "Url Link",
+                  "default": "https://nyumi.com/"
+                },
+                {
+                  "type": "text",
+                  "id": "time_period",
+                  "label": "Time Period",
+                  "default": "2021-04-28T07:09:19+00:00"
+                },
+                {
+                  "type": "text",
+                  "id": "preority",
+                  "label": "Priority",
+                  "default": "1.00"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

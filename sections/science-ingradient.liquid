@@ -1,0 +1,141 @@
+<style>
+  #ingredients_section .img_left {
+  flex-direction: row-reverse;
+  }
+</style>
+<div class="left_right_section" id="ingredients_section">  
+  <div class="lft_top">
+    {% if section.settings.heading != blank %}
+    <h2>{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.main_desc != blank %}
+    <div class="lft_txt">
+      {{ section.settings.main_desc }}
+    </div>
+    {% endif %}
+  </div>  
+  <div id="ingredients_img_box" class="ingd_img_box">
+    {% for block in section.blocks %}
+    {% if block.type == 'imageWithcontent' %}
+    {% assign lop_index = forloop.index | modulo: 2 %}
+    {% if lop_index == 0 %}
+    {% assign img_align = 'img_left' %}
+    {% endif %}
+    
+    {% unless block.settings.style != blank %}
+    {% assign style_class = 'lft_center' %}
+    {% endunless %}
+    {% if block.settings.style == 'style-1' %}
+    {% assign style_class = 'lft_center' %}
+    {% endif %}
+    {% if block.settings.style == 'style-2' %}
+    {% assign style_class = 'lft_left' %}
+    {% elsif block.settings.style == 'style-3' %}
+    {% assign style_class = 'lft_right lft_big ryt_fx' %}
+    {% elsif block.settings.style == 'style-4' %}
+    {% assign style_class = 'lft_left lft_big' %}
+    {% endif %}
+    
+    <div data-id="{{ forloop.index }}" class="lft_img_txt {{ style_class }}">
+      <div class="lftmtx_flx {{ img_align }}">
+        <div class="lftmtx_txt">
+          {% if block.settings.title != blank %}
+          <h3>{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.desc != blank %}
+          <div class="lftmtx_description">
+            {{ block.settings.desc }}
+          </div>
+          {% endif %}
+        </div>
+        {% if block.settings.image != blank %}
+        <div class="lftmtx_img">
+          <img class="lazyload" data-src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}" />
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% assign img_align = '' %}
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Science ingredient",
+    "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "ingredients have to earn their place"
+        },
+        {
+          "type": "richtext",
+          "id": "main_desc",
+          "label": "Main Description",
+          "default": "<p>Every ingredient is checked not just for nutritional benefits, but also for quality of source, clinical reports, and compatibility with other ingredients.</p>"
+        }
+],
+    "blocks": [
+        {
+            "type": "imageWithcontent",
+            "name": "Image With Content",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "style",
+                    "label": "Select Style",
+                    "options": [
+						{
+                            "value": "none",
+                            "label": "Select style"
+                        },                        
+						{
+                            "value": "style-1",
+                            "label": "Style 1"
+                        },
+                        {
+                            "value": "style-2",
+                            "label": "Style 2"
+                        },
+                        {
+                            "value": "style-3",
+                            "label": "Style 3"
+                        },
+                        {
+                            "value": "style-4",
+                            "label": "Style 4"
+                        }
+                    ]
+                },
+                {
+                  "type": "image_picker",
+                  "id": "image",
+                  "label": "Image"
+                },
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Title",
+                  "default": "power of two: Indian + western ingredients"
+                },
+                {
+                  "type": "richtext",
+                  "id": "desc",
+                  "label": "Description",
+                  "default": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

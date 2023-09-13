@@ -1,0 +1,92 @@
+<style>
+  .sitemap-page .product_breadcrumbs {
+    margin: 1rem 0;
+  }
+  .sitemap-page {
+    padding: 2rem 1rem;
+  }
+  .all-sitemaps {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .all-sitemaps .collection,
+  .all-sitemaps .product,
+  .all-sitemaps .page,
+  .all-sitemaps .blog {
+    width: 21%;
+  }
+  .all-sitemaps .collection {
+    width: 18%;
+  }
+  .all-sitemaps .page {
+    width: 20%;
+  }
+  .all-sitemaps .blog {
+    width: 40%;
+  }
+  .sitemap h3 {
+    color: #f37168;
+    font-size: 22px;
+  }
+  .sitemap ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (max-width: 960px) {
+    .all-sitemaps .collection,
+    .all-sitemaps .product,
+    .all-sitemaps .page,
+    .all-sitemaps .blog {
+      width: 33.3%;
+    }
+    .all-sitemaps .blog {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .all-sitemaps .collection,
+    .all-sitemaps .product,
+    .all-sitemaps .page,
+    .all-sitemaps .blog {
+      width: 100%;
+    }
+    .sitemap ul li {
+      margin-bottom: 0.5rem;
+      font-size: 18px;
+    }
+    .sitemap h3 {
+      margin-bottom: 1rem;
+    }
+    .sitemap {
+      margin-bottom: 3rem;
+    }
+    .sitemap-page .product_breadcrumbs {
+      margin-bottom: 3rem;
+    }
+  }
+</style>
+
+<div class="sitemap-page">
+  <div class="product_breadcrumbs">
+    <a href="https://{{ request.host }}">
+      Home 
+    </a>/ Sitemap
+  </div>
+  
+  <div class="all-sitemaps">
+    <div class="collection">
+      {% section 'collection-site-map' %}
+    </div>
+    <div class="product">
+      {% section 'product-site-map' %}
+    </div>
+    <div class="page">
+      {% section 'page-site-map' %}
+    </div>
+    <div class="blog">
+      {% section 'blog-site-map' %}
+    </div>
+  </div>
+</div>

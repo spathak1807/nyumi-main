@@ -1,0 +1,355 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+<!-- <meta name="google-site-verification" content="i1NbLNNRibCXp3wxYmQDoAfc1hMc7Z-lG1PzDOM0kKg" /> -->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <meta name="facebook-domain-verification" content="8d3spwlgfmsm7v6wnu316h7zso2o9e" />
+  <!-- Leveraging Browser Caching -->
+  <meta http-equiv="Expires" content="30" /> 
+
+  {%- if canonical_url != blank  -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+  {%- endif -%}
+
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {%- if request.page_type == 'search' and search.performed == true -%}
+      {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+    {%- else -%}
+      {{ page_title }}
+    {%- endif -%}
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {%- endcapture -%}
+  
+  {% comment %}
+  <title>{{ seo_title | strip }}</title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  
+  {% endcomment %}
+
+  {% include 'social-meta-tags' %}
+
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'new.scss' | asset_url | stylesheet_tag }}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
+
+  {% comment %}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {% endcomment %}
+  
+   {{ 'nyumi.scss.css' | asset_url | stylesheet_tag }}
+  
+  {% comment %}
+  	{{ 'style.scss.css' | asset_url | stylesheet_tag }} 
+    {{ 'responsive.scss' | asset_url | stylesheet_tag }}
+  {% endcomment %}
+  
+  
+  <script>
+    var theme = {
+      breakpoints: {
+        medium: 750,
+        large: 990,
+        widescreen: 1400
+      },
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        regularPrice: {{ 'products.product.regular_price' | t | json }},
+        salePrice: {{ 'products.product.sale_price' | t | json }},
+        sale: {{ 'products.product.on_sale' | t | json }},
+        fromLowestPrice: {{ 'products.product.from_lowest_price_html' | t: lowest_price: '[price]' | json }},
+        vendor: {{'products.product.vendor' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }},
+        searchFor: {{ 'general.search.search_for' | t | json }},
+        addressError: {{ 'sections.map.address_error' | t | json }},
+        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+        authError: {{ 'sections.map.auth_error_html' | t | json }},
+        newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
+        external: {{ 'general.accessibility.link_messages.external' | t | json }},
+        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
+        removeLabel: {{ 'cart.label.remove' | t: product: '[product]' | json }},
+        update: {{ 'cart.label.update' | t | json }},
+        quantity: {{ 'cart.label.quantity' | t | json }},
+        discountedTotal: {{ 'cart.label.discounted_total' | t | json }},
+        regularTotal: {{ 'cart.label.regular_total' | t | json }},
+        priceColumn: {{ 'cart.label.price_column' | t | json }},
+        quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
+        cartError: {{ 'cart.general.cart_error' | t | json }},
+        removedItemMessage: {{ 'cart.general.removed_item_html' | t: quantity: '[quantity]', link: '[link]' | json }},
+        unitPrice: {{ 'products.product.unit_price_label' | t | json }},
+        unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+        oneCartCount: {{ 'cart.popup.cart_count' | t: count: 1 | json }},
+        otherCartCount: {{ 'cart.popup.cart_count' | t: count: '[count]' | json }},
+        quantityLabel: {{ 'cart.popup.quantity_label' | t: quantity_count: '[count]' | json }},
+        products: {{ 'general.search.products' | t | json }},
+        loading: {{ 'general.search.loading' | t | json }},
+        number_of_results: {{ 'general.search.number_of_results' | t: result_number: '[result_number]', results_count: '[results_count]' | json }},
+        number_of_results_found: {{ 'general.search.number_of_results_found' | t: results_count: '[results_count]' | json }},
+        one_result_found: {{ 'general.search.one_result_found' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }},
+      settings: {
+        predictiveSearchEnabled: {{ settings.predictive_search_enabled | json }},
+        predictiveSearchShowPrice: {{ settings.predictive_search_show_price | json }},
+        predictiveSearchShowVendor: {{ settings.predictive_search_show_vendor | json }}
+      }
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+      
+  {%- if request.page_type contains 'customers/' -%}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+  {%- endif -%}
+  
+
+  <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
+  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+  
+   {% comment %}
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+   {% endcomment %}
+ 
+  <script src="{{ 'theme-min.js' | asset_url }}" defer="defer"></script>
+ 
+  
+  <script  src="{{ 'jquery.js' | asset_url }}"></script>
+  <script src="{{ 'slick.js' | asset_url }}" ></script>
+  
+ 
+  
+  
+   <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+  
+  <script src="{{ 'lazy_load.js' | asset_url }}" defer="defer"></script>
+  {{ 'custom-new.js' | asset_url | script_tag }}
+  
+  {% comment %}  {% endcomment %}
+  <script src="{{ 'https://ssl.widgets.webengage.com/js/service-worker.js' }}" defer="defer"></script>
+
+  {{ content_for_header }}
+
+  <script>window.beans_cjs_id = '{{ customer.id }}'; window.beans_cjs_email = '{{ customer.email }}';</script> 
+
+	  
+<!-- RYVIU APP :: Settings global -->	
+    <script>
+        var ryviu_global_settings = {{shop.metafields.ryviu.user_settings }};
+    </script>
+<!-- RYVIU APP -->
+   
+	<link href='https://s3.us-east-2.amazonaws.com/ekoma/ekoma.css.gz' rel='stylesheet' type='text/css' media='all' />
+  
+  <script id='_webengage_script_tag' type='text/javascript'>
+var webengage;!function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),
+arguments])}}var i,s,r=w[b],z=" ",l="init options track screen onReady".split(z),a="feedback survey notification".split(z),c="options render clear abort".split(z),p="Open Close Submit Complete View Click".split(z),u="identify login logout setAttribute".split(z);if(!r||!r.__v){for(w[b]=r={__queue:[],__v:"6.0",user:{}},i=0;i < l.length;i++)o(r,[l[i]]);for(i=0;i < a.length;i++){for(r[a[i]]={},s=0;s < c.length;s++)o(r[a[i]],[a[i],c[s]]);for(s=0;s < p.length;s++)o(r[a[i]],[a[i],"on"+p[s]])}for(i=0;i < u.length;i++)o(r.user,["user",u[i]]);setTimeout(function(){var f=e.createElement("script"),d=e.getElementById("_webengage_script_tag");f.type="text/javascript",f.async=!0,f.src=("https:"==e.location.protocol?"https://ssl.widgets.webengage.com":"http://cdn.widgets.webengage.com")+"/js/webengage-min-v-6.0.js",d.parentNode.insertBefore(f,d)})}}(window,document,"webengage");webengage.init("aa131cc8");
+</script>
+   
+  
+ 
+	{% unless template.name == 'index' %}
+  		{% include 'webhook-checkout-started' %}
+  	{% endunless %}
+  
+  
+   {% unless template.name == 'product' %}
+    <meta property="og:image" content="{{ 'safe_image_2x.png' | asset_url }}">
+  <meta property="og:image" content="{{ 'safe_image_2x.png' | asset_url }}">
+<meta property="og:image:secure_url" content="{{ 'safe_image_2x.png' | asset_url }}">
+  <meta property="og:image:secure_url" content="{{ 'safe_image_2x.png' | asset_url }}">
+
+  {% endunless %}
+  
+  
+  <script>
+   !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '193953175880287');
+    fbq('track', 'PageView'); 
+    </script>
+    
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=193953175880287&ev=PageView&noscript=1"
+/></noscript>
+ 
+    
+  </head>
+
+<body class="template-{{ request.page_type | handle }} {{ template.suffix }}">
+  
+{% unless template.name == 'index' %}   {% endunless %}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTMC5F7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+  
+  
+  <div class="reload_bg"></div>
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  {%- if settings.enable_ajax -%}
+    {% include 'cart-popup' %}
+  {%- endif -%}
+
+  
+  {% section 'header-new' %}
+   
+  <div class="page-container drawer-page-content remove_transform" id="PageContainer">
+
+    <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer-custom' %}
+
+    <div id="slideshow-info" class="visually-hidden" aria-hidden="true">
+      {{- 'sections.slideshow.navigation_instructions' | t -}}
+    </div>
+
+  </div>
+
+  <ul hidden>
+    <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+    <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
+  </ul>
+  
+   
+  
+ {% include 'smile-initializer' %}
+
+  {% comment %}
+{{ 'ndnapps-sociallogin.css' | asset_url | stylesheet_tag }}
+   {{ 'ndnapps-sociallogin-script.js' | asset_url | script_tag }}
+  {% endcomment %}
+  
+{% if shop.customer_accounts_enabled %}{% unless customer  %}
+ {% endunless %}{% endif %}
+  
+  <div class="whatapp_chat">
+    <a href="https://wa.me/918291155181" target="_blank">
+      <span class="whatsapp_txt">Chat with us</span>
+      <img src="{{ 'whatapp.png' | asset_url }}" alt="Whatsapp logo"/>
+    </a>
+  </div>
+  
+  
+  {% include 'min-cart' %}
+  
+  
+  
+ {% if customer %}
+<script>  
+  webengage.user.login({{customer.email | json}}); 
+  webengage.user.setAttribute('we_email', {{ customer.email | json}});
+ // webengage.user.setAttribute('we_email_opt_in', true);
+     
+    {% for address in customer.addresses limit:1 %} 
+        {% if forloop.first %}   
+       {% assign datofbirth = address.address2 %}
+       webengage.user.setAttribute("Address", {
+            "Flat"     : {{ address.address1 | json }},
+            "Building" : {{ address.address2 | json }},             
+            "City"     : {{ address.city | json }},
+            "State"    : {{ address.country | json }},
+            "PIN"      : {{ address.province | json }}
+        });     
+    {% endif %}
+  {% endfor %}
+  
+  {% if customer.first_name != blank %}
+   webengage.user.setAttribute('we_first_name', {{ customer.first_name | json}});
+  {% endif %}
+ 
+  {% if customer.last_name != blank %}
+   webengage.user.setAttribute('we_last_name', {{ customer.last_name | json}});
+  {% endif %}
+  
+   {% for ph in customer.tags %}
+      {% assign phone = ph %}
+   {% endfor %}
+
+   {% if phone == 'social-user' %}
+      {% assign phone = '' %}
+   {% endif %}
+                               
+  {% if customer.phone != '' %}
+   webengage.user.setAttribute('we_phone', '{{ customer.phone}}');
+  {% endif %}
+  
+   {% if datofbirth != '' %}
+     webengage.user.setAttribute('we_birth_date', '{{ datofbirth}}');
+   {% endif %}
+</script>
+ {% endif %} 
+   
+    
+  	<script>
+      var url = window.location.href,  name= '';
+      
+      {% if template.name == 'index' %} 
+       name = 'Home';
+      {% elsif template.name == 'blog' %}
+         name = 'Blog';
+      {% elsif template.name == 'collection' %}
+         name = 'Collection';
+      {% elsif template.name == 'page' %}
+         name = {{ page.title | json }};
+      {% endif %}
+      
+         if(name != ''){
+            webengage.track("Page Viewed", {
+                "Page Name" : name,
+                "Page url" : url
+            });
+         }
+    </script>
+  
+  
+  <script>
+    webengage.options("webpush.registerServiceWorker", false);
+    navigator.serviceWorker.register("https://nyumi.com/apps/webengage/service-worker",{scope: '/'}).then(function(registration) {
+     console.log('Service worker registered on '+registration.scope)
+    });
+  </script>
+   
+  <div class="hide_img_section" style="display:none"></div>
+   
+  
+{% include 'social-login' %}
+  
+  
+
+        </body>
+</html>

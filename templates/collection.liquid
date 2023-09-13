@@ -1,0 +1,103 @@
+<style>
+  .index-section {
+    padding: 0;
+    padding-bottom: 1rem;
+  }
+  .product_breadcrumbs {
+    padding-left: 1rem;
+  }
+</style>
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+{% if collection.id != 400236118272 %}
+  {% section 'slideshow-collection' %}
+{% else %}
+  {% section 'slideshow-collection-partnership' %}
+{% endif %}
+<div style="display:none;">{{ collection.description }}</div>
+<div class="product_breadcrumbs">
+  <a href="https://{{ request.host }}">
+    Home 
+  </a>/ Collection {{ collection.title }}
+</div>
+{% section 'collection-template' %}
+{% section 'collection-why-nyumi' %}
+
+<script>
+  // $(window).load(function() {
+    $('.add_to_cart_custom').click(function(event){
+      // console.log(event,'farzi-event')
+      if(window.fc_addtocart) {
+        try{
+          window.fc_addtocart({
+            product_name: event.currentTarget.attributes['product-name'].value,
+            product_id: parseInt(event.currentTarget.attributes['product-id'].value),
+            quantity: 1,
+            product_price: parseInt(event.currentTarget.attributes['price'].value)/100,
+            currency: "INR",
+            variant: event.currentTarget.attributes['variant-name'].value
+          })
+        }
+        catch {
+          console.log('error')
+        }
+      }
+       
+    })
+  // })
+   // Snapchat CAPI - AddToCart 
+    $('.add_to_cart_custom').click(function(event){
+      $.get('http://jsonip.com', function (res) {
+          console.log(event,'atc event')
+          console.log(event.currentTarget.previousElementSibling.children[4].children[0].innerText)
+          console.log(event.currentTarget.previousElementSibling.children[4].children[1].children[0].children[1].children[1].innerText.split(' ')[1])
+          var ip_address;
+          var product_name = event.currentTarget.previousElementSibling.children[4].children[0].innerText;
+          var product_price = event.currentTarget.previousElementSibling.children[4].children[1].children[0].children[1].children[1].innerText.split(' ')[1]
+          console.log('IP Address is: ' + res.ip);
+          ip_address = res.ip
+          console.log("ip_address",String(ip_address))
+          var hashed_ip =  sha256(String(ip_address))
+          console.log("hashed_ip",String(hashed_ip))
+          // Taboola Events - ATC
+            _tfa.push({
+              notify: 'event',
+              name: 'add_to_cart',
+              id: 1557333,
+              revenue: (parseInt(event.currentTarget.attributes['price'].value)/100).toString(),  
+              currency: 'INR', 
+              orderid: event.currentTarget.attributes['variant-id'].value,
+              quantity: '1' // Product qty
+            });
+         // End of Taboola Events - ATC 
+          var addToCart_event = {
+            "url": "https://tr.snapchat.com/v2/conversion",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNjY5NjI0MzM1LCJzdWIiOiJjZTliNWE5MC1hYmY5LTRhMmYtOTVhMC05ZjFmMWVhMjIxNzd-UFJPRFVDVElPTn5jYTlkYjQ1Ni0zZTNlLTQ0ZDctODYyNi1jNTRjZjlkMTliY2MifQ.IR3xglvOb1eTyCGRycXU9U5f9x4X_mKRW8oWrx303HE",
+              "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+              "pixel_id": "365b768d-8a9e-40d9-86fc-fdeb94acba98",
+              "timestamp": String($.now()),
+              "event_type": "ADD_CART",
+              "event_conversion_type": "WEB",
+              "event_tag": "add_cart",
+              "description": product_name,
+              "price": product_price,
+              "currency":"INR",
+              "page_url": String(window.location.href),
+              "user_agent": String(navigator.userAgent),
+              "hashed_ip_address": String(hashed_ip)
+            }),
+          };
+    
+          $.ajax(addToCart_event).done(function (response) {
+            console.log('CAPI Add To Cart',response);
+          });
+      });
+    });
+   // Snapchat CAPI - AddToCart 
+</script>

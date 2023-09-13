@@ -1,0 +1,95 @@
+<div class="control-section flx" id="Portion_Control">
+  <div class="control-text">
+    {% for block in section.blocks %}
+    {% if forloop.index == 1 %}
+    <div class="control-heading center">
+      {% if block.settings.title != blank %}
+      <h3 class="cm_title">
+        {{ block.settings.title }}
+      </h3>
+      {% endif %}
+      {% if block.settings.description != blank %}
+      <p class="cm_description">
+        {{ block.settings.description | strip_html }}
+      </p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div class="flx">
+      {% for block in section.blocks %}
+      {% if forloop.index == 2 or forloop.index == 3 %}
+      <div class="half center">
+        {% if block.settings.title != blank %}
+        <h3 class="sml_tag">{{ block.settings.title }}</h3>
+        {% endif %}
+        {% if block.settings.description != blank %}
+        <p class="cm_small_txt">
+          {{ block.settings.description | strip_html }}
+        </p>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% for block in section.blocks %}
+    {% if forloop.index == 4 %}
+    <div class="control-last-section">
+      {% if block.settings.title != blank %}
+      <h3 class="sml_tag">{{ block.settings.title }}</h3>
+      {% endif %}
+      {% if block.settings.description != blank %}
+      <p class="cm_small_txt">
+        {{ block.settings.description | strip_html }}
+      </p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% if section.settings.side-image != blank %}
+  <div class="control-image">
+    <img class="lazyload" data-src="{{ section.settings.side-image | img_url: 'master' }}" alt="{{ section.settings.side-image.alt }}">
+  </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Control section",
+	"max_blocks": 4,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "side-image",
+        "label": "Side image"
+      }
+],
+"blocks": [
+	{
+	  "type": "portion-control",
+	  "name": "Portion control",
+	  "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "we practice portion control"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Nutrients work well only if they’re eaten in the right amount. We left no room for more or less.</p>"
+        }
+	]
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

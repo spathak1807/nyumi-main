@@ -1,0 +1,146 @@
+<style>
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100%));
+    }
+  }
+  
+  .marquee {
+    padding: 20px;
+    --gap: 1rem;
+    margin-top: 0.5rem ;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 0;
+    background: #FFF4EF;
+  }
+  
+  .marquee__content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+  
+    gap: 0;
+    margin:0;
+    animation: marquee 32s linear infinite;
+  }
+
+
+    .brand_img {
+    width: 150px;
+    height: 48px;
+    margin-right: 25px;
+
+}
+  
+
+  .marquee__content li {
+    display: flex;
+  }
+.marquee-container {
+  background: #FFF4EF;
+}
+  .marquee-heading {
+    font-family: "Manrope";
+font-size: 24px;
+font-weight: bold;
+line-height: 15px;
+font-style: normal;
+text-align: center;
+    padding-top: 35px;
+    margin-bottom: 0;
+color: #f37168;
+  }
+  
+
+  @media (max-width: 768px) {
+    .marquee__content li {
+      margin-left: 1rem;
+    }
+    .marquee__content {
+      padding: 0;
+      
+    }
+    .brand_img {
+      width: 120px !important;
+      height: 30px !important;
+    }
+    .brand_img4, .brand_img6 {
+      height: 30px !important;
+      width: 200px !important;
+    }
+    .marquee-heading {
+      padding-top: 20px;
+    }
+  }
+
+</style>
+<div class="marquee-container">
+<h3 class="marquee-heading">
+    Featured in
+  </h3>
+<div class="marquee">
+  
+  <ul class="marquee__content">
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/ELLE-logo-min_150x50_773cebd2-463a-40fa-aec1-87df16870e57.webp?v=1684936412" alt="Mobile Banner Image" class="brand_img brand_img1" style="width:200px;" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/k3_150x50_62955637-7a16-4349-b3f8-d73e988620f9.webp?v=1684936355" alt="Mobile Banner Image" class="brand_img brand_img2" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Yourstory_logo-min_150x50_08c357f2-6549-4b31-b00b-509e5d044e89.webp?v=1684936412" alt="Mobile Banner Image" class="brand_img brand_img3" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/The_Economic_Times_logo_svg.png?v=1685012722" alt="Mobile Banner Image" class="brand_img brand_img4" style="width:270px; height: 39px;" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Mint__newspaper__logo_svg.png?v=1685012722" alt="Mobile Banner Image" class="brand_img brand_img5" style="    height: 40px;" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/The_Financial_Express_logo.png?v=1685012722" alt="Mobile Banner Image" class="brand_img brand_img6" style="width:295px;     height: 39px;" loading= 'lazy'/>
+    
+  </ul>
+ <!-- Mirrors the content above -->
+  <ul class="marquee__content" aria-hidden="true">
+     <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/ELLE-logo-min_150x50_773cebd2-463a-40fa-aec1-87df16870e57.webp?v=1684936412" alt="Mobile Banner Image" class="brand_img brand_img1" style="width:200px;" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/k3_150x50_62955637-7a16-4349-b3f8-d73e988620f9.webp?v=1684936355" alt="Mobile Banner Image" class="brand_img brand_img2" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Yourstory_logo-min_150x50_08c357f2-6549-4b31-b00b-509e5d044e89.webp?v=1684936412" alt="Mobile Banner Image" class="brand_img brand_img3" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/The_Economic_Times_logo_svg.png?v=1685012722" alt="Mobile Banner Image" class="brand_img brand_img4" style="width:270px;     height: 39px;" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Mint__newspaper__logo_svg.png?v=1685012722" alt="Mobile Banner Image" class="brand_img brand_img5" style= "    height: 40px;" loading= 'lazy'/>
+    <img src="https://cdn.shopify.com/s/files/1/0412/3027/0631/files/The_Financial_Express_logo.png?v=1685012722" alt="Mobile Banner Image" class="brand_img brand_img6" style="width:295px;     height: 39px;" loading= 'lazy'/>
+    
+  </ul>
+</div>
+  </div>
+
+{% schema %}
+  {
+    "name": "Brand Marquee Strip",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Choose marquee background color"
+      }
+    ],
+    "blocks":[
+      {
+        "name": "Strip",
+        "type": "strip",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "brand_img",
+            "label": "Add your brand image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Brand Marquee Strip"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

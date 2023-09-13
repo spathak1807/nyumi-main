@@ -1,0 +1,83 @@
+<style>
+  .static-faq {
+    display: block ;
+  }
+  .faq-1,.faq-2,.faq-3,.faq-4,.faq-5,.faq-6,.faq-7,.faq-8{
+    display:block !important;
+  }
+  .product_tab_item {
+    display:none;
+  }
+  
+  </style>
+ 
+<div id="shopify-section-product-template" class="shopify-section">
+  <div class="faq_section relative" id="product_faq" style="display: block;">
+    <div class="faq_title center">
+       got doubts? get answers.
+    </div>
+    <section class="ac-container">
+      {% for block in section.blocks %}   
+        <div class="product_tab_item static-faq faq-{{ forloop.index }}">
+          <div class="pdtb_heading">
+            {{block.settings.faq_title}}
+          </div>
+          <div class="pdtb_detail">
+            {{block.settings.faq_detail}}
+          </div>
+        </div>  
+        {% endfor %}
+    </section>
+    <div class="cm_but center">
+      <a class="button read_more_faq" href="#" style="" id>read more</a>
+    </div>
+    <style>
+      .faq_section:before {
+        background-image: url(https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Skin_Left_400x650_425caea6-c892-492a-bd7d-afee8d601dcb.png?v=1647095765)
+      }
+      .faq_section:after {
+        background-image: url(https://cdn.shopify.com/s/files/1/0412/3027/0631/files/Skin_Right_400x650_00d13cfa-8924-4f72-81d0-655bbba9e081.png?v=1647096295)
+      }
+    </style>
+  </div>
+</div>
+<script>
+  $(".button.read_more_faq").click(function(){
+      $(".product_tab_item").show();
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "Static Faq",
+    "settings": [
+        
+	],
+    "blocks":[
+           {
+            "type":"faq",
+            "name":"Faq",
+            "settings":[                
+                {
+                  "type": "text",
+                  "id": "faq_title",
+                  "label": "Faq Title",
+                  "default": "Who can take Radiant Skin?"
+                },                
+				{
+                  "type": "richtext",
+                  "id": "faq_detail",
+                  "label": "Faq Detail",
+                  "default": "<p>Anyone above 18 years of age can safely eat Radiant Skin gummies. Our formulation brings you the right dose of essential nutrients, and keeps out bad preservatives and additives</p>"
+                }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

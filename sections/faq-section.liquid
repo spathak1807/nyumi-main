@@ -1,0 +1,75 @@
+<div class="page_width">
+  <div class="faq_section_main flx"> 
+    <div class="faq-categories">
+      <div class="select_value">{{block.settings.title}}</div>
+      <ul id="faq_cat">
+        {% assign block_item = '' %}
+        {% for block in section.blocks %}  
+        {% if block.settings.title != blank %}
+        {% unless block_item == block.settings.title %}
+        <li class="" data-order="{{ forloop.index }}" data-cat="{{block.settings.title}}">{{block.settings.title}}</li>
+        {% assign block_item = block.settings.title %}
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="faq-main">
+      <section class="ac-container" id="faq_quans">
+        {% for block in section.blocks %}   
+        <div class="product_tab_item " data-cat="{{block.settings.title}}" data-id="{{ forloop.index }}">
+          {% if block.settings.faq_ques != blank %}
+          <div class="pdtb_heading">
+            {{block.settings.faq_ques}}
+          </div>
+          {% endif %}
+          {% if block.settings.faq_ans != blank %}
+          <div class="pdtb_detail">
+            {{block.settings.faq_ans}}
+          </div>
+          {% endif %}
+        </div>  
+        {% endfor %}
+      </section>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Faq Section",
+    "settings": [],
+	"blocks":[
+         {
+          "type":"product_type",
+          "name":"Types",
+          "settings":[
+                {
+                  "type":"text",
+                  "id":"title",
+                  "label":"Title",
+                  "default":"about nyumi"
+                },          
+                {
+                  "type":"text",
+                  "id":"faq_ques",
+                  "label":"Faq Question",
+                  "default":"How do you recommend eating Nyumi gummies?"
+                },
+                {
+                  "type":"richtext",
+                  "id":"faq_ans",
+                  "label":"Faq Answer",
+                  "default":"<p>Yes, we highly recommend it. Our gummies are intended as a daily dose of essential nutrients for you. </p>"
+                }
+             ]
+          }             
+                            
+     ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,71 @@
+<div class="behind-science flx" id="heart_section">
+  <div class="page_width">
+    <div class="flx">
+      <div class="behind-scienc-image">
+        {% if section.settings.title != blank %}
+        <h3 class="cm_title mobile">{{ section.settings.title }}</h3>
+        {% endif %}        
+        {% if section.settings.image != blank %}
+        <img class="lazyload" data-src="{{section.settings.image | img_url:"master"}}" alt="{{ section.settings.image.alt }}">
+        {% else %}
+        <img class="lazyload" data-src="//images.ctfassets.net/537ig19c198x/3X2ORxfQ0MR1W02V7OQPiC/9b1e50092ed2414b18083481f6a726be/AnyConv.com__heart_behind_the_science.webp">
+        {% endif %}
+      </div>
+      <div class="behind-science-text">
+        {% if section.settings.title != blank %}
+        <h3 class="cm_title desktop">{{ section.settings.title }}</h3>
+        {% endif %}        
+        {% if section.settings.description != blank %}
+        <p class="behind_txt">{{ section.settings.description | strip_html }}</p>
+        {% endif %}
+        {% if section.settings.url_text != blank %}
+        <div class="cm_but" id="heart_btn">
+          <a class="button" id="Science-btn" href="{{section.settings.url_link}}">{{section.settings.url_text}}</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Heart behind the science",
+    "settings": [
+		{
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "heart behind the science"
+        },
+        {
+          "type":"richtext",
+          "id":"description",
+          "label":"Description",
+          "default":"<p>Nyumi is conceptualized, created and powered by women who understand that a fine balance between responsibilities and ambitions needs overall wellness. Our job is to make the power of daily nutrition accessible, effective and trustworthy</p>"
+        },
+        {		
+          "type":"text",
+          "id":"url_text",
+          "label":"URL Text",
+          "default":"Know more"
+        },
+        {		
+          "type":"url",
+          "id":"url_link",
+          "label":"URL Link"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

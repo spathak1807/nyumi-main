@@ -1,0 +1,91 @@
+<div class="page_width">
+  <div class="addres_info flx" id="addres_info">
+    <div class="three" id="email_section">
+      <div class="cmcl">Email</div>
+      {% if section.settings.email != blank %}
+      <div class="infor">
+        <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="three" id="call_section">
+      <div class="cmcl">CALL</div>
+      {% if section.settings.number != blank %}
+      <div class="infor">
+        <a href="tel:{{ section.settings.number }}">{{ section.settings.number }}</a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="three" id="sunemail_section">
+      <div class="cmcl">MEDIA INQUIRIES</div>
+      {% if section.settings.media_mail != blank %}
+      <div class="infor">
+        <a href="mailto:{{ section.settings.media_mail }}">{{ section.settings.media_mail }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="find_more" id="find_more">
+    {% if section.settings.title != blank %}
+    <h2 class="center">{{ section.settings.title }}</h2>
+    {% endif %}
+    <div class="flx find_more_imgs">
+      {% for block in section.blocks %}
+      <div class="imgseting">
+        <img src="{{ block.settings.image | img_url:"master" }}" alt="{{ block.settings.image.alt }}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Contact Information",
+    "settings": [
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email",
+          "default": "hello@nyumi.com"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Contact Number",
+          "default": "+91 8291155181"
+        },
+        {
+          "type": "text",
+          "id": "media_mail",
+          "label": "Media Mail",
+          "default": "press@nyumi.com"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "find nyumi gummies at"
+        }
+	],
+"blocks": [
+	{
+	  "type": "logo",
+	  "name": "Logo image",
+	  "settings": [
+		{
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+	]
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

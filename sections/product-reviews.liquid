@@ -1,0 +1,55 @@
+<div class="product-reviews-section" style="display: block;">
+  <img src="{{ "red-heart.png" | asset_url }}" alt="heart" class="section-icon">
+  {% if section.settings.title != blank %}
+  <p class="section_heading">{{ section.settings.title }}</p>
+  {% endif %}
+  {% if section.settings.description != blank %}
+  <p class="section_subheading">{{ section.settings.description }}</p>
+  {% endif %}
+</div>
+ <div id="wc_review_section" class="wc_review_main_content" data-url="{{ shop.url }}" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}" data-limit="0"></div>
+
+<script>
+  setInterval(function(){
+    function changeTag(originTag, destTag) {
+      while($(originTag).length) {
+        $(originTag).replaceWith (function () {
+          var attributes = $(this).prop("attributes");
+          var $newEl = $(`<${destTag}>`)
+          $.each(attributes, function() {
+            $newEl.attr(this.name, this.value);
+          });  
+          return $newEl.html($(this).html())
+        })
+      }
+    }
+    
+    changeTag("h6.wc_review_author_name", "p")
+  },500)
+</script>
+ 
+{% schema %}
+  {
+    "name": "Product reviews",
+    "settings": [
+	  {
+		"type": "text",
+		"id": "title",
+	    "label": "Title",
+		"default": "we heart reviews"
+	  },
+	  {
+		"type": "text",
+		"id": "description",
+	    "label": "Description",
+		"default": "It tells us how you’re doing and that’s always good to hear."
+	  }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

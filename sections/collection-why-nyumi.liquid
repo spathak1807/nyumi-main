@@ -1,0 +1,75 @@
+<div id="coll_btm_section" class="bottom_section bst icon-section2" style="display: block;">
+  <div class="page_width">
+    {% if section.settings.section_title != blank %}
+    <h3 class="center white cm_title">
+      {{ section.settings.section_title }}
+    </h3>
+    {% endif %}
+    <div id="coll_btm_box" class="three-icon_box flx">
+      {% for block in section.blocks %}
+      <div class="three" data-index="0">
+        {% if block.settings.image != blank %}
+        <div class="icon_img">
+          <img class="res_width1 lazyload" data-src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}">
+        </div>
+        {% endif %}
+        {% if block.settings.title != blank %}
+        <div class="icon_txts white">
+          {{ block.settings.title }}
+        </div>
+        {% endif %}
+        {% if block.settings.description != blank %}
+        <div class="icon_des">
+          {{ block.settings.description | strip_html }}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Why Nyumi",
+"max_blocks": 3,
+    "settings": [
+	  {
+		"type": "text",
+	    "id": "section_title",
+		"label": "Section Title",
+	 	"default": "why Nyumi"
+	  }
+],
+"blocks": [
+	{
+	  "type": "why_nyumi_blocks",
+	  "name": "Why nyumi blocks",
+	  "settings": [
+	    {
+		  "type": "image_picker",
+		  "id": "image",
+		  "label": "Image"
+		},
+		{
+		  "type": "text",
+		  "id": "title",
+		  "label": "Title"
+		},
+		{
+		  "type": "richtext",
+		  "id": "description",
+		  "label": "Description"
+		}
+
+	]
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

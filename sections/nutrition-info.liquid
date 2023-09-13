@@ -1,0 +1,54 @@
+<div class="button_heading" id="nutritionInfo" style="display: block;">
+  {% if section.settings.title != blank %}
+  <div class="faq_title center black">
+    {{ section.settings.title }}
+  </div>
+  {% endif %}
+  <div class="cm_but center line-but">
+    {% if section.settings.btn_txt != blank %}
+    <a class="button toggle-nutrition" href="#">
+      {{ section.settings.btn_txt }}
+    </a>
+    {% endif %}
+  </div>
+  <div class="show-nutrition" style="display: none;">
+    <div class="nutrition_flx">
+      {% for nutrition_image in product.metafields.nutrition_image.nutrition_image %}
+      <div class="nutritional_item">
+        <img src="{{ nutrition_image }}" alt="{{ nutrition_image.alt }}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Nutrition Info",
+    "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "we don’t need fine print"
+        },
+        {
+          "type": "text",
+          "id": "btn_txt",
+          "label": "Button Text",
+          "default": "nutrition info +"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

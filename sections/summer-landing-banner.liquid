@@ -1,0 +1,61 @@
+{% schema %}
+{
+  "name": "Summer Banner Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "desktop_banner_image",
+      "label": "Desktop Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_banner_image",
+      "label": "Mobile Banner Image"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .banner-image {
+    text-align: center;
+  }
+
+  .banner-image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobile-image {
+    display: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    .banner-image img {
+      height: 100%;
+    }
+    .desktop-image{
+      display: none;
+    }
+    .mobile-image {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% assign desktop_banner_image = section.settings.desktop_banner_image %}
+{% assign mobile_banner_image = section.settings.mobile_banner_image %}
+{% if desktop_banner_image != blank %}
+  <div class="banner-image">
+    <a href="#add_to_cart"><img
+      src="{{ desktop_banner_image | img_url: '' }}"
+      alt="Desktop Banner Image"
+      class="desktop-image"
+    >
+    <img
+      src="{{ mobile_banner_image | img_url: '' }}"
+      alt="Mobile Banner Image"
+      class="mobile-image"
+    ></a>
+  </div>
+{% endif %}

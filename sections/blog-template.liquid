@@ -1,0 +1,207 @@
+<style>
+  .product_breadcrumbs {
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .product_breadcrumbs {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+<div class="blog_post_box">
+  <div class="page_width">
+    <div class="product_breadcrumbs">
+      <a href="https://{{ request.host }}">
+        Home 
+      </a>/ Blog
+    </div>
+    <div class="blog_nav">
+      <div class="blog_drop_down">All</div>
+      <ul id="blog_cat" class="blog_cat_box">
+        <li data-id="0" class="active">All</li>
+        {% for tag in blog.all_tags %}
+        {% if tag contains 'tag_'%}
+        {% assign filter_tag = tag | split: 'tag_' | last %}
+        <li data-id="{{ filter_tag }}">{{ filter_tag }}</li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="post_notfound"></div>
+    </div>
+  </div>
+  <div class="page_width">
+    <div class="blog_post_outer" id="blog_top_list">
+      {% for article in blog.articles %}
+      {% assign filter_tag = '' %}
+      {% if forloop.index <= 3 %}
+      {% for tag in article.tags %}
+        {% if tag contains 'tag_'%}
+          {% assign filter_tag = tag | split: 'tag_' | last %}
+        {% endif %}
+      {% endfor %}
+      <div class="blog_post" data-cat="{{ filter_tag }}" tag="{{ article.tags }}">
+        <div class="bgpt_flx">
+          {% if article.image != blank %}
+          <div class="bgpt_img">
+            <img class="lazyload" data-src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt }}">
+          </div>
+          {% endif %}
+          <div class="bgpt_txt">
+            <div class="bgpt_txt_inner">
+              <div class="sub_title">THIS JUST IN</div>
+              {% if article.metafields.article_subheading.article_subheading != blank %}
+              <div class="post_catg">{{article.metafields.article_subheading.article_subheading}}</div>
+              {% endif %}
+              <div class="post_title">
+                <a class="url_title" href="{{ article.url }}">{{ article.title }}</a>
+              </div>
+              <div class="post_description">
+                <p>
+                  {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html }}
+                  {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                  {% endif %}
+                  <a class="bgpt_btn aaa" href="{{ article.url }}">read more &gt; </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div> 
+  </div>
+  <div class="inline_post">
+    <div class="page_width">
+      {% if section.settings.editor_picks_title != blank %}
+      <div class="inline_top">
+        <h2>{{ section.settings.editor_picks_title }}</h2>
+      </div>
+      {% endif %}
+
+      <div class="inlpst_flx" id="Featured_post_item">
+        {% for block in section.blocks %}
+        {% assign featured_articles = block.settings.featured_article %}
+        {% assign featured_blog = articles[featured_articles] %}
+        <div class="inlpst_item" data-id="p0">
+          <a class="post_detail_url" href="{{ featured_blog.url }}"></a>
+          {% if featured_blog.image != blank %}
+          <div class="inlpst_img">
+            <img class="lazyload" data-src="{{ featured_blog.image | img_url: 'master' }}" alt="{{ featured_blog.image }}">
+          </div>
+          {% endif %}
+          <div class="inlpst_txt">
+            {% for tag in featured_blog.tags %}
+            {% if tag contains 'tag_'%}
+            {% assign filter_tag = tag | split: 'tag_' | last %}
+            <div class="inlpst_catg">{{ filter_tag }}</div>
+            {% endif %}
+            {% endfor %}
+            <div class="inlpst_title">{{ featured_blog.title }}</div>
+            <div class="inlpst_description">
+              {% if featured_blog.excerpt.size > 0 %}
+              {{ featured_blog.excerpt | strip_html }}
+              {% else %}
+              {{ featured_blog.content | strip_html | truncate: 150 }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="page_width">
+    <div class="blog_post_outer blog_bottom_list" id="blog_bottom_list">
+      {% paginate blog.articles by 500 %}
+      {% for article in blog.articles %}
+      {% assign filter_tag = '' %}
+      {% if forloop.index > 3 %}
+      {% for tag in article.tags %}
+        {% if tag contains 'tag_'%}
+        {% assign filter_tag = tag | split: 'tag_' | last %}
+      {% endif %}
+      {% endfor %}
+      <div class="blog_post" data-cat="{{ filter_tag }}" tag="{{ article.tags }}">
+        <div class="bgpt_flx">
+          {% if article.image != blank %}
+          <div class="bgpt_img">
+            <img class="lazyload" data-src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt }}">
+          </div>
+          {% endif %}
+          <div class="bgpt_txt">
+            <div class="bgpt_txt_inner">
+              {% if article.metafields.article_subheading.article_subheading != blank %}
+              <div class="post_catg">{{article.metafields.article_subheading.article_subheading}}</div>
+              {% endif %}
+              <div class="post_title">
+                <a class="url_title" href="{{ article.url }}">{{ article.title }}</a>
+              </div>
+              <div class="post_description"> 
+                <p>
+                  {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html }}
+                  {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                  {% endif %}
+                  <a class="bgpt_btn aaa" href="{{ article.url }}">read more &gt; </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.blog_post').each(function(i, obj) {
+    if($(obj)[0].attributes['tag'].value.toLowerCase().includes("hidden")) {
+      $(obj).hide()
+    }
+    else {
+      $(obj).show()
+    }
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Blog list page",
+	"max_blocks": 3,
+    "settings": [
+	  {
+		"type": "text",
+		"id": "editor_picks_title",
+		"label": "Editor picks title",
+		"default": "editor’s picks"
+	  }
+],
+"blocks": [
+	{
+	  "type": "featured_article",
+	  "name": "Featured article",
+	  "settings": [
+		{
+          "type": "article",
+          "id": "featured_article",
+          "label": "Featured article"
+        }
+	  ]
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

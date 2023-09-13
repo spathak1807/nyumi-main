@@ -1,0 +1,58 @@
+{% comment %}
+<div class="page-width">
+  <div class="empty-page-content text-center">
+    <h1>{{ 'general.404.title' | t }}</h1>
+    <p>{{ 'general.404.subtext' | t }}</p>
+    <p>
+      <a href="{{ routes.root_url }}" class="btn btn--has-icon-after">{{ 'general.404.link' | t }}{% include 'icon-arrow-right' %}</a>
+    </p>
+  </div>
+</div>
+{% endcomment %}
+<style>
+
+.custom_page_not_found  
+ {
+    background: #fff4ef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+ }
+  .heading h1 {
+    font-family: 'corbenr';
+    font-size: 100px;
+    color: #f37268;
+}
+.heading img {
+    max-width: 100px;
+    object-fit: cover;
+    position: relative;
+    top: 4px;
+
+}
+  
+  a.button{
+  	text-transform:uppercase;
+  }
+  
+.custom_page_not_found p {
+    font-family: 'manropes';
+    font-size: 18px;
+    max-width: 456px;
+    padding: 0px 20px;
+    text-align: center;
+}
+  
+  
+</style>
+
+
+<div class="custom_page_not_found">
+  <div class="heading"><h1>4 <img src="{{ '404_icon.png' | asset_url }}"> 4</h1></div>
+   <p>{{ 'general.404.subtext' | t }}</p>
+    <p>
+      <a href="{{ routes.root_url }}" class="btn btn--has-icon-after button">{{ 'general.404.link' | t }}</a>
+    </p>
+</div>  
